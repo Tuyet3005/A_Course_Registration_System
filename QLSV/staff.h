@@ -52,6 +52,7 @@ NodeSv_Lop* ThemSvLop_tay(NodeLop* nodeLop);
 NodeSv_Lop* ThemSvLop_file(NodeLop* nodeLop);
 void ThemSvLopNam1(ListNamHoc& l);
 //sua info mon
+string NextLine(string& data);
 void GhiFileMon(string filename, NodeMon* mon, bool remove);
 void CapNhatMonHoc(ListNamHoc& l);
 NodeMon* timNodeMon_CapNhat(ListNamHoc& l, NodeNamHoc*& NodeNam, int& ki, NodeMon*& headmonHK);
@@ -59,11 +60,11 @@ NodeMon* timNodeMon_CapNhat(ListNamHoc& l, NodeNamHoc*& NodeNam, int& ki, NodeMo
 void XoaMonHoc(ListNamHoc& l);
 //xoa mon ra khoi ds mon cua sv (neu co sv dang ky)
 bool XoaMon_Sv(ListNamHoc& l, NodeNamHoc* nodeNam, int ki, NodeMon*& headmonHK, NodeMon* mon);
-//diem 
+//xuat file, nhap diem 
 void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
 bool DocDiemTuFile(string file, NodeMon* mon, int siso);
 void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
-
+//sua diem
 void CapNhatDiemSv(ListNamHoc& l);
 void NhapDiem(float& diem, int x, int y);//x, y: toa do 
 void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon);

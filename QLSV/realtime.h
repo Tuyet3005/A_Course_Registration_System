@@ -3,6 +3,7 @@
 #include"staff.h"
 tm ThoiGianHeThong();
 int NHhientai_nambd();
+bool daTaoNamHT(ListNamHoc& l, NodeNamHoc*& node, int nam_bd);
 NodeNamHoc* NodeNamHienTai(ListNamHoc& l);
 //check nhap ngay thang nam hop le 
 bool NgayHopLe(int nDay, int nMonth, int nYear);

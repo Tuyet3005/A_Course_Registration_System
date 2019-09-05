@@ -2298,7 +2298,7 @@ void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk)
 		printA_Sentence("~ NHAP DIEM TU FILE THANH CONG ~", HEIGHT / 2 - 1);
 	}
 }
-//line <tra ve>: dong hien tai, data: dong tiep theo
+//line <tra ve>: dong hien tai, data: ~ dong tiep theo (con lai)
 string NextLine(string& data) 
 {
 	size_t pos = data.find('\n');
@@ -2475,7 +2475,7 @@ void GhiFileMon(string filename, NodeMon* mon, bool remove)//remove: xoa, !remov
 	file.close();
 
 	file.open(filename, ios::out);
-	file << NextLine(data);
+	file << NextLine(data); // ghi lai thoi gian cua hk vao file
 	bool success = false;
 
 	while (!data.empty())
@@ -2533,17 +2533,17 @@ void CapNhatMonHoc(ListNamHoc& l)
 	setColor(background_color, text_color);
 	int  x = WIDTH / 3 + 5;
 	int y = 10;
-
+	int c = 35;
 	gotoXY(x, y);
 	cout << "Ten mon (" << mon.tenMon << "): ";
-	gotoXY(x + 25, y);
+	gotoXY(x + c, y);
 	getline(cin, input);
 	if (!input.empty()) mon.tenMon = input;
 
 	y += 2;
 	gotoXY(x, y);
 	cout << "Ten giao vien (" << mon.tenGv << "): ";
-	gotoXY(x + 25, y);
+	gotoXY(x + c, y);
 	getline(cin, input);
 	if (!input.empty()) mon.tenGv = input;
 
@@ -2552,7 +2552,7 @@ void CapNhatMonHoc(ListNamHoc& l)
 	cout << "So tin chi (" << mon.so_tc << "): ";
 	while (true)
 	{
-		gotoXY(x + 25, y);
+		gotoXY(x + c, y);
 		getline(cin, input);
 		if (input.empty())
 			break;
@@ -2563,7 +2563,7 @@ void CapNhatMonHoc(ListNamHoc& l)
 		catch (invalid_argument)
 		{
 			cin.clear();
-			gotoXY(x + 25, y);
+			gotoXY(x + c, y);
 			cout << "                                                ";
 			continue;
 		}
@@ -2576,7 +2576,7 @@ void CapNhatMonHoc(ListNamHoc& l)
 	cout << "So sinh vien toi da (" << mon.MaxSv << "): ";
 	while (true)
 	{
-		gotoXY(x + 25, y);
+		gotoXY(x + c, y);
 		getline(cin, input);
 		if (input.empty())
 			break;
@@ -2587,7 +2587,7 @@ void CapNhatMonHoc(ListNamHoc& l)
 		catch (invalid_argument)
 		{
 			cin.clear();
-			gotoXY(x + 25, y);
+			gotoXY(x + c, y);
 			cout << "                                                ";
 			continue;
 		}
@@ -2634,7 +2634,7 @@ void XoaMonHoc(ListNamHoc& l)
 	int nam = nodeNam->data.tg.ngay_bd.y;
 	if (node_mon == NULL)
 	{
-		_getch();
+		char pause = _getch();
 		return;
 	}
 	system("cls");
@@ -2642,7 +2642,7 @@ void XoaMonHoc(ListNamHoc& l)
 	{
 		setColor(background_color, title_color1);
 		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
-		_getch();
+		char pause = _getch();
 		return;
 	}
 	system("cls");
@@ -2657,7 +2657,7 @@ void XoaMonHoc(ListNamHoc& l)
 		printA_Sentence("XOA MON " + node_mon->data.id + " THAT BAI!!!", HEIGHT / 2);
 		setColor(background_color, title_color1);
 		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
-		_getch();
+		char pause = _getch();
 		return;
 	}
 
@@ -2683,6 +2683,10 @@ void XoaMonHoc(ListNamHoc& l)
 	(*p)->pNext = NULL;
 	delete* p;
 	*p = next;
+	if (p == &headmonHK)//doi lai headmon HK thuc su
+	{
+		nodeNam->data.hk[stt_hk - 1].headMon = headmonHK;
+	}
 	viewDsMonHk(headmonHK, stt_hk);
 	_getch();
 	system("cls");
