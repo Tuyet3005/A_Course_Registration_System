@@ -48,6 +48,7 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 		{
 			gotoXY(0, HEIGHT - 4);
 			system("pause");
+			cin.ignore(100, '\n');
 			return true;
 		}
 		break;

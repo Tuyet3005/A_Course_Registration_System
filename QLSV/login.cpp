@@ -90,7 +90,7 @@ void changePass(bool role, string tk, string& mk)
 		cin.clear();
 		getline(cin, oldpass);
 		if (oldpass == mk) break;
-		else cout << "Nhap sai mat khau... moi nhap lai !" << endl;
+		else cout << "Nhap sai mat khau... moi nhap lai!" << endl;
 	}
 	cout << "Nhap mat khau moi: ";
 	cin.clear();

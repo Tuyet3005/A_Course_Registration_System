@@ -112,6 +112,7 @@ void xoaLC(int dem, int mon, int ki, NodeSv_Lop* A, NodeMon* head)
 	{
 		A->headMon[ki - 1] = temp2->pNext;
 		delMon_sv = temp2;
+		dem--;
 	}
 	else
 	{
@@ -333,6 +334,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 			else if (toupper(temp) == 'H')//xoa
 			{
 				xoaLC(dem, mon, ki, A, head);
+				dem--;
 			}
 			else if (temp < 48 || temp>57)
 				continue;
