@@ -24,7 +24,6 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 	}
 	case 2:
 	{
-		cout << "Hien thi thong tin cua tai khoan";
 		if (role)//tra ve sinh vien
 		{
 			viewInfoSv(findInfo(stoi(tk)));
