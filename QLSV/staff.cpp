@@ -1844,13 +1844,18 @@ void HienThiDSSv(NodeSv_Lop* head_sv_lop)
 }
 void CapNhatDiemSv(ListNamHoc& l)
 {
+	cout << "--------------------CAP NHAT DIEM SINH VIEN--------------------\n";
 	NodeNamHoc* node_nam = NhapNamHoc(l);
 	int nam_hoc = node_nam->data.tg.ngay_bd.y;
 	int nam_sv = -1;
 	while (nam_sv < 1 || nam_sv > 4)
 	{
-		cout << "Nhap nam (sv nam 1, nam 2, ...): ";
+		cout << "\nNhap nam (sv nam 1, nam 2, ...): ";
 		cin >> nam_sv;
+		if (cin.fail())
+		{
+			cin.clear();
+		}
 		cin.ignore();
 	}
 
