@@ -44,9 +44,10 @@ int InMenuCapNhat();
 int InMenuCapNhat2(); //muc 2 cua menu cap nhat chinh
 int InMenuCapNhat3(); //muc 3 cua menu cap nhat chinh
 //them sv
-bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head);
-void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv);
 void NhapThongtinSv(NodeSv_Lop* n, int i);
+bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head);
+void GhiThongtinSv(NodeLop* nodeLop, NodeSv_Lop* n);
+void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv);
 void ThemSvLop_tay(NodeLop* nodeLop);
 void ThemSvLop_file(NodeLop* nodeLop);
 void ThemSvLopNam1(ListNamHoc& l);

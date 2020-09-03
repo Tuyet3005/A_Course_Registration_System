@@ -9,7 +9,7 @@ int InMenuSv()
 	string title[5] = { "CAC MON HOC CUA TOI","DANG KI MON HOC","CAC MON DANG MO","QUAY VE","THOAT" };
 	return LuaChon_Menu(5, title,2, HEIGHT / 2);
 }
-Sv findInfo(string tenlop, int tk)//tim Info sv
+Sv findInfo(string tenlop, int tk)//tim Info sv trong file Lop 
 {
 	ifstream f;
 	f.open(tenlop + ".txt");
@@ -52,7 +52,7 @@ Sv findInfo(string tenlop, int tk)//tim Info sv
 	{
 
 	}
-	else
+	else 
 	{
 		T.stt = NULL;
 	}
@@ -63,7 +63,7 @@ void SinhVien(ListNamHoc& l,int tk)
 	NodeNamHoc* t = NodeNamHienTai(l);
 	int namhientai = t->data.tg.ngay_bd.y;
 	string tenlop = timLop(tk);
-	NodeLop* plop;
+	NodeLop* plop = NULL;
 	for (int i = 1; i <= 4; i++)
 	{
 		plop = timNodeLop(t, i,tenlop);

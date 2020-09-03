@@ -1,6 +1,3 @@
 05092020,31122020,
-TD1_de,The duc 1,Thay de thoi,2,Thu Hai,S2,Thu Ba,S3,20,
-KTLT,Ky thuat lap trinh,Nguyen Le Hoang Dung,4,Thu Sau,S3,Thu Sau,S4,25,
-TD1,The duc 1,Duong Van Nam,2,Thu Nam,S1,Thu Nam,S2,20,
-TRR,Toan Roi Rac,Trung,2,Thu Tu,S3,Thu Hai,S1,30,
-thVTP,Thuc hanh Vi Tich Phan,Aki Le,2,Thu Ba,S2,Thu Bay,S2,35,
+VLDC,Vat ly dai cuong,Le Tran,3,Thu Tu,S1,Thu Tu,S2,59,
+DSTT,Dai so tuyen tinh,Le Van Hop,4,Thu Ba,S1,Thu Ba,S2,100,

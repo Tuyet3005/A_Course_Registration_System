@@ -151,6 +151,7 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	{
 		system("cls");
 		TaoNam(l);
+		system("pause");
 		break;
 	}
 	case 2:
@@ -158,12 +159,14 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 		system("cls");
 		NodeNamHoc* n = NodeNamHienTai(l);
 		TaoLopNamNhat(n);
+		system("pause");
 		break;
 	}
 	case 3:
 	{
 		system("cls");
 		TaoHocKy(l);
+		system("pause");
 		break;
 	}
 	case 4:
@@ -172,11 +175,13 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 		NodeNamHoc* n = NodeNamHienTai(l);
 		int nam = n->data.tg.ngay_bd.y;
 		TaoMon(l, nam);
+		system("pause");
 		break;
 	}
 	case 5:
 	{
 		taoDKKH_Gv(NodeNamHienTai(l));
+		//system("pause");
 		break;
 	}
 	case 6:
@@ -236,7 +241,7 @@ NodeNamHoc* TaoNodeNam()
 		{
 			if (stoi(temp) == nam_bd)
 			{
-				cout << "Loi! Nam hoc da duoc tao truoc do!!!" << endl << endl;
+				cout << "Nam hoc da duoc tao truoc do!!!" << endl << endl;
 				return NULL;
 			}
 		}
@@ -287,11 +292,14 @@ int HienNamHoc(ListNamHoc l)
 }
 void TaoNam(ListNamHoc& l)
   {
-	cout << "TAO MOI 1 NAM HOC\n";
+	cout << "--------TAO MOI MOT NAM HOC--------\n";
 	NodeNamHoc* n = TaoNodeNam();
 	ThemNodeNamHoc(l, n);
-	if (n)
-		cout << "Tao nam hoc moi thanh cong!!!" << endl;
+	if (n) 
+	{
+		int nam = n->data.tg.ngay_bd.y;
+		cout << "Tao nam hoc " << nam << " - " << nam + 1 << " thanh cong!" << endl;
+	}
 }
 
 //lop hoc  
@@ -348,7 +356,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 	for (int i = 0; i < sl; i++)
 	{
 		string ten;
-		cout << "Nhap ten lop " << i + 1 << ": ";
+		cout << "\nNhap ten lop " << i + 1 << ": ";
 		cin >> ten;
 		//ktra co bi trung ten lop
 		NodeLop* temp = node->data.headLop[0];
@@ -475,6 +483,7 @@ void TaoHocKy(ListNamHoc& l)
 			hk = 0;
 		}
 	}
+	cout << endl;
 	//nhap thoi gian bat dau, ket thuc 
 	{
 		ngBD.d = 0;
@@ -568,6 +577,7 @@ void TaoHocKy(ListNamHoc& l)
 		{
 			f.close();
 			cout << "Ban da tao hoc ky nay truoc do roi!!!\n";
+			system("pause");
 			return;
 		}
 		else
@@ -609,7 +619,7 @@ void TaoHocKy(ListNamHoc& l)
 				f << ngKT.y << ",";
 			}
 			f.close();
-			cout << "Tao moi hoc ky thanh cong!\n";
+			cout << "Tao moi hoc ky thanh cong!\n";			
 			return;
 		}
 	}
@@ -854,6 +864,7 @@ void TaoMon(ListNamHoc& l, int nam)
 				cin.clear();
 				cin.ignore(100, '\n');
 				cout << "Tao mon khong thanh cong!!!\n";
+				system("pause");
 				return;
 			}
 		} while (true);
@@ -907,6 +918,7 @@ void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk)//file nay ch
 		{
 			cerr << error;
 			cout << "\nTao moi mon hoc that bai!!!\n";
+			system("pause");
 			return;
 		}
 		n->pNext = NULL;
@@ -914,6 +926,7 @@ void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk)//file nay ch
 		if (checkTrungMon(hk, n))
 		{
 			cout << "Ban da tao mon hoc nay truoc do roi!\n";
+			system("pause");
 			return;
 		}
 		ThemNodeMon(hk->headMon, n);//them vao list mon cua hoc ky? A ko phai node hk , can ktra n co trung mon hay ko?
@@ -935,6 +948,7 @@ void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk)//file nay ch
 		f.open(to_string(nam) + "hk" + to_string(stt_hk) + n->data.id + ".txt", ios::out);
 		f.close();
 		cout << "Ban da co the mo dang ky ghi danh vao mon hoc nay!\n";
+		system("pause");
 	}
 }
 void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk)
@@ -986,6 +1000,7 @@ void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk)
 		f.open(to_string(nam) + "hk" + to_string(stt_hk) + n->data.id + ".txt", ios::out);
 		f.close();
 		cout << "Ban da co the mo dang ky ghi danh vao mon hoc nay!\n";
+		system("pause");
 	}
 }
 
@@ -1060,8 +1075,8 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 		NodeNamHoc* nodeNam = NodeNamHienTai(l);
 		int stt_hk = 0;
 		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
-		cin.ignore(100, '\n');
 		XuatFileCsv(nodeNam, hk, stt_hk);
+		system("pause");
 		break;
 	}
 	case 2:
@@ -1070,14 +1085,15 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 		NodeNamHoc* nodeNam = NodeNamHienTai(l);
 		int stt_hk = 0;
 		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
-		cin.ignore(100, '\n');
 		NhapDiemTuFile(nodeNam, hk, stt_hk);
+		system("pause");
 		break;
 	}
 	case 3:
 	{
 		system("cls");
 		CapNhatDiemSv(l);
+		system("pause");
 		break;
 	}
 	case 4:
@@ -1298,8 +1314,50 @@ void NhapThongtinSv(NodeSv_Lop* n, int i)
 			break;
 	}
 	cin.ignore();
-	cout << "CMND/CCCD: \n";//lieu co loi j se xay ra hon ta 
+	cout << "CMND/CCCD: \n";
 	cin >> n->sv.cmnd;
+
+}
+void GhiThongtinSv(NodeLop* nodeLop, NodeSv_Lop* n)//sau khi dien thong tin sv => check trung => ghi vao file
+{
+	bool flag = false;//danh dau file lop co thong tin sv roi hay chua
+	if (nodeLop->lop.headSvLop)
+		flag = true;
+	fstream f("SinhVien.txt", ios::in | ios::app);
+	string s;
+	//kiem tra file co chua data chua?
+	getline(f, s);
+	f.close();
+	f.open("SinhVien.txt", ios::app);
+	if (s != "")
+	{
+		f << endl;
+	}
+	f << n->sv.id << ",abcd1234," << nodeLop->lop.ten << ",";//abcd1234 la mat khau mac dinh cua tai khoan sinh vien
+	f.close();
+	f.open(nodeLop->lop.ten + ".txt", ios::app);
+	//<mssv, stt, ten, ho, gioi tinh, ngay sinh, cccd / cmnd,>
+	if (flag)
+		f << endl;
+	f << n->sv.id << ',';
+	f << n->sv.stt << ',';
+	f << n->sv.ten << ',';
+	f << n->sv.ho << ',';
+	f << n->sv.gioi << ',';
+	if (n->sv.ngayS.d < 10)
+		f << '0';
+	f << n->sv.ngayS.d;
+	if (n->sv.ngayS.m < 10)
+		f << '0';
+	f << n->sv.ngayS.m;
+	f << n->sv.ngayS.y << ',';
+	f << n->sv.cmnd << ",";
+	if (f.good())
+	{
+		cout << "Them sinh vien vao lop thanh cong!\n";
+		flag = true;
+	}
+	f.close();
 }
 void ThemSvLop_tay(NodeLop* nodeLop)
 {
@@ -1308,9 +1366,6 @@ void ThemSvLop_tay(NodeLop* nodeLop)
 	cout << "Nhap so luong sinh vien them vao: ";
 	int sl;
 	cin >> sl;
-	bool flag = false;//danh dau file co data roi hay chua?
-	if (nodeLop->lop.headSvLop)
-		flag = true;
 	for (int i = 0; i < sl; i++)
 	{
 		NodeSv_Lop* n = new NodeSv_Lop;
@@ -1318,30 +1373,12 @@ void ThemSvLop_tay(NodeLop* nodeLop)
 		NhapThongtinSv(n, i);
 		if (checkTrungSv(n, nodeLop->lop.headSvLop))
 			continue;
+		else
 		{
-			fstream f(nodeLop->lop.ten + ".txt", ios::app);
-			//<mssv, stt, ten, ho, gioi tinh, ngay sinh, cccd / cmnd,>
-			if (flag)
-				f << endl;
-			f << n->sv.id << ',';
-			f << n->sv.stt << ',';
-			f << n->sv.ten << ',';
-			f << n->sv.ho << ',';
-			f << n->sv.gioi << ',';
-			if (n->sv.ngayS.d < 10)
-				f << '0';
-			f << n->sv.ngayS.d;
-			if (n->sv.ngayS.m < 10)
-				f << '0';
-			f << n->sv.ngayS.m;
-			f << n->sv.ngayS.y << ',';
-			f << n->sv.cmnd << ",";
-			if (f.good())
-				cout << "Them sinh vien vao lop thanh cong!\n";
-			f.close();
+			GhiThongtinSv(nodeLop, n);
+			ThemNodeSvLop(nodeLop->lop.headSvLop, n);
+			n->headMon[0] = n->headMon[1] = n->headMon[2] = NULL;
 		}
-		ThemNodeSvLop(nodeLop->lop.headSvLop, n);
-		flag = true;
 	}
 }
 void ThemSvLop_file(NodeLop* nodeLop)
@@ -1443,29 +1480,9 @@ void ThemSvLop_file(NodeLop* nodeLop)
 				else
 				{
 					//ghi vao file
-					{
-						//<mssv, stt, ten, ho, gioi tinh, ngay sinh, cccd / cmnd,>
-						ofs.clear();
-						if (flag)
-							ofs << endl;
-						ofs << n->sv.id << ',';
-						ofs << n->sv.stt << ',';
-						ofs << n->sv.ten << ',';
-						ofs << n->sv.ho << ',';
-						ofs << n->sv.gioi << ',';
-						if (n->sv.ngayS.d < 10)
-							ofs << '0';
-						ofs << n->sv.ngayS.d;
-						if (n->sv.ngayS.m < 10)
-							ofs << '0';
-						ofs << n->sv.ngayS.m;
-						ofs << n->sv.ngayS.y << ',';
-						ofs << n->sv.cmnd << ",";
-					}
+					GhiThongtinSv(nodeLop, n);
 					ThemNodeSvLop(nodeLop->lop.headSvLop, n);
 					n->headMon[0] = n->headMon[1] = n->headMon[2] = NULL;
-					flag = true;
-					cout << "Them sinh vien thanh cong!\n";
 				}
 			}
 			else
@@ -1515,6 +1532,7 @@ void ThemSvLopNam1(ListNamHoc& l)
 			ThemSvLop_file(n);
 		else
 			ThemSvLop_tay(n);
+		system("pause");
 		cout << "Ban co muon tiep tuc? Nhap Y/N: ";
 		char lenh;
 		cin >> lenh;

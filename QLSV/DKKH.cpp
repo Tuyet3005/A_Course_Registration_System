@@ -530,7 +530,7 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	if (H->data.hk[ki - 1].headMon == NULL)//chua co mon nao
 	{
 		cout << "! CHUA TAO MON HOC CHO HOC KY NAY !" << endl << endl;
-		cout << "--Hay vao muc CAP NHAT de them mon hoc cho ki nay " << endl;
+		cout << "--Hay quay ve menu truoc va vao muc TAO MOI de them mon hoc cho ki nay!" << endl;
 		return;
 	}
 
