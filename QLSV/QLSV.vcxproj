@@ -161,6 +161,7 @@
     <ClInclude Include="variable.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="2020hk1.txt" />
     <Text Include="GiaoVu.txt" />
     <Text Include="listnam.txt" />
     <Text Include="SinhVien.txt" />

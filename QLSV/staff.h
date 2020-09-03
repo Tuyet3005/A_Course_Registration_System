@@ -57,7 +57,7 @@ HocKy* NhapHocKy(NodeNamHoc* node_nam);
 HocKy* TimHocKy(ListNamHoc l);
 //sua info mon
 NodeMon* ChonMonHoc(HocKy* hk, string id_mon_hoc);
-void HienThiDSMon(NodeMon* head_mon);
+void HienThiDSMon(NodeMon*& head_mon);
 NodeMon* NhapMonHoc(HocKy* hoc_ky);
 NodeMon* NhapMonHoc(ListNamHoc l);
 void GhiFileMon(string filename, NodeMon* mon, bool remove);

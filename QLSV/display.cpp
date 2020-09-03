@@ -617,7 +617,10 @@ bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 		}
 		pSv = pSv->pNext;
 	}
-	t->lop.GPA[ki - 1] = sumlop / dem;
+	if (dem == 0)
+		t->lop.GPA[ki - 1] = 0;
+	else
+		t->lop.GPA[ki - 1] = sumlop / dem;
 	return true;
 }
 

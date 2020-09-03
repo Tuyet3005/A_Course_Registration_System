@@ -75,7 +75,7 @@ struct NodeMon
 };
 struct HocKy
 {
-	NodeMon* headMon;
+	NodeMon* headMon = NULL;
 	ThoiGian tg;//thoi gian bd, kt
 };
 //LOP HOC
