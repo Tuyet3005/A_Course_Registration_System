@@ -1,4 +1,4 @@
-#include"Header.h"
+#include"variable.h"
 bool checkAccount(string tk, string mk, short lc)
 {
 	ifstream f;
