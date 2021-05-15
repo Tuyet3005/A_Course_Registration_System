@@ -3,23 +3,24 @@
 #include<string>
 #include<fstream>
 using namespace std;
+//THOI GIAN
+struct time
+{
+	int gio;
+	int phut;
+};
 struct Ngay
 {
 	int d;
 	int m;
 	int y;
 };
-//thoi gian cua hoc ky
 struct ThoiGian
 {
 	Ngay ngay_bd;
 	Ngay ngay_kt;
 };
-struct time
-{
-	int gio;
-	int phut;
-};
+//HOC KY
 struct BuoiHoc
 {
 	string thu;//mon, tue, wed,...
@@ -49,7 +50,7 @@ struct HocKy
 	ListMon dsMon;
 	ThoiGian tg;//thoi gian bd, kt
 };
-
+//LOP HOC
 struct Sv
 {
 	int stt;
@@ -82,14 +83,10 @@ struct ListLopHoc
 	NodeLop* pHead;
 	NodeLop* pTail;
 };
-
+//NAM HOC
 struct NamHoc
 {
 	ThoiGian tg;//chi cout nam (vd: tg.ngay_bd.y)
 	HocKy hk1, hk2, hk3;
 	ListLopHoc nam1, nam2, nam3, nam4;
 };
-void Split(string s, string& tk, string& mk);
-bool checkAccount(string tk, string mk, short lc);
-void LogIn(string& tk, string& mk, short& lc);
-void changePass(short lc, string tk, string& mk);
