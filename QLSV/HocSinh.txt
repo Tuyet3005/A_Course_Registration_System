@@ -1,0 +1,4 @@
+20120435,bichvanxd,3,Bich,Le Thi Ngoc,Nu,10042002,225963952,
+20120440,chauchau,8,Chau,Le Tran Bao,Nu,24052002,345678912,
+20120399,kimtuyen,21,Tuyen,Dang Vo Hoang,Nu,06092002,123456789,
+20120422,anhtuyet,300,Tuyet,Nguyen Thi Anh,Nu,30052002,111111111,

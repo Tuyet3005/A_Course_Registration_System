@@ -9,6 +9,10 @@ int main()
 	do
 	{
 		LogIn(tk, mk, lc);//dn sai thi tu dong thoat ra luon
+		/*TEST CHOI :>
+		cout << "Ban co muon doi mat khau?" << endl;
+		changePass(lc, tk, mk);*/
+		system("pause");
 		system("cls");
 		if (lc == 0)
 		{

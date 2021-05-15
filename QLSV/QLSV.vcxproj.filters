@@ -35,10 +35,10 @@
     <ClInclude Include="login.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="staff.h">
+    <ClInclude Include="student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="student.h">
+    <ClInclude Include="staff.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

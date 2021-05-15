@@ -4,11 +4,11 @@
 int InMenuGv()
 {
 	cout << "------HE THONG QUAN LY SINH VIEN------\n";
-	cout << "		1. Tao moi					  \n";
-	cout << "		2. Cap nhat                   \n";
-	cout << "		3. Hien thi    			  	  \n";
-	cout << "		4. Dang xuat				  \n";
-	cout << "		5. Thoat					  \n";
+	cout << "	1. Tao moi					  \n";
+	cout << "	2. Cap nhat                   \n";
+	cout << "	3. Hien thi    			  	  \n";
+	cout << "	4. Dang xuat				  \n";
+	cout << "	5. Thoat					  \n";
 	cout << "--------------------------------------\n";
 	return 5;//lua chon lon nhat la 5
 }
@@ -27,7 +27,7 @@ int LuaChon(int maxChoice)
 		}
 	}
 	//trong khoang lua chon, dung kieu du lieu
-	while (cin.fail() || chon < 1 || chon > maxChoice);
+	while (chon < 1 || chon > maxChoice);
 	return chon;
 }
 bool XlMenuGv(int chon)
