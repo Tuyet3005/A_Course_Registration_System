@@ -32,7 +32,7 @@
     <Text Include="GiaoVu.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="HocSinh.txt">
+    <Text Include="SinhVien.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
@@ -47,6 +47,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="variable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

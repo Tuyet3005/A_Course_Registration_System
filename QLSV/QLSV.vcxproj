@@ -146,10 +146,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="GiaoVu.txt" />
-    <Text Include="HocSinh.txt" />
+    <Text Include="SinhVien.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="login.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="student.h" />
     <ClInclude Include="variable.h" />
