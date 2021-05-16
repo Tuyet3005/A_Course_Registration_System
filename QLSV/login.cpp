@@ -14,7 +14,6 @@ bool checkAccount(string tk, string mk, short lc)
 		f.clear();
 		if (acc == tk && mk == pass) return true;
 		getline(f, s);
-		f.clear();
 	}
 	f.close();
 	return false;
