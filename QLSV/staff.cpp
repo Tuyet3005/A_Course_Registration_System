@@ -3,12 +3,13 @@
 //giao dien Giao vu
 int InMenuGv()
 {
+	system("cls");
 	cout << "------HE THONG QUAN LY SINH VIEN------\n";
-	cout << "		1. Tao moi					  \n";
-	cout << "		2. Cap nhat                   \n";
-	cout << "		3. Hien thi    			  	  \n";
-	cout << "		4. Dang xuat				  \n";
-	cout << "		5. Thoat					  \n";
+	cout << "	1. Tao moi\n";
+	cout << "	2. Cap nhat\n";
+	cout << "	3. Hien thi\n";
+	cout << "	4. Dang xuat\n";
+	cout << "	5. Thoat\n";
 	cout << "--------------------------------------\n";
 	return 5;//lua chon lon nhat la 5
 }
@@ -39,21 +40,18 @@ bool XlMenuGv(int chon)
 	{
 		cout << "tao moi" << endl;
 		system("pause");
-		system("cls");
 		break;
 	}
 	case 2:
 	{
 		cout << "cap nhat" << endl;
 		system("pause");
-		system("cls");
 		break;
 	}
 	case 3:
 	{
 		cout << "hien thi" << endl;
 		system("pause");
-		system("cls");
 		break;
 	}
 	case 4:
@@ -62,6 +60,8 @@ bool XlMenuGv(int chon)
 		cin >> lenh;
 		if (lenh == 'Y' || lenh == 'y')
 			return true;
+		system("pause");
+		break;
 	}
 	case 5:
 	{

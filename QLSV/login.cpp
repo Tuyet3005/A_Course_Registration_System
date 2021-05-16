@@ -90,6 +90,8 @@ void LogIn(string& tk, string& mk, short& lc)//tra ve gia tri j do de co the xd 
 	if (checkLogIn(tk, mk, lc))
 	{
 		cout << "DANG NHAP THANH CONG" << endl;
+		system("pause");
+		system("cls");
 	}
 	else
 	{
