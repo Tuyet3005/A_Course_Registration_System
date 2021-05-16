@@ -18,6 +18,5 @@ int main()
 		SinhVien();
 		changePass(lc, tk, mk);
 	}
-
 	return 0;
 }
