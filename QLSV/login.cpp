@@ -35,7 +35,7 @@ void Split(string s, string& tk, string& mk) //oke
 bool checkAccount(string tk, string mk, short lc)
 {
 	ifstream f;
-	if (lc == 1) f.open("HocSinh.txt");
+	if (lc == 1) f.open("SinhVien.txt");
 	else f.open("GiaoVu.txt");
 	string acc, pass, s;
 	while (!f.eof())
@@ -115,7 +115,7 @@ void changePass(short lc, string tk, string& mk)
 	cin.clear();
 	getline(cin, newpass);
 	ifstream f;
-	if (lc == 1) f.open("HocSinh.txt");
+	if (lc == 1) f.open("SinhVien.txt");
 	else f.open("GiaoVu.txt");
 	string s = "";
 	ofstream t;
@@ -133,6 +133,6 @@ void changePass(short lc, string tk, string& mk)
 	mk = newpass;
 	t.close();
 	f.close();
-	remove((lc == 1) ? "HocSinh.txt" : "GiaoVu.txt");
-	rename("trunggian.txt", (lc == 1) ? "HocSinh.txt" : "GiaoVu.txt");
+	remove((lc == 1) ? "SinhVien.txt" : "GiaoVu.txt");
+	rename("trunggian.txt", (lc == 1) ? "SinhVien.txt" : "GiaoVu.txt");
 }
