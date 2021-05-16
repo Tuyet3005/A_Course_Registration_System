@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="console.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="staff.cpp" />
@@ -149,8 +150,8 @@
     <Text Include="SinhVien.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="console.h" />
     <ClInclude Include="login.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="student.h" />
     <ClInclude Include="variable.h" />
