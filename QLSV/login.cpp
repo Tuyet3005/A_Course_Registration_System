@@ -50,7 +50,6 @@ void LogIn(string& tk, string& mk, short& lc)
 	else cout << "DANG NHAP THANH CONG" << endl;
 	system("pause");
 }
-
 void changePass(short lc, string tk, string& mk)
 {
 	string oldpass, newpass;
