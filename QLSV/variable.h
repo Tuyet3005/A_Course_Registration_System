@@ -2,6 +2,7 @@
 #include<iostream>
 #include<string>
 #include<fstream>
+#include<iomanip>
 using namespace std;
 //THOI GIAN
 struct time
@@ -70,7 +71,7 @@ struct ListSv
 };
 struct LopHoc
 {
-	ListSv l;
+	ListSv listsv;
 	string ten;
 };
 struct NodeLop

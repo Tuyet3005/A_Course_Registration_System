@@ -2,6 +2,8 @@
 #include"login.h"
 #include"staff.h"
 #include"student.h"
+#include"display.h"
+#include"console.h"
 int main()
 {
 	string tk, mk;
@@ -18,7 +20,9 @@ int main()
 		{
 			SinhVien();
 			changePass(lc, tk, mk);
+			chaythu();
 		}
 	} 	while (true);
+
 	return 0;
 }

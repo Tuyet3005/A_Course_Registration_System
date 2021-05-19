@@ -7,3 +7,57 @@ void SinhVien()
 	system("cls");
 	return;
 }
+void Init(ListSv& list)
+{
+	list.pHead = NULL;
+	list.pTail = NULL;
+}
+Sv findInfo(string tk)//tim Info, tui viet de lam cai xuat ds lop thu voi tien dung sau luon
+{
+	ifstream f;
+	f.open("SinhVien.txt");
+	string acc, s;
+	bool flag = false;
+	while (!f.eof())
+	{
+		f.clear();
+		getline(f, acc, ',');
+		if (acc == tk)
+		{
+			f.clear();
+			getline(f, s, ',');
+			flag = true;
+			break;
+		}
+		f.clear();
+		getline(f, s);
+	}
+	Sv T;
+	if (flag)
+	{
+		T.id = atoi(tk.c_str());
+		f.clear();
+		getline(f, s, ',');
+		T.stt = atoi(s.c_str());
+		f.clear();
+		getline(f, T.ten, ',');
+		f.clear();
+		getline(f, T.ho, ',');
+		f.clear();
+		getline(f, T.gioi, ',');
+		f.clear();
+		getline(f, s, ',');
+		T.ngayS.d = atoi(s.c_str());
+		T.ngayS.y = T.ngayS.d % 10000;
+		T.ngayS.m = (T.ngayS.d / 10000) % 100;
+		T.ngayS.d = T.ngayS.d / 1000000;
+		f.clear();
+		getline(f, s, ',');
+		T.cmnd = atoi(s.c_str());
+	}
+	else
+	{
+		T.stt = NULL;
+	}
+	return T;
+}
