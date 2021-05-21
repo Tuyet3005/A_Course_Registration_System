@@ -140,9 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="console.cpp" />
-    <ClCompile Include="display.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="display.cpp" />
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="student.cpp" />
   </ItemGroup>

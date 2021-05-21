@@ -19,7 +19,7 @@ int main()
 		else if (lc == 1)
 		{
 			SinhVien();
-			changePass(lc, tk, mk);
+			//changePass(lc, tk, mk);
 			chaythu();
 		}
 	} 	while (true);
