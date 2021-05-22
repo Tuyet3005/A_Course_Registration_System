@@ -20,6 +20,7 @@ bool checkAccount(string tk, string mk, short lc)
 }
 void LogIn(string& tk, string& mk, short& lc)
 {
+	system("cls");
 	cout << "--------------------DANG NHAP------------------------" << endl;
 	cout << "Nhap 1 neu ban la hoc sinh, 0 neu ban la giao vu" << endl;
 	cout << "Moi nhap: ";
