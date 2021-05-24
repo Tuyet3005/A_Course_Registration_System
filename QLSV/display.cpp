@@ -1,6 +1,5 @@
-#include"variable.h"
-#include"student.h"
-#include"console.h"
+﻿#include"display.h"
+
 void drawTable(int Row,int Col,int posCol[])
 {
 	//stt-mssv-ho-ten--gioitinh-ngaysinh-cmnd
@@ -57,7 +56,7 @@ void viewDsLop(LopHoc A,int posCol[],string title[])
 {
 	system("cls");
 	cout << endl;
-	cout << "----------------------------------------DANH SACH LOP " << A.ten << "--------------------------------------" << endl;
+	cout << "----------------------------------------DANH SACH LOP "<< A.ten<<"--------------------------------------" << endl;
 	for (int j = 0; j < 8; j++)
 	{
 		gotoXY(posCol[j] + 2, 3);
@@ -71,7 +70,7 @@ void viewDsLop(LopHoc A,int posCol[],string title[])
 		gotoXY(posCol[0] + 2, 2 * i + 1);
 		cout << p->sv.stt;
 		gotoXY(posCol[1] + 2, 2 * i + 1);
-		cout << p->sv.id;
+		cout <<p->sv.id;
 		gotoXY(posCol[2] + 2, 2 * i + 1);
 		cout << p->sv.ho;
 		gotoXY(posCol[3] + 2, 2 * i + 1);
@@ -91,6 +90,7 @@ void viewDsLop(LopHoc A,int posCol[],string title[])
 void chaythu()
 {
 	// chay thu ham viewDsLop trong khi doi mb lam doc info tu file...hao huc qua a~
+
 	LopHoc A;
 	A.ten = "12C1";
 	Init(A.listsv);
@@ -103,7 +103,24 @@ void chaythu()
 	t->pNext = NULL;
 	A.listsv.pTail = t;
 	int posCol[8] = { 0,6,17,43,55,67,81,95 };
+	cout.clear();
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	viewDsLop(A, posCol, title);
 	gotoXY(0, 20);
+}
+void BackGround1()
+{
+	
+	cout << "            XXXX                       XXXX                 XXXX            XXXX            XXXX           " << endl;
+	cout << "       XXX         XX              XXX        XX            XXX  XXX    XXX  XXX        XXX        XX       " << endl;
+	cout << "    XXX                            XXX                      XXX      XXX     XXX        XXX                " << endl;
+	cout << "  XXX                                   XXX                 XXX       X      XXX              XXX           " << endl;
+	cout << "  XXX                                          XXX          XXX              XXX                    XXX     " << endl;
+	cout << "    XXX                XX        XX             XXX         XXX              XXX        XX            XXX    " << endl;
+	cout << "        XXX        XXX            XXX         XXX           XXX              XXX          XXX        XXX     " << endl;
+	cout << "             XXXX                      XXXX                 XXX              XXX              XXXX         " << endl;
+}
+void viewDsMon(ListMon A)
+{
+
 }
