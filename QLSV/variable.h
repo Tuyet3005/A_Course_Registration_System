@@ -124,3 +124,13 @@ struct NamHoc
 	HocKy hk1, hk2, hk3;
 	ListLopHoc nam1, nam2, nam3, nam4;
 };
+struct NodeNamHoc
+{
+	NamHoc data;
+	NodeNamHoc* pNext;
+};
+struct ListNamHoc
+{
+	NodeNamHoc* pHead;
+	NodeNamHoc* pTail;
+};
