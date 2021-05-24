@@ -1,14 +1,15 @@
 #include"staff.h"
-#include"login.h"//phuc vu chuc nang log out
+//login.h??
 //giao dien Giao vu
 int InMenuGv()
 {
 	system("cls");
 	cout << "------HE THONG QUAN LY SINH VIEN------\n";
+	cout << "\t <Giao dien giao vu>\n";
 	cout << "	1. Tao moi\n";
 	cout << "	2. Cap nhat\n";
 	cout << "	3. Hien thi\n";
-	cout << "	4. Dang xuat\n";
+	cout << "	4. Quay ve menu bat dau\n";
 	cout << "	5. Thoat\n";
 	cout << "--------------------------------------\n";
 	return 5;//lua chon lon nhat la 5
@@ -155,12 +156,7 @@ bool XlMenuGv(int chon)
 	}
 	case 4:
 	{
-		cout << "Ban se dang xuat ra khoi tai khoan nay? Y?N?" << endl;
-		cin >> lenh;
-		if (lenh == 'Y' || lenh == 'y')
-			return true;
-		system("pause");
-		break;
+		return true;
 	}
 	case 5:
 	{
