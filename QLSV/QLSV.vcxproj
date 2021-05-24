@@ -144,6 +144,7 @@
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="staff.cpp" />
+    <ClCompile Include="startMenu.cpp" />
     <ClCompile Include="student.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="display.h" />
     <ClInclude Include="login.h" />
     <ClInclude Include="staff.h" />
+    <ClInclude Include="startMenu.h" />
     <ClInclude Include="student.h" />
     <ClInclude Include="variable.h" />
   </ItemGroup>

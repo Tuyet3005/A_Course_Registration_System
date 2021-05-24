@@ -1,3 +1,0 @@
-id,tenMon,tenGv,soTc,maxSv,thu1,buoi1,thu2,buoi2,
-KTLT,Ky thuat lap trinh,Nguyen Le Hoang Dung,4,95,MON,S1,FRI,S3,
-VTP,Vi tich phan,Le Van Chanh,4,32,TUE,S3,THU,S4,

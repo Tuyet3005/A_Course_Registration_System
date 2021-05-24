@@ -1,3 +1,0 @@
-stt,id,ho ten;diemGK,diemCK,diemCong,dTongKet,
-1,20120399Dang Vo Hoang Kim Tuyen;8.5,8,1.5,8.3,
-2,20120422,Nguyen Thi Anh Tuyet;9,8.5,1,8.75,

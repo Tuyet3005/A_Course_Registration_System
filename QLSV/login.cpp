@@ -1,4 +1,4 @@
-#include"variable.h"
+#include"login.h"
 bool checkAccount(string tk, string mk, short lc)
 {
 	ifstream f;
@@ -54,8 +54,9 @@ void LogIn(string& tk, string& mk, short& lc)
 void changePass(short lc, string tk, string& mk)
 {
 	string oldpass, newpass;
+	system("cls");
 	cout << "-----------------DOI MAT KHAU-----------------------" << endl;
-	//cin.ignore();
+	cin.ignore();
 	bool flag = false;
 	while (!flag)
 	{
@@ -90,3 +91,5 @@ void changePass(short lc, string tk, string& mk)
 	remove((lc == 1) ? "SinhVien.txt" : "GiaoVu.txt");
 	rename("trunggian.txt", (lc == 1) ? "SinhVien.txt" : "GiaoVu.txt");
 }
+
+
