@@ -114,6 +114,7 @@ struct ListMon
 };
 struct HocKy
 {
+	short ki;//ki may
 	ListMon dsMon;
 	ThoiGian tg;//thoi gian bd, kt
 };

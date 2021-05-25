@@ -127,14 +127,75 @@ void BackGround()
 	cout << "                                     Course & Student Management System" << endl << endl << endl << endl;
 	system("pause");
 }
-void viewDsMon(ListMon A)
+void viewDsMon(HocKy A, int namhoc)
 {
-
+	system("cls");
+	cout << "-----------------------------DANH SACH MON KI " << A.ki << " NAM HOC "<<namhoc<<" - "<<namhoc+1<<"-----------------------------" << endl;
+	string title[] = { "ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC" };
+	int posCol[7] = { 0,10,30,30,15,15,30};
+	for (int j = 0; j < 8; j++)
+	{
+		gotoXY(posCol[j] + 2, 3);
+		cout << title[j];
+	}
+	cout.clear();
+	NodeMon* p = A.dsMon.pHead;
+	int dem = 0;
+	for (int i = 2; p != NULL; i++)
+	{
+		gotoXY(posCol[0] + 2, 2 * i + 1);
+		cout << p->data.id;
+		gotoXY(posCol[1] + 2, 2 * i + 1);
+		cout << p->data.tenMon;
+		gotoXY(posCol[2] + 2, 2 * i + 1);
+		cout << p->data.tenGv;
+		gotoXY(posCol[3] + 2, 2 * i + 1);
+		cout << p->data.so_tc;
+		gotoXY(posCol[4] + 2, 2 * i + 1);
+		cout << p->data.MaxSv;
+		gotoXY(posCol[5] + 2, 2 * i + 1);
+		cout << p->data.bh1.buoi << "-" << p->data.bh1.thu << ", " << p->data.bh2.buoi << "-" << p->data.bh2.thu;
+		p = p->pNext;
+		dem++;
+	}
+	gotoXY(0, 2);
+	drawTable(dem + 1, sizeof(posCol) - 1, posCol);
 }
 void viewDsSvMon(MonHoc A)
 {
-
-}
+	system("cls");
+	cout << "----------------------------------------DANH SACH SINH VIEN MON " << A.tenMon << "--------------------------------------" << endl;
+	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
+	int posCol[8] = { 0,6,17,43,55,67,81,95 };
+	for (int j = 0; j < 8; j++)
+	{
+		gotoXY(posCol[j] + 2, 3);
+		cout << title[j];
+	}
+	cout.clear();
+	NodeSv* p = A.listsv.pHead;
+	int dem = 0;
+	for (int i = 2; p != NULL; i++)
+	{
+		gotoXY(posCol[0] + 2, 2 * i + 1);
+		cout << p->sv.stt;
+		gotoXY(posCol[1] + 2, 2 * i + 1);
+		cout << p->sv.id;
+		gotoXY(posCol[2] + 2, 2 * i + 1);
+		cout << p->sv.ho;
+		gotoXY(posCol[3] + 2, 2 * i + 1);
+		cout << p->sv.ten;
+		gotoXY(posCol[4] + 2, 2 * i + 1);
+		cout << p->sv.gioi;
+		gotoXY(posCol[5] + 2, 2 * i + 1);
+		cout << p->sv.ngayS.d << "/" << p->sv.ngayS.m << "/" << p->sv.ngayS.y;
+		gotoXY(posCol[6] + 2, 2 * i + 1);
+		cout << p->sv.cmnd;
+		p = p->pNext;
+		dem++;
+	}
+	gotoXY(0, 2);
+	drawTable(dem + 1, sizeof(posCol) - 1, posCol);
 void viewDsKi(NamHoc A)
 {
 
