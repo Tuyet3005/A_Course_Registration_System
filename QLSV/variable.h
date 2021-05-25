@@ -24,34 +24,8 @@ struct ThoiGian
 //LOP HOC
 struct Diem
 {
-	string thu;//mon, tue, wed,...
-	string buoi;//buoi(S1, S2, S3, S4)
-	//S1 (07:30), S2(09:30), S3(13:30), S4(15:30)
+	float gk, ck, cong, tongket;
 };
-struct MonHoc
-{
-	string id;
-	string tenMon, tenGv;
-	int so_tc;
-	int MaxSv = 50;//sl sv toi da 
-	BuoiHoc bh1, bh2;//hai buoi trong tuan
-};
-struct NodeMon
-{
-	MonHoc data;
-	NodeMon* pNext;
-};
-struct ListMon
-{
-	NodeMon* pHead;
-	NodeMon* pTail;
-};
-struct HocKy
-{
-	ListMon dsMon;
-	ThoiGian tg;//thoi gian bd, kt
-};
-//LOP HOC
 struct Sv
 {
 	int stt;//dem tu 1
@@ -114,7 +88,6 @@ struct ListMon
 };
 struct HocKy
 {
-	short ki;//ki may
 	ListMon dsMon;
 	ThoiGian tg;//thoi gian bd, kt
 };
@@ -123,7 +96,7 @@ struct NamHoc
 {
 	ThoiGian tg;//chi cout nam (vd: tg.ngay_bd.y)
 	HocKy hk1, hk2, hk3;
-	ListLopHoc nam1, nam2, nam3, nam4;
+	ListLopHoc nam1, nam2, nam3, nam4;//list lop hoc cua sv nam1, nam 2 ...
 };
 struct NodeNamHoc
 {
