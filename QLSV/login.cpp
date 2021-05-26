@@ -13,7 +13,7 @@ bool checkAccount(string tk, string mk, short lc)
 		getline(f, pass, ',');
 		f.clear();
 		if (acc == tk && mk == pass) return true;
-		getline(f, s);
+		getline(f, s);//bo het cac du lieu thua nhu ',' hoac du lieu ca nhan vo s ? 
 	}
 	f.close();
 	return false;
