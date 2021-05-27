@@ -6,6 +6,7 @@
 #include"display.h"
 #include"console.h"
 #include"windows.h"
+#include"realtime.h"
 int InMenuBatDau(int ma_tk);
 //xai ke ham void LuaChon(int maxSelect); cua staff.cpp
 bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l);
