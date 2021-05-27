@@ -1,6 +1,5 @@
 ﻿#include"display.h"
 
-
 void drawTable(int Row,int Col,int posCol[])
 {
 	//stt-mssv-ho-ten--gioitinh-ngaysinh-cmnd
