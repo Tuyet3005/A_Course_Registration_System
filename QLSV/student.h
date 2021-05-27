@@ -1,6 +1,6 @@
 #pragma once
 #include"variable.h"
-void SinhVien();
+void SinhVien(ListNamHoc& l);
 Sv findInfo(string tk);
 //template<typename T>
 void Init(ListSv& list);

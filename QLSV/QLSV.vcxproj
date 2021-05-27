@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -143,6 +143,7 @@
     <ClCompile Include="display.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="realtime.cpp" />
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="startMenu.cpp" />
     <ClCompile Include="student.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="console.h" />
     <ClInclude Include="display.h" />
+    <ClInclude Include="realtime.h" />
     <ClInclude Include="login.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="startMenu.h" />

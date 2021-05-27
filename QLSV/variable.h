@@ -3,6 +3,7 @@
 #include<string>
 #include<fstream>
 #include<iomanip>
+#include<ctime>
 using namespace std;
 //THOI GIAN
 struct time
