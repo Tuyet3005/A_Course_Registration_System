@@ -15,7 +15,7 @@ int HienNamHoc();
 void TaiNamTuFile(ListNamHoc& l);
 void TaoNam(ListNamHoc& l);
 //lop hoc
-NodeLop* TaoNodeLop();
+NodeLop* TaoNodeLop(string ten);
 void ThemLopHoc(ListLopHoc& l, NodeLop* n);
 int HienLopHoc(ListLopHoc l);
 string TaiLopTuFile(ListNamHoc& l, NodeNamHoc* n);//tai lop tu file len he thong

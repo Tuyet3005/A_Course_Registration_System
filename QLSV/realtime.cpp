@@ -9,7 +9,6 @@ tm ThoiGianHeThong()
 int NHhientai_nambd()
 {
 	//nam hoc bat dau tu 5/9 nam X den 31/7 nam X+1 
-	//cho phep tao moi nam hoc tu 1/8
 	int nam_bd;
 	tm tmTime = ThoiGianHeThong();
 	if (tmTime.tm_mon < 8)
@@ -22,20 +21,16 @@ NodeNamHoc* NodeNamHienTai(ListNamHoc& l)//ktra NH ht co dc tao chua, chua thi c
 {
 	int nam_bd = NHhientai_nambd();
 	NodeNamHoc* temp = l.pHead;
-	while (temp!=NULL)//chua den node cuoi || node nay da thoa dk
+	while (temp!=NULL)
 	{
 		if (temp->data.tg.ngay_bd.y == nam_bd)
 		{
 			return temp;//luc nay, temp tro den node cua nam hoc hien tai
 		}
-		else if (temp->pNext == NULL)
-		{
-			break;
-		}
 		else
 			temp = temp->pNext;
 	}
-	//la node cuoi nhung van ko thoa dk -> CAN TAO NODE NAM HOC HT
+	//CAN TAO NODE NAM HOC HT
 	char lenh;
 	cout << "Nam hoc hien tai chua duoc tao!!!\n";
 	cout << "Ban co muon tao nam hoc hien tai ngay? Y/N?\n";
