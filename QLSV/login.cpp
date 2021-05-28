@@ -13,7 +13,7 @@ bool checkAccount(string tk, string mk, short lc)
 		getline(f, pass, ',');
 		f.clear();
 		if (acc == tk && mk == pass) return true;
-		getline(f, s);
+		getline(f, s);//bo het cac du lieu thua nhu ',' hoac du lieu ca nhan vo s ? 
 	}
 	f.close();
 	return false;
@@ -23,8 +23,17 @@ void LogIn(string& tk, string& mk, short& lc)
 	system("cls");
 	cout << "--------------------DANG NHAP------------------------" << endl;
 	cout << "Nhap 1 neu ban la hoc sinh, 0 neu ban la giao vu" << endl;
-	cout << "Moi nhap: ";
-	cin >> lc;
+	do
+	{
+		cout << "Moi nhap: ";
+		cin >> lc;
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore();
+			lc = 2;
+		}
+	} 	while (lc < 0 || lc>1);
 	cout << endl;
 	cin.ignore();
 	char dem = 0;
