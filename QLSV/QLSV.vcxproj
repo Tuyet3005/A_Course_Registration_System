@@ -148,9 +148,6 @@
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="startMenu.cpp" />
     <ClCompile Include="student.cpp" />
-    <ClCompile Include="đkkh.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="GiaoVu.txt" />
