@@ -147,6 +147,7 @@
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="startMenu.cpp" />
     <ClCompile Include="student.cpp" />
+    <ClCompile Include="dkmh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GiaoVu.txt" />
