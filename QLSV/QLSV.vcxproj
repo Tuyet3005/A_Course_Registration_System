@@ -142,10 +142,13 @@
     <ClCompile Include="console.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="login.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="startMenu.cpp" />
     <ClCompile Include="student.cpp" />
+    <ClCompile Include="đkkh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GiaoVu.txt" />

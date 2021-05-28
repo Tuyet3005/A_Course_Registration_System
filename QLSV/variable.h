@@ -26,15 +26,7 @@ struct Diem
 {
 	float gk, ck, cong, tongket;
 };
-struct Sv
-{
-	int stt;//dem tu 1
-	int id, cmnd;
-	string ten, ho, gioi;
-	Ngay ngayS;//ngaySinh
-	int soMondk;//max=5
-	Diem diem;
-};
+
 struct NodeSv
 {
 	Sv sv;
@@ -85,6 +77,15 @@ struct ListMon
 {
 	NodeMon* pHead;
 	NodeMon* pTail;
+};
+struct Sv
+{
+	int stt;//dem tu 1
+	int id, cmnd;
+	string ten, ho, gioi;
+	Ngay ngayS;//ngaySinh
+	ListMon listmon;
+	Diem diem;
 };
 struct HocKy
 {

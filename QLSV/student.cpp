@@ -35,10 +35,10 @@ Sv findInfo(string tk)//tim Info, tui viet de lam cai xuat ds lop thu voi tien d
 	Sv T;
 	if (flag)
 	{
-		T.id = atoi(tk.c_str());
+		T.id = stoi(tk);
 		f.clear();
 		getline(f, s, ',');
-		T.stt = atoi(s.c_str());
+		T.stt = stoi(s);
 		f.clear();
 		getline(f, T.ten, ',');
 		f.clear();
@@ -47,13 +47,13 @@ Sv findInfo(string tk)//tim Info, tui viet de lam cai xuat ds lop thu voi tien d
 		getline(f, T.gioi, ',');
 		f.clear();
 		getline(f, s, ',');
-		T.ngayS.d = atoi(s.c_str());
+		T.ngayS.d = stoi(s);
 		T.ngayS.y = T.ngayS.d % 10000;
 		T.ngayS.m = (T.ngayS.d / 10000) % 100;
 		T.ngayS.d = T.ngayS.d / 1000000;
 		f.clear();
 		getline(f, s, ',');
-		T.cmnd = atoi(s.c_str());
+		T.cmnd = stoi(s);
 	}
 	else
 	{

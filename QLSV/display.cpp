@@ -105,7 +105,7 @@ void chaythu()
 	t->pNext = NULL;
 	A.listsv.pTail = t;
 	cout.clear();
-	viewDsLop(A);
+	viewDsSvLop(A);
 	gotoXY(0, 20);
 }
 void BackGround()
