@@ -11,6 +11,7 @@ void Timer(Time t, int posx, int posy)
 	{
 		gotoXY(posx, posy);
 		cout << t.h << " : " << t.m << " : " << t.s << "             ";
+		Beep(10, 1000);
 		if (t.s == 0)
 		{
 			if (t.m == 0)
