@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="console.cpp" />
     <ClCompile Include="display.cpp" />
+    <ClCompile Include="Import.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="realtime.cpp" />
@@ -150,12 +151,16 @@
     <ClCompile Include="dkmh.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="2020n1.txt" />
+    <Text Include="20CTT3.txt" />
+    <Text Include="20DTV1.txt" />
     <Text Include="GiaoVu.txt" />
     <Text Include="SinhVien.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h" />
     <ClInclude Include="display.h" />
+    <ClInclude Include="Import.h" />
     <ClInclude Include="realtime.h" />
     <ClInclude Include="login.h" />
     <ClInclude Include="staff.h" />

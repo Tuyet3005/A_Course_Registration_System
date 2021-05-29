@@ -1,4 +1,5 @@
 #include"staff.h"//GIAO VU
+#include"Import.h"
 int InMenuGv()
 {
 	system("cls");

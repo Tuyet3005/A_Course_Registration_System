@@ -42,12 +42,24 @@
     <ClCompile Include="dkmh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Import.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="GiaoVu.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="SinhVien.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="20CTT3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="20DTV1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020n1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
@@ -74,6 +86,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="realtime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Import.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
