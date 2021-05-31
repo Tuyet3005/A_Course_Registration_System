@@ -87,7 +87,12 @@ struct HocKy
 	ThoiGian tg;//thoi gian bd, kt
 };
 //NAM HOC
-struct NamHoc
+struct NamHoc 
+{
+	ThoiGian tg;//chi cout nam (vd: tg.ngay_bd.y)
+	HocKy hk1, hk2, hk3;
+	NodeLop* headLopNam1, headLopNam2, headLopNam3, headLopNam4;//list lop hoc cua sv nam1, nam 2 ...
+};
 struct NodeNamHoc
 {
 	NamHoc data;
