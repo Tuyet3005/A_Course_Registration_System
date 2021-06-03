@@ -52,62 +52,62 @@ void drawTable(int Row,int Col,int posCol[])
 		cout << endl;
 	}
 }
-void viewDsLop(LopHoc A,int posCol[],string title[])
-{
-	system("cls");
-	cout << endl;
-	cout << "----------------------------------------DANH SACH LOP "<< A.ten<<"--------------------------------------" << endl;
-	for (int j = 0; j < 8; j++)
-	{
-		gotoXY(posCol[j] + 2, 3);
-		cout << title[j];
-	}
-	cout.clear();
-	NodeSv* p = A.listsv.pHead;
-	int dem = 0;
-	for(int i=2;p!=NULL;i++)
-	{
-		gotoXY(posCol[0] + 2, 2 * i + 1);
-		cout << p->sv.stt;
-		gotoXY(posCol[1] + 2, 2 * i + 1);
-		cout <<p->sv.id;
-		gotoXY(posCol[2] + 2, 2 * i + 1);
-		cout << p->sv.ho;
-		gotoXY(posCol[3] + 2, 2 * i + 1);
-		cout << p->sv.ten;
-		gotoXY(posCol[4] + 2, 2 * i + 1);
-		cout << p->sv.gioi;
-		gotoXY(posCol[5] + 2, 2 * i + 1);
-		cout << p->sv.ngayS.d << "/" << p->sv.ngayS.m << "/" << p->sv.ngayS.y;
-		gotoXY(posCol[6] + 2, 2 * i + 1);
-		cout << p->sv.cmnd;
-		p = p->pNext;
-		dem++;
-	}
-	gotoXY(0, 2);
-	drawTable(dem+1,sizeof(posCol)-1,posCol);
-}
-void chaythu()
-{
-	// chay thu ham viewDsLop trong khi doi mb lam doc info tu file...hao huc qua a~
-
-	LopHoc A;
-	A.ten = "12C1";
-	Init(A.listsv);
-	NodeSv* t = new NodeSv;
-	t->sv = findInfo("20120435");
-	t->pNext = new NodeSv;
-	A.listsv.pHead = t;
-	t = t->pNext;
-	t->sv = findInfo("20120440");
-	t->pNext = NULL;
-	A.listsv.pTail = t;
-	int posCol[8] = { 0,6,17,43,55,67,81,95 };
-	cout.clear();
-	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
-	viewDsLop(A, posCol, title);
-	gotoXY(0, 20);
-}
+//void viewDsLop(LopHoc A,int posCol[],string title[])
+//{
+//	system("cls");
+//	cout << endl;
+//	cout << "----------------------------------------DANH SACH LOP "<< A.ten<<"--------------------------------------" << endl;
+//	for (int j = 0; j < 8; j++)
+//	{
+//		gotoXY(posCol[j] + 2, 3);
+//		cout << title[j];
+//	}
+//	cout.clear();
+//	NodeSv* p = A.listsv.pHead;
+//	int dem = 0;
+//	for(int i=2;p!=NULL;i++)
+//	{
+//		gotoXY(posCol[0] + 2, 2 * i + 1);
+//		cout << p->sv.stt;
+//		gotoXY(posCol[1] + 2, 2 * i + 1);
+//		cout <<p->sv.id;
+//		gotoXY(posCol[2] + 2, 2 * i + 1);
+//		cout << p->sv.ho;
+//		gotoXY(posCol[3] + 2, 2 * i + 1);
+//		cout << p->sv.ten;
+//		gotoXY(posCol[4] + 2, 2 * i + 1);
+//		cout << p->sv.gioi;
+//		gotoXY(posCol[5] + 2, 2 * i + 1);
+//		cout << p->sv.ngayS.d << "/" << p->sv.ngayS.m << "/" << p->sv.ngayS.y;
+//		gotoXY(posCol[6] + 2, 2 * i + 1);
+//		cout << p->sv.cmnd;
+//		p = p->pNext;
+//		dem++;
+//	}
+//	gotoXY(0, 2);
+//	drawTable(dem+1,sizeof(posCol)-1,posCol);
+//}
+//void chaythu()
+//{
+//	// chay thu ham viewDsLop trong khi doi mb lam doc info tu file...hao huc qua a~
+//
+//	LopHoc A;
+//	A.ten = "12C1";
+//	Init(A.listsv);
+//	NodeSv* t = new NodeSv;
+//	t->sv = findInfo("20120435");
+//	t->pNext = new NodeSv;
+//	A.listsv.pHead = t;
+//	t = t->pNext;
+//	t->sv = findInfo("20120440");
+//	t->pNext = NULL;
+//	A.listsv.pTail = t;
+//	int posCol[8] = { 0,6,17,43,55,67,81,95 };
+//	cout.clear();
+//	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
+//	viewDsLop(A, posCol, title);
+//	gotoXY(0, 20);
+//}
 void BackGround1()
 {
 	
@@ -120,7 +120,4 @@ void BackGround1()
 	cout << "        XXX        XXX            XXX         XXX           XXX              XXX          XXX        XXX     " << endl;
 	cout << "             XXXX                      XXXX                 XXX              XXX              XXXX         " << endl;
 }
-void viewDsMon(ListMon A)
-{
 
-}
