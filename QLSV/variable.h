@@ -53,9 +53,7 @@ struct MonHoc
 struct NodeSvMon
 {
 	int mssv;
-	//thoi gian sv hoc
-	short hk;//vd 1 2 3
-	short nam_bd;//vd 2019 2020 
+	string lop;
 	Diem diem;
 	NodeSvMon* pNext;
 };
@@ -71,10 +69,15 @@ struct HocKy
 	ThoiGian tg;//thoi gian bd, kt
 };
 //LOP HOC
+struct NodeMonofSv
+{
+	NodeMon* mon;
+	NodeMonofSv* pNext;
+};
 struct NodeSvLop
 {
 	Sv sv;
-	NodeSvMon* headMon;
+	NodeMonofSv* headMonhk1,* headMonhk2,* headMonhk3;
 	NodeSvLop* pNext;
 };
 struct LopHoc

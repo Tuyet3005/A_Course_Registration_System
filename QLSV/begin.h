@@ -16,3 +16,6 @@ void ThemNodeSvLop(NodeSvLop*& headSvLop, NodeSvLop* n);
 NodeSvLop* TaoNodeSv(Sv sv);
 Sv findInfo(int id);
 string timLop(int id);
+void test();
+void BackwardFile(ifstream& inFile, long& numBytes);
+void readFile(char* fileName);

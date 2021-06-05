@@ -1,4 +1,6 @@
 #include"begin.h"
+using namespace std;
+ListNamHoc l;
 int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 {
 	system("cls");
@@ -12,7 +14,7 @@ int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 	cout << "\t \t \t \t \t 5. Thoat\n";
 	return 5;//tra ve maxSelect
 }
-bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la maTk  0:Giao vu, 1: Sinh vien
+bool XlMenuBD(int chon, short lc, string tk, string& mk)//lc la maTk  0:Giao vu, 1: Sinh vien
 {
 	char lenh;
 	switch (chon)
@@ -61,7 +63,18 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 	}
 	return false;
 }
-void TaiData_Nam(ListNamHoc& l)
+//Nam
+NodeNamHoc* timNodeNam(int nam)
+{
+	if (l.pHead == NULL) return NULL;
+	NodeNamHoc* t = l.pHead;
+	while (t != NULL && t->data.tg.ngay_bd.y != nam)
+	{
+		t = t->pNext;
+	}
+	exit(1);
+}
+void TaiData_Nam()
 {
 	fstream f;
 	f.open("listnam.txt", ios::in | ios::app);
@@ -84,6 +97,7 @@ void TaiData_Nam(ListNamHoc& l)
 	}
 	f.close();
 }
+//Lop,Sv
 NodeSvLop* TaoNodeSv(Sv sv)
 {
 	NodeSvLop* n = new NodeSvLop;
@@ -102,6 +116,25 @@ void ThemNodeSvLop(NodeSvLop*& headSvLop, NodeSvLop* n)
 		n->pNext = headSvLop;
 		headSvLop = n;
 	}
+}
+NodeLop* timNodeLop(int nam,int styear,string lop)
+{
+	NodeNamHoc* namhoc = timNodeNam(nam);
+	NodeLop* list;
+	if (styear == 1)
+		list = namhoc->data.headLopNam1;
+	else if (styear == 2)
+		list = namhoc->data.headLopNam2;
+	else if (styear == 3)
+		list = namhoc->data.headLopNam3;
+	else
+		list = namhoc->data.headLopNam4;
+	while (list != NULL)
+	{
+		if (list->lop.ten == lop) return list;
+		list = list->pNext;
+	}
+	exit(1);
 }
 string timLop(int id)//tra ve ten lop cua sv co id tuong ung 
 {
@@ -126,6 +159,16 @@ string timLop(int id)//tra ve ten lop cua sv co id tuong ung
 	}
 	f.close();
 	return s;
+}
+NodeSvLop* timNodeSvLop(NodeSvLop* head, int mssv)
+{
+	NodeSvLop* t = head;
+	while (t != NULL)
+	{
+		if (t->sv.id == mssv) return t;
+		t = t->pNext;
+	}
+	exit(1);
 }
 Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.txt len ->doc info sv
 {
@@ -258,62 +301,132 @@ void TaiData_Lop(NodeNamHoc* n)
 		f.close();
 	}
 }
-//void TaiData_Mon(NodeNamHoc* n)
-//{
-//	fstream f;
-//	string s;
-//	n->data.hk1.headMon = n->data.hk2.headMon = n->data.hk3.headMon = NULL;
-//	for (int i = 1; i <= 3; i++)//xem tung hk 
-//	{
-//		//mo file thong tin cac hoc ky
-//		{
-//			if (i == 1)
-//			{
-//				f.open(to_string(n->data.tg.ngay_bd.y) + "hk1.txt", ios::in | ios::app);
-//			}
-//			else if (i == 2)
-//			{
-//				f.open(to_string(n->data.tg.ngay_bd.y) + "hk2.txt", ios::in | ios::app);
-//			}
-//			else if (i == 3)
-//			{
-//				f.open(to_string(n->data.tg.ngay_bd.y) + "hk3.txt", ios::in | ios::app);
-//			}
-//			else
-//			{
-//				f.open(to_string(n->data.tg.ngay_bd.y) + "hk4.txt", ios::in | ios::app);
-//			}
-//		}
-//		//doc file, tao node, them node
-//		while (!f.eof())
-//		{
-//			f.clear();
-//			getline(f, s, ',');
-//			if (s != "")
-//			{
-//				//doc du lieu thoi gian
-//				//doc cac mon trong hoc ky
-//				//mo file cac mon doc dssv tung mon
-//				//node->lop.headSvLop = TaiData_DsMon(node);
-//				if (i == 1)
-//				{
-//					n->data.hk1.tg.ngay_bd.d = stoi(s);
-//					f.clear();
-//					getline(f, s, ',');
-//					n->data.hk1.tg.ngay_bd.m = stoi(s);
-//					f.clear();
-//					getline(f, s, ',');
-//					n->data.hk1.tg.ngay_bd.y = stoi(s);
-//					f.clear();
-//				}
-//				else if (i == 2)
-//					ThemNodeLopHoc(n->data.headLopNam2, node);
-//				else if (i == 3)
-//					ThemNodeLopHoc(n->data.headLopNam3, node);
-//				else
-//					ThemNodeLopHoc(n->data.headLopNam4, node);
-//			}
-//		}
-//		f.close();
-//	}
-//}
+//Mon
+void themNodeMon(NodeMon*& A,NodeMon* T)//themdau
+{
+	if (A == NULL)
+		A=T;
+	else
+	{
+		T->pNext = A;
+		A = T;
+	}
+}
+void taiData_Mon(NodeNamHoc* n)
+{
+	fstream f;
+	string s;
+	n->data.hk1.headMon = n->data.hk2.headMon = n->data.hk3.headMon = NULL;
+	HocKy* A;
+	for (int i = 1; i <= 3; i++)//xem tung hk 
+	{
+		//mo file thong tin cac hoc ky
+		if (i == 1)
+		{
+			f.open(to_string(n->data.tg.ngay_bd.y) + "hk1.txt", ios::in | ios::app);
+			A = &(n->data.hk1);
+		}
+		else if (i == 2)
+		{
+			f.open(to_string(n->data.tg.ngay_bd.y) + "hk2.txt", ios::in | ios::app);
+			A = &(n->data.hk2);
+		}
+		else 
+		{
+			f.open(to_string(n->data.tg.ngay_bd.y) + "hk3.txt", ios::in | ios::app);
+			A = &(n->data.hk3);
+		}
+		//doc file, tao node, them node
+		//lay tg bd hk
+		f.clear();
+		getline(f, s, ',');
+		A->tg.ngay_bd.d = atoi(s.c_str());
+		A->tg.ngay_bd.y = A->tg.ngay_bd.d % 10000;
+		A->tg.ngay_bd.m = (A->tg.ngay_bd.d / 10000) % 100;
+		A->tg.ngay_bd.d = A->tg.ngay_bd.d / 1000000;
+		//lay tg ket thuc hk
+		f.clear();
+		getline(f, s, ',');
+		A->tg.ngay_kt.d = atoi(s.c_str());
+		A->tg.ngay_kt.y = A->tg.ngay_kt.d % 10000;
+		A->tg.ngay_kt.m = (A->tg.ngay_kt.d / 10000) % 100;
+		A->tg.ngay_kt.d = A->tg.ngay_kt.d / 1000000;
+
+		while (!f.eof())
+		{
+				//doc cac mon trong hoc ky
+				//mo file cac mon doc dssv tung mon
+				//node->lop.headSvLop = TaiData_DsMon(node);
+			NodeMon* t = new NodeMon;
+			f.clear();
+			getline(f,t->data.id, '\n');
+			getline(f, t->data.tenMon, '\n');
+			getline(f, t->data.tenGv, '\n');
+			getline(f, s, '\n');
+			t->data.so_tc = stoi(s);
+			getline(f, t->data.bh1.thu, '\n');
+			getline(f, t->data.bh1.buoi, '\n');
+			getline(f, t->data.bh2.thu, '\n');
+			getline(f, t->data.bh2.buoi, '\n');			
+			t->pNext = NULL;
+			t->headSvMon = NULL;
+			taiData_SvMon(A->headMon, n->data.tg.ngay_bd.y, i);
+			themNodeMon(A->headMon, t);
+
+		}
+		f.close();
+
+	}
+}
+void themNodelistMonSv(NodeMonofSv*& head,NodeMon* A)//them dau
+{
+	NodeMonofSv* n = new NodeMonofSv;
+	n->mon = A;
+	n->pNext = head;
+	head = n;
+}
+void taiData_SvMon(NodeMon*& mon,int nam,int ki)
+{
+	ifstream f;
+	f.open(nam+'/'+"hk"+ki+'/'+mon->data.tenMon + ".txt");
+	//trong file chua: mssv,lop,diem-gk,ck,cong,tk
+	string s;
+	while (!f.eof())
+	{
+		NodeSvMon* t = new NodeSvMon;
+		f.clear();
+		getline(f, s, '\n');
+		t->mssv = stoi(s);
+		getline(f, t->lop, '\n');
+		getline(f, s, '\n');
+		t->diem.gk = stoi(s);
+		getline(f, s, '\n');
+		t->diem.ck = stoi(s);
+		getline(f, s, '\n');
+		t->diem.cong = stoi(s);
+		getline(f, s, '\n');
+		t->diem.tongket = stoi(s);
+		//them node vao dau list sv mon
+		t->pNext = mon->headSvMon;
+		mon->headSvMon = t;
+		//tim nodesvlop de no tro vao node mon
+		int styear;//nam nhat, nam hia, nam 3, nam 4
+		string s="";
+		s = t->lop[0] + t->lop[1];
+		styear = nam - stoi(s) + 1;
+		NodeSvLop* A;
+		A = timNodeSvLop(timNodeLop(nam, styear, t->lop)->lop.headSvLop, t->mssv);
+		if (ki == 1)
+			themNodelistMonSv(A->headMonhk1, mon);
+		else if (ki == 2)
+			themNodelistMonSv(A->headMonhk2, mon);
+		else
+			themNodelistMonSv(A->headMonhk3, mon);
+	}
+	f.close();
+}
+
+//tui nghi la nen de may cai them node cua cac struct vo ham luon neu ko tai su dung de de quan li
+//dung liist nam lam bien toan cuc
+//bo trong cac file de de quan li
+
