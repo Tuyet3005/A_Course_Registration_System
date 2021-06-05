@@ -1,4 +1,5 @@
 #include"login.h"
+
 bool checkAccount(string tk, string mk, short lc)
 {
 	ifstream f;

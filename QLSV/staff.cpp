@@ -90,16 +90,21 @@ int InMenuTaoMoi(int chon)//dung cho ca menu Cap nhat
 {
 	system("cls");
 	if (chon == 1)
+	{
 		cout << "----MENU TAO MOI----\n";
+
+	}
 	else
+	{
 		cout << "----MENU CAP NHAT----\n";
-	cout << "1. Nam hoc\n";
-	cout << "2. Lop hoc\n";
-	cout << "3. Hoc ky\n";
-	cout << "4. Mon hoc\n";
-	cout << "5. Quay ve\n";
-	cout << "6. Thoat\n";
-	return 6;
+		cout << "1. Nam hoc\n";
+		cout << "2. Lop hoc\n";
+		cout << "3. Hoc ky\n";
+		cout << "4. Mon hoc\n";
+		cout << "5. Quay ve\n";
+		cout << "6. Thoat\n";
+		return 6;
+	}
 }
 bool XlTaoMoi(int chon, ListNamHoc& l)
 {
