@@ -20,7 +20,7 @@ void TaiData_Lop(NodeNamHoc* n);
 void ThemNodeMon(NodeMon*& A, NodeMon* T);
 NodeLop* timNodeLop(NodeNamHoc* namhoc, int styear, string lop);
 NodeSv_Lop* timNodeSv_Lop(NodeSv_Lop* head, int mssv);
-Sv findInfo(int id);
+//Sv findInfo(int id); //can cai tien them 
 void ThemNodeMon_Sv(NodeMon_Sv*& head, NodeMon* A, NodeSv_Mon* sv_mon);
 void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki);
 void TaiData_Mon(NodeNamHoc* n);

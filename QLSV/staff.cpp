@@ -245,7 +245,6 @@ NodeLop* TaoNodeLop(string ten)
 	n->pNext = NULL;
 	return n;
 }
-
 void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop*& n)
 {
 	// ds rong: them dau
