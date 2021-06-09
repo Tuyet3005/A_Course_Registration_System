@@ -1,5 +1,4 @@
 #include"login.h"
-
 bool checkAccount(string tk, string mk, short lc)
 {
 	ifstream f;
@@ -14,7 +13,7 @@ bool checkAccount(string tk, string mk, short lc)
 		getline(f, pass, ',');
 		f.clear();
 		if (acc == tk && mk == pass) return true;
-		getline(f, s);//bo het cac du lieu thua nhu ',' hoac du lieu ca nhan vo s ? 
+		getline(f, s);
 	}
 	f.close();
 	return false;
@@ -101,5 +100,3 @@ void changePass(short lc, string tk, string& mk)
 	remove((lc == 1) ? "SinhVien.txt" : "GiaoVu.txt");
 	rename("trunggian.txt", (lc == 1) ? "SinhVien.txt" : "GiaoVu.txt");
 }
-
-

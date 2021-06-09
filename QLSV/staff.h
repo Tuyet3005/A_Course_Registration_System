@@ -1,6 +1,7 @@
 #pragma once
 #include"variable.h"
 #include"realtime.h"
+#include"begin.h"
 int InMenuGv();
 int LuaChon(int maxChoice);
 bool XlMenuGv(int chon, ListNamHoc& l);
@@ -10,15 +11,13 @@ int InMenuTaoMoi(int chon);
 bool XlTaoMoi(int chon, ListNamHoc& l);
 //nam hoc
 NodeNamHoc* TaoNodeNam();
-void ThemNamHoc(ListNamHoc& l, NodeNamHoc* n);
-int HienNamHoc();
-void TaiNamTuFile(ListNamHoc& l);
+void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n);
+void HienNamHoc(ListNamHoc l);
 void TaoNam(ListNamHoc& l);
 //lop hoc
 NodeLop* TaoNodeLop(string ten);
-void ThemLopHoc(ListLopHoc& l, NodeLop* n);
-int HienLopHoc(ListLopHoc l);
-string TaiLopTuFile(ListNamHoc& l, NodeNamHoc* n);//tai lop tu file len he thong
-void TaoLopNamNhat(ListNamHoc& l);
+void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop*& n);
+void HienLopHoc(NodeLop* HeadLop);
+void TaoLopNamNhat(NodeNamHoc* node);
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);

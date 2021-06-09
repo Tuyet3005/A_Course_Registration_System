@@ -33,7 +33,10 @@
     <ClCompile Include="display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="startMenu.cpp">
+    <ClCompile Include="begin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="realtime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -64,7 +67,10 @@
     <ClInclude Include="display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="startMenu.h">
+    <ClInclude Include="begin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="realtime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,12 +1,12 @@
-#include"startMenu.h"
+#include"begin.h"
 int main()
 {
 	string tk, mk;
 	short lc = 1;//Ma tk:  0: giao vu ; 1: sinh vien
 	ListNamHoc listNam;
 	listNam.pHead = listNam.pTail = NULL;
-	//tai du lieu list nam hoc tu file len he thong
-	TaiNamTuFile(listNam);
+	//tai cac du lieu tu file len he thong
+	TaiData_Nam(listNam);
 	do
 	{
 		bool Thoat = false;
