@@ -258,7 +258,7 @@ void viewDsLop(NodeLop* head,int nam, int namhoc)
 	gotoXY(0, 2);
 	drawTable(dem, 2, posCol);
 }
-void viewSvScore(NodeSvLop* sv, int ki)
+void viewSvScore(NodeSvLop* sv, int ki)//xem diem theo tung hoc ki
 {
 	system("cls");
 	cout << "-------------------------------------KET QUA HOC TAP - HOC KI "<<ki<<"----------------------------------" << endl;
@@ -286,7 +286,8 @@ void viewSvScore(NodeSvLop* sv, int ki)
 		NodeSvMon* temp = p->mon->headSvMon;
 		while (temp != NULL)
 		{
-			if(temp->mssv==sv->sv.id)
+			if (temp->mssv == sv->sv.id)
+				break;
 			temp = temp->pNext;
 		}
 		//
