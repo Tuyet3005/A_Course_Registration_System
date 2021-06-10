@@ -41,7 +41,7 @@ NodeNamHoc* NodeNamHienTai(ListNamHoc& l)//ktra NH ht co dc tao chua, chua thi c
 		NodeNamHoc* node = new NodeNamHoc;
 		node->data.tg.ngay_bd.y = nam_bd;
 		node->pNext = NULL;
-		ThemNamHoc(l, node);
+		ThemNodeNamHoc(l, node);
 		fstream f;
 		f.open("listnam.txt", ios::in | ios::app);
 		f << nam_bd << ",";

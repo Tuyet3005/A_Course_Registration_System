@@ -4,7 +4,6 @@
 #include<fstream>
 #include<iomanip>
 #include<ctime>
-//
 using namespace std;
 //THOI GIAN
 struct time
@@ -23,7 +22,6 @@ struct ThoiGian
 	Ngay ngay_bd;
 	Ngay ngay_kt;
 };
-//LOP HOC
 struct Diem
 {
 	float gk, ck, cong, tongket;
@@ -34,23 +32,8 @@ struct Sv
 	int id, cmnd;
 	string ten, ho, gioi;
 	Ngay ngayS;//ngaySinh
-};
-struct NodeSvLop
-{
-	Sv sv;
-	NodeSvMon* headSvMonHk1, headSvMonHk2, headSvMonHk3;//ds mon ma 1 sv hoc
-	NodeSvLop* pNext;
-};
-struct LopHoc
-{
-	NodeSvLop* headSvLop;
-	string ten;
-};
-struct NodeLop
-{
-	NodeLop* pNext;
-	LopHoc lop;
-	//list lop hoc la nodelop* head
+	//int soMondk;//max=5
+	//Diem diem;
 };
 //HOC KY
 struct BuoiHoc
@@ -59,13 +42,6 @@ struct BuoiHoc
 	string buoi;//buoi(S1, S2, S3, S4)
 	//S1 (07:30), S2(09:30), S3(13:30), S4(15:30)
 };
-struct NodeSvMon
-{
-	NodeSvLop* sv;//thong tin sv
-	Diem diem;
-	NodeSvMon* pNext;
-	NodeMon* mon;//thong tin mon 
-};
 struct MonHoc
 {
 	string id;
@@ -73,7 +49,13 @@ struct MonHoc
 	int so_tc;
 	int MaxSv = 50;//sl sv toi da 
 	BuoiHoc bh1, bh2;//hai buoi trong tuan
-	NodeSvMon* head;
+};
+struct NodeSvMon
+{
+	int mssv;
+	string lop;
+	Diem diem;
+	NodeSvMon* pNext;
 };
 struct NodeMon
 {
@@ -86,12 +68,37 @@ struct HocKy
 	NodeMon* headMon;
 	ThoiGian tg;//thoi gian bd, kt
 };
+//LOP HOC
+struct NodeMonofSv
+{
+	NodeMon* mon;
+	NodeMonofSv* pNext;
+};
+struct NodeSvLop
+{
+	Sv sv;
+	NodeMonofSv* headMonhk1,* headMonhk2,* headMonhk3;
+	NodeSvLop* pNext;
+};
+struct LopHoc
+{
+	NodeSvLop* headSvLop;
+	string ten;
+};
+struct NodeLop
+{
+	NodeLop* pNext;
+	LopHoc lop;
+};
 //NAM HOC
 struct NamHoc
 {
 	ThoiGian tg;//chi cout nam (vd: tg.ngay_bd.y)
 	HocKy hk1, hk2, hk3;
-	NodeLop* headLopNam1, headLopNam2, headLopNam3, headLopNam4;//list lop hoc cua sv nam1, nam 2 ...
+	NodeLop* headLopNam1;
+	NodeLop* headLopNam2;
+	NodeLop* headLopNam3;
+	NodeLop* headLopNam4;//list lop hoc cua sv nam1, nam 2 ...
 };
 struct NodeNamHoc
 {
@@ -103,4 +110,3 @@ struct ListNamHoc
 	NodeNamHoc* pHead;
 	NodeNamHoc* pTail;
 };
-

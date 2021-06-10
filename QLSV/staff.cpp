@@ -1,4 +1,5 @@
-#include"staff.h"//GIAO VU
+#include"staff.h"
+//GIAO VU
 int InMenuGv()
 {
 	system("cls");
@@ -119,7 +120,9 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	case 2:
 	{
 		system("cls");
-		TaoLopNamNhat(l);
+		TaoLop(NodeNamHienTai(l));
+		cout << l.pHead->data.headLopNam1->lop.headSvLop->sv.ten << endl;
+		system("pause");
 		break;
 	}
 	case 3:
@@ -154,7 +157,6 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 // Nhap node nam tu ban phim, tra ve node
 NodeNamHoc* NhapNodeNam()
 {
-	NodeNamHoc* n = new NodeNamHoc;
 	int nam_bd;
 	do
 	{
@@ -164,7 +166,7 @@ NodeNamHoc* NhapNodeNam()
 		{
 			cin.clear();
 			cin.ignore();
-			nam_bd = -1;
+			nam_bd = 0;
 		}
 	} while (nam_bd < NHhientai_nambd());
 
@@ -181,10 +183,8 @@ bool LuuNodeNam(NodeNamHoc* n)
 	string temp = "";
 	while (!f.eof())//ktra lo nhap nam trung voi nam da tao!!!!
 	{
-		f.clear();
-		getline(f, temp, ',');
-		if (temp != "")//file da chua du lieu
-		{
+		if (nam_bd == temp->data.tg.ngay_bd.y)
+    {
 			if (stoi(temp) == nam_bd)
 			{
 				cout << "Loi! Nam hoc da duoc tao truoc do!!!" << endl << endl;
@@ -209,9 +209,9 @@ NodeNamHoc* TaoNodeNam()
 	else
 	{
 		return n;
-	}
+  }
 }
-void ThemNamHoc(ListNamHoc& l, NodeNamHoc* n)
+void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n)
 {
 	if (n == NULL)//nhap nam trung voi nam da tao
 		return;
@@ -227,28 +227,7 @@ void ThemNamHoc(ListNamHoc& l, NodeNamHoc* n)
 		l.pTail->pNext = n;
 		l.pTail = n;
 	}
-}
-void TaiNamTuFile(ListNamHoc& l)
-{
-	string file = "listnam.txt";
-	fstream f;
-	f.open(file, ios::in);
-	string temp = "";
-	while (!f.eof())
-	{
-		f.clear();
-		getline(f, temp, ',');
-		if (temp != "")//file da chua du lieu
-		{
-			int nam_bd = stoi(temp);
-			NodeNamHoc* n = new NodeNamHoc;
-			n->pNext = NULL;
-			n->data.tg.ngay_bd.y = nam_bd;
-			n->data.tg.ngay_kt.y = nam_bd + 1;
-			ThemNamHoc(l, n);
-		}
-	}
-	f.close();
+	cout << "Tao nam hoc moi thanh cong!!!" << endl;
 }
 int HienNamHoc()
 {
@@ -276,39 +255,39 @@ int HienNamHoc()
 void TaoNam(ListNamHoc& l)
 {
 	cout << "TAO MOI 1 NAM HOC\n";
-	ThemNamHoc(l, TaoNodeNam());
+	ThemNodeNamHoc(l, TaoNodeNam(l));
 	system("pause");
 	system("cls");
 	HienNamHoc();
 	system("pause");
 }
 //lop hoc
-NodeLop* TaoNodeLop(string ten)
+NodeLop* TaoNodeLop(string ten)//cap nhat dssv cho lop ngay ??????????????????????????????
 {
 	NodeLop* n = new NodeLop;
 	n->lop.ten = ten;
 	n->pNext = NULL;
+	//cap nhat dssv 
+	n->lop.headSvLop = TaiData_DsLop(n);
 	return n;
 }
-void ThemLopHoc(ListLopHoc& l, NodeLop* n)
+void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop* n)
 {
 	// ds rong: them dau
-	if (l.pHead == NULL)
+	if (HeadLop == NULL)
 	{
-		l.pHead = n;
-		l.pTail = n;
+		HeadLop = n;
 	}
-	// ds co roi: pTail-> next = node; pTail = node
-	else
+	else//them dau 
 	{
-		l.pTail->pNext = n;
-		l.pTail = n;
+		n->pNext = HeadLop;
+		HeadLop = n;
 	}
 }
-int HienLopHoc(ListLopHoc l)
+int HienLopHoc(NodeLop* HeadLop)
 {
 	cout << "\nCac lop hoc da tao:\n";
-	NodeLop* temp = l.pHead;
+	NodeLop* temp = HeadLop;
 	int i = 0;
 	while (temp != NULL)
 	{
@@ -319,47 +298,16 @@ int HienLopHoc(ListLopHoc l)
 	}
 	return i;
 }
-string TaiLopTuFile(ListNamHoc& l, NodeNamHoc* node)//tai file lop nam 234 cua nam truoc len he thong 
-{//da co san node nh hien tai tren he thong
-	fstream f;
-	//cap nhat nam nhat 
-	string file1 = to_string(node->data.tg.ngay_bd.y) + "n1.txt";
-	f.open(file1, ios:: in | ios::app);//mo file de doc, neu file da dc tao thi ghi them o cuoi file 
-	while (!f.eof())
-	{
-		string s;
-		getline(f, s, ',');
-		if (s != "")
-		{
-			NodeLop* n = new NodeLop;
-			n->pNext = NULL;
-			n->lop.ten = s;
-			ThemLopHoc(node->data.nam1, n);
-		}
-	}
-	f.close();
-	//cap nhat nam hai, ba, tu
-	//cach lam
-	//ktra co nam hoc truoc nh hien tai chua
-	//neu co thi tai dssv nam hoc truoc len nh ht theo quy tac
-	//vd 2018n1.txt-> 2019n2.txt 2018n2.txt -> 2019n3.txt
-	return file1;
-}
-void TaoLopNamNhat(ListNamHoc& l)
+void TaoLop(NodeNamHoc* node)
 {
-	//ktra nam hoc hien tai co dc tao chua, chua thi co the tao nam truoc, co roi thi tiep buoc sau
-	NodeNamHoc* node = NodeNamHienTai(l);
 	if (node == NULL)
-		return;//ko tao nam hoc thi ko tao lop luon
-	//khoi tao list lop hoc nam1 trong nam hoc hien tai 
-	node->data.nam1.pHead = node->data.nam1.pTail = NULL;
-	//mo file namhocn1.txt o 2 che do doc, ghi them o cuoi(neu file chua dc tao thi se tao file) -> tai du lieu lop tu file len he thong 	
-	string file = TaiLopTuFile(l, node);
+		return;
+	node->data.headLopNam1 = NULL;
 	int sl = 0;
 	//nhap ten lop moi len file, tao node len he thong
 	cout << "Nhap so luong lop nam nhat muon tao: ";
 	cin >> sl;
-	if (cin.fail()||sl<0)
+	if (cin.fail() || sl < 0)
 	{
 		cin.clear();
 		cin.ignore();
@@ -372,9 +320,9 @@ void TaoLopNamNhat(ListNamHoc& l)
 		cout << "Nhap ten lop " << i + 1 << ": ";
 		cin >> ten;
 		//ktra co bi trung ten lop
-		NodeLop* temp = node->data.nam1.pHead;
+		NodeLop* temp = node->data.headLopNam1;
 		bool trungTen = false;
-		while (temp!=NULL)
+		while (temp != NULL)
 		{
 			if (temp->lop.ten == ten)
 			{
@@ -386,7 +334,7 @@ void TaoLopNamNhat(ListNamHoc& l)
 			{
 				temp = temp->pNext;
 			}
-		} 
+		}
 		if (trungTen)
 		{
 			char lenh;
@@ -400,20 +348,15 @@ void TaoLopNamNhat(ListNamHoc& l)
 		}
 		//ko bi trung thi tao node va ghi ten lop vo file
 		fstream f;
-		f.open(file, ios::app);//file lop nam1 cua NH htai
+		f.open(to_string(node->data.tg.ngay_bd.y)+"n1.txt", ios::app);//file lop nam1 
 		f << ten << ",";
 		f.clear();
 		f.close();
-		ThemLopHoc(node->data.nam1, TaoNodeLop(ten));
-		//cap nhat dssv 
-		string file_lop = ten + ".txt";
-		f.open(file_lop, ios::app);
-		f.close();
-		cout << "File "<<ten<<".txt da duoc tao!\n";
-		cout << "Ban co the cap nhat danh sach sinh vien cua lop " << ten<<" ngay bay gio!\n";
-		cout <<"Huong dan: Mo file nay len, roi dien vao cac MSSV ngan cach nhau boi dau phay.\n";
-		system("pause");		
-	}	
+		ThemNodeLopHoc(node->data.headLopNam1, TaoNodeLop(ten));
+		//da cap nhat du lieu lop moi vao file trong ham TaoNodeLop
+		cout << "Tao lop thanh cong!!!" << endl;
+		system("pause");
+	}
 }
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l)

@@ -7,53 +7,48 @@ void SinhVien(ListNamHoc& l)
 	system("cls");
 	return;
 }
-void Init(ListSv& list)
-{
-	list.pHead = NULL;
-	list.pTail = NULL;
-}
-Sv findInfo(string tk)//tim Info, tui viet de lam cai xuat ds lop thu voi tien dung sau luon
+Sv findInfo(string tenlop, int tk)//tim Info sv
 {
 	ifstream f;
-	f.open("SinhVien.txt");
-	string acc, s;
+	f.open(tenlop+".txt");
+	string s;
+	int acc;
 	bool flag = false;
+	Sv T;
 	while (!f.eof())
 	{
 		f.clear();
-		getline(f, acc, ',');
+		getline(f, s, ',');
+		acc = stoi(s);
 		if (acc == tk)
 		{
+			flag = true;
+			T.id = tk;
 			f.clear();
 			getline(f, s, ',');
-			flag = true;
-			break;
+			T.stt = stoi(s);
+			f.clear();
+			getline(f, T.ten, ',');
+			f.clear();
+			getline(f, T.ho, ',');
+			f.clear();
+			getline(f, T.gioi, ',');
+			f.clear();
+			getline(f, s, ',');
+			T.ngayS.d = stoi(s);
+			T.ngayS.y = T.ngayS.d % 10000;
+			T.ngayS.m = (T.ngayS.d / 10000) % 100;
+			T.ngayS.d = T.ngayS.d / 1000000;
+			f.clear();
+			getline(f, s, ',');
+			T.cmnd = stoi(s);
 		}
 		f.clear();
 		getline(f, s);
 	}
-	Sv T;
 	if (flag)
 	{
-		T.id = atoi(tk.c_str());
-		f.clear();
-		getline(f, s, ',');
-		T.stt = atoi(s.c_str());
-		f.clear();
-		getline(f, T.ten, ',');
-		f.clear();
-		getline(f, T.ho, ',');
-		f.clear();
-		getline(f, T.gioi, ',');
-		f.clear();
-		getline(f, s, ',');
-		T.ngayS.d = atoi(s.c_str());
-		T.ngayS.y = T.ngayS.d % 10000;
-		T.ngayS.m = (T.ngayS.d / 10000) % 100;
-		T.ngayS.d = T.ngayS.d / 1000000;
-		f.clear();
-		getline(f, s, ',');
-		T.cmnd = atoi(s.c_str());
+		
 	}
 	else
 	{
