@@ -14,7 +14,7 @@ bool checkAccount(string tk, string mk, short lc)
 		getline(f, pass, ',');
 		f.clear();
 		if (acc == tk && mk == pass) return true;
-		getline(f, s);//bo het cac du lieu thua nhu ',' hoac du lieu ca nhan vo s ? 
+		getline(f, s);
 	}
 	f.close();
 	return false;
@@ -61,7 +61,7 @@ void LogIn(string& tk, string& mk, short& lc)
 	else cout << "DANG NHAP THANH CONG" << endl;
 	system("pause");
 }
-void changePass(short lc, string tk, string& mk)
+void changePass(short lc, int tk, string& mk)
 {
 	string oldpass, newpass;
 	system("cls");
