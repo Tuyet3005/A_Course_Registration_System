@@ -33,16 +33,10 @@
     <ClCompile Include="display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="startMenu.cpp">
+    <ClCompile Include="begin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="realtime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dkmh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Import.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,13 +47,49 @@
     <Text Include="SinhVien.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="20CTT3.txt">
+    <Text Include="2019\19HOH4.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="20DTV1.txt">
+    <Text Include="2019\19VLK2.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="2020n1.txt">
+    <Text Include="2019\2019n1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019\2019n2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019\2019n3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019\2019n4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020\20CSH2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020\20CTT3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020\20DTV1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020\2020n1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020\2020n2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020\2020n3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020\2020n4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019\2019hk1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019\2019hk2.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
@@ -82,14 +112,16 @@
     <ClInclude Include="display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="startMenu.h">
+    <ClInclude Include="begin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="realtime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Import.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="2020\20CTT3m.text">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
