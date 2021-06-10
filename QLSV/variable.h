@@ -38,7 +38,7 @@ struct Sv
 struct NodeSvLop
 {
 	Sv sv;
-	NodeSvMon* headSvMonHk1, headSvMonHk2, headSvMonHk3;//ds mon ma 1 sv hoc
+	NodeSvMon* headSvMonHk1, *headSvMonHk2, *headSvMonHk3;//ds mon ma 1 sv hoc
 	NodeSvLop* pNext;
 };
 struct LopHoc
@@ -91,7 +91,7 @@ struct NamHoc
 {
 	ThoiGian tg;//chi cout nam (vd: tg.ngay_bd.y)
 	HocKy hk1, hk2, hk3;
-	NodeLop* headLopNam1, headLopNam2, headLopNam3, headLopNam4;//list lop hoc cua sv nam1, nam 2 ...
+	NodeLop* headLopNam1, *headLopNam2, *headLopNam3, *headLopNam4;//list lop hoc cua sv nam1, nam 2 ...
 };
 struct NodeNamHoc
 {

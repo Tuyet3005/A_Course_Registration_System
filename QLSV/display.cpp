@@ -65,7 +65,7 @@ void viewDsSvLop(LopHoc A)
 		cout << title[j];
 	}
 	cout.clear();
-	NodeSv* p = A.listsv.pHead;
+	NodeSvLop* p = A.headSvLop;
 	int dem = 1;
 	for(int i=2;p!=NULL;i++)
 	{
@@ -88,25 +88,6 @@ void viewDsSvLop(LopHoc A)
 	}
 	gotoXY(0, 2);
 	drawTable(dem,7,posCol);
-}
-void chaythu()
-{
-	// chay thu ham viewDsLop trong khi doi mb lam doc info tu file...hao huc qua a~
-
-	LopHoc A;
-	A.ten = "12C1";
-	Init(A.listsv);
-	NodeSv* t = new NodeSv;
-	t->sv = findInfo("20120435");
-	t->pNext = new NodeSv;
-	A.listsv.pHead = t;
-	t = t->pNext;
-	t->sv = findInfo("20120440");
-	t->pNext = NULL;
-	A.listsv.pTail = t;
-	cout.clear();
-	viewDsSvLop(A);
-	gotoXY(0, 20);
 }
 void BackGround()
 {
@@ -138,7 +119,7 @@ void viewDsMon(HocKy A,int ki, int namhoc)
 		cout << title[j];
 	}
 	cout.clear();
-	NodeMon* p = A.dsMon.pHead;
+	NodeMon* p = A.headMon;
 	int dem = 1;
 	for (int i = 2; p != NULL; i++)
 	{
@@ -172,26 +153,26 @@ void viewDsSvMon(MonHoc A)
 		cout << title[j];
 	}
 	cout.clear();
-	NodeSv* p = A.listsv.pHead;
+	NodeSvMon* p = A.head;
 	int dem = 1;
 	for (int i = 2; p != NULL; i++)
 	{
 		gotoXY(posCol[0] + 2, 2 * i + 1);
-		cout << p->sv.stt;
+		cout << p->sv->sv.stt;
 		gotoXY(posCol[1] + 2, 2 * i + 1);
-		cout << p->sv.id;
+		cout << p->sv->sv.id;
 		gotoXY(posCol[2] + 2, 2 * i + 1);
-		cout << p->sv.ho;
+		cout << p->sv->sv.ho;
 		gotoXY(posCol[3] + 2, 2 * i + 1);
-		cout << p->sv.ten;
+		cout << p->sv->sv.ten;
 		gotoXY(posCol[4] + 2, 2 * i + 1);
-		cout << p->sv.diem.gk;
+		cout << p->diem.gk;
 		gotoXY(posCol[5] + 2, 2 * i + 1);
-		cout << p->sv.diem.ck;
+		cout << p->diem.ck;
 		gotoXY(posCol[6] + 2, 2 * i + 1);
-		cout << p->sv.diem.cong;
+		cout << p->diem.cong;
 		gotoXY(posCol[7] + 2, 2 * i + 1);
-		cout << p->sv.diem.tongket;
+		cout << p->diem.tongket;
 		p = p->pNext;
 		dem++;
 	}
@@ -250,7 +231,7 @@ void viewDsNam(ListNamHoc A)
 	gotoXY(0, 2);
 	drawTable(dem , 2, posCol);
 }
-void viewDsLop(ListLopHoc A,int nam, int namhoc)
+void viewDsLop(NodeLop* head,int nam, int namhoc)
 {
 	system("cls");
 	cout << "---------------------DANH SACH LOP HOC NAM "<<nam<<" NAM HOC "<<namhoc<<" - "<<namhoc+1<<"-----------------------" << endl;
@@ -262,7 +243,7 @@ void viewDsLop(ListLopHoc A,int nam, int namhoc)
 		cout << title[j];
 	}
 	cout.clear();
-	NodeLop* p = A.pHead;
+	NodeLop* p = head;
 	int dem = 1;
 	for (int i = 2; p != NULL; i++)
 	{
