@@ -1,4 +1,5 @@
 ﻿#include"display.h"
+#include"student.h"
 
 void drawTable(int Row,int Col,int posCol[])
 {
@@ -107,7 +108,7 @@ void BackGround()
 	gotoXY(0,20);
 	system("pause");
 }
-void viewDsMon(HocKy A,int ki, int namhoc)
+void viewDsMonHk(HocKy A,int ki, int namhoc)
 {
 	system("cls");
 	cout << "-----------------------------DANH SACH MON KI " << ki << " NAM HOC "<<namhoc<<" - "<<namhoc+1<<"-----------------------------" << endl;
@@ -141,10 +142,10 @@ void viewDsMon(HocKy A,int ki, int namhoc)
 	gotoXY(0, 2);
 	drawTable(dem, 6, posCol);
 }
-void viewDsSvMon(MonHoc A)
+void viewDsSvMon(NodeMon A)
 {
 	system("cls");
-	cout << "----------------------------------------DANH SACH SINH VIEN MON " << A.tenMon << "--------------------------------------" << endl;
+	cout << "---------------------------------------DANH SACH SINH VIEN MON " << A.data.tenMon << "--------------------------------------" << endl;
 	string title[] = { "STT","MSSV","HO","TEN","DIEM GK","DIEM CK","DIEM CONG","TONG KET" };
 	int posCol[9] = { 0,6,17,43,55,65,75,85 };
 	for (int j = 0; j < 8; j++)
@@ -153,18 +154,19 @@ void viewDsSvMon(MonHoc A)
 		cout << title[j];
 	}
 	cout.clear();
-	NodeSvMon* p = A.head;
-	int dem = 1;
-	for (int i = 2; p != NULL; i++)
+	NodeSvMon* p = A.headSvMon;
+	int i = 2;
+	for (; p != NULL; i++)
 	{
+		Sv s = findInfo(p->lop, p->mssv);
 		gotoXY(posCol[0] + 2, 2 * i + 1);
-		cout << p->sv->sv.stt;
+		cout << s.stt;
 		gotoXY(posCol[1] + 2, 2 * i + 1);
-		cout << p->sv->sv.id;
+		cout << s.id;
 		gotoXY(posCol[2] + 2, 2 * i + 1);
-		cout << p->sv->sv.ho;
+		cout << s.ho;
 		gotoXY(posCol[3] + 2, 2 * i + 1);
-		cout << p->sv->sv.ten;
+		cout << s.ten;
 		gotoXY(posCol[4] + 2, 2 * i + 1);
 		cout << p->diem.gk;
 		gotoXY(posCol[5] + 2, 2 * i + 1);
@@ -174,10 +176,9 @@ void viewDsSvMon(MonHoc A)
 		gotoXY(posCol[7] + 2, 2 * i + 1);
 		cout << p->diem.tongket;
 		p = p->pNext;
-		dem++;
 	}
 	gotoXY(0, 2);
-	drawTable(dem, 8, posCol);
+	drawTable(i-1, 8, posCol);
 }
 void viewDsKi(NamHoc A)
 {
@@ -256,4 +257,89 @@ void viewDsLop(NodeLop* head,int nam, int namhoc)
 	}
 	gotoXY(0, 2);
 	drawTable(dem, 2, posCol);
+}
+void viewSvScore(NodeSvLop* sv, int ki)
+{
+	system("cls");
+	cout << "-------------------------------------KET QUA HOC TAP - HOC KI "<<ki<<"----------------------------------" << endl;
+	cout << endl;
+	NodeMonofSv* p;
+	if (ki == 1)
+		p = sv->headMonhk1;
+	else if (ki == 2)
+		p = sv->headMonhk2;
+	else
+		p = sv->headMonhk3;
+
+	string title[] = { "STT","ID MON","TEN MON","GK","CK","CONG","TONG KET" };
+	int posCol[] = { 0,6,20, 30,9,9,9,9 };
+	for (int j = 0; j < 7; j++)
+	{
+		gotoXY(posCol[j] + 2, 3);
+		cout << title[j];
+	}
+	cout.clear();
+	int i = 2;
+	for(; p!= NULL;i++)
+	{
+		//tim node svmon
+		NodeSvMon* temp = p->mon->headSvMon;
+		while (temp != NULL)
+		{
+			if(temp->mssv==sv->sv.id)
+			temp = temp->pNext;
+		}
+		//
+		gotoXY(posCol[0], 2 * i + 1);
+		cout << i - 1;
+		gotoXY(posCol[1], 2 * i + 1);
+		cout << p->mon->data.id;
+		gotoXY(posCol[2], 2 * i + 1);
+		cout << p->mon->data.tenMon;
+		gotoXY(posCol[3], 2 * i + 1);
+		cout << temp->diem.gk;
+		gotoXY(posCol[4], 2 * i + 1);
+		cout << temp->diem.ck;
+		gotoXY(posCol[5], 2 * i + 1);
+		cout << temp->diem.cong;
+		gotoXY(posCol[6], 2 * i + 1);
+		cout << temp->diem.tongket;
+		p = p->pNext;
+	}
+	gotoXY(0, 2);
+	drawTable(i - 1, 7, posCol);
+}
+void viewInfoSv(Sv A)
+{
+	system("cls");
+	cout << endl;
+	cout << "----------------------------------------THONG TIN CA NHAN--------------------------------------" << endl;
+	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
+	int posCol[8] = { 0,6,17,43,55,67,81,95 };
+	for (int j = 0; j < 8; j++)//ghi title
+	{
+		gotoXY(posCol[j] + 2, 3);
+		cout << title[j];
+	}
+	cout.clear();
+	for (int i = 2; i<9; i++)
+	{
+		gotoXY(posCol[0] + 2, 2 * i + 1);
+		cout << A.stt;
+		gotoXY(posCol[1] + 2, 2 * i + 1);
+		cout << A.id;
+		gotoXY(posCol[2] + 2, 2 * i + 1);
+		cout << A.ho;
+		gotoXY(posCol[3] + 2, 2 * i + 1);
+		cout << A.ten;
+		gotoXY(posCol[4] + 2, 2 * i + 1);
+		cout << A.gioi;
+		gotoXY(posCol[5] + 2, 2 * i + 1);
+		cout << A.ngayS.d << "/" << A.ngayS.m << "/" << A.ngayS.y;
+		gotoXY(posCol[6] + 2, 2 * i + 1);
+		cout << A.cmnd;
+	}
+	gotoXY(0, 2);
+	drawTable(2, 7, posCol);
+	system("pause");
 }

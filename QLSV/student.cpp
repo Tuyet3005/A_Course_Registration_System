@@ -7,7 +7,6 @@ void SinhVien(ListNamHoc& l)
 	system("cls");
 	return;
 }
-
 Sv findInfo(string tenlop, int tk)//tim Info sv
 {
 	ifstream f;

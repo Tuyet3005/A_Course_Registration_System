@@ -19,3 +19,5 @@ string timLop(int id);
 void test();
 void BackwardFile(ifstream& inFile, long& numBytes);
 void readFile(char* fileName);
+void themNodelistMonSv(NodeMonofSv*& head, NodeMon* A);
+void taiData_SvMon(NodeMon*& mon, int nam, int ki);

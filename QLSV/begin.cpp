@@ -14,7 +14,7 @@ int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 	cout << "\t \t \t \t \t 5. Thoat\n";
 	return 5;//tra ve maxSelect
 }
-bool XlMenuBD(int chon, short lc, string tk, string& mk)//lc la maTk  0:Giao vu, 1: Sinh vien
+bool XlMenuBD(int chon, short lc, int tk, string& mk)//lc la maTk  0:Giao vu, 1: Sinh vien
 {
 	char lenh;
 	switch (chon)
@@ -30,12 +30,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk)//lc la maTk  0:Giao vu,
 	case 2:
 	{
 		cout << "Hien thi thong tin cua tai khoan";
-		/*if (lc == 1)//tra ve sinh vien 
-		{
-			findInfo(stoi(tk));
-		}*/
-		//viet them ham hien thi thong tin sv da tra ve !!!!!!!!!!!!!!!
-		system("pause");
+		viewInfoSv(findInfo(timLop(tk), tk));
 		break;
 	}
 	case 3:
