@@ -4,7 +4,7 @@ ListNamHoc l;
 int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 {
 	system("cls");
-	BackGround1();
+	BackGround();
 	cout << endl << endl << endl;
 	cout << "\t \t \t CHAO MUNG BAN DEN VOI HE THONG QUAN LY SINH VIEN\n";
 	cout << "\t \t \t \t \t 1. Vao he thong chinh\n";
