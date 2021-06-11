@@ -41,8 +41,8 @@ void LogIn(string& tk, string& mk, short& lc)
 	while (dem < 5)
 	{
 		cout << "Tai khoan: ";
-		cin.clear();
-		getline(cin, tk);
+		cin >> tk;
+		cin.ignore();//xoa \n
 		cout << "Mat khau: ";
 		cin.clear();
 		getline(cin, mk);
@@ -61,7 +61,7 @@ void LogIn(string& tk, string& mk, short& lc)
 	else cout << "DANG NHAP THANH CONG" << endl;
 	system("pause");
 }
-void changePass(short lc, int tk, string& mk)
+void changePass(short lc, string tk, string& mk)
 {
 	string oldpass, newpass;
 	system("cls");
@@ -101,5 +101,3 @@ void changePass(short lc, int tk, string& mk)
 	remove((lc == 1) ? "SinhVien.txt" : "GiaoVu.txt");
 	rename("trunggian.txt", (lc == 1) ? "SinhVien.txt" : "GiaoVu.txt");
 }
-
-

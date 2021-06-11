@@ -45,6 +45,7 @@ NodeNamHoc* NodeNamHienTai(ListNamHoc& l)//ktra NH ht co dc tao chua, chua thi c
 		fstream f;
 		f.open("listnam.txt", ios::in | ios::app);
 		f << nam_bd << ",";
+		f.close();
 		return node;
 	}
 	return NULL;
