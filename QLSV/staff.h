@@ -10,14 +10,14 @@ void GiaoVu(ListNamHoc& l);
 int InMenuTaoMoi(int chon);
 bool XlTaoMoi(int chon, ListNamHoc& l);
 //nam hoc
-NodeNamHoc* TaoNodeNam(ListNamHoc& l);
+NodeNamHoc* TaoNodeNam();
 void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n);
-int HienNamHoc();
+void HienNamHoc(ListNamHoc l);
 void TaoNam(ListNamHoc& l);
 //lop hoc
 NodeLop* TaoNodeLop(string ten);
-void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop* n);
-int HienLopHoc(NodeLop* HeadLop);
-void TaoLop(NodeNamHoc* node);
+void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop*& n);
+void HienLopHoc(NodeLop* HeadLop);
+void TaoLopNamNhat(NodeNamHoc* node);
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);
