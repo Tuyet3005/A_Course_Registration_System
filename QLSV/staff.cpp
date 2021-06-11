@@ -1,5 +1,4 @@
-#include"staff.h"
-//GIAO VU
+#include"staff.h"//GIAO VU
 int InMenuGv()
 {
 	system("cls");
@@ -93,7 +92,6 @@ int InMenuTaoMoi(int chon)//dung cho ca menu Cap nhat
 	if (chon == 1)
 	{
 		cout << "----MENU TAO MOI----\n";
-
 	}
 	else
 	{
@@ -120,7 +118,8 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	case 2:
 	{
 		system("cls");
-		TaoLop(NodeNamHienTai(l));
+		NodeNamHoc* n = NodeNamHienTai(l);
+		TaoLopNamNhat(n);
 		cout << l.pHead->data.headLopNam1->lop.headSvLop->sv.ten << endl;
 		system("pause");
 		break;
@@ -155,9 +154,12 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
 //nam hoc
-NodeNamHoc* TaoNodeNam(ListNamHoc& l)
+NodeNamHoc* TaoNodeNam()
 {
+	NodeNamHoc* n = new NodeNamHoc;
 	int nam_bd;
+	fstream f;
+	f.open("listnam.txt", ios::in | ios::app);
 	do
 	{
 		cout << "Nhap nam bat dau nam hoc: ";
@@ -166,27 +168,28 @@ NodeNamHoc* TaoNodeNam(ListNamHoc& l)
 		{
 			cin.clear();
 			cin.ignore();
-			nam_bd = 0;
+			nam_bd = -1;
 		}
-	} 	while (nam_bd < NHhientai_nambd());
-	//ktra lo nhap nam trung voi nam da tao!!!!
-	NodeNamHoc* temp = l.pHead;
-	while (temp != NULL)
+	} while (nam_bd < NHhientai_nambd());
+	string temp = "";
+	while (!f.eof())//ktra lo nhap nam trung voi nam da tao!!!!
 	{
-		if (nam_bd == temp->data.tg.ngay_bd.y)
+		f.clear();
+		getline(f, temp, ',');
+		if (temp != "")//file da chua du lieu
 		{
-			cout << "Loi! Nam hoc da duoc tao truoc do!!!" << endl << endl;
-			return NULL;
+			if (stoi(temp) == nam_bd)
+			{
+				cout << "Loi! Nam hoc da duoc tao truoc do!!!" << endl << endl;
+				return NULL;
+			}
 		}
-		temp = temp->pNext;
 	}
-	fstream f;
-	f.open("listnam.txt", ios::app);
-	f << nam_bd<<',';
-	f.close();
-	NodeNamHoc* n = new NodeNamHoc;
 	n->data.tg.ngay_bd.y = nam_bd;
 	n->data.tg.ngay_kt.y = nam_bd + 1;
+	f.clear();
+	f << nam_bd << ',';
+	f.close();
 	n->pNext = NULL;
 	return n;
 }
@@ -208,49 +211,41 @@ void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n)
 	}
 	cout << "Tao nam hoc moi thanh cong!!!" << endl;
 }
-int HienNamHoc()
+void HienNamHoc(ListNamHoc l)
 {
-	fstream f;
-	f.open("listnam.txt", ios::in);
-	cout << "Cac nam hoc da tao:\n";
-	string s = "";
-	int i = 0;
-	bool filerong = true;
-	while (!f.eof())
+	if (l.pHead)
 	{
-		f.clear();
-		getline(f, s, ',');
-		if (s != "")
+		cout << "Cac nam hoc da tao: \n";
+		NodeNamHoc* n = l.pHead;
+		int i = 0;
+		while (n)
 		{
-			cout << ++i << ". Nam hoc " << s << " - " << stoi(s) + 1 << endl;//1. Nam hoc 2020 - 2021
-			filerong = false;
+			cout << ++i << ". Nam hoc ";
+			cout << n->data.tg.ngay_bd.y << " - " << n->data.tg.ngay_kt.y << endl;
+			n = n->pNext;
 		}
 	}
-	if (filerong) cout << "CHUA TAO NAM HOC NAO!!!\n";
-	f.clear();
-	f.close();
-	return i;//so nh hien tai
+	cout << "CHUA CO NAM HOC NAO!\n";
 }
 void TaoNam(ListNamHoc& l)
 {
 	cout << "TAO MOI 1 NAM HOC\n";
-	ThemNodeNamHoc(l, TaoNodeNam(l));
+	NodeNamHoc* n = TaoNodeNam();
+	ThemNodeNamHoc(l, n);
 	system("pause");
 	system("cls");
-	HienNamHoc();
+	HienNamHoc(l);
 	system("pause");
 }
-//lop hoc
-NodeLop* TaoNodeLop(string ten)//cap nhat dssv cho lop ngay ??????????????????????????????
+//lop hoc  /cap nhat dssv lop!!! 
+NodeLop* TaoNodeLop(string ten)
 {
 	NodeLop* n = new NodeLop;
 	n->lop.ten = ten;
 	n->pNext = NULL;
-	//cap nhat dssv 
-	n->lop.headSvLop = TaiData_DsLop(n);
 	return n;
 }
-void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop* n)
+void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop*& n)
 {
 	// ds rong: them dau
 	if (HeadLop == NULL)
@@ -263,21 +258,20 @@ void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop* n)
 		HeadLop = n;
 	}
 }
-int HienLopHoc(NodeLop* HeadLop)
+void HienLopHoc(NodeLop* HeadLop)
 {
 	cout << "\nCac lop hoc da tao:\n";
 	NodeLop* temp = HeadLop;
 	int i = 0;
 	while (temp != NULL)
 	{
-		cout << i + 1 << ". ";
+		cout << ++i << ". ";
 		cout << "Lop ";
 		cout << temp->lop.ten << endl;
 		temp = temp->pNext;
 	}
-	return i;
 }
-void TaoLop(NodeNamHoc* node)
+void TaoLopNamNhat(NodeNamHoc* node)
 {
 	if (node == NULL)
 		return;
@@ -327,11 +321,12 @@ void TaoLop(NodeNamHoc* node)
 		}
 		//ko bi trung thi tao node va ghi ten lop vo file
 		fstream f;
-		f.open(to_string(node->data.tg.ngay_bd.y)+"n1.txt", ios::app);//file lop nam1 
+		f.open(to_string(node->data.tg.ngay_bd.y) + "n1.txt", ios::app);//file lop nam1 
 		f << ten << ",";
 		f.clear();
 		f.close();
-		ThemNodeLopHoc(node->data.headLopNam1, TaoNodeLop(ten));
+		NodeLop* n = TaoNodeLop(ten);
+		ThemNodeLopHoc(node->data.headLopNam1, n);
 		//da cap nhat du lieu lop moi vao file trong ham TaoNodeLop
 		cout << "Tao lop thanh cong!!!" << endl;
 		system("pause");
@@ -383,5 +378,3 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	}
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
-
-	
