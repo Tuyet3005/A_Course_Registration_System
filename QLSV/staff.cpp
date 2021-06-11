@@ -153,8 +153,8 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	}
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
-//nam hoc
-NodeNamHoc* TaoNodeNam()
+// Nhap node nam tu ban phim, tra ve node
+NodeNamHoc* NhapNodeNam()
 {
 	NodeNamHoc* n = new NodeNamHoc;
 	int nam_bd;
@@ -171,27 +171,46 @@ NodeNamHoc* TaoNodeNam()
 			nam_bd = -1;
 		}
 	} while (nam_bd < NHhientai_nambd());
+	n->data.tg.ngay_bd.y = nam_bd;
+	n->data.tg.ngay_kt.y = nam_bd + 1;
+	n->pNext = NULL;
+}
+// Luu node nam vao file, tra ve true neu luu thanh cong, false neu bi trung
+bool LuuNodeNam(NodeNamHoc* n)
+{
+	int nam_bd = n->data.tg.ngay_bd.y;
+	fstream f;
+	f.open("listnam.txt", ios::in | ios::app);
 	string temp = "";
 	while (!f.eof())//ktra lo nhap nam trung voi nam da tao!!!!
 	{
-		f.clear();
-		getline(f, temp, ',');
-		if (temp != "")//file da chua du lieu
-		{
+		if (nam_bd == temp->data.tg.ngay_bd.y)
+    {
 			if (stoi(temp) == nam_bd)
 			{
 				cout << "Loi! Nam hoc da duoc tao truoc do!!!" << endl << endl;
-				return NULL;
+				return false;
 			}
 		}
 	}
-	n->data.tg.ngay_bd.y = nam_bd;
-	n->data.tg.ngay_kt.y = nam_bd + 1;
 	f.clear();
 	f << nam_bd << ',';
 	f.close();
-	n->pNext = NULL;
-	return n;
+	return true;
+}
+//nam hoc
+NodeNamHoc* TaoNodeNam()
+{
+	NodeNamHoc* n = NhapNodeNam();
+
+	if (!LuuNodeNam(n))
+	{
+		return NULL;
+	}
+	else
+	{
+		return n;
+  }
 }
 void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n)
 {
