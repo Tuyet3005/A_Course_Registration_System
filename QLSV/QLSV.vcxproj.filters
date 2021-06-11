@@ -47,51 +47,6 @@
     <Text Include="SinhVien.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="2019\19HOH4.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\19VLK2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019n1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019n2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019n3.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019n4.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\20CSH2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\20CTT3.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\20DTV1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\2020n1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\2020n2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\2020n3.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\2020n4.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019hk1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019hk2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="login.h">
@@ -118,10 +73,14 @@
     <ClInclude Include="realtime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="2020\20CTT3m.text">
-      <Filter>Resource Files</Filter>
-    </None>
+    <ClInclude Include="courses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="years.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="semesters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
