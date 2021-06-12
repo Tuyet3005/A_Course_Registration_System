@@ -3,11 +3,11 @@ int main()
 {
 	string tk, mk;
 	short lc = 1;//Ma tk:  0: giao vu ; 1: sinh vien
-	ListNamHoc listNam;
+	//ListNamHoc listNam;
 	//ds tam luu dia chi nodeSv lop
-	listNam.pHead = listNam.pTail = NULL;
+	l.pHead = l.pTail = NULL;
 	//tai du lieu list nam hoc tu file len he thong
-	TaiData_Nam(listNam);
+	TaiData_Nam(l);
 	do
 	{
 		bool Thoat = false;
@@ -15,7 +15,7 @@ int main()
 		system("cls");
 		do
 		{
-			Thoat = XlMenuBD(LuaChon(InMenuBatDau(lc)), lc, tk, mk, listNam);
+			Thoat = XlMenuBD(LuaChon(InMenuBatDau(lc)), lc, tk, mk, l);
 		} 		while (!Thoat);
 		//
 	} 	while (true);
