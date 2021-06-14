@@ -14,4 +14,27 @@ NodeNamHoc* ChonNamHoc(ListNamHoc l, int nam_hoc)
 		}
 		nam = nam->pNext;
 	}
+	return NULL;
+}
+
+NodeNamHoc* NhapNamHoc(ListNamHoc l)
+{
+	int nam_hoc;
+	NodeNamHoc* nam;
+
+	while (true)
+	{
+		cout << "Nhap nam hoc: ";
+		cin >> nam_hoc;
+		cin.ignore();
+		nam = ChonNamHoc(l, nam_hoc);
+		if (nam != NULL)
+		{
+			return nam;
+		}
+		else
+		{
+			cout << "Nhap sai nam hoc.\n";
+		}
+	}
 }
