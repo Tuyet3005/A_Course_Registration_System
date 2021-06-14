@@ -74,7 +74,7 @@ void TaiData_Nam(ListNamHoc& l)
 	while (!f.eof())
 	{
 		f.clear();
-		getline(f, temp, ',');
+   		getline(f, temp, ',');
 		if (temp != "")//file co san du lieu
 		{
 			int nam_bd = stoi(temp);
@@ -163,24 +163,65 @@ void TaiData_Lop(NodeNamHoc* n)
 			else if (i == 2)
 			{
 				n->data.headLopNam2 = new NodeLop;
-				f.open(to_string(n->data.tg.ngay_bd.y) + "n2.txt", ios::in | ios::app);
-				//mo file nam ngoai n1.txt
-				//neu file nam nay rong thi...
-				//ghi du lieu nam cu qua file nam nay<ios::out>?
+				//file nam nay chua dc tao -> sao chep data file nam ngoai sang 
+				//vd: 2020n2.txt chua tao -> sao chep 2019n1.txt sang 
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n2.txt", ios::in ||ios::app);
+				getline(f, s);
+				if (s == "")//file trong thi sao chep du lieu nam hoc cu
+				{
+					fstream f1;
+					f1.open(to_string(n->data.tg.ngay_bd.y - 1) + "n1.txt", ios::in);
+					while (!f1.eof())
+					{
+						getline(f1, s);
+						f << s << "\n";
+					}
+					f1.close();//dong file nam cu
+				}
+				f.close();//dong lai file de khoi phuc lai con tro file 
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n2.txt", ios::in);//mo file moi o che do doc de doc lai tu dau file
 			}
 			else if (i == 3)
 			{
 				n->data.headLopNam3 = new NodeLop;
-				f.open(to_string(n->data.tg.ngay_bd.y) + "n3.txt", ios::in | ios::app);
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n3.txt", ios::in|| ios::app);
+				getline(f, s);
+				if (s == "")
+				{
+					fstream f1;
+					f1.open(to_string(n->data.tg.ngay_bd.y - 1) + "n2.txt", ios::in);
+					while (!f1.eof())
+					{
+						getline(f1, s);
+						f << s << "\n";
+						f1.close();//dong file nam cu
+					}
+				}
+				f.close();//dong lai file vua tao moi o che do app <con tro trong file dang o cuoi>
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n3.txt", ios::in);//mo file moi o che do doc de doc lai tu dau file
 			}
 			else
 			{
 				n->data.headLopNam4 = new NodeLop;
-				f.open(to_string(n->data.tg.ngay_bd.y) + "n4.txt", ios::in | ios::app);
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n4.txt", ios::in||ios::app);
+				getline(f, s);
+				if (s == "")
+				{
+					fstream f1;
+					f1.open(to_string(n->data.tg.ngay_bd.y - 1) + "n3.txt", ios::in);
+					while (!f1.eof())
+					{
+						getline(f1, s);
+						f << s << "\n";
+					}
+					f1.close();//dong file nam cu
+				}
+				f.close();//dong lai file vua tao moi o che do app <con tro trong file dang o cuoi>
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n4.txt", ios::in);//mo file moi o che do doc de doc lai tu dau file
 			}
 		}
 		//doc file, tao node, them node
-		while (!f.eof())
+  		while (!f.eof())
 		{
 			f.clear();
 			getline(f, s, ',');
