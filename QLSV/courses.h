@@ -39,3 +39,67 @@ NodeMon* NhapMonHoc(ListNamHoc l)
 		}
 	}
 }
+
+void LuuMonHoc(ListNamHoc& l)
+{
+	// Luu tung mon hoc vao file
+}
+
+void CapNhatMonHoc(ListNamHoc& l)
+{
+	NodeMon* node_mon = NhapMonHoc(l);
+	MonHoc mon = node_mon->data;
+	string input;
+
+	cout << "Nhap thong tin moi. De trong de giu nguyen.\n";
+
+	input = "";
+	cout << "Ten mon (" << mon.tenMon << "): ";
+	getline(cin, input);
+	if (!input.empty()) mon.tenMon = input;
+
+	input = "";
+	cout << "Ten giao vien (" << mon.tenGv << "): ";
+	getline(cin, input);
+	if (!input.empty()) mon.tenGv = input;
+
+	input = "";
+	cout << "So tin chi (" << mon.so_tc << "): ";
+	getline(cin, input);
+	try
+	{
+		mon.so_tc = stoi(input);
+	}
+	catch (invalid_argument) {}
+
+	input = "";
+	cout << "So sinh vien toi da (" << mon.MaxSv << "): ";
+	getline(cin, input);
+	try
+	{
+		mon.MaxSv = stoi(input);
+	}
+	catch (invalid_argument) {}
+
+	input = "";
+	cout << "Buoi hoc 1 - thu (" << mon.bh1.thu << "): ";
+	getline(cin, input);
+	if (!input.empty()) mon.bh1.thu = input;
+
+	input = "";
+	cout << "Buoi hoc 1 - buoi (" << mon.bh1.buoi << "): ";
+	getline(cin, input);
+	if (!input.empty()) mon.bh1.buoi = input;
+
+	input = "";
+	cout << "Buoi hoc 2 - thu (" << mon.bh2.thu << "): ";
+	getline(cin, input);
+	if (!input.empty()) mon.bh2.thu = input;
+
+	input = "";
+	cout << "Buoi hoc 2 - buoi (" << mon.bh2.buoi << "): ";
+	getline(cin, input);
+	if (!input.empty()) mon.bh2.buoi = input;
+
+	LuuMonHoc(l);
+}
