@@ -40,6 +40,46 @@ NodeMon* NhapMonHoc(ListNamHoc l)
 	}
 }
 
+NodeSv_Mon* ChonDiemSv(NodeMon* node_mon, int mssv, string lop)
+{
+	NodeSv_Mon* diem = node_mon->headSvMon;
+
+	while (diem != NULL)
+	{
+		if (diem->mssv == mssv && diem->lop == lop)
+		{
+			return diem;
+		}
+		diem = diem->pNext;
+	}
+	return NULL;
+}
+
+NodeSv_Mon* NhapDiemSv(ListNamHoc l)
+{
+	NodeMon* node_mon = NhapMonHoc(l);
+	int mssv;
+	string lop;
+	NodeSv_Mon* diem_sv;
+
+	while (true)
+	{
+		cout << "Nhap mssv: ";
+		cin >> mssv;
+		cout << "Nhap lop: ";
+		cin >> lop;
+		diem_sv = ChonDiemSv(node_mon, mssv, lop);
+		if (diem_sv != NULL)
+		{
+			return diem_sv;
+		}
+		else
+		{
+			cout << "Nhap sai thong tin sinh vien.\n";
+		}
+	}
+}
+
 void LuuMonHoc(ListNamHoc& l)
 {
 	// Luu tung mon hoc vao file
