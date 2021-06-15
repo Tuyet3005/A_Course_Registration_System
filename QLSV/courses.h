@@ -143,3 +143,39 @@ void CapNhatMonHoc(ListNamHoc& l)
 
 	LuuMonHoc(l);
 }
+
+void CapNhatDiemSv(ListNamHoc& l)
+{
+	NodeSv_Mon* diem_sv = NhapDiemSv(l);
+	Diem diem = diem_sv->diem;
+	string input;
+
+	input = "";
+	cout << "Diem giua ky (" << diem.gk << "): ";
+	getline(cin, input);
+	try
+	{
+		diem.gk = stof(input);
+	}
+	catch (invalid_argument) {}
+
+	input = "";
+	cout << "Diem cuoi ky (" << diem.ck << "): ";
+	getline(cin, input);
+	try
+	{
+		diem.ck = stof(input);
+	}
+	catch (invalid_argument) {}
+
+	input = "";
+	cout << "Diem cong (" << diem.cong << "): ";
+	getline(cin, input);
+	try
+	{
+		diem.cong = stof(input);
+	}
+	catch (invalid_argument) {}
+
+	diem.tongket = min((diem.gk + diem.ck * 2.0) / 3 + diem.cong / 10, 10.0);
+}
