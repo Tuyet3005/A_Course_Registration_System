@@ -149,14 +149,22 @@
     <ClCompile Include="student.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="GiaoVu.txt" />
+    <Text Include="SinhVien.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="console.h" />
+    <ClInclude Include="courses.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="realtime.h" />
     <ClInclude Include="login.h" />
+    <ClInclude Include="semesters.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="begin.h" />
     <ClInclude Include="student.h" />
     <ClInclude Include="variable.h" />
+
+    <ClInclude Include="years.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="2019n1.txt" />

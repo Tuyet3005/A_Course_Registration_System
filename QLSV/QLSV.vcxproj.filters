@@ -41,6 +41,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="GiaoVu.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="SinhVien.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="login.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -63,6 +71,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="realtime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="courses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="years.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="semesters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
