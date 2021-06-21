@@ -90,7 +90,7 @@ void changePass(short lc, string tk, string& mk)
 	{
 		getline(f, s);
 		pos = s.find(mk);
-		if (pos != string::npos)
+		if (pos != string::npos)//npos la gia tri tra ve cua ham find khi ko tim thay mk trong chuoi s 
 			s.replace(pos, mk.length(), newpass);
 		t << s << endl;
 		pos = -1;
@@ -99,5 +99,5 @@ void changePass(short lc, string tk, string& mk)
 	t.close();
 	f.close();
 	remove((lc == 1) ? "SinhVien.txt" : "GiaoVu.txt");
-	rename("trunggian.txt", (lc == 1) ? "SinhVien.txt" : "GiaoVu.txt");
+	rename("trunggian.txt", (lc == 1) ? "GiaoVu.txt" : "GiaoVu.txt");
 }

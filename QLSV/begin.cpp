@@ -165,7 +165,7 @@ void TaiData_Lop(NodeNamHoc* n)
 				n->data.headLopNam2 = new NodeLop;
 				//file nam nay chua dc tao -> sao chep data file nam ngoai sang 
 				//vd: 2020n2.txt chua tao -> sao chep 2019n1.txt sang 
-				f.open(to_string(n->data.tg.ngay_bd.y) + "n2.txt", ios::in ||ios::app);
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n2.txt", ios::in |ios::app);
 				getline(f, s);
 				if (s == "")//file trong thi sao chep du lieu nam hoc cu
 				{
@@ -184,7 +184,7 @@ void TaiData_Lop(NodeNamHoc* n)
 			else if (i == 3)
 			{
 				n->data.headLopNam3 = new NodeLop;
-				f.open(to_string(n->data.tg.ngay_bd.y) + "n3.txt", ios::in|| ios::app);
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n3.txt", ios::in| ios::app);
 				getline(f, s);
 				if (s == "")
 				{
@@ -203,7 +203,7 @@ void TaiData_Lop(NodeNamHoc* n)
 			else
 			{
 				n->data.headLopNam4 = new NodeLop;
-				f.open(to_string(n->data.tg.ngay_bd.y) + "n4.txt", ios::in||ios::app);
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n4.txt", ios::in|ios::app);
 				getline(f, s);
 				if (s == "")
 				{
@@ -304,24 +304,28 @@ void TaiData_Mon(NodeNamHoc* n)
 					getline(f, s);//xoa "/n" ra khoi f truoc khi den thong tin mon
 				}
 				NodeMon* t = new NodeMon;
-				//doc info mon trong file hoc ky
+				//doc info mon trong file hoc ky NEU CO 
 				{
 					f.clear();
-					getline(f, t->data.id, ',');
-					getline(f, t->data.tenMon, ',');
-					getline(f, t->data.tenGv, ',');
 					getline(f, s, ',');
-					t->data.so_tc = stoi(s);
-					getline(f, t->data.bh1.thu, ',');
-					getline(f, t->data.bh1.buoi, ',');
-					getline(f, t->data.bh2.thu, ',');
-					getline(f, t->data.bh2.buoi, ',');
-					getline(f, s);//xoa "\n" ra khoi f
+					if (s != "")
+					{
+						t->data.id = s;
+						getline(f, t->data.tenMon, ',');
+						getline(f, t->data.tenGv, ',');
+						getline(f, s, ',');
+						t->data.so_tc = stoi(s);
+						getline(f, t->data.bh1.thu, ',');
+						getline(f, t->data.bh1.buoi, ',');
+						getline(f, t->data.bh2.thu, ',');
+						getline(f, t->data.bh2.buoi, ',');
+						getline(f, s);//xoa "\n" ra khoi f
+						t->pNext = NULL;
+						t->headSvMon = new NodeSv_Mon;
+						//tai dssv cua mon trong file mon len 
+						TaiData_SvMon(t, n, i);
+					}
 				}
-				t->pNext = NULL;
-				t->headSvMon = new NodeSv_Mon;
-				//tai dssv cua mon trong file mon len 
-				TaiData_SvMon(t, n, i);
 				ThemNodeMon(A->headMon, t);//them vao list mon cua hoc ky
 			}
 		}

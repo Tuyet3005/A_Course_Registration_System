@@ -144,6 +144,7 @@
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="realtime.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="begin.cpp" />
     <ClCompile Include="student.cpp" />
