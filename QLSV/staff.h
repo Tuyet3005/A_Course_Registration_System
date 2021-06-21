@@ -19,8 +19,10 @@ NodeLop* TaoNodeLop(string ten);
 void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop*& n);
 void HienLopHoc(NodeLop* HeadLop);
 void TaoLopNamNhat(NodeNamHoc* node);
-//hoc ky 
-void TaoHocKy(ListNamHoc& l);
+//hoc ky
 NodeNamHoc* TimNodeNamHoc(ListNamHoc& l, int nam_bd);
+bool sosanhNgay(Ngay ngay_truoc, Ngay ngay_sau);
+bool XungdotTg(HocKy* hktruoc, Ngay ngBD_hksau, int hkTr, int hkS);
+void TaoHocKy(ListNamHoc& l);
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);

@@ -76,16 +76,13 @@
     <Text Include="GiaoVu.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="2019n4.txt">
+    <Text Include="2020hk1.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="2019n3.txt">
+    <Text Include="2020hk2.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="2019n2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019n1.txt">
+    <Text Include="2020hk3.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

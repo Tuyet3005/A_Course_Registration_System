@@ -367,12 +367,43 @@ NodeNamHoc* TimNodeNamHoc(ListNamHoc&l, int nam_bd)//tim nam hoc de them hk vao
 	}
 	return NULL;
 }
+bool sosanhNgay(Ngay ngay_truoc, Ngay ngay_sau)
+{
+	//ngay_sau.y<ngay_truoc.y -> loi!
+	//ngay_sau.y=ngay_truoc.y -> so sanh tiep m ( m sau > m truoc ->ok; neu = thi so sanh d, d sau phai > d truoc)
+	//ngay_sau.y>ngay_truoc.y -> ok
+	if (ngay_sau.y > ngay_truoc.y)
+		return true;
+	if (ngay_sau.y < ngay_truoc.y)
+		return false;
+	if (ngay_sau.m > ngay_truoc.m)
+		return true;
+	if ((ngay_sau.m == ngay_truoc.m) && (ngay_sau.d > ngay_truoc.d))
+		return true;
+	return false;
+}
+bool XungdotTg(HocKy* hktruoc, Ngay ngBD_hksau, int hkTr, int hkS)
+{
+	//chua tao hk truoc 
+	if (hktruoc->tg.ngay_bd.d == 0)
+	{
+		cout << "LOI!!! Ban chua tao hoc ky " << hkTr << "!\n";
+		return true;
+	}
+	//hk sau co thoi gian xung dot voi thoi gian hoc ky truoc 
+	else if (sosanhNgay(hktruoc->tg.ngay_kt, ngBD_hksau) == false)
+	{
+		cout << "LOI!!! Hoc ky " << hkS << " co thoi gian xung dot voi thoi gian cua hoc ky " << hkTr << "!!!\n";
+		return true;
+	}
+	return false;
+}
 void TaoHocKy(ListNamHoc& l)
 {
 	int hk = 0;
 	Ngay ngBD;
 	Ngay ngKT;
-	int nam_bd;//nam bat dau cua nam hoc tuong ung de them hoc ky vao
+	int nam_bd;//nam bat dau cua nam hoc tuong ung ngay kt do user nhap vao
 	cout << "TAO MOI HOC KY\n";
 	while (hk < 1 || hk>3)
 	{
@@ -385,7 +416,7 @@ void TaoHocKy(ListNamHoc& l)
 			hk = 0;
 		}
 	}
-	//nhap thoi gian bat dau, ket thuc @@@ tr.hop ngay kt < ngay bd? @@@
+	//nhap thoi gian bat dau, ket thuc 
 	{
 		ngBD.d = 0;
 		ngKT.d = 0;
@@ -425,6 +456,12 @@ void TaoHocKy(ListNamHoc& l)
 					continue;
 				}
 			}
+			if (!sosanhNgay(ngBD, ngKT))
+			{
+				cout << "LOI! Ngay bat dau phai TRUOC ngay ket thuc!!!\nVui long nhap lai!\n";
+				ngBD.d = 0;
+				ngKT.d = 0;
+			}
 		} while (ngBD.d == 0 || ngKT.d == 0);
 	}
 	//do tim node nam hoc tuong ung de them hoc ky vao
@@ -445,41 +482,41 @@ void TaoHocKy(ListNamHoc& l)
 		}
 		case 2:
 		{
+			//hk1 da tao chua? co trung ko?
 			hockyP = &(nodeNam->data.hk2);
+			HocKy* hk1P= &(nodeNam->data.hk1);
+			bool flag = XungdotTg(hk1P, ngBD, hk - 1, hk);
+			if (flag)
+				return;
 			break;
 		}
 		case 3:
 		{
 			hockyP = &(nodeNam->data.hk3);
-		}
-		}
-		//da tao hk truoc do roi -> return;
-		if ((hockyP->tg.ngay_bd.d == ngBD.d) && (hockyP->tg.ngay_bd.m == ngBD.m) && (hockyP->tg.ngay_bd.y == ngBD.y))
-		{
-			if ((hockyP->tg.ngay_kt.d == ngKT.d) && (hockyP->tg.ngay_kt.m == ngKT.m) && (hockyP->tg.ngay_kt.y == ngKT.y))
-			{
-				cout << "Ban da tao hoc ky nay truoc do roi!\n";
+			HocKy* hk2P = &(nodeNam->data.hk2);
+			bool flag = XungdotTg(hk2P, ngBD, hk - 1, hk);
+			if (flag)
 				return;
-			}
+			break;
 		}
-		//chua tao hoac can chinh sua hoc ky
+		}
+		fstream f;
+		string s;
+		string filePath = to_string(nam_bd) + "hk" + to_string(hk) + ".txt";
+		f.open(filePath, ios::in);
+		//da tao hk truoc do roi -> return;
+		if (f.is_open() && (f >> s) && (s != " "))
 		{
+			f.close();
+			cout << "Ban da tao hoc ky nay truoc do roi!!!\n";
+			return;
+		}
+		else
+		{
+			f.close();
 			hockyP->tg.ngay_bd = ngBD;
 			hockyP->tg.ngay_kt = ngKT;
-			// tao hoac chinh sua file hk tuong ung
-			fstream f;
-			string s;
-			bool taomoi = true;
-			string filePath = to_string(nam_bd) + "hk" + to_string(hk) + ".txt";
-			f.open(filePath, ios::in | ios::app);
-			getline(f, s);
-			//ghi vao file goc neu file trong
-			if (s != "")//ghi vao file trunggian neu file cu da co data 
-			{
-				f.close();
-				f.open("trunggian.txt", ios::out);// tao file trung gian de thuc hien chinh sua 
-				taomoi = false;
-			}
+			f.open(filePath, ios::out);
 			//ghi du lieu thoi gian vao file theo cau truc "ddmmyyyy,ddmmyyyy,\n"
 			{
 				//ghi ngay BD
@@ -511,36 +548,9 @@ void TaoHocKy(ListNamHoc& l)
 				//ghi nam KT
 				f << ngKT.y << ",\n";
 			}
-			if (taomoi)
-			{
-				f << "buon qua di\n";
-				f.close();
-				cout << "Tao moi hoc ky thanh cong!\n";
-				return;
-			}
-			//chinh sua file hoc ky da co thong tin truoc do thong qua file trung gian 
-			else
-			{
-				ifstream g;
-				g.open(to_string(nam_bd) + "hk" + to_string(hk) + ".txt");//mo file cu da co du lieu 
-				getline(g, s);//bo qua thoi gian hk cu
-				//sao chep cac du lieu mon hoc qua file trung gian 
-				while (!g.eof())
-				{
-					getline(g, s);
-					f << s;
-				}
-				g.close();//dong file cu
-				f.close();//dong file trung gian 
-				//chuyen doi data type tu string sang char* <de truyen vao ham rename, remove ben duoi>
-				char* c = new char[filePath.size() + 1];
-				copy(filePath.begin(), filePath.end(), c);
-				c[filePath.size()] = '\0';
-				remove(c);//xoa file cu 
-				rename("trunggian.txt", c);//doi ten file trung gian 
-				delete[] c;
-				c = NULL;
-			}
+			f.close();
+			cout << "Tao moi hoc ky thanh cong!\n";
+			return;
 		}
 	}
 	//ko tao nam hoc tuong ung thi ko them hk vao 
