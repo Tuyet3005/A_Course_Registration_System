@@ -1,4 +1,5 @@
 #include"staff.h"//GIAO VU
+#include"courses.h"
 int InMenuGv()
 {
 	system("cls");
@@ -49,7 +50,7 @@ bool XlMenuGv(int chon, ListNamHoc& l)
 	{
 		do
 		{
-			Thoat = XlCapNhat(LuaChon(InMenuTaoMoi(chon)), l);
+			Thoat = XlCapNhat(LuaChon(InMenuCapNhat()), l);
 		} while (!Thoat);
 		system("pause");
 		break;
@@ -104,6 +105,17 @@ int InMenuTaoMoi(int chon)//dung cho ca menu Cap nhat
 	cout << "5. Quay ve\n";
 	cout << "6. Thoat\n";
 	return 6;
+}
+//TAO MOI
+int InMenuCapNhat()//dung cho ca menu Cap nhat
+{
+	system("cls");
+	cout << "----MENU CAP NHAT----\n";
+	cout << "1. Mon hoc\n";
+	cout << "2. Diem sinh vien\n";
+	cout << "3. Quay ve\n";
+	cout << "4. Thoat\n";
+	return 4;
 }
 bool XlTaoMoi(int chon, ListNamHoc& l)
 {
@@ -339,33 +351,21 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	{
 	case 1:
 	{
-		//cap nhat nh
-		system("pause");
+		//cap nhat mon hoc
+		CapNhatMonHoc(l);
 		break;
 	}
 	case 2:
 	{
-		//cap nhat lop hoc 
-		system("pause");
+		//cap nhat diem sinh vien 
+		CapNhatDiemSv(l);
 		break;
 	}
 	case 3:
 	{
-		cout << "hoc ky\n";
-		system("pause");
-		break;
-	}
-	case 4:
-	{
-		cout << "mon hoc\n";
-		system("pause");
-		break;
-	}
-	case 5:
-	{
 		return true;
 	}
-	case 6:
+	case 4:
 	{
 		char lenh;
 		cout << "Ban thuc su muon thoat? Y/N?" << endl;

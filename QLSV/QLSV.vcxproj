@@ -158,7 +158,6 @@
     <ClInclude Include="display.h" />
     <ClInclude Include="realtime.h" />
     <ClInclude Include="login.h" />
-    <ClInclude Include="scores.h" />
     <ClInclude Include="semesters.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="begin.h" />

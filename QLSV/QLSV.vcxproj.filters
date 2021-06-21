@@ -49,6 +49,8 @@
     </Text>
     <Text Include="GiaoVu.txt" />
     <Text Include="SinhVien.txt" />
+    <Text Include="GiaoVu.txt" />
+    <Text Include="SinhVien.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="login.h">
@@ -82,9 +84,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="semesters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="scores.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
