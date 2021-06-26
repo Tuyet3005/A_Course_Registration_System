@@ -39,6 +39,9 @@
     <ClCompile Include="realtime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DKKH.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="GiaoVu.txt">
@@ -116,6 +119,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="realtime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DKKH.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

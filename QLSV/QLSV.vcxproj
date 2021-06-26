@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="console.cpp" />
     <ClCompile Include="display.cpp" />
+    <ClCompile Include="DKKH.cpp" />
     <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="realtime.cpp" />
@@ -170,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="console.h" />
     <ClInclude Include="display.h" />
+    <ClInclude Include="DKKH.h" />
     <ClInclude Include="realtime.h" />
     <ClInclude Include="login.h" />
     <ClInclude Include="staff.h" />

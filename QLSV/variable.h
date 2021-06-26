@@ -6,10 +6,11 @@
 #include<ctime>
 using namespace std;
 //THOI GIAN
-struct time
+struct Time
 {
 	int gio;
 	int phut;
+	int giay;
 };
 struct Ngay
 {
