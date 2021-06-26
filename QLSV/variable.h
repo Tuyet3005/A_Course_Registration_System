@@ -23,20 +23,11 @@ struct ThoiGian
 	Ngay ngay_bd;
 	Ngay ngay_kt;
 };
+//HOC KY
 struct Diem
 {
 	float gk, ck, cong, tongket;
 };
-struct Sv
-{
-	int stt;//dem tu 1
-	int id, cmnd;
-	string ten, ho, gioi;
-	Ngay ngayS;//ngaySinh
-	//int soMondk;//max=5
-	//Diem diem;
-};
-//HOC KY
 struct BuoiHoc
 {
 	string thu;//mon, tue, wed,...
@@ -51,17 +42,17 @@ struct MonHoc
 	int MaxSv = 50;//sl sv toi da 
 	BuoiHoc bh1, bh2;//hai buoi trong tuan
 };
-struct NodeSvMon
+struct NodeSv_Mon
 {
 	int mssv;
 	string lop;
 	Diem diem;
-	NodeSvMon* pNext;
+	NodeSv_Mon* pNext;
 };
 struct NodeMon
 {
 	MonHoc data;
-	NodeSvMon* headSvMon;
+	NodeSv_Mon* headSvMon;
 	NodeMon* pNext;
 };
 struct HocKy
@@ -70,20 +61,30 @@ struct HocKy
 	ThoiGian tg;//thoi gian bd, kt
 };
 //LOP HOC
-struct NodeMonofSv
+struct Sv
 {
-	NodeMon* mon;
-	NodeMonofSv* pNext;
+	int stt;//dem tu 1
+	int id, cmnd;
+	string ten, ho, gioi;
+	Ngay ngayS;//ngaySinh
 };
-struct NodeSvLop
+struct NodeMon_Sv
+{
+	NodeMon* mon;//thong tin chung cua mon hoc 
+	NodeSv_Mon* svMon;//mssv, diem cua sv 
+	NodeMon_Sv* pNext;
+};
+struct NodeSv_Lop
 {
 	Sv sv;
-	NodeMonofSv* headMonhk1,* headMonhk2,* headMonhk3;
-	NodeSvLop* pNext;
+	NodeMon_Sv* headMonhk1;
+	NodeMon_Sv* headMonhk2;
+	NodeMon_Sv* headMonhk3;
+	NodeSv_Lop* pNext;
 };
 struct LopHoc
 {
-	NodeSvLop* headSvLop;
+	NodeSv_Lop* headSvLop;
 	string ten;
 };
 struct NodeLop

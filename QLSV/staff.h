@@ -10,14 +10,27 @@ void GiaoVu(ListNamHoc& l);
 int InMenuTaoMoi(int chon);
 bool XlTaoMoi(int chon, ListNamHoc& l);
 //nam hoc
-NodeNamHoc* TaoNodeNam(ListNamHoc& l);
+NodeNamHoc* TaoNodeNam();
 void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n);
-int HienNamHoc();
+void HienNamHoc(ListNamHoc l);
 void TaoNam(ListNamHoc& l);
 //lop hoc
 NodeLop* TaoNodeLop(string ten);
-void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop* n);
-int HienLopHoc(NodeLop* HeadLop);
-void TaoLop(NodeNamHoc* node);
+void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop*& n);
+void HienLopHoc(NodeLop* HeadLop);
+void TaoLopNamNhat(NodeNamHoc* node);
+//hoc ky
+NodeNamHoc* TimNodeNamHoc(ListNamHoc& l, int nam_bd);
+bool sosanhNgay(Ngay ngay_truoc, Ngay ngay_sau);
+bool XungdotTg(HocKy* hktruoc, Ngay ngBD_hksau, int hkTr, int hkS);
+void TaoHocKy(ListNamHoc& l);
+//mon hoc 
+HocKy* HkHienTai(ListNamHoc& l, NodeNamHoc* n, int& i);
+void NhapNodeMon(NodeMon* n);
+void XulyThu(int lc, BuoiHoc& bh);
+void NhapTgMon(NodeMon* n);
+//bool checkTrungMon(HocKy* hk, NodeMon* n);
+void TaoMon(ListNamHoc& l, int nam);
+
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);
