@@ -1,17 +1,22 @@
 #include"student.h"
-void SinhVien(ListNamHoc& l)
+int InMenuSv()
 {
-	cout << "giao dien cho sinh vien" << endl;
-	cout << "dang hoan thien, chuan bi quay lai giao dien LOG IN ...";
-	system("pause");
 	system("cls");
-	return;
+	cout << "------HE THONG QUAN LY SINH VIEN------\n";
+	cout << "\t <Giao dien sinh vien>\n";
+	cout << "	1. Cac mon hoc cua toi\n";
+	cout << "	2. Dang ky mon hoc \n";//co the dk them hoac xoa -> check conflict 
+	cout << "	3. Cac lop hoc dang mo\n";
+	cout << "	4. Cac mon hoc dang mo\n";
+	cout << "	5. Quay ve \n";
+	cout << "	6. Thoat\n";
+	cout << "--------------------------------------\n";
+	return 6;//lua chon lon nhat la 6
 }
-//test ham nay !!!!
 Sv findInfo(string tenlop, int tk)//tim Info sv
 {
 	ifstream f;
-	f.open(tenlop+".txt");
+	f.open(tenlop + ".txt");
 	string s;
 	int acc;
 	bool flag = false;
@@ -49,7 +54,7 @@ Sv findInfo(string tenlop, int tk)//tim Info sv
 	}
 	if (flag)
 	{
-		
+
 	}
 	else
 	{
@@ -57,3 +62,62 @@ Sv findInfo(string tenlop, int tk)//tim Info sv
 	}
 	return T;
 }
+void SinhVien(ListNamHoc& l)
+{
+	bool Thoat = false;
+	do
+	{
+		Thoat = XlMenuSv((LuaChon(InMenuSv())), l);
+	} while (!Thoat);
+	system("cls");
+}
+bool XlMenuSv(int chon, ListNamHoc& l)
+{
+	char lenh;//thoat thi nhap Y/y
+	bool Thoat = false;
+	switch (chon)
+	{
+	case 1:
+	{
+		//my course 
+		//hien thi cac mon hoc cua sv da hoc va dk 
+		system("pause");
+		break;
+	}
+	case 2:
+	{
+		//course registration
+		//xem cac mon da dk trong hk hien tai 
+		//dk mon hoc, chinh sua dk mon <chuc nang chi hoat dong trong tg mo dk mon hoc
+		system("pause");
+		break;
+	}
+	case 3:
+	{
+		//opened class
+		//hien thi cac lop hoc, dssv_lop 
+		system("pause");
+		break;
+	}
+	case 4:
+	{
+		//opened course
+		//hien thi cac mon va dssv_mon  
+	}
+	case 5:
+	{
+		return true;
+	}
+	case 6:
+	{
+		cout << "Ban thuc su muon thoat? Y/N?" << endl;
+		cin >> lenh;
+		if (lenh == 'Y' || lenh == 'y')
+		{
+			exit(0);
+		}
+	}
+	}
+	return false;
+}
+//sv log in (doc tu file -> biet lop -> tim node lop cua sv do -> tim nodesv)

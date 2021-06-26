@@ -41,12 +41,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="GiaoVu.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="SinhVien.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="GiaoVu.txt" />
     <Text Include="SinhVien.txt" />
     <Text Include="GiaoVu.txt" />
@@ -88,25 +82,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="listnam.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="SinhVien.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="GiaoVu.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019n4.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019n3.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019n2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019n1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

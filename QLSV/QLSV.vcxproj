@@ -149,10 +149,6 @@
     <ClCompile Include="student.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="GiaoVu.txt" />
-    <Text Include="SinhVien.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="console.h" />
     <ClInclude Include="courses.h" />
     <ClInclude Include="display.h" />
@@ -164,15 +160,6 @@
     <ClInclude Include="student.h" />
     <ClInclude Include="variable.h" />
     <ClInclude Include="years.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="2019n1.txt" />
-    <Text Include="2019n2.txt" />
-    <Text Include="2019n3.txt" />
-    <Text Include="2019n4.txt" />
-    <Text Include="GiaoVu.txt" />
-    <Text Include="listnam.txt" />
-    <Text Include="SinhVien.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

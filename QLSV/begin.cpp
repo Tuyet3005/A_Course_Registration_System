@@ -65,6 +65,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 	}
 	return false;
 }
+
 //NAM HOC 
 void TaiData_Nam(ListNamHoc& l)
 {
@@ -74,7 +75,7 @@ void TaiData_Nam(ListNamHoc& l)
 	while (!f.eof())
 	{
 		f.clear();
-   		getline(f, temp, ',');
+		getline(f, temp, ',');
 		if (temp != "")//file co san du lieu
 		{
 			int nam_bd = stoi(temp);
@@ -89,6 +90,7 @@ void TaiData_Nam(ListNamHoc& l)
 	}
 	f.close();
 }
+
 //LOP HOC
 NodeSv_Lop* TaoNodeSv(Sv sv)
 {
@@ -109,7 +111,7 @@ void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* n)
 		headSvLop = n;
 	}
 }
-NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)//!!TEST LAI CHO DOC FILE LOP
+NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 {
 	NodeSv_Lop* headSvLop = NULL;
 	fstream f;
@@ -165,7 +167,7 @@ void TaiData_Lop(NodeNamHoc* n)
 				n->data.headLopNam2 = new NodeLop;
 				//file nam nay chua dc tao -> sao chep data file nam ngoai sang 
 				//vd: 2020n2.txt chua tao -> sao chep 2019n1.txt sang 
-				f.open(to_string(n->data.tg.ngay_bd.y) + "n2.txt", ios::in ||ios::app);
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n2.txt", ios::in | ios::app);
 				getline(f, s);
 				if (s == "")//file trong thi sao chep du lieu nam hoc cu
 				{
@@ -184,7 +186,7 @@ void TaiData_Lop(NodeNamHoc* n)
 			else if (i == 3)
 			{
 				n->data.headLopNam3 = new NodeLop;
-				f.open(to_string(n->data.tg.ngay_bd.y) + "n3.txt", ios::in|| ios::app);
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n3.txt", ios::in | ios::app);
 				getline(f, s);
 				if (s == "")
 				{
@@ -203,7 +205,7 @@ void TaiData_Lop(NodeNamHoc* n)
 			else
 			{
 				n->data.headLopNam4 = new NodeLop;
-				f.open(to_string(n->data.tg.ngay_bd.y) + "n4.txt", ios::in||ios::app);
+				f.open(to_string(n->data.tg.ngay_bd.y) + "n4.txt", ios::in | ios::app);
 				getline(f, s);
 				if (s == "")
 				{
@@ -221,7 +223,7 @@ void TaiData_Lop(NodeNamHoc* n)
 			}
 		}
 		//doc file, tao node, them node
-  		while (!f.eof())
+		while (!f.eof())
 		{
 			f.clear();
 			getline(f, s, ',');
@@ -244,6 +246,7 @@ void TaiData_Lop(NodeNamHoc* n)
 		f.close();
 	}
 }
+
 //MON HOC 
 void ThemNodeMon(NodeMon*& A, NodeMon* T)//themdau
 {
@@ -283,47 +286,54 @@ void TaiData_Mon(NodeNamHoc* n)
 				A = &(n->data.hk3);
 			}
 		}
-		while (!f.eof())
+		//lay tg hoc ky
+		f.clear();
+		getline(f, s, ',');
+		if (s != "" && s!="\n")
 		{
+			A->tg.ngay_bd.d = atoi(s.c_str());
+			A->tg.ngay_bd.y = A->tg.ngay_bd.d % 10000;
+			A->tg.ngay_bd.m = (A->tg.ngay_bd.d / 10000) % 100;
+			A->tg.ngay_bd.d = A->tg.ngay_bd.d / 1000000;
 			f.clear();
 			getline(f, s, ',');
-			if (s != "")
+			A->tg.ngay_kt.d = atoi(s.c_str());
+			A->tg.ngay_kt.y = A->tg.ngay_kt.d % 10000;
+			A->tg.ngay_kt.m = (A->tg.ngay_kt.d / 10000) % 100;
+			A->tg.ngay_kt.d = A->tg.ngay_kt.d / 1000000;
+			getline(f, s);//xoa "/n" ra khoi f truoc khi den thong tin mon
+		}
+		else
+		{
+			f.close();
+			return;
+		}
+		//doc info mon trong file hoc ky NEU CO 
+		A->headMon = NULL;
+		f.clear();
+		while (!f.eof())
+		{
+			getline(f, s, ',');
+			if (s == "" || s == "\n")
 			{
-				//lay tg HK 
-				{
-					A->tg.ngay_bd.d = atoi(s.c_str());
-					A->tg.ngay_bd.y = A->tg.ngay_bd.d % 10000;
-					A->tg.ngay_bd.m = (A->tg.ngay_bd.d / 10000) % 100;
-					A->tg.ngay_bd.d = A->tg.ngay_bd.d / 1000000;
-					f.clear();
-					getline(f, s, ',');
-					A->tg.ngay_kt.d = atoi(s.c_str());
-					A->tg.ngay_kt.y = A->tg.ngay_kt.d % 10000;
-					A->tg.ngay_kt.m = (A->tg.ngay_kt.d / 10000) % 100;
-					A->tg.ngay_kt.d = A->tg.ngay_kt.d / 1000000;
-					getline(f, s);//xoa "/n" ra khoi f truoc khi den thong tin mon
-				}
-				NodeMon* t = new NodeMon;
-				//doc info mon trong file hoc ky
-				{
-					f.clear();
-					getline(f, t->data.id, ',');
-					getline(f, t->data.tenMon, ',');
-					getline(f, t->data.tenGv, ',');
-					getline(f, s, ',');
-					t->data.so_tc = stoi(s);
-					getline(f, t->data.bh1.thu, ',');
-					getline(f, t->data.bh1.buoi, ',');
-					getline(f, t->data.bh2.thu, ',');
-					getline(f, t->data.bh2.buoi, ',');
-					getline(f, s);//xoa "\n" ra khoi f
-				}
-				t->pNext = NULL;
-				t->headSvMon = new NodeSv_Mon;
-				//tai dssv cua mon trong file mon len 
-				TaiData_SvMon(t, n, i);
-				ThemNodeMon(A->headMon, t);//them vao list mon cua hoc ky
+				break;
 			}
+			NodeMon* t = new NodeMon;
+			t->data.id = s;
+			getline(f, t->data.tenMon, ',');
+			getline(f, t->data.tenGv, ',');
+			getline(f, s, ',');
+			t->data.so_tc = stoi(s);
+			getline(f, t->data.bh1.thu, ',');
+			getline(f, t->data.bh1.buoi, ',');
+			getline(f, t->data.bh2.thu, ',');
+			getline(f, t->data.bh2.buoi, ',');
+			getline(f, s);//xoa "\n" ra khoi f
+			t->pNext = NULL;
+			t->headSvMon = NULL;
+			//tai dssv cua mon trong file mon len 
+			TaiData_SvMon(t, n, i);
+			ThemNodeMon(A->headMon, t);//them vao list mon cua hoc ky
 		}
 		f.close();
 	}
