@@ -1,4 +1,5 @@
 #include"DKKH.h"
+//SV
 void xuatLC(int* kq, int n)
 {
 	cout << "Ban da chon " << n << " mon hoc co STT lan luot la: " << endl;
@@ -56,7 +57,7 @@ int viewDKKH(NodeMon_Sv* A, int ki, NodeMon* head)
 	cout << "  Hay nhap: " << endl;
 	return mon;
 }
-NodeMon_Sv* DKKH(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon dc mo, nodemonofsv la ds mon ma sv da dk
+NodeMon_Sv* runDKKH(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon dc mo, nodemonofsv la ds mon ma sv da dk
 {
 	int mon = viewDKKH(A, ki, head);
 	string s = "";
@@ -232,4 +233,9 @@ NodeMon_Sv* DKKH(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon dc mo
 		re[i].mon = giu;
 	}
 	return re;
+}
+//GV
+void taoDKKH()//tao cho nam nay
+{
+
 }
