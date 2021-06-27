@@ -106,7 +106,7 @@ void BackGround()
 	cout << "             XXXX                      XXXX                 XXX              XXX              XXXX         " << endl;
 	cout << endl;
 	cout << "                                     Course & Student Management System";
-	gotoXY(0,20);
+	gotoXY(0, 15);
 }
 int viewDsMonHk(NodeMon* head,int ki)//đưa dô head moon của struct hk
 {
