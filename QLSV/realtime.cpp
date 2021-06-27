@@ -109,3 +109,17 @@ bool NgayHopLe(int ngay, int thang, int nam)
 	}
 	return true;
 }
+bool GioHopLe(Time t)
+{
+	if (t.gio > 24 || t.gio < 0)
+		return false;
+	else {
+		if (t.phut < 0 || t.phut>60)
+			return false;
+		else {
+			if (t.giay < 0 || t.giay>60)
+				return false;
+			return true;
+		}
+	}
+}

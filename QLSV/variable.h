@@ -112,3 +112,11 @@ struct ListNamHoc
 	NodeNamHoc* pHead;
 	NodeNamHoc* pTail;
 };
+
+//DKKH
+struct NodeDKKH
+{
+	ThoiGian tg;//ngay,thang
+	Time tmBD, tmKT;//gio,phut
+	bool flag = false;//ktra neu co buoi dkkh
+};
