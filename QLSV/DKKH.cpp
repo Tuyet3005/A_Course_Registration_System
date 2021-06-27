@@ -35,7 +35,7 @@ void changeLC(int* kq, int dem, int mon)
 	kq[lc - 1] = re;
 	xuatLC(kq, kq[0]);
 }
-int viewDKKH(NodeMonofSv* A, int ki, NodeMon* head)
+int viewDKKH(NodeMon_Sv* A, int ki, NodeMon* head)
 {
 	gotoXY(30, 1);
 	int mon;// so mon dc mo
@@ -56,7 +56,7 @@ int viewDKKH(NodeMonofSv* A, int ki, NodeMon* head)
 	cout << "  Hay nhap: " << endl;
 	return mon;
 }
-NodeMonofSv* DKKH(NodeMonofSv* A, int ki, NodeMon* head)//node mon la ds mon dc mo, nodemonofsv la ds mon ma sv da dk
+NodeMon_Sv* DKKH(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon dc mo, nodemonofsv la ds mon ma sv da dk
 {
 	int mon = viewDKKH(A, ki, head);
 	string s = "";
@@ -222,7 +222,7 @@ NodeMonofSv* DKKH(NodeMonofSv* A, int ki, NodeMon* head)//node mon la ds mon dc 
 			}
 		}
 	}
-	NodeMonofSv* re = new NodeMonofSv[kq[0]];
+	NodeMon_Sv* re = new NodeMon_Sv[kq[0]];
 	NodeMon* giu;
 	for (int i = 0; i < kq[0]; i++)
 	{
@@ -233,8 +233,3 @@ NodeMonofSv* DKKH(NodeMonofSv* A, int ki, NodeMon* head)//node mon la ds mon dc 
 	}
 	return re;
 }
-
-
-//doi y+=2
-//check y/n
-//

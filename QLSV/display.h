@@ -11,4 +11,6 @@ void viewDsKi(NamHoc A);
 void viewDsNam(ListNamHoc A);
 void viewDsLop(NodeLop* head, int nam, int namhoc);
 void viewInfoSv(Sv A);
-void viewMondaDk(NodeMonofSv* A, int ki);
+void viewMondaDk(NodeMon_Sv* A, int ki);
+void viewSvScore(NodeSv_Lop* sv, int ki);
+bool tinhGPA_SvvaLop(NodeLop* t, int ki);

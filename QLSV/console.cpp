@@ -25,7 +25,6 @@ int inputKey()
 	return key_none;
 }
 
-
 //-------------------------Screen-------------------------
 void clrscr()
 {

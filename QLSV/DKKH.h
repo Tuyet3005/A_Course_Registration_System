@@ -5,5 +5,5 @@
 #include<string>
 void xuatLC(int* kq, int n);
 void changeLC(int* kq, int dem, int mon);
-int viewDKKH(NodeMonofSv* A, int ki, NodeMon* head);
-NodeMonofSv* DKKH(NodeMonofSv* A, int ki, NodeMon* head);
+int viewDKKH(NodeMon_Sv* A, int ki, NodeMon* head);
+NodeMon_Sv* DKKH(NodeMon_Sv* A, int ki, NodeMon* head);

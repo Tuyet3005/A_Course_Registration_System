@@ -42,59 +42,9 @@
     <ClCompile Include="DKKH.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="GiaoVu.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="SinhVien.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\19HOH4.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\19VLK2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019n1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019n2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019n3.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019n4.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\20CSH2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\20CTT3.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\20DTV1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\2020n1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\2020n2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\2020n3.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020\2020n4.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019hk1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2019\2019hk2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+    <ClCompile Include="ViewTAM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="login.h">
@@ -124,10 +74,106 @@
     <ClInclude Include="DKKH.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="courses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="semesters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="years.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="2020\20CTT3m.text">
+    <Text Include="16HOH2.txt">
       <Filter>Resource Files</Filter>
-    </None>
+    </Text>
+    <Text Include="16KDL3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="17CSH1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="17VLK1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="18HOH1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="18KDL3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="19HOH4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="19VLK2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="20CTT3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="20DTV1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019hk1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019hk1VTP.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019hk2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019hk3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019n1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019n2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019n3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019n4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020hk1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020hk1DSTT.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020hk1KTLT.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020hk2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020hk3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020n1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020n2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020n3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020n4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="GiaoVu.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="listnam.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="SinhVien.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
