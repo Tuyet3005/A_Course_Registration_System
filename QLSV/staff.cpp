@@ -178,6 +178,18 @@ NodeNamHoc* TaoNodeNam()
 			cin.ignore();
 			nam_bd = -1;
 		}
+		if (nam_bd < NHhientai_nambd())
+		{
+			cout << "Ban co chac muon tao mot nam hoc cu da qua? Y/N?\n";
+			char lenh;
+			cin >> lenh;
+			if (lenh == 'Y' || lenh == 'y')
+			{
+				break;
+			}
+			else
+				return NULL;
+		}
 	} while (nam_bd < NHhientai_nambd());
 	string temp = "";
 	while (!f.eof())//ktra lo nhap nam trung voi nam da tao!!!!
@@ -237,7 +249,7 @@ void HienNamHoc(ListNamHoc l)
 		cout << "CHUA CO NAM HOC NAO!\n";
 }
 void TaoNam(ListNamHoc& l)
-{
+  {
 	cout << "TAO MOI 1 NAM HOC\n";
 	NodeNamHoc* n = TaoNodeNam();
 	ThemNodeNamHoc(l, n);
