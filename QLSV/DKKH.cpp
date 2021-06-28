@@ -1,16 +1,18 @@
 #include"DKKH.h"
+//CHUA CHAY THU A
+using namespace std;
 //CON NHIEU CAI CHUA CODE XONG :'(
 //SV
-void xuatLC(int* kq, int n)
+void xuatLC(int* stt, int n)
 {
 	cout << "Ban da chon " << n << " mon hoc co STT lan luot la: " << endl;
 	for (int i = 0; i < n; i++)
 	{
-		cout << i + 1 << ". " << kq[i] << "    ";
+		cout << i + 1 << ". " << stt[i] << "    ";
 	}
 	cout << endl;
 }
-void changeLC(int* kq, int dem, int mon)
+void changeLC(int* stt, int dem, int mon)
 {
 	char ask = 'Y';
 	int lc;
@@ -34,8 +36,8 @@ void changeLC(int* kq, int dem, int mon)
 		else
 			cout << "Khong hop le... Hay nhap lai !" << endl;
 	} while (true);
-	kq[lc - 1] = re;
-	xuatLC(kq, kq[0]);
+	stt[lc - 1] = re;
+	xuatLC(stt, stt[0]);
 }
 int viewDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)//return so mon
 {
@@ -60,23 +62,59 @@ int viewDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)//return so mon
 	return mon;
 }
 //Xl trung buoi, Xl si so mon
-bool checkBuoiHoc(NodeMon* mon)
+//co the dang ki nhieu lan trong 1 tg
+bool BuoiHocHopLe(NodeMon* mon, NodeMon_Sv* dadk)//check siso, check mon da dk, check trung buoi hoc
 {
-
+	if (mon->data.num_Sv == mon->data.MaxSv)
+	{
+		cout << "Mon hoc da du so luong sinh vien dang ki... Hay chon mon khac !" << endl;
+		return false;
+	}
+	NodeMon_Sv* pdadk = dadk;
+	bool flag = true;
+	while (pdadk != NULL)
+	{
+		//bh1
+		if (pdadk->mon->data.bh1.thu == mon->data.bh1.thu && pdadk->mon->data.bh1.buoi == mon->data.bh1.buoi)
+			flag = false;
+		if (pdadk->mon->data.bh1.thu == mon->data.bh1.thu && pdadk->mon->data.bh2.buoi == mon->data.bh2.buoi)
+			flag = false;
+		if (pdadk->mon->data.bh2.thu == mon->data.bh2.thu && pdadk->mon->data.bh1.buoi == mon->data.bh1.buoi)
+			flag = false;
+		if (pdadk->mon->data.bh2.thu == mon->data.bh2.thu && pdadk->mon->data.bh2.buoi == mon->data.bh2.buoi)
+			flag = false;
+		pdadk = pdadk->pNext;
+	}
+	if(flag)
+		return true;
+	else {
+		cout << "Mon hoc nay da trung voi lich hoc cua mon ban da dang ki truoc do !" << endl;
+		return false;
+	}
 }
-bool checkSiSo()
+void themMon(NodeMon_Sv*& A, int stt,NodeMon* head)//them dau
 {
-
+	NodeMon* temp = head;
+	for (int i = 0; i < stt; i++)
+	{
+		temp = temp->pNext;		
+	}
+	NodeMon_Sv* nw = new NodeMon_Sv;
+	nw->mon = temp;
+	nw->pNext = A;
+	A = nw;
 }
-NodeMon_Sv* runDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon dc mo, nodemonofsv la ds mon ma sv da dk
+NodeMon_Sv* runDKKH_Sv(NodeMon_Sv*& A, int ki, NodeMon* head)//node mon la ds mon dc mo, nodemonofsv la ds mon ma sv da dk
 {
 	int mon = viewDKKH_Sv(A, ki, head);
 	string s = "";
 	char temp;
-	int* kq = new int[6];//kq[0] so mon hoc da dang ki- là phan tu dau cua mang 
-	kq[0] = 0;
+	int* stt = new int[6];//stt[0] so mon hoc da dang ki- là phan tu dau cua mang 
+	stt[0] = 0;
 	int x = whereX(), y = whereY();
 	int key;
+	NodeMon_Sv* pMon_Sv;
+	NodeMon* pMon;
 	while (true)
 	{
 		gotoXY(x, y);
@@ -100,16 +138,23 @@ NodeMon_Sv* runDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon
 					{
 						//check si so
 						//check buoi hoc
-						kq[kq[0]] = key;
-						kq[0]++;
+						pMon = head;
+						for (int i = 1; i < key; i++)
+							pMon = pMon->pNext;
+						if (BuoiHocHopLe(pMon, pMon_Sv))
+						{
+							themMon(pMon_Sv, key, head);
+							stt[stt[0]] = key;
+							stt[0]++;
+						}
 						s = "";
 						y++;
 						x = 0;
 					}
-					if (kq[0] == 5)//da dk du
+					if (stt[0] == 5)//da dk du
 					{
 						cout << endl;
-						xuatLC(kq, kq[0]);
+						xuatLC(stt, stt[0]);
 						do
 						{
 							cout << "Ban co muon thay doi lua chon? Y/N?" << endl;
@@ -118,7 +163,7 @@ NodeMon_Sv* runDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon
 							cin >> t;
 							if ('Y' == toupper(t))
 							{
-								changeLC(kq, kq[0],mon);
+								changeLC(stt, stt[0],mon);
 							}
 							else if ('N' == toupper(t))
 							{
@@ -165,7 +210,7 @@ NodeMon_Sv* runDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon
 				{
 					//nhap lai
 					mon = viewDKKH_Sv(A, ki, head);
-					kq[0] = 0;
+					stt[0] = 0;
 					x = whereX();
 					y = whereY();
 					s = "";
@@ -178,7 +223,7 @@ NodeMon_Sv* runDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon
 			}
 			else if (toupper(temp) == 'A')//Thay doi lua chon
 			{
-				xuatLC(kq, kq[0]);
+				xuatLC(stt, stt[0]);
 				char t;
 				do
 				{
@@ -187,7 +232,7 @@ NodeMon_Sv* runDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon
 					cin >> t;
 					if ('Y' == toupper(t))
 					{
-						changeLC(kq, kq[0],mon);
+						changeLC(stt, stt[0],mon);
 					}
 					else if ('N' == toupper(t))
 					{
@@ -235,18 +280,19 @@ NodeMon_Sv* runDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)//node mon la ds mon
 			}
 		}
 	}
-	NodeMon_Sv* re = new NodeMon_Sv[kq[0]];
+	NodeMon_Sv* re = new NodeMon_Sv[stt[0]];
 	NodeMon* giu;
-	for (int i = 0; i < kq[0]; i++)
+	for (int i = 0; i < stt[0]; i++)
 	{
 		giu = head;
-		for (int j = 1; j < kq[i + 1]; j++)
+		for (int j = 1; j < stt[i + 1]; j++)
 			giu = giu->pNext;
 		re[i].mon = giu;
 	}
 	return re;
 }
 //Can tao  dau vao Sv sau do check xem Sv
+//hoi la thong tin mon hoc import file hay la nhap tay
 void DKKH_Sv(NodeSv_Lop* sv,int ki)
 {
 	NodeMon_Sv* p = sv->headMon[ki-1];
