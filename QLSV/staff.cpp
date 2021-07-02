@@ -122,7 +122,7 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 		cout << "TAO MOI LOP HOC NAM NHAT\n";
 		NodeNamHoc* n = NodeNamHienTai(l);
 		TaoLopNamNhat(n);
-		cout << l.pHead->data.headLopNam1->lop.headSvLop->sv.ten << endl;
+		cout << l.pHead->data.headLop[0]->lop.headSvLop->sv.ten << endl;
 		system("pause");
 		break;
 	}
@@ -297,7 +297,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 {
 	if (node == NULL)
 		return;
-	node->data.headLopNam1 = NULL;
+	node->data.headLop[0] = NULL;
 	int sl = 0;
 	//nhap ten lop moi len file, tao node len he thong
 	cout << "Nhap so luong lop nam nhat muon tao: ";
@@ -315,7 +315,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		cout << "Nhap ten lop " << i + 1 << ": ";
 		cin >> ten;
 		//ktra co bi trung ten lop
-		NodeLop* temp = node->data.headLopNam1;
+		NodeLop* temp = node->data.headLop[0];
 		bool trungTen = false;
 		while (temp != NULL)
 		{
@@ -348,7 +348,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		f.clear();
 		f.close();
 		NodeLop* n = TaoNodeLop(ten);
-		ThemNodeLopHoc(node->data.headLopNam1, n);
+		ThemNodeLopHoc(node->data.headLop[0], n);
 		//da cap nhat du lieu lop moi vao file trong ham TaoNodeLop
 		cout << "Tao lop thanh cong!!!" << endl << endl;
 		cout << "Thong bao!\n";
@@ -501,14 +501,14 @@ void TaoHocKy(ListNamHoc& l)
 		{
 		case 1:
 		{
-			hockyP = &(nodeNam->data.hk1);
+			hockyP = &(nodeNam->data.hk[0]);
 			break;
 		}
 		case 2:
 		{
 			//hk1 da tao chua? co trung ko?
-			hockyP = &(nodeNam->data.hk2);
-			HocKy* hk1P = &(nodeNam->data.hk1);
+			hockyP = &(nodeNam->data.hk[1]);
+			HocKy* hk1P = &(nodeNam->data.hk[0]);
 			bool flag = XungdotTg(hk1P, ngBD, hk - 1, hk);
 			if (flag)
 				return;
@@ -516,8 +516,8 @@ void TaoHocKy(ListNamHoc& l)
 		}
 		case 3:
 		{
-			hockyP = &(nodeNam->data.hk3);
-			HocKy* hk2P = &(nodeNam->data.hk2);
+			hockyP = &(nodeNam->data.hk[2]);
+			HocKy* hk2P = &(nodeNam->data.hk[1]);
 			bool flag = XungdotTg(hk2P, ngBD, hk - 1, hk);
 			if (flag)
 				return;
@@ -592,16 +592,7 @@ HocKy* checkHocKy(NodeNamHoc* n, int& i)//i: so thu tu hoc ky
 	i = 3;
 	for (i; i > 0; i--)
 	{
-		if (i == 3)
-		{
-			hk = &(n->data.hk3);
-		}
-		else if (i == 2)
-		{
-			hk = &(n->data.hk2);
-		}
-		else
-			hk = &(n->data.hk1);
+		hk = &(n->data.hk[i - 1]);
 		if (NgayHopLe(hk->tg.ngay_bd.d, hk->tg.ngay_bd.m, hk->tg.ngay_bd.y))
 		{
 			return hk;
@@ -626,13 +617,13 @@ HocKy* HkHienTai(ListNamHoc& l, NodeNamHoc* n, int& i)//i la thu tu hk
 		if (lenh == 'y' || lenh == 'Y')
 		{
 			TaoHocKy(l);
-			if (n->data.hk1.tg.ngay_bd.d == 0)
+			if (n->data.hk[0].tg.ngay_bd.d == 0)
 			{
 				cout << "LOI THOI GIAN THUC!!!\n Tao hoc ky moi khong thanh cong do nhap sai thoi gian!\n";
 				return NULL;
 			}
 			cout << endl;
-			return &(n->data.hk1);
+			return &(n->data.hk[0]);
 		}
 	}
 	return hk;

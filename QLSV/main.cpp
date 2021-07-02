@@ -1,4 +1,5 @@
 #include"begin.h"
+#include"DKKH.h"
 int main()
 {
 	string tk, mk;
@@ -19,6 +20,5 @@ int main()
 		} 		while (!Thoat);
 		//
 	} 	while (true);
-
 	return 0;
 }

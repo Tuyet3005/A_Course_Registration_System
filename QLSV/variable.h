@@ -6,10 +6,11 @@
 #include<ctime>
 using namespace std;
 //THOI GIAN
-struct time
+struct Time
 {
 	int gio;
 	int phut;
+	int giay;
 };
 struct Ngay
 {
@@ -25,7 +26,10 @@ struct ThoiGian
 //HOC KY
 struct Diem
 {
-	float gk, ck, cong, tongket;
+	float gk = NULL;
+	float ck = NULL;
+	float cong = NULL;
+	float tongket = NULL;
 };
 struct BuoiHoc
 {
@@ -40,6 +44,7 @@ struct MonHoc
 	int so_tc;
 	int MaxSv = 50;//sl sv toi da 
 	BuoiHoc bh1, bh2;//hai buoi trong tuan
+	int num_Sv;
 };
 struct NodeSv_Mon
 {
@@ -76,15 +81,15 @@ struct NodeMon_Sv
 struct NodeSv_Lop
 {
 	Sv sv;
-	NodeMon_Sv* headMonhk1;
-	NodeMon_Sv* headMonhk2;
-	NodeMon_Sv* headMonhk3;
+	NodeMon_Sv** headMon = new NodeMon_Sv * [3];
 	NodeSv_Lop* pNext;
+	float GPA[3] = { NULL,NULL,NULL };//GPA lan luot 3 ki
 };
 struct LopHoc
 {
 	NodeSv_Lop* headSvLop;
 	string ten;
+	float GPA[3] = { NULL,NULL,NULL };//GPA trung binh
 };
 struct NodeLop
 {
@@ -95,11 +100,8 @@ struct NodeLop
 struct NamHoc
 {
 	ThoiGian tg;//chi cout nam (vd: tg.ngay_bd.y)
-	HocKy hk1, hk2, hk3;
-	NodeLop* headLopNam1;
-	NodeLop* headLopNam2;
-	NodeLop* headLopNam3;
-	NodeLop* headLopNam4;//list lop hoc cua sv nam1, nam 2 ...
+	HocKy hk[3];
+	NodeLop** headLop=new NodeLop*[4];//list lop hoc cua sv nam1, nam 2 ...
 };
 struct NodeNamHoc
 {
@@ -110,4 +112,12 @@ struct ListNamHoc
 {
 	NodeNamHoc* pHead;
 	NodeNamHoc* pTail;
+};
+
+//DKKH
+struct NodeDKKH
+{
+	ThoiGian tg;//ngay,thang
+	Time tmBD, tmKT;//gio,phut
+	bool flag = false;//ktra neu co buoi dkkh
 };

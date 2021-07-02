@@ -23,5 +23,10 @@ NodeSv_Lop* timNodeSv_Lop(NodeSv_Lop* head, int mssv);
 string timLop(int id);
 //Sv findInfo(int id); //can cai tien them 
 void ThemNodeMon_Sv(NodeMon_Sv*& head, NodeMon* A, NodeSv_Mon* sv_mon);
-void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki);
+int TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki);
 void TaiData_Mon(NodeNamHoc* n);
+
+
+//GPA
+void tinhGPASv(NodeSv_Lop* t);
+void tinhGPALop(NodeLop* L);
