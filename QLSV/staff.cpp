@@ -1,4 +1,5 @@
 #include"staff.h"//GIAO VU
+#include"display.h"
 int InMenuGv()
 {
 	system("cls");
@@ -838,4 +839,72 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	}
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
+
+//HIEN THI
+int menuHienThi()
+{
+	cout << "----MENU HIEN THI----" << endl;
+	cout << "1. Hien thi danh sach cac nam hoc" << endl;
+	cout << "2. Hien thi danh sach cac lop hoc" << endl;
+	cout << "3. Hien thi danh sach cac ki" << endl;
+	cout << "4. Hien thi danh sach cac mon hoc cua 1 ki" << endl;
+	cout << "5. Hien thi danh sach sinh vien cua 1 mon hoc" << endl;
+	cout << "6. Hien thi danh sach sinh vien cua 1 lop" << endl;
+	cout << "7.Quay ve" << endl;
+	cout << "8. Thoat" << endl;
+	return 8;
+}
+bool XlHienThi(int chon, ListNamHoc l)
+{
+	switch (chon)
+	{
+	case 1:
+	{
+		viewDsNam(l);
+	}
+	case 2:
+	{
+		//xl chon st-year
+		//xl chon nam, nam hoc
+		//viewDsLop(l.pHead->data->headLop[0],nam,namhoc);
+
+	}
+	case 3:
+	{
+		//xl chon nam hoc
+		//viewDsKi()
+	}
+	case 4:
+	{
+		//xl chon nam, ki,
+		//viewDsMonHk()
+	}
+	case 5:
+	{
+		//xl chon nam, hk, mon
+		//viewSvMon()
+	}
+	case 6:
+	{
+		//xl chon nam, st-year,lop
+		//viewDsDvLop
+	}
+	case 7:
+	{
+		return true;
+	}
+	case 8:
+	{
+		char lenh;
+		cout << "Ban thuc su muon thoat? Y/N?" << endl;
+		cin >> lenh;
+		if (lenh == 'Y' || lenh == 'y')
+		{
+			exit(0);
+		}
+	}
+	}
+	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
+}
+
 

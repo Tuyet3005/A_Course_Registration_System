@@ -9,13 +9,13 @@ HocKy* ChonHocKy(NamHoc nam_hoc, int hoc_ky)
 	switch (hoc_ky)
 	{
 	case 1:
-		return &nam_hoc.hk1;
+		return &nam_hoc.hk[0];
 		break;
 	case 2:
-		return &nam_hoc.hk2;
+		return &nam_hoc.hk[1];
 		break;
 	case 3:
-		return &nam_hoc.hk3;
+		return &nam_hoc.hk[2];
 		break;
 	default:
 		return NULL;

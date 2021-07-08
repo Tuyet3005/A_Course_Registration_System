@@ -69,7 +69,7 @@ void viewDsSvLop(LopHoc A)
 	}
 	cout.clear();
 	NodeSv_Lop* p = A.headSvLop;
-	int i = 0;
+	int i = 1;
 	for(;p!=NULL;i++)
 	{
 		gotoXY(posCol[0] + 2, posRow + 1 + 2 * i);
@@ -89,7 +89,7 @@ void viewDsSvLop(LopHoc A)
 		p = p->pNext;	
 	}
 	gotoXY(0, posRow);
-	drawTable(i+1,7,posCol,posRow);
+	drawTable(i,7,posCol,posRow);
 }
 void BackGround()
 {
@@ -111,10 +111,10 @@ void BackGround()
 int viewDsMonHk(NodeMon* head,int ki)//đưa dô head moon của struct hk
 {
 	system("cls");
-	cout << "-----------------------------DANH SACH MON KI " << ki <<"-----------------------------" << endl;
-	string title[] = { "ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC" };
+	cout << "---------------------------------------------DANH SACH MON KI " << ki <<"----------------------------------------" << endl;
+	string title[] = {"STT", "ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC"};
 	int posRow = whereY();
-	int posCol[7] = { 0,10,40,70,85,100,130};
+	int posCol[8] = { 0,5,15,45,75,90,105,135};
 	for (int j = 0; j < 7; j++)
 	{
 		gotoXY(posCol[j] + 2, posRow+1);
@@ -122,25 +122,27 @@ int viewDsMonHk(NodeMon* head,int ki)//đưa dô head moon của struct hk
 	}
 	cout.clear();
 	NodeMon* p =head;
-	int i = 0;
+	int i = 1;
 	for (; p != NULL; i++)
 	{
 		gotoXY(posCol[0] + 2, posRow + 1 + 2 * i);
-		cout << p->data.id;
+		cout << i;
 		gotoXY(posCol[1] + 2, posRow + 1 + 2 * i);
-		cout << p->data.tenMon;
+		cout << p->data.id;
 		gotoXY(posCol[2] + 2, posRow + 1 + 2 * i);
-		cout << p->data.tenGv;
+		cout << p->data.tenMon;
 		gotoXY(posCol[3] + 2, posRow + 1 + 2 * i);
-		cout << p->data.so_tc;
+		cout << p->data.tenGv;
 		gotoXY(posCol[4] + 2, posRow + 1 + 2 * i);
-		cout << p->data.MaxSv;
+		cout << p->data.so_tc;
 		gotoXY(posCol[5] + 2, posRow + 1 + 2 * i);
+		cout << p->data.MaxSv;
+		gotoXY(posCol[6] + 2, posRow + 1 + 2 * i);
 		cout << p->data.bh1.buoi << "-" << p->data.bh1.thu << ", " << p->data.bh2.buoi << "-" << p->data.bh2.thu;
 		p = p->pNext;
 	}
 	gotoXY(0, posRow);
-	drawTable(i+1, 6, posCol,posRow);
+	drawTable(i, 7, posCol,posRow);
 	return i;
 }
 void viewDsSvMon(NodeMon A)
@@ -157,7 +159,7 @@ void viewDsSvMon(NodeMon A)
 	}
 	cout.clear();
 	NodeSv_Mon* p = A.headSvMon;
-	int i = 0;
+	int i = 1;
 	for (; p != NULL; i++)
 	{
 		Sv s = findInfo(p->lop, p->mssv);
@@ -180,7 +182,7 @@ void viewDsSvMon(NodeMon A)
 		p = p->pNext;
 	}
 	gotoXY(0, posRow);
-	drawTable(i+1, 8, posCol,posRow);
+	drawTable(i, 8, posCol,posRow);
 }
 void viewDsKi(NamHoc A)
 {
@@ -195,14 +197,11 @@ void viewDsKi(NamHoc A)
 		cout << title[j];
 	}
 	cout.clear();
-	for (int i = 0; i < 5; i++)
+	for (int i = 1; i < 4; i++)
 	{
-		gotoXY(posCol[0]+2, posRow + 1 + 2 * i);
-		cout << i - 1;
-	}
-	for (int i = 0; i < 3; i++)
-	{
-		gotoXY(posCol[1] + 2, 5 + 2 * i);
+		gotoXY(posCol[0] + 2, posRow + 1 + 2 * i);
+		cout << i;
+		gotoXY(posCol[1] + 2, posRow + 1 + 2 * i);
 		cout << A.hk[i].tg.ngay_bd.d << "/" << A.hk[i].tg.ngay_bd.m << "/" << A.hk[i].tg.ngay_bd.y << " - " << A.hk[i].tg.ngay_kt.d << "/" << A.hk[i].tg.ngay_kt.m << "/" << A.hk[i].tg.ngay_kt.y;
 	}
 	gotoXY(0, posRow);
@@ -217,12 +216,12 @@ void viewDsNam(ListNamHoc A)
 	int posCol[7] = { 0,6,16 };
 	for (int j = 0; j < 2; j++)
 	{
-		gotoXY(posCol[j] + 2, 3);
+		gotoXY(posCol[j] + 2, posRow+1);
 		cout << title[j];
 	}
 	cout.clear();
 	NodeNamHoc* p = A.pHead;
-	int i = 0;
+	int i = 1;
 	for (; p != NULL; i++)
 	{
 		gotoXY(posCol[0] + 2, posRow + 1 + 2 * i);
@@ -232,7 +231,7 @@ void viewDsNam(ListNamHoc A)
 		p = p->pNext;
 	}
 	gotoXY(0, posRow);
-	drawTable(i+1 , 2, posCol,posRow);
+	drawTable(i , 2, posCol,posRow);
 }
 void viewDsLop(NodeLop* head,int nam, int namhoc)
 {
@@ -248,7 +247,7 @@ void viewDsLop(NodeLop* head,int nam, int namhoc)
 	}
 	cout.clear();
 	NodeLop* p = head;
-	int i = 0;
+	int i = 1;
 	for (; p != NULL; i++)
 	{
 		gotoXY(posCol[0] + 2, posRow + 1 + 2 * i);
@@ -258,7 +257,7 @@ void viewDsLop(NodeLop* head,int nam, int namhoc)
 		p = p->pNext;
 	}
 	gotoXY(0, posRow);
-	drawTable(i+1, 2, posCol,posRow);
+	drawTable(i, 2, posCol,posRow);
 }
 void viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 {
@@ -275,7 +274,7 @@ void viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 		cout << title[j];
 	}
 	cout.clear();
-	int i = 0;
+	int i = 1;
 	for(; p!= NULL;i++)
 	{
 		//tim node svmon
@@ -304,7 +303,7 @@ void viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 		p = p->pNext;
 	}
 	gotoXY(0,posRow);
-	drawTable(i + 1, 7, posCol,posRow);
+	drawTable(i , 7, posCol,posRow);
 }
 void viewInfoSv(Sv A)
 {
@@ -313,30 +312,27 @@ void viewInfoSv(Sv A)
 	cout << "----------------------------------------THONG TIN CA NHAN--------------------------------------" << endl;
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posRow = whereY();
-	int posCol[8] = { 0,6,17,43,55,67,81,95 };
-	for (int j = 0; j < 8; j++)//ghi title
+	int posCol[8] = { 0,6,17,43,55,67,85,95 };
+	for (int j = 0; j < 7; j++)//ghi title
 	{
 		gotoXY(posCol[j] + 2, posRow+1);
 		cout << title[j];
 	}
 	cout.clear();
-	for (int i = 0;i<9; i++)
-	{
-		gotoXY(posCol[0] + 2, posRow + 1 + 2 * i);
-		cout << A.stt;
-		gotoXY(posCol[1] + 2, posRow + 1 + 2 * i);
-		cout << A.id;
-		gotoXY(posCol[2] + 2, posRow + 1 + 2 * i);
-		cout << A.ho;
-		gotoXY(posCol[3] + 2, posRow + 1 + 2 * i);
-		cout << A.ten;
-		gotoXY(posCol[4] + 2, posRow + 1 + 2 * i);
-		cout << A.gioi;
-		gotoXY(posCol[5] + 2, posRow + 1 + 2 * i);
-		cout << A.ngayS.d << "/" << A.ngayS.m << "/" << A.ngayS.y;
-		gotoXY(posCol[6] + 2, posRow + 1 + 2 * i);
-		cout << A.cmnd;
-	}
+	gotoXY(posCol[0] + 2, posRow + 3 );
+	cout << A.stt;
+	gotoXY(posCol[1] + 2, posRow + 3 );
+	cout << A.id;
+	gotoXY(posCol[2] + 2, posRow + 3 );
+	cout << A.ho;
+	gotoXY(posCol[3] + 2, posRow + 3 );
+	cout << A.ten;
+	gotoXY(posCol[4] + 2, posRow + 3 );
+	cout << A.gioi;
+	gotoXY(posCol[5] + 2, posRow + 3 );
+	cout << A.ngayS.d << "/" << A.ngayS.m << "/" << A.ngayS.y;
+	gotoXY(posCol[6] + 2, posRow + 3);
+	cout << A.cmnd;
 	gotoXY(0, posRow);
 	drawTable(2, 7, posCol,posRow);
 	system("pause");
@@ -347,14 +343,14 @@ void viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
 	int posRow = whereY();
 	string title[] = { "ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC" };
 	int posCol[7] = { 0,10,40,70,85,100,130 };
-	for (int j = 0; j < 7; j++)
+	for (int j = 0; j < 6; j++)
 	{
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
 	cout.clear();
 	NodeMon_Sv* p = A;
-	int i = 0;
+	int i = 1;
 	for (; p != NULL; i++)
 	{
 		gotoXY(posCol[0] + 2, posRow + 1 + 2 * i);
@@ -372,7 +368,7 @@ void viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
 		p = p->pNext;
 	}
 	gotoXY(0, posRow);
-	drawTable(i + 1, 6, posCol,posRow);
+	drawTable(i , 6, posCol,posRow);
 }
 void viewDiem_Lop(NodeLop* A,int ki)
 {
@@ -394,7 +390,7 @@ void viewDiem_Lop(NodeLop* A,int ki)
 	cout.clear();
 	NodeSv_Lop* pSv = A->lop.headSvLop;
 	NodeMon_Sv* pMon;
-	int i = 0;
+	int i = 1;
 	int j;
 	for (; pSv != NULL; i++)
 	{
@@ -421,15 +417,15 @@ void viewDiem_Lop(NodeLop* A,int ki)
 		cout << pSv->GPA[ki];
 		pSv = pSv->pNext;
 	}
-	gotoXY(posCol[10], i + 2);
+	gotoXY(posCol[10],posRow+ i + 2);
 	cout << "Trung binh GPA: ";
-	gotoXY(posCol[14] + 2, i + 2);
+	gotoXY(posCol[14] + 2,posRow +i + 2);
 	if (flag)
 		cout << A->lop.GPA;
 	else
 		cout << "Chua cap nhat";
 	gotoXY(0, posRow);
-	drawTable(i + 1, 7, posCol, posRow);
+	drawTable(i, 7, posCol, posRow);
 }
 //TINH GPA
 bool tinhGPA_SvvaLop(NodeLop* t,int ki)

@@ -30,7 +30,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 		cout << "Hien thi thong tin cua tai khoan";
 		if (lc == 1)//tra ve sinh vien
 		{
-			viewInfoSv(findInfo(timLop(stoi(tk)), stoi(tk)));
+			viewInfoSv(findInfo(stoi(tk)));
 			break;
 		}
 		if (lc == 0)
@@ -344,7 +344,6 @@ NodeSv_Lop* timNodeSv_Lop(NodeSv_Lop* head, int mssv)
 	}
 	exit(1);
 }
-//Can cai tien them de tai su dung khi muon doc thong tin sv_mon
 Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.txt len ->doc info sv
 {
 	string tenLop = timLop(id);
@@ -364,6 +363,7 @@ Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.
 		f.clear();
 		getline(f, s);//bo qua cac data thua cua sv khac
 	}
+	T.id = id;
 	f.clear();
 	getline(f, s, ',');
 	T.stt = atoi(s.c_str());

@@ -81,7 +81,7 @@ struct NodeMon_Sv
 struct NodeSv_Lop
 {
 	Sv sv;
-	NodeMon_Sv** headMon = new NodeMon_Sv * [3];
+	NodeMon_Sv** headMon = new NodeMon_Sv * [5];
 	NodeSv_Lop* pNext;
 	float GPA[3] = { NULL,NULL,NULL };//GPA lan luot 3 ki
 };
@@ -114,10 +114,3 @@ struct ListNamHoc
 	NodeNamHoc* pTail;
 };
 
-//DKKH
-struct NodeDKKH
-{
-	ThoiGian tg;//ngay,thang
-	Time tmBD, tmKT;//gio,phut
-	bool flag = false;//ktra neu co buoi dkkh
-};
