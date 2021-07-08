@@ -272,7 +272,6 @@ void TaiData_Mon(NodeNamHoc* n)
 		f.open(to_string(n->data.tg.ngay_bd.y) + "hk"+to_string(i+1)+".txt", ios::in | ios::app);
 		A = &(n->data.hk[i]);
 		//lay tg hoc ky
-		f.clear();
 		getline(f, s, ',');
 		if (s != "" && s!="\n")
 		{
@@ -280,7 +279,6 @@ void TaiData_Mon(NodeNamHoc* n)
 			A->tg.ngay_bd.y = A->tg.ngay_bd.d % 10000;
 			A->tg.ngay_bd.m = (A->tg.ngay_bd.d / 10000) % 100;
 			A->tg.ngay_bd.d = A->tg.ngay_bd.d / 1000000;
-			f.clear();
 			getline(f, s, ',');
 			A->tg.ngay_kt.d = atoi(s.c_str());
 			A->tg.ngay_kt.y = A->tg.ngay_kt.d % 10000;
@@ -295,7 +293,6 @@ void TaiData_Mon(NodeNamHoc* n)
 		}
 		//doc info mon trong file hoc ky NEU CO 
 		A->headMon = NULL;
-		f.clear();
 		while (!f.eof())
 		{
 			getline(f, s, ',');

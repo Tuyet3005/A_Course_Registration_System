@@ -267,7 +267,7 @@ void runDKKH_Sv(NodeMon_Sv*& A, int ki, NodeMon* head)//node mon la ds mon dc mo
 			}
 			else if (temp == 27)// nhan esc
 			{
-				cout << "Ban that su muon thoat? Y/N?" << endl;
+				cout << "Ban that su muon thoat DKKH? Y/N?" << endl;
 				cout << "Hay nhap: ";
 				char t;
 				cin >> t;
@@ -277,6 +277,16 @@ void runDKKH_Sv(NodeMon_Sv*& A, int ki, NodeMon* head)//node mon la ds mon dc mo
 				}
 				else
 					y += 2;
+			}
+			else if (temp == 8)
+			{
+				if (x != 0)
+				{
+					x--;
+					gotoXY(x, y);
+					cout << ' ';
+					gotoXY(x, y);
+				}
 			}
 			else if (toupper(temp) == 'R')//Nhap lai tu dau
 			{
@@ -329,7 +339,7 @@ void runDKKH_Sv(NodeMon_Sv*& A, int ki, NodeMon* head)//node mon la ds mon dc mo
 			else if (temp < 48 || temp>57)
 			{
 				cout << "Khong hop le... Moi nhap lai !" << endl;
-				y++;
+				y+=2;
 				x = 0;
 			}
 			else

@@ -8,15 +8,15 @@ using namespace std;
 //THOI GIAN
 struct Time
 {
-	int gio;
-	int phut;
-	int giay;
+	int gio = NULL;
+	int phut = NULL;
+	int giay = NULL;
 };
 struct Ngay
 {
-	int d;
-	int m;
-	int y;
+	int d = NULL;
+	int m = NULL;
+	int y = NULL;
 };
 struct ThoiGian
 {
