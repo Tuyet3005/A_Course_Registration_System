@@ -1021,12 +1021,12 @@ void end(int& lc)
 			temp = _getch();
 			if (temp == 27)
 			{
-				lc == 0;
+				lc = 0;
 				return;
 			}
 			else if (temp == 'B' || temp == 'b')
 			{
-				lc == -1;
+				lc = -1;
 				return;
 			}
 		}
