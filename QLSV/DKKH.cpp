@@ -113,7 +113,7 @@ NodeMon_Sv* runDKKH_Sv(NodeMon_Sv*& A, int ki, NodeMon* head)//node mon la ds mo
 	stt[0] = 0;
 	int x = whereX(), y = whereY();
 	int key;
-	NodeMon_Sv* pMon_Sv;
+	NodeMon_Sv* pMon_Sv = new NodeMon_Sv;
 	NodeMon* pMon;
 	while (true)
 	{
