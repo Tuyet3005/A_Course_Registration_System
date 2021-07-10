@@ -508,7 +508,7 @@ void taoDKKH_Gv(int nam)//tao cho nam hien tai cho ca 4 nam
 	else
 	{
 		//Nhap tay 
-		//ghi vo file dat ten theo he thong.
+		//ghi vo file dat ten bat ki
 		//roi doc nhu bth
 	}
 	if (askforsure(tg, tmBD, tmKT, ki))

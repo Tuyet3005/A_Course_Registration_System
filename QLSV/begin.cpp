@@ -94,22 +94,10 @@ void TaiData_Nam(ListNamHoc& l)
 //LOP HOC
 NodeSv_Lop* TaoNodeSv(Sv sv)
 {
-	NodeSv_Lop* n = new NodeSv_Lop;s
+	NodeSv_Lop* n = new NodeSv_Lop;
 	n->sv = sv;
 	n->pNext = NULL;
 	return n;
-}
-void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* n)
-{
-	if (headSvLop == NULL)
-	{
-		headSvLop = n;
-	}
-	else
-	{
-		n->pNext = headSvLop;
-		headSvLop = n;
-	}
 }
 NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 {
@@ -157,23 +145,23 @@ void TaiData_Lop(NodeNamHoc* n)
 	{
 		//mo file ds lop, khoi tao list lop cho sv n1234
 		n->data.headLop[i] = new NodeLop;
-		f.open(to_string(n->data.tg.ngay_bd.y) + 'n'+to_string(i)+".txt"/*,ios::in|ios::app*/);
+		f.open(to_string(n->data.tg.ngay_bd.y) + 'n'+to_string(i)+".txt");
 		if(i!=1)
 		{
 			getline(f, s);
 			if (s == "")//file trong thi sao chep du lieu nam hoc cu
 			{
 				fstream f1;
-				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + 'n'+to_string(i-1)+".txt"/*, ios::in | ios::app*/);
+				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + 'n'+to_string(i-1)+".txt");
 				while (!f1.eof())
 				{
 					getline(f1, s);
-					f << s << "\n";
+					f << s /*<< "/n"*/;
 				}
 				f1.close();//dong file nam cu
 			}
 			f.close();//dong lai file de khoi phuc lai con tro file 
-			f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt"/*, ios::in*/);//mo file moi o che do doc de doc lai tu dau file
+			f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt");//mo file moi o che do doc de doc lai tu dau file
 		}
 		//doc file, tao node, them node
 		while (!f.eof())

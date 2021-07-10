@@ -244,7 +244,7 @@ int viewDsLop(NodeLop* head)
 	cout << "---------------------DANH SACH LOP HOC-----------------------" << endl;
 	string title[] = { "STT","TEN LOP" };
 	int posRow = whereY();
-	int posCol[7] = { 0,6,16 };
+	int posCol[3] = { 0,6,16 };
 	for (int j = 0; j < 2; j++)
 	{
 		gotoXY(posCol[j] + 2, posRow+1);
@@ -253,7 +253,7 @@ int viewDsLop(NodeLop* head)
 	cout.clear();
 	NodeLop* p = head;
 	int i = 1;
-	for (; p != NULL; i++)
+	for (; p!=NULL ; i++)
 	{
 		gotoXY(posCol[0] + 2, posRow + 1 + 2 * i);
 		cout << i;

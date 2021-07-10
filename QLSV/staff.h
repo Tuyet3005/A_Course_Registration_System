@@ -16,9 +16,12 @@ int HienNamHoc(ListNamHoc l);
 void TaoNam(ListNamHoc& l);
 //lop hoc
 NodeLop* TaoNodeLop(string ten);
-void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop*& n);
+void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop* n);
 void HienLopHoc(NodeLop* HeadLop);
+//
+void ThemSvLop(NodeLop* nodeLop);
 void TaoLopNamNhat(NodeNamHoc* node);
+void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv);
 //hoc ky
 NodeNamHoc* TimNodeNamHoc(ListNamHoc& l, int nam_bd);
 bool sosanhNgay(Ngay ngay_truoc, Ngay ngay_sau);
