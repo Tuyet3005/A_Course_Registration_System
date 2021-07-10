@@ -6,20 +6,12 @@
 // Tra ve hoc ky tuong ung
 HocKy* ChonHocKy(NamHoc nam_hoc, int hoc_ky)
 {
-	switch (hoc_ky)
+	if (hoc_ky < size(nam_hoc.hk))
 	{
-	case 1:
-		return &nam_hoc.hk[0];
-		break;
-	case 2:
-		return &nam_hoc.hk[1];
-		break;
-	case 3:
-		return &nam_hoc.hk[2];
-		break;
-	default:
+		return &nam_hoc.hk[hoc_ky];
+	}
+	else {
 		return NULL;
-		break;
 	}
 }
 

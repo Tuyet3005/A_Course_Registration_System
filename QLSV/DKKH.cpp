@@ -186,16 +186,17 @@ void runDKKH_Sv(NodeMon_Sv*& A, int ki, NodeMon* head)//node mon la ds mon dc mo
 	int key;
 	NodeMon_Sv* pMon_Sv = A;
 	NodeMon* pMon = head;
-	int dem=1;//////////=0
-	//if (A != NULL)//chua dk mon nao
-	//{
-	//	NodeMon_Sv* t = A;
-	//	while (t != NULL)
-	//	{
-	//		dem++;
-	//		t = t->pNext;
-	//	}
-	//}
+	int dem=1;
+	if (A != NULL)//chua dk mon nao
+	{
+		NodeMon_Sv* t = A;
+		while (t != NULL)
+		{
+			dem++;
+			t = t->pNext;
+		}
+	}
+
 	while (true)
 	{
 		gotoXY(x, y);
