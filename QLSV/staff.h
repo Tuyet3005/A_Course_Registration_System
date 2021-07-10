@@ -12,13 +12,16 @@ bool XlTaoMoi(int chon, ListNamHoc& l);
 //nam hoc
 NodeNamHoc* TaoNodeNam();
 void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n);
-void HienNamHoc(ListNamHoc l);
+int HienNamHoc(ListNamHoc l);
 void TaoNam(ListNamHoc& l);
 //lop hoc
 NodeLop* TaoNodeLop(string ten);
-void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop*& n);
+void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop* n);
 void HienLopHoc(NodeLop* HeadLop);
+//
+void ThemSvLop(NodeLop* nodeLop);
 void TaoLopNamNhat(NodeNamHoc* node);
+void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv);
 //hoc ky
 NodeNamHoc* TimNodeNamHoc(ListNamHoc& l, int nam_bd);
 bool sosanhNgay(Ngay ngay_truoc, Ngay ngay_sau);
@@ -34,3 +37,21 @@ void TaoMon(ListNamHoc& l, int nam);
 
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);
+
+//HIENTHI
+//neu chua co du lieu
+void hienthiNam(ListNamHoc l, int& lc);
+int Chon(int maxChoice);
+//ki
+void hienthiKi(NodeNamHoc* A, int& lc);
+void hienthiDsMon(NodeMon* head, int& lc);
+void hienthiDsSv_Mon(NodeMon* A, int& lc);
+void end(int& lc);
+//lop
+bool ChonTThayDiem_Lop();
+void hienthiDsLop(NodeLop* head, int& lc);
+void hienthiTTSv_Lop(NodeLop* A, int& lc);
+void hienthiDiem_Lop(NodeLop* A, int& lc);
+bool ChonKihayLop();
+
+

@@ -148,6 +148,7 @@
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="begin.cpp" />
     <ClCompile Include="student.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h" />
@@ -194,7 +195,6 @@
     <Text Include="GiaoVu.txt" />
     <Text Include="listnam.txt" />
     <Text Include="SinhVien.txt" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

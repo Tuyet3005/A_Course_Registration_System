@@ -30,7 +30,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 		cout << "Hien thi thong tin cua tai khoan";
 		if (lc == 1)//tra ve sinh vien
 		{
-			viewInfoSv(findInfo(timLop(stoi(tk)), stoi(tk)));
+			viewInfoSv(findInfo(stoi(tk)));
 			break;
 		}
 		if (lc == 0)
@@ -99,18 +99,6 @@ NodeSv_Lop* TaoNodeSv(Sv sv)
 	n->pNext = NULL;
 	return n;
 }
-void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* n)
-{
-	if (headSvLop == NULL)
-	{
-		headSvLop = n;
-	}
-	else
-	{
-		n->pNext = headSvLop;
-		headSvLop = n;
-	}
-}
 NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 {
 	NodeSv_Lop* headSvLop = NULL;
@@ -156,76 +144,29 @@ void TaiData_Lop(NodeNamHoc* n)
 	for (int i = 1; i <= 4; i++)
 	{
 		//mo file ds lop, khoi tao list lop cho sv n1234
-
-		if (i == 1)
+		n->data.headLop[i] = new NodeLop;
+		f.open(to_string(n->data.tg.ngay_bd.y) + 'n'+to_string(i)+".txt");
+		if(i!=1)
 		{
-			n->data.headLop[0] = new NodeLop;
-			f.open(to_string(n->data.tg.ngay_bd.y) + "n1.txt", ios::in | ios::app);
-		}
-		else if (i == 2)
-		{
-			n->data.headLop[1] = new NodeLop;
-			//file nam nay chua dc tao -> sao chep data file nam ngoai sang 
-			//vd: 2020n2.txt chua tao -> sao chep 2019n1.txt sang 
-			f.open(to_string(n->data.tg.ngay_bd.y) + "n2.txt", ios::in | ios::app);
 			getline(f, s);
 			if (s == "")//file trong thi sao chep du lieu nam hoc cu
 			{
 				fstream f1;
-				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + "n1.txt", ios::in);
+				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + 'n'+to_string(i-1)+".txt");
 				while (!f1.eof())
 				{
 					getline(f1, s);
-					f << s << "\n";	
+					f << s /*<< "/n"*/;
 				}
 				f1.close();//dong file nam cu
 			}
 			f.close();//dong lai file de khoi phuc lai con tro file 
-			f.open(to_string(n->data.tg.ngay_bd.y) + "n2.txt", ios::in);//mo file moi o che do doc de doc lai tu dau file
+			f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt");//mo file moi o che do doc de doc lai tu dau file
 		}
-		else if (i == 3)
-		{
-			n->data.headLop[2] = new NodeLop;
-			f.open(to_string(n->data.tg.ngay_bd.y) + "n3.txt", ios::in | ios::app);
-			getline(f, s);
-			if (s == "")
-			{
-				fstream f1;
-				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + "n2.txt", ios::in);
-				while (!f1.eof())
-				{
-					getline(f1, s);
-					f << s << "\n";
-					f1.close();//dong file nam cu
-				}
-			}
-			f.close();//dong lai file vua tao moi o che do app <con tro trong file dang o cuoi>
-			f.open(to_string(n->data.tg.ngay_bd.y) + "n3.txt", ios::in);//mo file moi o che do doc de doc lai tu dau file
-		}
-		else
-		{
-			n->data.headLop[3] = new NodeLop;
-			f.open(to_string(n->data.tg.ngay_bd.y) + "n4.txt", ios::in | ios::app);
-			getline(f, s);
-			if (s == "")
-			{
-				fstream f1;
-				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + "n3.txt", ios::in);
-				while (!f1.eof())
-				{
-					getline(f1, s);
-					f << s << "\n";
-				}
-				f1.close();//dong file nam cu
-			}
-			f.close();//dong lai file vua tao moi o che do app <con tro trong file dang o cuoi>
-			f.open(to_string(n->data.tg.ngay_bd.y) + "n4.txt", ios::in);//mo file moi o che do doc de doc lai tu dau file
-		}
-
 		//doc file, tao node, them node
 		while (!f.eof())
 		{
-			f.clear();
+			//f.clear();
 			getline(f, s, ',');
 			if (s != "")
 			{
@@ -233,14 +174,7 @@ void TaiData_Lop(NodeNamHoc* n)
 				node->pNext = NULL;
 				node->lop.ten = s;
 				node->lop.headSvLop = TaiData_SvLop(node);
-				if (i == 1)
-					ThemNodeLopHoc(n->data.headLop[0], node);
-				else if (i == 2)
-					ThemNodeLopHoc(n->data.headLop[1], node);
-				else if (i == 3)
-					ThemNodeLopHoc(n->data.headLop[2], node);
-				else
-					ThemNodeLopHoc(n->data.headLop[3], node);
+				ThemNodeLopHoc(n->data.headLop[i - 1], node);
 			}
 		}
 		f.close();
@@ -272,7 +206,6 @@ void TaiData_Mon(NodeNamHoc* n)
 		f.open(to_string(n->data.tg.ngay_bd.y) + "hk"+to_string(i+1)+".txt", ios::in | ios::app);
 		A = &(n->data.hk[i]);
 		//lay tg hoc ky
-		f.clear();
 		getline(f, s, ',');
 		if (s != "" && s!="\n")
 		{
@@ -280,7 +213,6 @@ void TaiData_Mon(NodeNamHoc* n)
 			A->tg.ngay_bd.y = A->tg.ngay_bd.d % 10000;
 			A->tg.ngay_bd.m = (A->tg.ngay_bd.d / 10000) % 100;
 			A->tg.ngay_bd.d = A->tg.ngay_bd.d / 1000000;
-			f.clear();
 			getline(f, s, ',');
 			A->tg.ngay_kt.d = atoi(s.c_str());
 			A->tg.ngay_kt.y = A->tg.ngay_kt.d % 10000;
@@ -295,7 +227,6 @@ void TaiData_Mon(NodeNamHoc* n)
 		}
 		//doc info mon trong file hoc ky NEU CO 
 		A->headMon = NULL;
-		f.clear();
 		while (!f.eof())
 		{
 			getline(f, s, ',');
@@ -328,8 +259,8 @@ NodeLop* timNodeLop(NodeNamHoc* namhoc, int styear, string lop)
 	NodeLop* n = namhoc->data.headLop[styear - 1];
 	while (n != NULL)
 	{
-		string s = n->lop.ten;
-		if (s == lop) return n;
+		if (n->lop.ten == lop) 
+			return n;
 		n = n->pNext;
 	}
 	exit(1);
@@ -344,7 +275,6 @@ NodeSv_Lop* timNodeSv_Lop(NodeSv_Lop* head, int mssv)
 	}
 	exit(1);
 }
-//Can cai tien them de tai su dung khi muon doc thong tin sv_mon
 Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.txt len ->doc info sv
 {
 	string tenLop = timLop(id);
@@ -364,6 +294,7 @@ Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.
 		f.clear();
 		getline(f, s);//bo qua cac data thua cua sv khac
 	}
+	T.id = id;
 	f.clear();
 	getline(f, s, ',');
 	T.stt = atoi(s.c_str());
