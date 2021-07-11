@@ -4,6 +4,16 @@
 #include<fstream>
 //nho khoi tao nodemon_sv vs doc node mon
 using namespace std;
+
+//HAM THEM SV VAO MON HOC 
+void ThemSvMon(NodeMon*& mon, NodeSv_Lop*& svLop, int hk)
+{
+	// cach lam:
+	// ktra sv do co hoc mon nao trung gio voi mon nay ko <thong qua svLop->headMon[hk-1]
+	// dong thoi, dem so nodeMonSv do da dk hoc trong hk (phai <5 moi dc them) <cho svLop->headMon[hk-1]->pNext den khi nao = NULL thi dung>
+	// neu ok het thi tao nodeSvMon 
+	// them nodeSvMon vua tao vao headSvMon cua nodeMon truyen vao 
+}
 //SV
 bool readFileDKKH(ThoiGian& tg, Time& tmBD, Time& tmKT,int& ki,string& file)
 {

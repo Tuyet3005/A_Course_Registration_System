@@ -165,33 +165,6 @@
     <ClInclude Include="years.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="16HOH2.txt" />
-    <Text Include="16KDL3.txt" />
-    <Text Include="17CSH1.txt" />
-    <Text Include="17VLK1.txt" />
-    <Text Include="18HOH1.txt" />
-    <Text Include="18KDL3.txt" />
-    <Text Include="19HOH4.txt" />
-    <Text Include="19VLK2.txt" />
-    <Text Include="2019hk1.txt" />
-    <Text Include="2019hk1VTP.txt" />
-    <Text Include="2019hk2.txt" />
-    <Text Include="2019hk3.txt" />
-    <Text Include="2019n1.txt" />
-    <Text Include="2019n2.txt" />
-    <Text Include="2019n3.txt" />
-    <Text Include="2019n4.txt" />
-    <Text Include="2020hk1.txt" />
-    <Text Include="2020hk1DSTT.txt" />
-    <Text Include="2020hk1KTLT.txt" />
-    <Text Include="2020hk2.txt" />
-    <Text Include="2020hk3.txt" />
-    <Text Include="2020n1.txt" />
-    <Text Include="2020n2.txt" />
-    <Text Include="2020n3.txt" />
-    <Text Include="2020n4.txt" />
-    <Text Include="20CTT3.txt" />
-    <Text Include="20DTV1.txt" />
     <Text Include="GiaoVu.txt" />
     <Text Include="listnam.txt" />
     <Text Include="SinhVien.txt" />

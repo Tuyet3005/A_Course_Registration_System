@@ -127,7 +127,6 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 		cout << "TAO MOI LOP HOC NAM NHAT\n";
 		NodeNamHoc* n = NodeNamHienTai(l);
 		TaoLopNamNhat(n);
-		cout << l.pHead->data.headLop[0]->lop.headSvLop->sv.ten << endl;
 		system("pause");
 		break;
 	}
@@ -212,6 +211,7 @@ NodeNamHoc* TaoNodeNam()
 	}
 	n->data.tg.ngay_bd.y = nam_bd;
 	n->data.tg.ngay_kt.y = nam_bd + 1;
+	n->data.headLop[0] = n->data.headLop[1] = n->data.headLop[2] = n->data.headLop[3] = NULL;
 	f.clear();
 	f << nam_bd << ',';
 	f.close();
@@ -234,7 +234,6 @@ void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n)
 		l.pTail->pNext = n;
 		l.pTail = n;
 	}
-	cout << "Tao nam hoc moi thanh cong!!!" << endl;
 }
 int HienNamHoc(ListNamHoc l)
 {
@@ -259,13 +258,15 @@ void TaoNam(ListNamHoc& l)
 	cout << "TAO MOI 1 NAM HOC\n";
 	NodeNamHoc* n = TaoNodeNam();
 	ThemNodeNamHoc(l, n);
+	if (n)
+		cout << "Tao nam hoc moi thanh cong!!!" << endl;
 	system("pause");
 	system("cls");
 	HienNamHoc(l);
 	system("pause");
 }
 
-//lop hoc  /cap nhat dssv lop!!! 
+//lop hoc  
 NodeLop* TaoNodeLop(string ten)
 {
 	NodeLop* n = new NodeLop;
@@ -299,9 +300,45 @@ void HienLopHoc(NodeLop* HeadLop)
 		temp = temp->pNext;
 	}
 }
+bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head)
+{
+	while (head)
+	{
+		if (head->sv.stt == n->sv.stt || n->sv.id == head->sv.id)
+		{
+			cout << "Ban da them sinh vien co STT hoac MSSV tuong tu vao lop roi!\n";
+			return false;
+		}
+		head = head->pNext;
+	}
+	return true;
+}
 //themsv vao theo thu tu tang dan stt
+void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv)
+{
+	//them vao dau 
+	if (headSvLop == NULL || nodeSv->sv.stt < headSvLop->sv.stt)
+	{
+		nodeSv->pNext = headSvLop;
+		headSvLop = nodeSv;
+	}
+	//them vao giua hoac cuoi
+	else
+	{
+		//duyet tim prenode cua node sv co stt lon hon stt cua node sv them vao
+		NodeSv_Lop* temp = headSvLop;
+		while (temp->pNext && (temp->pNext->sv.stt < nodeSv->sv.stt))
+		{
+			temp = temp->pNext;
+		}
+		//noi link prenode (temp) voi n va n voi after node (temp->pNext)
+		nodeSv->pNext = temp->pNext;
+		temp->pNext = nodeSv;
+	}
+}
 void ThemSvLop(NodeLop* nodeLop)
 {
+	system("cls");
 	cout << "----THEM SINH VIEN VAO LOP----\n";
 	cout << "Nhap so luong sinh vien: ";
 	int sl;
@@ -339,6 +376,11 @@ void ThemSvLop(NodeLop* nodeLop)
 				cin.ignore();
 				continue;
 			}
+			else if (n->sv.stt < 1)
+			{
+				cout << "STT phai lon hon 0!!!\n";
+				continue;
+			}
 			else
 				break;
 		}
@@ -370,6 +412,8 @@ void ThemSvLop(NodeLop* nodeLop)
 		cin.ignore();
 		cout << "CMND/CCCD: \n";//lieu co loi j se xay ra hon ta 
 		cin >> n->sv.cmnd;
+		if (!checkTrungSv(n, nodeLop->lop.headSvLop))
+			return;
 		ThemNodeSvLop(nodeLop->lop.headSvLop, n);
 		//ghi vao file
 		fstream f(nodeLop->lop.ten + ".txt", ios::app);
@@ -410,7 +454,6 @@ void TaoLopNamNhat(NodeNamHoc* node)
 	for (int i = 0; i < sl; i++)
 	{
 		string ten;
-		system("cls");
 		cout << "Nhap ten lop " << i + 1 << ": ";
 		cin >> ten;
 		//ktra co bi trung ten lop
@@ -455,58 +498,18 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		cout << "\n \nThong bao!\n";
 		cout << "Ban co the thoat chuong trinh hien tai va tien hanh them sinh vien vao lop...\n";
 		cout << "...bang cach dien thong tin sinh vien vao file \"" << ten << ".txt\".\n \n";
+		Sleep(200);
 		cout << "Thong tin moi sinh vien can nam rieng tren mot dong va theo cau truc sau:\n";
 		cout << "<mssv,stt,ten,ho,gioi tinh,ngay sinh,cccd/cmnd,> vd: <19120789,04,Tram,Nguyen Ai,Nu,07052001,111111111,>\n";
-		system("pause");
+		Sleep(200);
 		cout << "\n \nHoac ban co the them sinh vien bang cach nhap tay ngay bay gio! Y/N???\n";
 		char lc;
 		cin >> lc;
 		if (lc == 'y' || lc == 'Y')
 		{
+			system("pause");
 			ThemSvLop(n);
 		}
-	}
-}
-void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv)
-{
-	if (headSvLop == NULL || nodeSv->sv.stt < headSvLop->sv.stt)
-	{
-		nodeSv->pNext = headSvLop;
-		headSvLop = nodeSv;
-	}
-	else
-	{
-		//duyet tim prenode cua node sv co stt lon hon stt cua node sv them vao
-		if (nodeSv->sv.stt == headSvLop->sv.stt)
-		{
-			cout << "Loi!!! Nhap trung stt voi sinh vien khac trong lop!\n";
-			return;
-		}
-		if (nodeSv->sv.id == headSvLop->sv.id)
-		{
-			cout << "Loi!!! Nhap trung mssv voi sinh vien khac!\n";
-			return;
-		}
-		NodeSv_Lop* temp = headSvLop;
-		while (temp->pNext && (temp->pNext->sv.stt < nodeSv->sv.stt))
-			temp = temp->pNext;
-		//if nhap trung stt->loi
-		if (temp->pNext != NULL)
-		{
-			if (temp->pNext->sv.stt == nodeSv->sv.stt)
-			{
-				cout << "Loi!!! Nhap trung stt voi sinh vien khac trong lop!\n";
-				return;
-			}
-			if (temp->pNext->sv.id == nodeSv->sv.id)
-			{
-				cout << "Loi!!! Nhap trung mssv voi sinh vien khac!\n";
-				return;
-			}
-		}
-		//noi link prenode voi n va n voi after node
-		nodeSv->pNext = temp->pNext;
-		temp->pNext = nodeSv;
 	}
 }
 
@@ -1269,8 +1272,3 @@ bool ChonKihayLop()
 		}
 	}
 }
-
-
-
-
-

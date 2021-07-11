@@ -81,13 +81,13 @@ struct NodeMon_Sv
 struct NodeSv_Lop
 {
 	Sv sv;
-	NodeMon_Sv** headMon = new NodeMon_Sv * [5];
+	NodeMon_Sv** headMon = new NodeMon_Sv * [3];//list mon cua 3 hk 
 	NodeSv_Lop* pNext;
 	float GPA[3] = { NULL,NULL,NULL };//GPA lan luot 3 ki
 };
 struct LopHoc
 {
-	NodeSv_Lop* headSvLop;
+	NodeSv_Lop* headSvLop = NULL;
 	string ten;
 	float GPA[3] = { NULL,NULL,NULL };//GPA trung binh
 };
