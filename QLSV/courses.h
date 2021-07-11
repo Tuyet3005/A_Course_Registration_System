@@ -81,29 +81,40 @@ NodeSv_Mon* NhapDiemSv(ListNamHoc l)
 	}
 }
 
+
+string NextLine(string& data)
+{
+	size_t pos = data.find('\n');
+	string line = data.substr(0, pos);
+	data = pos != string::npos ? data.substr(pos + 1) : "";
+	return line;
+}
+
 // Luu mon hoc vao file tuong ung
 void LuuMonHoc(string filename, NodeMon* mon)
 {
-	ifstream file(filename);
-	string lines[999];
-	int n = 0;
+	fstream file(filename, ios::in);
+	string data, line;
+	getline(file, data);
 	while (!file.eof())
 	{
-		getline(file, lines[n++]);
+		getline(file, line);
+		data += '\n' + line;	
 	}
 	file.close();
 
-	ofstream out_file(filename, ios::out);
-	out_file << lines[0];
+	file.open(filename, ios::out);
+	file << NextLine(data);
 	bool saved = false;
 
-	for (int i = 1; i < n; i++)
+	while (!data.empty())
 	{
-		string line = lines[i];
-		out_file << '\n';
+		line = NextLine(data);
+		file << '\n';
+
 		if (line.find(mon->data.id + ",") == 0)
 		{
-			out_file << mon->data.id << ',' << mon->data.tenMon << ',' << mon->data.tenGv << ',' << mon->data.so_tc << ','
+			file << mon->data.id << ',' << mon->data.tenMon << ',' << mon->data.tenGv << ',' << mon->data.so_tc << ','
 				<< mon->data.bh1.thu << ',' << mon->data.bh1.buoi << ','
 				<< mon->data.bh2.thu << ',' << mon->data.bh2.buoi << ',';
 			cout << "Luu mon hoc thanh cong!!!\n";
@@ -111,11 +122,12 @@ void LuuMonHoc(string filename, NodeMon* mon)
 		}
 		else
 		{
-			out_file << line;
+			file << line;
 		}
 	}
 	if (!saved)
 		cout << "Khong the tim thay mon hoc " << mon->data.id << " - " << mon->data.tenMon << "!!!\n";
+	file.close();
 }
 
 // Tim va luu vao file tuong ung
@@ -210,7 +222,7 @@ void CapNhatMonHoc(ListNamHoc& l)
 void CapNhatDiemSv(ListNamHoc& l)
 {
 	NodeSv_Mon* diem_sv = NhapDiemSv(l);
-	Diem diem = diem_sv->diem;
+	Diem& diem = diem_sv->diem;
 	string input;
 
 	cout << "Diem giua ky (" << diem.gk << "): ";
