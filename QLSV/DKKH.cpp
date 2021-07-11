@@ -186,6 +186,8 @@ void themMon(NodeMon_Sv*& A, int stt,NodeMon* head)//them dau
 	nw->mon = temp;
 	nw->pNext = A;
 	A = nw;
+	//tang si so
+	temp->data.num_Sv++;
 }
 void runDKKH_Sv(NodeMon_Sv*& A, int ki, NodeMon* head)//node mon la ds mon dc mo, nodemonofsv la ds mon ma sv da dk
 {

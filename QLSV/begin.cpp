@@ -132,7 +132,9 @@ NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 			f.clear();
 			getline(f, s, ',');
 			T.cmnd = atoi(s.c_str());
-			ThemNodeSvLop(headSvLop, TaoNodeSv(T));
+			NodeSv_Lop* temp = TaoNodeSv(T);
+			ThemNodeSvLop(headSvLop, temp);
+			temp->headMon[0] = temp->headMon[1] = temp->headMon[2] = NULL;
 		}
 	}
 	f.close();
@@ -321,6 +323,12 @@ void ThemNodeMon_Sv(NodeMon_Sv*& head, NodeMon* A, NodeSv_Mon* sv_mon)//them dau
 	//tao link tu <nodeMon cua 1 sv: (node n)> den <nodeSv cua chinh sv do trong mon A: sv_mon>
 	n->svMon = sv_mon;
 	//them <node mon vua tao cua 1 sv> vao dau <ds mon cua sv do>
+	if (head == NULL)
+	{
+		head = n;
+		head->pNext = NULL;
+		return;
+	}
 	n->pNext = head;
 	head = n;
 }
