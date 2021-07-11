@@ -83,6 +83,7 @@ void TaiData_Nam(ListNamHoc& l)
 			n->pNext = NULL;
 			n->data.tg.ngay_bd.y = nam_bd;
 			n->data.tg.ngay_kt.y = nam_bd + 1;
+			n->data.headLop[0] = n->data.headLop[1] = n->data.headLop[2] = n->data.headLop[3] = NULL;
 			ThemNodeNamHoc(l, n);
 			TaiData_Lop(n);
 			TaiData_Mon(n);
@@ -144,7 +145,6 @@ void TaiData_Lop(NodeNamHoc* n)
 	for (int i = 1; i <= 4; i++)
 	{
 		//mo file ds lop, khoi tao list lop cho sv n1234
-		n->data.headLop[i] = new NodeLop;
 		f.open(to_string(n->data.tg.ngay_bd.y) + 'n'+to_string(i)+".txt");
 		if(i!=1)
 		{
@@ -196,9 +196,7 @@ void TaiData_Mon(NodeNamHoc* n)
 {
 	fstream f;
 	string s;
-	n->data.hk[0].headMon = new NodeMon;
-	n->data.hk[1].headMon = new NodeMon;
-	n->data.hk[2].headMon = new NodeMon;
+	n->data.hk[0].headMon = n->data.hk[1].headMon = n->data.hk[2].headMon = NULL;
 	HocKy* A;
 	for (int i = 0; i < 3; i++)//xem tung hk 
 	{
@@ -320,11 +318,13 @@ void ThemNodeMon_Sv(NodeMon_Sv*& head, NodeMon* A, NodeSv_Mon* sv_mon)//them dau
 {
 	NodeMon_Sv* n = new NodeMon_Sv;
 	n->mon = A;
+	//tao link tu <nodeMon cua 1 sv: (node n)> den <nodeSv cua chinh sv do trong mon A: sv_mon>
 	n->svMon = sv_mon;
+	//them <node mon vua tao cua 1 sv> vao dau <ds mon cua sv do>
 	n->pNext = head;
 	head = n;
 }
-void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki)/////
+void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki)
 {
 	fstream f;
 	int nam = nodeNam->data.tg.ngay_bd.y;
@@ -355,9 +355,11 @@ void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki)/////
 				t->diem.tongket = stof(s);
 			}
 			getline(f, s);//bo "\n" o dong cu 
-			//them node vao dau list sv_mon
+
+			//them <node sv_mon> vua tao vao dau <list sv_mon>
 			t->pNext = mon->headSvMon;
 			mon->headSvMon = t;
+
 			//them con tro den nodesv_mon vao list mon cua nodesv_lop
 			int study_year;//nam nhat,2,3,4
 			int K = stoi(t->lop.substr(0, 2));//lay ra 2 ki tu dau cua ten lop 
