@@ -6,6 +6,7 @@
 // Tra ve hoc ky tuong ung
 HocKy* ChonHocKy(NamHoc nam_hoc, int hoc_ky)
 {
+	hoc_ky -= 1;
 	if (hoc_ky < size(nam_hoc.hk))
 	{
 		return &nam_hoc.hk[hoc_ky];
@@ -33,7 +34,7 @@ HocKy NhapHocKy(ListNamHoc l)
 		}
 		else
 		{
-			cout << "Nhap sai nam hoc.\n";
+			cout << "Nhap sai hoc ky.\n";
 		}
 	}
 }

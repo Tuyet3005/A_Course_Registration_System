@@ -1,5 +1,6 @@
 #pragma once
 #include "variable.h"
+#include "staff.h"
 #include "semesters.h"
 
 
@@ -35,7 +36,7 @@ NodeMon* NhapMonHoc(ListNamHoc l)
 		}
 		else
 		{
-			cout << "Nhap sai nam hoc.\n";
+			cout << "Nhap sai ID mon hoc.\n";
 		}
 	}
 }
@@ -80,30 +81,78 @@ NodeSv_Mon* NhapDiemSv(ListNamHoc l)
 	}
 }
 
-void LuuMonHoc(ListNamHoc& l)
+// Luu mon hoc vao file tuong ung
+void LuuMonHoc(string filename, NodeMon* mon)
 {
-	// Luu tung mon hoc vao file
+	ifstream file(filename);
+	string lines[999];
+	int n = 0;
+	while (!file.eof())
+	{
+		getline(file, lines[n++]);
+	}
+	file.close();
+
+	ofstream out_file(filename, ios::out);
+	out_file << lines[0];
+	bool saved = false;
+
+	for (int i = 1; i < n; i++)
+	{
+		string line = lines[i];
+		out_file << '\n';
+		if (line.find(mon->data.id + ",") == 0)
+		{
+			out_file << mon->data.id << ',' << mon->data.tenMon << ',' << mon->data.tenGv << ',' << mon->data.so_tc << ','
+				<< mon->data.bh1.thu << ',' << mon->data.bh1.buoi << ','
+				<< mon->data.bh2.thu << ',' << mon->data.bh2.buoi << ',';
+			cout << "Luu mon hoc thanh cong!!!\n";
+			saved = true;
+		}
+		else
+		{
+			out_file << line;
+		}
+	}
+	if (!saved)
+		cout << "Khong the tim thay mon hoc " << mon->data.id << " - " << mon->data.tenMon << "!!!\n";
+}
+
+// Tim va luu vao file tuong ung
+void LuuMonHoc(ListNamHoc& l, NodeMon* node_mon)
+{
+	for (NodeNamHoc* nam = l.pHead; nam != NULL; nam = nam->pNext)
+	{
+		for (int stt_hoc_ky = 0; stt_hoc_ky <= 2; stt_hoc_ky++)
+		{
+			HocKy hoc_ky = nam->data.hk[stt_hoc_ky];
+			for (NodeMon* mon = hoc_ky.headMon; mon != NULL; mon = mon->pNext)
+			{
+				if (mon == node_mon)
+				{
+					LuuMonHoc(to_string(nam->data.tg.ngay_bd.y) + "hk" + to_string(stt_hoc_ky + 1) + ".txt", node_mon);
+				}
+			}
+		}
+	}
 }
 
 void CapNhatMonHoc(ListNamHoc& l)
 {
 	NodeMon* node_mon = NhapMonHoc(l);
-	MonHoc mon = node_mon->data;
+	MonHoc& mon = node_mon->data;
 	string input;
 
 	cout << "Nhap thong tin moi. De trong de giu nguyen.\n";
 
-	input = "";
 	cout << "Ten mon (" << mon.tenMon << "): ";
 	getline(cin, input);
 	if (!input.empty()) mon.tenMon = input;
 
-	input = "";
 	cout << "Ten giao vien (" << mon.tenGv << "): ";
 	getline(cin, input);
 	if (!input.empty()) mon.tenGv = input;
 
-	input = "";
 	cout << "So tin chi (" << mon.so_tc << "): ";
 	getline(cin, input);
 	try
@@ -112,7 +161,6 @@ void CapNhatMonHoc(ListNamHoc& l)
 	}
 	catch (invalid_argument) {}
 
-	input = "";
 	cout << "So sinh vien toi da (" << mon.MaxSv << "): ";
 	getline(cin, input);
 	try
@@ -121,27 +169,42 @@ void CapNhatMonHoc(ListNamHoc& l)
 	}
 	catch (invalid_argument) {}
 
-	input = "";
-	cout << "Buoi hoc 1 - thu (" << mon.bh1.thu << "): ";
-	getline(cin, input);
-	if (!input.empty()) mon.bh1.thu = input;
+	for (int stt_buoi = 1; stt_buoi <= 2; stt_buoi++)
+	{
+		BuoiHoc buoi;
+		if (stt_buoi == 1)
+		{
+			BuoiHoc& buoi = mon.bh1;
+		}
+		else
+		{
+			BuoiHoc& buoi = mon.bh2;
+		}
 
-	input = "";
-	cout << "Buoi hoc 1 - buoi (" << mon.bh1.buoi << "): ";
-	getline(cin, input);
-	if (!input.empty()) mon.bh1.buoi = input;
+		cout << "Buoi hoc " << stt_buoi << " - thu (" << buoi.thu << ")\n";
+		HienLuaChonThu(1);
+		getline(cin, input);
+		try
+		{
+			XulyThu(stoi(input), buoi);
+		}
+		catch (invalid_argument) {}
 
-	input = "";
-	cout << "Buoi hoc 2 - thu (" << mon.bh2.thu << "): ";
-	getline(cin, input);
-	if (!input.empty()) mon.bh2.thu = input;
+		cout << "Buoi hoc " << stt_buoi << " - gio (" << buoi.buoi << "): ";
+		HienLuaChonGio();
+		getline(cin, input);
+		try
+		{
+			int selection = stoi(input);
+			if (selection >= 1 && selection <= 4)
+			{
+				buoi.buoi = "S" + input;
+			}
+		}
+		catch (invalid_argument) {}
+	}
 
-	input = "";
-	cout << "Buoi hoc 2 - buoi (" << mon.bh2.buoi << "): ";
-	getline(cin, input);
-	if (!input.empty()) mon.bh2.buoi = input;
-
-	LuuMonHoc(l);
+	LuuMonHoc(l, node_mon);
 }
 
 void CapNhatDiemSv(ListNamHoc& l)
@@ -150,7 +213,6 @@ void CapNhatDiemSv(ListNamHoc& l)
 	Diem diem = diem_sv->diem;
 	string input;
 
-	input = "";
 	cout << "Diem giua ky (" << diem.gk << "): ";
 	getline(cin, input);
 	try
@@ -159,7 +221,6 @@ void CapNhatDiemSv(ListNamHoc& l)
 	}
 	catch (invalid_argument) {}
 
-	input = "";
 	cout << "Diem cuoi ky (" << diem.ck << "): ";
 	getline(cin, input);
 	try
@@ -168,7 +229,6 @@ void CapNhatDiemSv(ListNamHoc& l)
 	}
 	catch (invalid_argument) {}
 
-	input = "";
 	cout << "Diem cong (" << diem.cong << "): ";
 	getline(cin, input);
 	try
