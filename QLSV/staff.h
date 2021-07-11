@@ -6,6 +6,7 @@ int InMenuGv();
 int LuaChon(int maxChoice);
 bool XlMenuGv(int chon, ListNamHoc& l);
 void GiaoVu(ListNamHoc& l);
+
 //TAO MOI
 int InMenuTaoMoi(int chon);
 bool XlTaoMoi(int chon, ListNamHoc& l);
@@ -31,6 +32,8 @@ void TaoHocKy(ListNamHoc& l);
 //mon hoc 
 HocKy* HkHienTai(ListNamHoc& l, NodeNamHoc* n, int& i);
 void NhapNodeMon(NodeMon* n);
+void HienLuaChonThu(int buoi);
+void HienLuaChonGio();
 void XulyThu(int lc, BuoiHoc& bh);
 void NhapTgMon(NodeMon* n);
 //bool checkTrungMon(HocKy* hk, NodeMon* n);
@@ -38,6 +41,7 @@ void TaoMon(ListNamHoc& l, int nam);
 
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);
+int InMenuCapNhat();
 
 //HIENTHI
 //neu chua co du lieu
