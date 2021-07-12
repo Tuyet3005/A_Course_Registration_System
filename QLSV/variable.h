@@ -4,6 +4,8 @@
 #include<fstream>
 #include<iomanip>
 #include<ctime>
+#define WIDTH 1080
+#define HEIGHT 720
 using namespace std;
 //THOI GIAN
 struct Time

@@ -1,6 +1,7 @@
 ﻿#include"display.h"
 #include"student.h"
 #include"console.h"
+#include<conio.h>
 
 void drawTable(int Row,int Col,int posCol[],int posRow)//posRow la hang bat dau ke bang
 {
@@ -241,6 +242,7 @@ int viewDsNam(ListNamHoc A)
 int viewDsLop(NodeLop* head)
 {
 	system("cls");
+	system("color E4");
 	cout << "---------------------DANH SACH LOP HOC-----------------------" << endl;
 	string title[] = { "STT","TEN LOP" };
 	int posRow = whereY();
