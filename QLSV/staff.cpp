@@ -1,5 +1,6 @@
 #include"staff.h"//GIAO VU
 #include"display.h"
+#include"courses.h"
 #include <conio.h>
 int InMenuGv()
 {
@@ -51,7 +52,7 @@ bool XlMenuGv(int chon, ListNamHoc& l)
 	{
 		do
 		{
-			Thoat = XlCapNhat(LuaChon(InMenuTaoMoi(chon)), l);
+			Thoat = XlCapNhat(LuaChon(InMenuCapNhat()), l);
 		} while (!Thoat);
 		system("pause");
 		break;
@@ -89,6 +90,18 @@ void GiaoVu(ListNamHoc& l)
 		Thoat = XlMenuGv((LuaChon(InMenuGv())), l);
 	} while (!Thoat);
 	system("cls");
+}
+
+//CAP NHAT
+int InMenuCapNhat()//dung cho ca menu Cap nhat
+{
+	system("cls");
+	cout << "----MENU CAP NHAT----\n";
+	cout << "1. Mon hoc\n";
+	cout << "2. Diem sinh vien\n";
+	cout << "3. Quay ve\n";
+	cout << "4. Thoat\n";
+	return 4;
 }
 
 //TAO MOI
@@ -141,7 +154,6 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	{
 		system("cls");
 		NodeNamHoc* n = NodeNamHienTai(l);
-		int hk;
 		int nam = n->data.tg.ngay_bd.y;
 		TaoMon(l, nam);
 		system("pause");
@@ -819,6 +831,20 @@ void XulyThu(int lc, BuoiHoc& bh)
 	}
 	}
 }
+void HienLuaChonThu(int buoi)
+{
+	cout << "Buoi " << buoi << ":\n";
+	cout << "1. Thu hai \t 2. Thu ba \t 3. Thu tu\n";
+	cout << "4. Thu nam \t 5. Thu sau \t 6. Thu bay\n";
+	cout << "Nhap lua chon (1-6): ";
+}
+void HienLuaChonGio()
+{
+	cout << "Khung gio:\n";
+	cout << "1. S1 (07:30)\t 2. S2 (09:30)\n";
+	cout << "3. S3 (13:30)\t 4. S4 (15:30)\n";
+	cout << "Nhap lua chon (1-4): ";
+}
 void NhapTgMon(NodeMon* n)
 {
 	do
@@ -826,13 +852,10 @@ void NhapTgMon(NodeMon* n)
 		cout << "Chon thoi gian cua hai buoi hoc trong tuan:\n";
 		for (int i = 1; i < 3; i++)
 		{
-			cout << "Buoi " << i << ":\n";
-			cout << "1. Thu hai \t 2. Thu ba \t 3. Thu tu\n";
-			cout << "4. Thu nam \t 5. Thu sau \t 6. Thu bay\n";
 			int lc;
 			do
 			{
-				cout << "Nhap lua chon (1-6): ";
+				HienLuaChonThu(i);
 				cin >> lc;
 				if (cin.fail())
 				{
@@ -845,10 +868,7 @@ void NhapTgMon(NodeMon* n)
 				XulyThu(lc, n->data.bh1);
 			else
 				XulyThu(lc, n->data.bh2);
-			cout << "Khung gio:\n";
-			cout << "1. S1 (07:30)\t 2. S2 (09:30)\n";
-			cout << "3. S3 (13:30)\t 4. S4 (15:30)\n";
-			cout << "Nhap lua chon (1-4): ";
+			HienLuaChonGio();
 			cin >> lc;
 			if (i == 1)
 			{
@@ -921,7 +941,7 @@ void NhapNodeMon(NodeMon* n)
 	} while (n->data.MaxSv == 0);
 	NhapTgMon(n);
 }
-void TaoMon(ListNamHoc& l, int nam)//hk hien tai vua moi tao   
+void TaoMon(ListNamHoc& l, int nam)
 {
 	int i = 0;//i: stt hoc ky
 	HocKy* hk = HkHienTai(l, NodeNamHienTai(l), i);
@@ -942,13 +962,13 @@ void TaoMon(ListNamHoc& l, int nam)//hk hien tai vua moi tao
 	hk->headMon = n;
 	//ghi vao file hk htai moi nhat 
 	string fPath = to_string(nam) + "hk" + to_string(i) + ".txt";
-	fstream f;
-	f.open(fPath, ios::in | ios::app);
+	fstream f (fPath, ios::app);
 	f << endl;
 	f << n->data.id << "," << n->data.tenMon << "," << n->data.tenGv << ",";
 	f << n->data.so_tc << ",";
 	f << n->data.bh1.thu << "," << n->data.bh1.buoi << ",";
 	f << n->data.bh2.thu << "," << n->data.bh2.buoi << ",";
+	f << n->data.MaxSv << ',';
 	if (f.good())
 	{
 		cout << "Tao moi mon hoc thanh cong!\n";
@@ -966,41 +986,26 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	{
 	case 1:
 	{
-		//cap nhat nh
+		//cap nhat mon hoc
+		CapNhatMonHoc(l);
 		system("pause");
 		break;
 	}
 	case 2:
 	{
-		//cap nhat lop hoc 
+		//cap nhat diem sinh vien 
+		CapNhatDiemSv(l);
 		system("pause");
 		break;
 	}
 	case 3:
 	{
-		cout << "hoc ky\n";
-		system("pause");
-		break;
+		return true;
 	}
 	case 4:
 	{
-		cout << "mon hoc\n";
-		system("pause");
-		break;
-	}
-	case 5:
-	{
-		return true;
-	}
-	case 6:
-	{
 		char lenh;
 		cout << "Ban thuc su muon thoat? Y/N?" << endl;
-		cin >> lenh;
-		if (lenh == 'Y' || lenh == 'y')
-		{
-			exit(0);
-		}
 	}
 	}
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
