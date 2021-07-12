@@ -144,29 +144,38 @@ void TaiData_Lop(NodeNamHoc* n)
 	string s;
 	for (int i = 1; i <= 4; i++)
 	{
-		//mo file ds lop, khoi tao list lop cho sv n1234
-		f.open(to_string(n->data.tg.ngay_bd.y) + 'n'+to_string(i)+".txt");
+		//mo file ds lop
+		f.open(to_string(n->data.tg.ngay_bd.y) + 'n'+to_string(i)+".txt", ios::in | ios::app);
 		if(i!=1)
 		{
+			//neu file nam nay chua dc tao -> sao chep data file nam ngoai sang 
+			//vd: 2020n2.txt chua tao -> sao chep 2019n1.txt sang 
 			getline(f, s);
 			if (s == "")//file trong thi sao chep du lieu nam hoc cu
 			{
+				f.close();
+				f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt", ios::app);
 				fstream f1;
 				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + 'n'+to_string(i-1)+".txt");
 				while (!f1.eof())
 				{
 					getline(f1, s);
-					f << s /*<< "/n"*/;
+					f << s;
+					if (!f.good())
+					{
+						cout << "loi sao chep lop nam cu sang !\n";
+						system("pause");
+					}
 				}
+				
 				f1.close();//dong file nam cu
 			}
 			f.close();//dong lai file de khoi phuc lai con tro file 
-			f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt");//mo file moi o che do doc de doc lai tu dau file
+			f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt", ios::in);//mo file moi o che do doc de doc lai tu dau file
 		}
 		//doc file, tao node, them node
 		while (!f.eof())
 		{
-			//f.clear();
 			getline(f, s, ',');
 			if (s != "")
 			{
