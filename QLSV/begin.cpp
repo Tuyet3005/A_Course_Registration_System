@@ -251,6 +251,8 @@ void TaiData_Mon(NodeNamHoc* n)
 			getline(f, t->data.bh1.buoi, ',');
 			getline(f, t->data.bh2.thu, ',');
 			getline(f, t->data.bh2.buoi, ',');
+			getline(f, s, ',');
+			t->data.MaxSv = stoi(s);
 			getline(f, s);//xoa "\n" ra khoi f
 			t->pNext = NULL;
 			t->headSvMon = NULL;

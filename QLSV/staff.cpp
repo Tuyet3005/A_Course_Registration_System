@@ -154,7 +154,6 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	{
 		system("cls");
 		NodeNamHoc* n = NodeNamHienTai(l);
-		int hk;
 		int nam = n->data.tg.ngay_bd.y;
 		TaoMon(l, nam);
 		system("pause");
@@ -942,7 +941,7 @@ void NhapNodeMon(NodeMon* n)
 	} while (n->data.MaxSv == 0);
 	NhapTgMon(n);
 }
-void TaoMon(ListNamHoc& l, int nam)//hk hien tai vua moi tao   
+void TaoMon(ListNamHoc& l, int nam)
 {
 	int i = 0;//i: stt hoc ky
 	HocKy* hk = HkHienTai(l, NodeNamHienTai(l), i);
@@ -963,13 +962,13 @@ void TaoMon(ListNamHoc& l, int nam)//hk hien tai vua moi tao
 	hk->headMon = n;
 	//ghi vao file hk htai moi nhat 
 	string fPath = to_string(nam) + "hk" + to_string(i) + ".txt";
-	fstream f;
-	f.open(fPath, ios::in | ios::app);
+	fstream f (fPath, ios::app);
 	f << endl;
 	f << n->data.id << "," << n->data.tenMon << "," << n->data.tenGv << ",";
 	f << n->data.so_tc << ",";
 	f << n->data.bh1.thu << "," << n->data.bh1.buoi << ",";
 	f << n->data.bh2.thu << "," << n->data.bh2.buoi << ",";
+	f << n->data.MaxSv << ',';
 	if (f.good())
 	{
 		cout << "Tao moi mon hoc thanh cong!\n";

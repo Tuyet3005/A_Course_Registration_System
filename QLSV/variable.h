@@ -44,7 +44,7 @@ struct MonHoc
 	int so_tc;
 	int MaxSv = 50;//sl sv toi da 
 	BuoiHoc bh1, bh2;//hai buoi trong tuan
-	int num_Sv;
+	int num_Sv = 0;
 };
 struct NodeSv_Mon
 {
