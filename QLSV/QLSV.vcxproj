@@ -148,7 +148,6 @@
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="begin.cpp" />
     <ClCompile Include="student.cpp" />
-    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h" />

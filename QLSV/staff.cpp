@@ -1178,8 +1178,15 @@ void end(int& lc)
 			temp = _getch();
 			if (temp == 27)
 			{
-				lc = 0;
-				return;
+				cout << "Ban that su muon thoat khoi Hien Thi? Y/N?" << endl;
+				cout << "Hay nhap: ";
+				char t;
+				cin >> t;
+				if ('Y' == toupper(t))
+				{
+					lc = 0;
+					return;
+				}
 			}
 			else if (temp == 'B' || temp == 'b')
 			{
@@ -1224,7 +1231,8 @@ void hienthiDsLop(NodeLop* head, int& lc)
 	NodeLop* temp = head;
 	for (int i = 1; i < lc; i++)
 		temp = temp->pNext;
-	hienthiDiem_Lop(temp, lc);
+	//cin.clear();
+	//cin.ignore();
 	if (ChonTThayDiem_Lop())
 		hienthiTTSv_Lop(temp, lc);
 	else

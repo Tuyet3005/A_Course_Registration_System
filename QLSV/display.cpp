@@ -1,6 +1,7 @@
 ﻿#include"display.h"
 #include"student.h"
 #include"console.h"
+#include<conio.h>
 
 void drawTable(int Row,int Col,int posCol[],int posRow)//posRow la hang bat dau ke bang
 {
@@ -241,6 +242,7 @@ int viewDsNam(ListNamHoc A)
 int viewDsLop(NodeLop* head)
 {
 	system("cls");
+	system("color E4");
 	cout << "---------------------DANH SACH LOP HOC-----------------------" << endl;
 	string title[] = { "STT","TEN LOP" };
 	int posRow = whereY();
@@ -377,7 +379,7 @@ int viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
 		p = p->pNext;
 	}
 	gotoXY(0, posRow);
-	drawTable(i , 6, posCol,posRow);
+	drawTable(i , 7, posCol,posRow);
 	return i - 1;
 }
 int viewDiem_Lop(NodeLop* A,int ki)
@@ -386,15 +388,15 @@ int viewDiem_Lop(NodeLop* A,int ki)
 	bool flag=tinhGPA_SvvaLop(A, ki);
 	//
 	system("cls");
-	cout << "-------------------------------------KET QUA HOC TAP - LOP "<<A->lop.ten<<" - KI << "<<ki<<"----------------------------------" << endl;
+	cout << "-------------------------------------KET QUA HOC TAP - LOP "<<A->lop.ten<<" - KI "<<ki<<"----------------------------------" << endl;
 	cout << endl;
 	//DIEM Cuoi ki all mon, GPA, GPA overall
 	string title[] = { "STT","MSSV","HO","TEN","ID MON","TK","ID MON","TK","ID MON","TK","ID MON","TK","ID MON","TK","GPA" };
 	int posRow = whereY();
 	int posCol[16] = { 0,6,17,43,55,65,70,80,85,95,100,110,115,125,130,140 };
-	for (int j = 0; j < 16; j++)
+	for (int j = 0; j < 15; j++)
 	{
-		gotoXY(posCol[j] + 2, posRow + 1);
+		gotoXY(posCol[j] +1, posRow + 1);
 		cout << title[j];
 	}
 	cout.clear();
@@ -406,36 +408,37 @@ int viewDiem_Lop(NodeLop* A,int ki)
 	{
 		pMon = pSv->headMon[ki - 1];
 		//
-		gotoXY(posCol[0], posRow + 1 + 2 * i);
+		gotoXY(posCol[0] + 1, posRow + 1 + 2 * i);
 		cout << pSv->sv.stt;
-		gotoXY(posCol[1], posRow + 1 + 2 * i);
+		gotoXY(posCol[1] + 1, posRow + 1 + 2 * i);
 		cout << pSv->sv.id;
-		gotoXY(posCol[2], posRow + 1 + 2 * i);
+		gotoXY(posCol[2] + 1, posRow + 1 + 2 * i);
 		cout << pSv->sv.ho;
-		gotoXY(posCol[3], posRow + 1 + 2 * i);
+		gotoXY(posCol[3] + 1, posRow + 1 + 2 * i);
 		cout << pSv->sv.ten;
 		j = 4;
-		for (; j < 4 + 5 && pMon!=NULL; j+=2)
+		for (; j <= 4 + 10 && pMon!=NULL; j+=2)
 		{
-			gotoXY(posCol[j], posRow + 1 + 2 * i);
+			gotoXY(posCol[j] + 1, posRow + 1 + 2 * i);
 			cout << pMon->mon->data.id;
-			gotoXY(posCol[j+1], posRow + 1 + 2 * i);
+			gotoXY(posCol[j+1] + 1, posRow + 1 + 2 * i);
 			cout << pMon->svMon->diem.tongket;
 			pMon = pMon->pNext;
 		}
-		gotoXY(posCol[5], posRow + 1 + 2 * i);
-		cout << pSv->GPA[ki];
+		gotoXY(posCol[j-1] + 1, posRow + 1 + 2 * i);
+		cout << pSv->GPA[ki-1];
 		pSv = pSv->pNext;
 	}
-	gotoXY(posCol[10],posRow+ i + 2);
+	gotoXY(posCol[10],posRow+ i*2 + 2);
 	cout << "Trung binh GPA: ";
-	gotoXY(posCol[14] + 2,posRow +i + 2);
+	gotoXY(posCol[14] + 1,posRow +i*2 + 2);
 	if (flag)
 		cout << A->lop.GPA;
 	else
 		cout << "Chua cap nhat";
 	gotoXY(0, posRow);
-	drawTable(i, 7, posCol, posRow);
+	drawTable(i, 15, posCol, posRow);
+	gotoXY(0, posRow + i * 2 + 4);
 	return i - 1;
 }
 //TINH GPA
@@ -444,7 +447,6 @@ bool tinhGPA_SvvaLop(NodeLop* t,int ki)
 	NodeSv_Lop* pSv = t->lop.headSvLop;
 	NodeMon_Sv* pMon;
 	float sum;
-	float temp;
 	int tin;
 	//lop
 	int dem = 0;
@@ -456,8 +458,7 @@ bool tinhGPA_SvvaLop(NodeLop* t,int ki)
 		tin = 0;
 		while (pMon != NULL)
 		{
-			temp = pMon->svMon->diem.tongket;
-			if (temp == -1)
+			if (!pMon->svMon->diem.tongket)
 				break;
 			else
 			{
@@ -466,7 +467,7 @@ bool tinhGPA_SvvaLop(NodeLop* t,int ki)
 			}
 			pMon = pMon->pNext;
 		}
-		if (temp != NULL)//co diem tk
+		if (pMon==NULL)//co diem tk
 		{
 			pSv->GPA[ki - 1] = sum / tin;
 			sumlop += pSv->GPA[ki - 1];
