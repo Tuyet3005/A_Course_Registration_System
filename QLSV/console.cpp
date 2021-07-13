@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include "console.h"
-
+#include "begin.h""
 
 int inputKey()
 {
@@ -76,4 +76,46 @@ int whereY()
 void TextColor (int color)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE) , color);
+}
+
+//fix full man hinh 
+void resizeConsole(int width, int height)
+{
+	HWND console = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(console, &r);
+	MoveWindow(console, r.left, r.top, width, height, TRUE);
+}
+void DisableCtrButton(bool Max)
+{
+	HWND hWnd = GetConsoleWindow();
+	HMENU hMenu = GetSystemMenu(hWnd, false);
+	if (Max == 1)
+	{
+		DeleteMenu(hMenu, SC_MAXIMIZE, MF_BYCOMMAND);
+	}
+}
+void ShowScrollbar(BOOL Show)
+{
+	HWND hWnd = GetConsoleWindow();
+	ShowScrollBar(hWnd, SB_BOTH, Show);
+}
+void DisableSelection()
+{
+	HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
+
+	SetConsoleMode(hStdin, ~ENABLE_QUICK_EDIT_MODE);
+}
+void DisableResizeWindow()
+{
+	HWND hWnd = GetConsoleWindow();
+	SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) & ~WS_SIZEBOX);
+}
+void SetConsole()
+{
+	resizeConsole(1920, 1080);
+	DisableCtrButton(1);
+	DisableSelection();
+	DisableResizeWindow();
+	ShowScrollbar(0);
 }
