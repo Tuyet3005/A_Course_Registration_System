@@ -85,7 +85,7 @@ int viewDsSvLop(NodeLop* A)
 		cout << p->sv.gioi;
 		gotoXY(posCol[5] + 2, posRow + 1 + 2 * i);
 		cout << p->sv.ngayS.d << "/" << p->sv.ngayS.m << "/" << p->sv.ngayS.y;
-		gotoXY(posCol[6] + 2, 2 * i + 1);
+		gotoXY(posCol[6] + 2, posRow + 1 + 2 * i);
 		cout << p->sv.cmnd;
 		p = p->pNext;	
 	}
