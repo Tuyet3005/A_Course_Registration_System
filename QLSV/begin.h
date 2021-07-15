@@ -6,6 +6,7 @@
 #include"display.h"
 #include"console.h"
 #include"realtime.h"
+#include"DKKH.h"
 int InMenuBatDau(int ma_tk);
 bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l);
 // TAI DU LIEU TU FILE LEN HE THONG

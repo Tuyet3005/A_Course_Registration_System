@@ -1,14 +1,8 @@
 #include"begin.h"
 #include"DKKH.h"
-void resizeConsole(int width, int height)
-{
-	HWND console = GetConsoleWindow();
-	RECT r;
-	GetWindowRect(console, &r);
-	MoveWindow(console, r.left, r.top, width, height, TRUE);
-}
 int main()
 {
+	SetConsole();
 	string tk, mk;
 	short lc = 1;//Ma tk:  0: giao vu ; 1: sinh vien
 	ListNamHoc listNam;
@@ -27,29 +21,7 @@ int main()
 		} 		while (!Thoat);
 		//
 	} 	while (true);
-	return 0;
-
-	//resizeConsole(WIDTH, HEIGHT);
-
-	//fstream f;
-	//f.open("2019n1.txt");
-	//string s;
-	//NodeLop* headSvLop = NULL;
-
-	//while (!f.eof())
-	//{
-	//	//f.clear();
-	//	getline(f, s, ',');
-	//	if (s != "")
-	//	{
-	//		NodeLop* node = new NodeLop;
-	//		node->pNext = NULL;
-	//		node->lop.ten = s;
-	//		node->lop.headSvLop = TaiData_SvLop(node);
-	//		ThemNodeLopHoc(headSvLop, node);
-	//	}
-	//}
-	//viewDsLop(headSvLop);
+	viewDsLop(headSvLop);
 
 	return 0;
 }

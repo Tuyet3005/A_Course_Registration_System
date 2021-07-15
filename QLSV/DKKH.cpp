@@ -387,6 +387,7 @@ void DKKH_Sv(NodeMon_Sv*& A, NodeMon* head)
 //GV
 void taoDKKH_Gv(int nam)//tao cho nam hien tai cho ca 4 nam
 {
+	system("cls");
 	cout << "-------------------------TAO BUOI DANG KI KHOA HOC-------------------------" << endl;
 	int ki;
 	cout << "--Nhap ki hoc " << endl;

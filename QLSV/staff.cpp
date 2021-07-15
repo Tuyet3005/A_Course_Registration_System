@@ -43,7 +43,7 @@ bool XlMenuGv(int chon, ListNamHoc& l)
 	{
 		do
 		{
-			Thoat = XlTaoMoi(LuaChon(InMenuTaoMoi(chon)), l);
+			Thoat = XlTaoMoi(LuaChon(InMenuTaoMoi()), l);
 		} while (!Thoat);
 		system("pause");
 		break;
@@ -92,37 +92,19 @@ void GiaoVu(ListNamHoc& l)
 	system("cls");
 }
 
-//CAP NHAT
-int InMenuCapNhat()//dung cho ca menu Cap nhat
-{
-	system("cls");
-	cout << "----MENU CAP NHAT----\n";
-	cout << "1. Mon hoc\n";
-	cout << "2. Diem sinh vien\n";
-	cout << "3. Quay ve\n";
-	cout << "4. Thoat\n";
-	return 4;
-}
-
 //TAO MOI
-int InMenuTaoMoi(int chon)//dung cho ca menu Cap nhat
+int InMenuTaoMoi()
 {
 	system("cls");
-	if (chon == 1)
-	{
-		cout << "----MENU TAO MOI----\n";
-	}
-	else
-	{
-		cout << "----MENU CAP NHAT----\n";
-	}
+	cout << "----MENU TAO MOI----\n";
 	cout << "1. Nam hoc\n";
 	cout << "2. Lop hoc\n";
 	cout << "3. Hoc ky\n";
 	cout << "4. Mon hoc\n";
-	cout << "5. Quay ve\n";
-	cout << "6. Thoat\n";
-	return 6;
+	cout << "5. Buoi dang ky khoa hoc\n";
+	cout << "6. Quay ve\n";
+	cout << "7. Thoat\n";
+	return 7;
 }
 bool XlTaoMoi(int chon, ListNamHoc& l)
 {
@@ -161,9 +143,15 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	}
 	case 5:
 	{
-		return true;
+		taoDKKH_Gv(NodeNamHienTai(l)->data.tg.ngay_bd.y);
+		system("pause");
+		break;
 	}
 	case 6:
+	{
+		return true;
+	}
+	case 7:
 	{
 		char lenh;
 		cout << "Ban thuc su muon thoat? Y/N?" << endl;
@@ -980,6 +968,16 @@ void TaoMon(ListNamHoc& l, int nam)
 };
 
 //CAP NHAT
+int InMenuCapNhat()//dung cho ca menu Cap nhat
+{
+	system("cls");
+	cout << "----MENU CAP NHAT----\n";
+	cout << "1. Mon hoc\n";
+	cout << "2. Diem sinh vien\n";
+	cout << "3. Quay ve\n";
+	cout << "4. Thoat\n";
+	return 4;
+}
 bool XlCapNhat(int chon, ListNamHoc& l)
 {
 	switch (chon)
