@@ -144,6 +144,8 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	case 5:
 	{
 		taoDKKH_Gv(NodeNamHienTai(l)->data.tg.ngay_bd.y);
+		system("pause");
+		break;
 	}
 	case 6:
 	{
