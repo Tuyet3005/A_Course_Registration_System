@@ -2,13 +2,14 @@
 #include"variable.h"
 #include"realtime.h"
 #include"begin.h"
+
 int InMenuGv();
 int LuaChon(int maxChoice);
 bool XlMenuGv(int chon, ListNamHoc& l);
 void GiaoVu(ListNamHoc& l);
 
 //TAO MOI
-int InMenuTaoMoi(int chon);
+int InMenuTaoMoi();
 bool XlTaoMoi(int chon, ListNamHoc& l);
 //nam hoc
 NodeNamHoc* TaoNodeNam();
