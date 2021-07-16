@@ -115,7 +115,7 @@ void SetConsole()
 {
 	resizeConsole(1920, 1080);
 	DisableCtrButton(0);
-	DisableSelection();
+	//DisableSelection();
 	DisableResizeWindow();
 	ShowScrollbar(0);
 }

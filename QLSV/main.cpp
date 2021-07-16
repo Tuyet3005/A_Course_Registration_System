@@ -21,7 +21,6 @@ int main()
 		} 		while (!Thoat);
 		//
 	} 	while (true);
-	viewDsLop(headSvLop);
 
 	return 0;
 }
