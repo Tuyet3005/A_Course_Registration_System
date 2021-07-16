@@ -35,8 +35,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 		}
 		if (lc == 0)
 		{
-			cout << "BO SUNG THONG TIN CHO GIAO VU !\n";
-			system("pause");
+			viewInfoGV(taiTT_GV(tk));
 			break;
 		}
 	}
@@ -396,7 +395,6 @@ string timLop(int id)//tra ve ten lop cua sv co id tuong ung
 	ifstream f;
 	f.open("SinhVien.txt");
 	string s;
-	bool flag = false;
 	while (!f.eof())
 	{
 		f.clear();
@@ -414,4 +412,43 @@ string timLop(int id)//tra ve ten lop cua sv co id tuong ung
 	}
 	f.close();
 	return s;
+}
+
+//GIAO VU
+Sv taiTT_GV(string id)
+{
+	ifstream f;
+	f.open("GiaoVu.txt");
+	string s;
+	Sv gv;
+	while (!f.eof())
+	{
+		f.clear();
+		getline(f, s, ',');
+		if (s == id)
+		{
+			f.clear();
+			getline(f, s, ',');//pass
+			f.clear();
+			getline(f, gv.ten, ',');
+			f.clear();
+			getline(f, gv.ho, ',');
+			f.clear();
+			getline(f, gv.gioi, ',');
+			f.clear();
+			getline(f, s, ',');
+			gv.ngayS.d = stoi(s);
+			gv.ngayS.y = gv.ngayS.d % 10000;
+			gv.ngayS.m = (gv.ngayS.d / 10000) % 100;
+			gv.ngayS.d = gv.ngayS.d / 1000000;
+			f.clear();
+			getline(f, s, ',');
+			gv.cmnd = stoi(s);
+			break;
+		}
+		f.clear();
+		getline(f, s);
+	}
+	f.close();
+	return gv;
 }

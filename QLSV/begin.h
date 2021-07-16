@@ -26,3 +26,4 @@ string timLop(int id);
 void ThemNodeMon_Sv(NodeMon_Sv*& head, NodeMon* A, NodeSv_Mon* sv_mon);
 void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki);
 void TaiData_Mon(NodeNamHoc* n);
+Sv taiTT_GV(string id);

@@ -481,3 +481,32 @@ bool tinhGPA_SvvaLop(NodeLop* t,int ki)
 	t->lop.GPA[ki - 1] = sumlop / dem;
 	return true;
 }
+//TTGV
+void viewInfoGV(Sv A)
+{
+	system("cls");
+	cout << endl;
+	cout << "---------------------------THONG TIN CA NHAN-------------------------------------" << endl;
+	string title[] = { "HO","TEN","GIOI TINH","NGAY SINH","CMND" };
+	int posRow = whereY();
+	int posCol[6] = { 0,26,38,50,68,78 };
+	for (int j = 0; j < 5; j++)//ghi title
+	{
+		gotoXY(posCol[j] + 2, posRow + 1);
+		cout << title[j];
+	}
+	cout.clear();
+	gotoXY(posCol[0] + 2, posRow + 3);
+	cout << A.ho;
+	gotoXY(posCol[1] + 2, posRow + 3);
+	cout << A.ten;
+	gotoXY(posCol[2] + 2, posRow + 3);
+	cout << A.gioi;
+	gotoXY(posCol[3] + 2, posRow + 3);
+	cout << A.ngayS.d << "/" << A.ngayS.m << "/" << A.ngayS.y;
+	gotoXY(posCol[4] + 2, posRow + 3);
+	cout << A.cmnd;
+	gotoXY(0, posRow);
+	drawTable(2, 5, posCol, posRow);
+	system("pause");
+}
