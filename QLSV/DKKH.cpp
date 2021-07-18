@@ -435,7 +435,6 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	system("cls");
 	cout << "----------------------------------TAO BUOI DANG KI KHOA HOC-------------------------------" << endl;
 	cout << endl;
-	//in ra tg hk va tg nam hoc
 	if (H->data.hk[ki - 1].headMon == NULL)//chua co mon nao
 	{
 		cout << "! CAC MON HOC CHO HOC KI NAY CHUA DUOC CAP NHAT " << endl;
@@ -443,6 +442,12 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 		system("pause");
 		return;
 	}
+
+	//in ra tg hk va tg nam hoc
+	ThoiGian tY = H->data.tg;
+	ThoiGian tHK = H->data.hk[ki-1].tg;
+	cout << "Thoi gian NAM HOC: " << tY.ngay_bd.d << '/' << tY.ngay_bd.m << '/' << tY.ngay_bd.y << " - " << tY.ngay_kt.d << '/' << tY.ngay_kt.m << '/' << tY.ngay_kt.y << endl;
+	cout<<"Thoi gian HOC KI "<<ki<<": "<< tHK.ngay_bd.d << '/' << tHK.ngay_bd.m << '/' << tHK.ngay_bd.y << " - " << tHK.ngay_kt.d << '/' << tHK.ngay_kt.m << '/' << tHK.ngay_kt.y << endl;
 
 	tmBD.giay = tmKT.giay = 0;
 	do {
@@ -527,7 +532,7 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 		cout << "Ngay bat dau va ket thuc khong hop le... Hay nhap lai !" << endl;
 	} while (true);
 	//tg k phu hop voi hoc ki: sau tg bd nam hoc, trc tg bd hoc ki
-	if (!sosanhNgay(H->data.tg.ngay_bd, tg.ngay_bd) || sosanhNgay(H->data.hk[ki - 1].tg.ngay_bd, tg.ngay_kt))
+	if (!sosanhNgay(tY.ngay_bd, tg.ngay_bd) || sosanhNgay(tHK.ngay_bd, tg.ngay_kt))
 	{
 		cout << "! TAO BUOI DANG KI KHOA HOC KHONG THANH CONG !" << endl;
 		cout << "--Ban chi duoc tao buoi dang ki khoa hoc cho nam hoc nay" << endl;
