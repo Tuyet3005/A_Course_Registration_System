@@ -1,4 +1,7 @@
 #include"student.h"
+#include"display.h"
+#include"begin.h"
+#include"DKKH.h"
 int InMenuSv()
 {
 	system("cls");
@@ -6,12 +9,11 @@ int InMenuSv()
 	cout << "\t <Giao dien sinh vien>\n";
 	cout << "	1. Cac mon hoc cua toi\n";
 	cout << "	2. Dang ky mon hoc \n";//co the dk them hoac xoa -> check conflict 
-	cout << "	3. Cac lop hoc dang mo\n";
-	cout << "	4. Cac mon hoc dang mo\n";
-	cout << "	5. Quay ve \n";
-	cout << "	6. Thoat\n";
+	cout << "	3. Cac mon hoc dang mo\n";
+	cout << "	4. Quay ve \n";
+	cout << "	5. Thoat\n";
 	cout << "--------------------------------------\n";
-	return 6;//lua chon lon nhat la 6
+	return 5;//lua chon lon nhat la 6
 }
 Sv findInfo(string tenlop, int tk)//tim Info sv
 {
@@ -62,16 +64,28 @@ Sv findInfo(string tenlop, int tk)//tim Info sv
 	}
 	return T;
 }
-void SinhVien(ListNamHoc& l)
+void SinhVien(ListNamHoc& l,int tk)
 {
+	NodeNamHoc* t = NodeNamHienTai(l);
+	int namhientai = t->data.tg.ngay_bd.y;
+	string tenlop = timLop(tk);
+	NodeLop* plop;
+	for (int i = 1; i <= 4; i++)
+	{
+		plop = timNodeLop(t, i,tenlop);
+		if (plop == NULL)
+			continue;
+		break;
+	}
+	NodeSv_Lop* SV = timNodeSv_Lop(plop->lop.headSvLop, tk);
 	bool Thoat = false;
 	do
 	{
-		Thoat = XlMenuSv((LuaChon(InMenuSv())), l);
+		Thoat = XlMenuSv((LuaChon(InMenuSv())), l,SV);
 	} while (!Thoat);
 	system("cls");
 }
-bool XlMenuSv(int chon, ListNamHoc& l)
+bool XlMenuSv(int chon, ListNamHoc& l, NodeSv_Lop* A)
 {
 	char lenh;//thoat thi nhap Y/y
 	bool Thoat = false;
@@ -79,13 +93,14 @@ bool XlMenuSv(int chon, ListNamHoc& l)
 	{
 	case 1:
 	{
-		//my course 
-		//hien thi cac mon hoc cua sv da hoc va dk 
+		Xlviewmondk(A);
 		system("pause");
 		break;
 	}
 	case 2:
 	{
+		
+		DKKH_Sv(NodeNamHienTai(l),A, 0);
 		//course registration
 		//xem cac mon da dk trong hk hien tai 
 		//dk mon hoc, chinh sua dk mon <chuc nang chi hoat dong trong tg mo dk mon hoc
@@ -94,21 +109,17 @@ bool XlMenuSv(int chon, ListNamHoc& l)
 	}
 	case 3:
 	{
-		//opened class
-		//hien thi cac lop hoc, dssv_lop 
+		DKKH_Sv(NodeNamHienTai(l), A, 1);
+		//opened course
+		//hien thi cac mon
 		system("pause");
 		break;
 	}
 	case 4:
 	{
-		//opened course
-		//hien thi cac mon va dssv_mon  
-	}
-	case 5:
-	{
 		return true;
 	}
-	case 6:
+	case 5:
 	{
 		cout << "Ban thuc su muon thoat? Y/N?" << endl;
 		cin >> lenh;
@@ -120,4 +131,28 @@ bool XlMenuSv(int chon, ListNamHoc& l)
 	}
 	return false;
 }
-//sv log in (doc tu file -> biet lop -> tim node lop cua sv do -> tim nodesv)
+//viewmondk
+char chonKi()
+{
+	system("cls");
+	cout << "Ban muon xem mon da dk cua ki may ? 1/2/3?" << endl;
+	cout << "Hay nhan phim tuong uong" << endl;
+	char k;
+	while (true)
+	{
+		if (_kbhit())
+		{
+			k = _getch();
+			if (k >= 49 && k <= 51)
+			{
+				return k - 48;
+			}
+		}
+	}
+}
+void Xlviewmondk(NodeSv_Lop* A)
+{
+	char ki = chonKi();
+	system("cls");
+	viewMondaDk(A->headMon[ki-1], (int)ki);
+}

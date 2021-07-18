@@ -1,1 +1,3 @@
-
+01072021,31082021,
+NMCNTT,Nhap Mon Cong Nghe Thong Tin,Huynh Thuy Bao Tran,4,Thu Hai,S1,Thu Nam,S2,50,
+thTRR,Thuc hanh Toan Roi Rac,Tran Dung,2,Thu Hai,S4,Thu Sau,S2,15,

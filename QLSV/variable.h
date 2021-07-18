@@ -39,7 +39,7 @@ struct BuoiHoc
 };
 struct MonHoc
 {
-	string id = " ";
+	string id = "";
 	string tenMon = "", tenGv = "";
 	int so_tc = 0;
 	int MaxSv = 50;//sl sv toi da 

@@ -55,11 +55,17 @@ void drawTable(int Row,int Col,int posCol[],int posRow)//posRow la hang bat dau 
 		cout << endl;
 	}
 }
+
 int viewDsSvLop(NodeLop* A)
 {
 	system("cls");
-	cout << endl;
 	cout << "----------------------------------------DANH SACH LOP "<< A->lop.ten<<"--------------------------------------" << endl;
+	cout << endl;
+	if (A == NULL)
+	{
+		cout << "Hien chua cap nhat du lieu..."<<endl;
+		return 0;
+	}
 	int posRow = whereY();
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posCol[8] = { 0,6,17,43,55,67,81,95 };
@@ -93,6 +99,7 @@ int viewDsSvLop(NodeLop* A)
 	drawTable(i,7,posCol,posRow);
 	return i-1;
 }
+
 void BackGround()
 {
 	system("cls");
@@ -110,13 +117,19 @@ void BackGround()
 	cout << "                                     Course & Student Management System";
 	gotoXY(0, 15);
 }
+
 int viewDsMonHk(NodeMon* head,int ki)//đưa dô head moon của struct hk
 {
-	system("cls");
 	cout << "---------------------------------------------DANH SACH MON KI " << ki <<"----------------------------------------" << endl;
+	cout << endl;
+	if (head == NULL)
+	{
+		cout << "Hien chua cap nhat du lieu..."<<endl;
+		return 0;
+	}
 	string title[] = {"STT", "ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC"};
 	int posRow = whereY();
-	int posCol[8] = { 0,5,15,45,75,95,110,150};
+	int posCol[8] = { 0,6,15,45,75,90,105,140};
 	for (int j = 0; j < 7; j++)
 	{
 		gotoXY(posCol[j] + 2, posRow+1);
@@ -147,10 +160,17 @@ int viewDsMonHk(NodeMon* head,int ki)//đưa dô head moon của struct hk
 	drawTable(i, 7, posCol,posRow);
 	return i-1;
 }
+
 int viewDsSvMon(NodeMon* A)
 {
 	system("cls");
 	cout << "---------------------------------------DANH SACH SINH VIEN MON " << A->data.tenMon << "--------------------------------------" << endl;
+	cout << endl;
+	if (A == NULL)
+	{
+		cout << "Hien chua cap nhat du lieu..."<<endl;
+		return 0;
+	}
 	string title[] = { "STT","MSSV","HO","TEN","GK","CK","CONG","TONG KET" };
 	int posRow = whereY();
 	int posCol[9] = { 0,6,17,43,55,65,75,85,100 };
@@ -187,10 +207,17 @@ int viewDsSvMon(NodeMon* A)
 	drawTable(i, 8, posCol,posRow);
 	return i - 1;
 }
+
 int viewDsKi(NodeNamHoc* A)
 {
 	system("cls");
-	cout << "-----------------------------DANH SACH KI NAM HOC " << A->data.tg.ngay_bd.y << " - " << A->data.tg.ngay_bd.y+1 << "-----------------------------" << endl;
+	cout << "---------------------------------------------DANH SACH KI NAM HOC " << A->data.tg.ngay_bd.y << " - " << A->data.tg.ngay_bd.y+1 << "-------------------------------------------" << endl;
+	cout << endl;
+	if (A == NULL)
+	{
+		cout << "Hien chua cap nhat du lieu..."<<endl;
+		return 0;
+	}
 	string title[] = { "KI","THOI GIAN" };
 	int posRow = whereY();
 	int posCol[3] = { 0,5,35 };
@@ -212,10 +239,17 @@ int viewDsKi(NodeNamHoc* A)
 	drawTable(i+1, 2, posCol,posRow);
 	return i ;
 }
+
 int viewDsNam(ListNamHoc A)
 {
 	system("cls");
 	cout << "---------------------------------------DANH SACH NAM HOC----------------------------------" << endl;
+	cout << endl;
+	if (A.pHead == NULL)
+	{
+		cout << "Hien chua cap nhat du lieu..."<<endl;
+		return 0;
+	}
 	string title[] = { "STT","NAM HOC" };
 	int posRow = whereY();
 	int posCol[7] = { 0,6,25 };
@@ -239,11 +273,18 @@ int viewDsNam(ListNamHoc A)
 	drawTable(i , 2, posCol,posRow);
 	return i - 1;
 }
+
 int viewDsLop(NodeLop* head)
 {
 	system("cls");
 	system("color E4");
 	cout << "---------------------DANH SACH LOP HOC-----------------------" << endl;
+	cout << endl;
+	if (head == NULL)
+	{
+		cout << "Hien chua cap nhat du lieu..."<<endl;
+		return 0;
+	}
 	string title[] = { "STT","TEN LOP" };
 	int posRow = whereY();
 	int posCol[3] = { 0,6,16 };
@@ -267,11 +308,17 @@ int viewDsLop(NodeLop* head)
 	drawTable(i, 2, posCol,posRow);
 	return i - 1;
 }
+
 int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 {
 	system("cls");
 	cout << "-------------------------------------KET QUA HOC TAP - HOC KI "<<ki<<"----------------------------------" << endl;
 	cout << endl;
+	if (sv->headMon == NULL)
+	{
+		cout << "Hien chua cap nhat du lieu..."<<endl;
+		return 0;
+	}
 	NodeMon_Sv* p = sv->headMon[ki - 1];
 	string title[] = { "STT","ID MON","TEN MON","GK","CK","CONG","TONG KET" };
 	int posRow = whereY();
@@ -314,11 +361,13 @@ int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 	drawTable(i , 7, posCol,posRow);
 	return i - 1;
 }
+
 void viewInfoSv(Sv A)
 {
 	system("cls");
 	cout << endl;
 	cout << "----------------------------------------THONG TIN CA NHAN--------------------------------------" << endl;
+	cout << endl;
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posRow = whereY();
 	int posCol[8] = { 0,6,17,43,55,67,85,95 };
@@ -346,12 +395,19 @@ void viewInfoSv(Sv A)
 	drawTable(2, 7, posCol,posRow);
 	system("pause");
 }
+
 int viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
 {
-	cout << "---------------------------------------KET QUA DANG KI HOC PHAN KI"<<ki<<"-------------------------------------" << endl;
+	cout << "------------------------------------------------KET QUA DANG KI HOC PHAN KI "<<ki<<"----------------------------------------------" << endl;
+	cout << endl;
+	if (A == NULL)
+	{
+		cout << "Danh sach mon da dang ki trong..."<<endl;
+		return 0;
+	}
 	int posRow = whereY();
 	string title[] = { "STT","ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC" };
-	int posCol[8] = { 0,6,16,46,76,91,106,136 };
+	int posCol[8] = { 0,6,15,45,75,90,105,140 };
 	for (int j = 0; j < 7; j++)
 	{
 		gotoXY(posCol[j] + 2, posRow + 1);
@@ -382,6 +438,7 @@ int viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
 	drawTable(i , 7, posCol,posRow);
 	return i - 1;
 }
+
 int viewDiem_Lop(NodeLop* A,int ki)
 {
 	//TINH GPA
@@ -390,7 +447,11 @@ int viewDiem_Lop(NodeLop* A,int ki)
 	system("cls");
 	cout << "-------------------------------------KET QUA HOC TAP - LOP "<<A->lop.ten<<" - KI "<<ki<<"----------------------------------" << endl;
 	cout << endl;
-	//DIEM Cuoi ki all mon, GPA, GPA overall
+	if (A == NULL)
+	{
+		cout << "Hien chua cap nhat du lieu..."<<endl;
+		return 0;
+	}
 	string title[] = { "STT","MSSV","HO","TEN","ID MON","TK","ID MON","TK","ID MON","TK","ID MON","TK","ID MON","TK","GPA" };
 	int posRow = whereY();
 	int posCol[16] = { 0,6,17,43,55,65,70,80,85,95,100,110,115,125,130,140 };
@@ -441,6 +502,7 @@ int viewDiem_Lop(NodeLop* A,int ki)
 	gotoXY(0, posRow + i * 2 + 4);
 	return i - 1;
 }
+
 //TINH GPA
 bool tinhGPA_SvvaLop(NodeLop* t,int ki)
 {
@@ -481,6 +543,7 @@ bool tinhGPA_SvvaLop(NodeLop* t,int ki)
 	t->lop.GPA[ki - 1] = sumlop / dem;
 	return true;
 }
+
 //TTGV
 void viewInfoGV(Sv A)
 {
