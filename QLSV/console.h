@@ -54,7 +54,6 @@ int whereY();
 void resizeConsole(int width, int height);
 void DisableCtrButton(bool Max);
 void ShowScrollbar(BOOL Show);
-void DisableSelection();
 void DisableResizeWindow();
 void SetConsole();
 void TextColor (int color);

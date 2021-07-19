@@ -100,12 +100,6 @@ void ShowScrollbar(BOOL Show)
 	HWND hWnd = GetConsoleWindow();
 	ShowScrollBar(hWnd, SB_BOTH, Show);
 }
-void DisableSelection()
-{
-	HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
-
-	SetConsoleMode(hStdin, ~ENABLE_QUICK_EDIT_MODE);
-}
 void DisableResizeWindow()
 {
 	HWND hWnd = GetConsoleWindow();
@@ -115,7 +109,6 @@ void SetConsole()
 {
 	resizeConsole(1920, 1080);
 	DisableCtrButton(0);
-	//DisableSelection();
 	DisableResizeWindow();
 	ShowScrollbar(0);
 }

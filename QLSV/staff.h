@@ -45,7 +45,8 @@ NodeMon* mondangmo_nhaptay(HocKy* hk);
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);
 int InMenuCapNhat();
-
+int InMenuCapNhat2(); //muc 2 cua menu cap nhat chinh
+int InMenuCapNhat3(); //muc 3 cua menu cap nhat chinh
 //HIENTHI
 //neu chua co du lieu
 void hienthiNam(ListNamHoc l, int& lc);
