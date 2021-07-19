@@ -2,6 +2,7 @@
 #include"display.h"
 #include"courses.h"
 #include <conio.h>
+#include<string>
 
 int InMenuGv()
 {
@@ -961,7 +962,7 @@ void TaoMon(ListNamHoc& l, int nam)
 		if (head == NULL)
 		{
 			cout << "Loi: Khong mo duoc File.." << endl;
-			cout << endl << "Tao moi mon hoc that bai !" << endl;
+			cout << endl << "! TAO MOI MON HOC THAT BAI !" << endl;
 			system("pause");
 			return;
 		}
@@ -973,23 +974,22 @@ void TaoMon(ListNamHoc& l, int nam)
 	NodeMon* p = head;
 	while (p->pNext != NULL)
 		p = p->pNext;
+	NodeMon* temp = hk->headMon;
 	if (hk->headMon)
-	{
 		p->pNext = hk->headMon;
-		hk->headMon = head;
-	}
+	hk->headMon = head;
 	//ghi vao file hk htai moi nhat 
 	string fPath = to_string(nam) + "hk" + to_string(i) + ".txt";
 	fstream f (fPath, ios::app);
 	if (!f.is_open())
 	{
 		cout << "Loi: Khong mo duoc File.." << endl;
-		cout << endl << "Tao moi mon hoc that bai !" << endl;
+		cout << endl << "! TAO MOI MON HOC THAT BAI !" << endl;
 		system("pause");
 		return;
 	}
 	p = head;
-	while (p != hk->headMon)
+	while (p != temp)
 	{
 		f << endl;
 		f << p->data.id << "," << p->data.tenMon << "," << p->data.tenGv << ",";
@@ -1000,7 +1000,8 @@ void TaoMon(ListNamHoc& l, int nam)
 		p = p->pNext;
 	}
 	f.close();
-	cout <<endl<< "Tao moi mon hoc thanh cong !" << endl;
+
+	cout <<endl<< "~ TAO MOI MON HOC THANH CONG ~" << endl;
 	cout << "Ban da co the mo dang ky ghi danh vao mon hoc nay!\n";
 };
 bool importFilehayNhapTay()
@@ -1063,6 +1064,7 @@ NodeMon* mondangmo_docfile(string file)////file nay chi co ds mon khong co tg bd
 }
 NodeMon* mondangmo_nhaptay(HocKy* hk)
 {
+	cout << "TAO MOI MON HOC" << endl << endl;
 	NodeMon* head = NULL;
 	cout << "Nhap so mon hoc" << endl;
 	int somon = 0;
@@ -1082,6 +1084,7 @@ NodeMon* mondangmo_nhaptay(HocKy* hk)
 	for (int i = 0; i < somon; i++)
 	{
 		NodeMon* n = new NodeMon;
+		cout << endl << "--Mon hoc " << i + 1 << endl;
 		NhapNodeMon(n);
 		if (checkTrungMon(hk, n))
 		{
@@ -1217,7 +1220,7 @@ int Chon(int maxChoice)
 			s += temp;
 			if (temp == 13)//enter
 			{
-				if (s != "")
+				if (s != "\r")
 				{
 					key = stoi(s);
 					if (key == 0 || key > maxChoice)
@@ -1226,8 +1229,8 @@ int Chon(int maxChoice)
 						return key;
 					x = 0;
 					y += 2;
-					s = "";
 				}
+				s = "";
 			}
 			else if (temp == 27)
 			{
@@ -1246,6 +1249,8 @@ int Chon(int maxChoice)
 				return -1;
 			else if (temp == 8)//xoa
 			{
+				s.pop_back();//bo dau backspace
+				s.pop_back();
 				if (x != 0)
 				{
 					x--;
@@ -1256,9 +1261,7 @@ int Chon(int maxChoice)
 			}
 			else if (temp < 48 || temp>57)
 			{
-				cout << "Khong hop le... Moi nhap lai !" << endl;
-				y += 2;
-				x = 0;
+				
 			}
 			else
 			{
