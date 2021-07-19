@@ -39,6 +39,8 @@ void XulyThu(int lc, BuoiHoc& bh);
 void NhapTgMon(NodeMon* n);
 //bool checkTrungMon(HocKy* hk, NodeMon* n);
 void TaoMon(ListNamHoc& l, int nam);
+NodeMon* mondangmo_docfile(string file);
+NodeMon* mondangmo_nhaptay(HocKy* hk);
 
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);

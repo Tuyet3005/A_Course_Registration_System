@@ -1,4 +1,5 @@
 #include"begin.h"
+
 int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 {
 	system("cls");
@@ -12,6 +13,7 @@ int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 	cout << "\t \t \t \t \t 5. Thoat\n";
 	return 5;//tra ve maxSelect
 }
+
 bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la maTk  0:Giao vu, 1: Sinh vien
 {
 	char lenh;
@@ -22,7 +24,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 		if (lc == 0)
 			GiaoVu(l);
 		else
-			SinhVien(l);
+			SinhVien(l,stoi(tk));
 		break;
 	}
 	case 2:
@@ -65,6 +67,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 	return false;
 }
 
+
 //NAM HOC 
 void TaiData_Nam(ListNamHoc& l)
 {
@@ -91,6 +94,7 @@ void TaiData_Nam(ListNamHoc& l)
 	f.close();
 }
 
+
 //LOP HOC
 NodeSv_Lop* TaoNodeSv(Sv sv)
 {
@@ -99,6 +103,7 @@ NodeSv_Lop* TaoNodeSv(Sv sv)
 	n->pNext = NULL;
 	return n;
 }
+
 NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 {
 	NodeSv_Lop* headSvLop = NULL;
@@ -139,6 +144,7 @@ NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 	f.close();
 	return headSvLop;
 }
+
 void TaiData_Lop(NodeNamHoc* n)
 {
 	fstream f;
@@ -191,6 +197,7 @@ void TaiData_Lop(NodeNamHoc* n)
 	}
 }
 
+
 //MON HOC 
 void ThemNodeMon(NodeMon*& A, NodeMon* T)//themdau
 {
@@ -202,6 +209,7 @@ void ThemNodeMon(NodeMon*& A, NodeMon* T)//themdau
 		A = T;
 	}
 }
+
 void TaiData_Mon(NodeNamHoc* n)
 {
 	fstream f;
@@ -264,6 +272,7 @@ void TaiData_Mon(NodeNamHoc* n)
 		f.close();
 	}
 }
+
 NodeLop* timNodeLop(NodeNamHoc* namhoc, int styear, string lop)
 {
 	NodeLop* n = namhoc->data.headLop[styear - 1];
@@ -273,8 +282,9 @@ NodeLop* timNodeLop(NodeNamHoc* namhoc, int styear, string lop)
 			return n;
 		n = n->pNext;
 	}
-	exit(1);
+	return NULL;
 }
+
 NodeSv_Lop* timNodeSv_Lop(NodeSv_Lop* head, int mssv)
 {
 	NodeSv_Lop* t = head;
@@ -285,6 +295,7 @@ NodeSv_Lop* timNodeSv_Lop(NodeSv_Lop* head, int mssv)
 	}
 	exit(1);
 }
+
 Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.txt len ->doc info sv
 {
 	string tenLop = timLop(id);
@@ -326,6 +337,7 @@ Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.
 	f.close();
 	return T;
 }
+
 void ThemNodeMon_Sv(NodeMon_Sv*& head, NodeMon* A, NodeSv_Mon* sv_mon)//them dau
 {
 	NodeMon_Sv* n = new NodeMon_Sv;
@@ -342,6 +354,7 @@ void ThemNodeMon_Sv(NodeMon_Sv*& head, NodeMon* A, NodeSv_Mon* sv_mon)//them dau
 	n->pNext = head;
 	head = n;
 }
+
 void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki)
 {
 	fstream f;
@@ -389,7 +402,7 @@ void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki)
 	}
 	f.close();
 }
-//
+
 string timLop(int id)//tra ve ten lop cua sv co id tuong ung 
 {
 	ifstream f;
@@ -413,6 +426,7 @@ string timLop(int id)//tra ve ten lop cua sv co id tuong ung
 	f.close();
 	return s;
 }
+
 
 //GIAO VU
 Sv taiTT_GV(string id)

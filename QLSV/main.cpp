@@ -1,4 +1,4 @@
-#include"begin.h"
+//#include"begin.h"
 #include"DKKH.h"
 int main()
 {
@@ -21,6 +21,7 @@ int main()
 		} 		while (!Thoat);
 		//
 	} 	while (true);
+
 
 	return 0;
 }
