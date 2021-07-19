@@ -170,11 +170,10 @@ void TaiData_Lop(NodeNamHoc* n)
 					f << s;
 					if (!f.good())
 					{
-						cout << "loi sao chep lop nam cu sang !\n";
+						cout << "Loi sao chep lop nam cu sang !\n";
 						system("pause");
 					}
 				}
-				
 				f1.close();//dong file nam cu
 			}
 			f.close();//dong lai file de khoi phuc lai con tro file 

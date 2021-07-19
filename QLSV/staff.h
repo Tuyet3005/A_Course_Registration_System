@@ -37,10 +37,10 @@ void HienLuaChonThu(int buoi);
 void HienLuaChonGio();
 void XulyThu(int lc, BuoiHoc& bh);
 void NhapTgMon(NodeMon* n);
-//bool checkTrungMon(HocKy* hk, NodeMon* n);
+bool checkTrungMon(HocKy* hk, NodeMon* n);
 void TaoMon(ListNamHoc& l, int nam);
-NodeMon* mondangmo_docfile(string file);
-NodeMon* mondangmo_nhaptay(HocKy* hk);
+void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk);
+void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk);
 
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);

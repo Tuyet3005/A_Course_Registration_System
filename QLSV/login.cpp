@@ -27,12 +27,12 @@ void LogIn(string& tk, string& mk, short& lc)
 	cout << "Nhap 1 neu ban la hoc sinh, 0 neu ban la giao vu" << endl;
 	do
 	{
-		cout << "Moi nhap: ";
+		cout << "Moi nhap (0-1): ";
 		cin >> lc;
 		if (cin.fail())
 		{
 			cin.clear();
-			cin.ignore();
+			cin.ignore(100, '\n');
 			lc = 2;
 		}
 	} 	while (lc < 0 || lc>1);

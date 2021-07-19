@@ -1,4 +1,5 @@
 01072021,31082021,
-NMCNTT,Nhap Mon Cong Nghe Thong Tin,Huynh Thuy Bao Tran,4,Thu Hai,S1,Thu Nam,S2,50,
-thTRR,Thuc hanh Toan Roi Rac,Tran Dung,2,Thu Hai,S4,Thu Sau,S2,15,
-TTHCM,Tu Tuong HCM,Le Trung,1,Thu Hai,S1,Thu Ba,S2,40,
+VTP,Vi tich phan 1B,LadyGaGa,2,Thu Hai,S1,Thu Ba,S2,
+TD2,The duc 2,Vu,3,Thu Sau,S2,Thu Ba,S4,
+TD1,The duc 1,Van,2,Thu Hai,S3,Thu Tu,S1,
+TD3,The duc 3,Thanh,3,Thu Ba,S2,Thu Ba,S1,

@@ -1,4 +1,3 @@
-//#include"begin.h"
 #include"DKKH.h"
 int main()
 {
@@ -6,7 +5,6 @@ int main()
 	string tk, mk;
 	short lc = 1;//Ma tk:  0: giao vu ; 1: sinh vien
 	ListNamHoc listNam;
-	//ds tam luu dia chi nodeSv lop
 	listNam.pHead = listNam.pTail = NULL;
 	//tai du lieu list nam hoc tu file len he thong
 	TaiData_Nam(listNam);
@@ -21,7 +19,5 @@ int main()
 		} 		while (!Thoat);
 		//
 	} 	while (true);
-
-
 	return 0;
 }
