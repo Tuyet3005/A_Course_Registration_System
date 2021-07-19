@@ -1098,11 +1098,30 @@ int InMenuCapNhat()//dung cho ca menu Cap nhat
 {
 	system("cls");
 	cout << "----MENU CAP NHAT----\n";
-	cout << "1. Mon hoc\n";
-	cout << "2. Diem sinh vien\n";
+	cout << "1. Them sinh vien nam nhat\n";
+	cout << "2. Mon hoc\n"; // xoa, sua thong tin 
+	cout << "3. Diem sinh vien\n";//xuat file csv dssv mon, nhap diem, sua diem 
+	cout << "4. Thoat\n";
+	return 4;
+}
+int InMenuCapNhat2()
+{
+	system("cls");
+	cout << "----CAP NHAT MON HOC----\n";
+	cout << "1. Sua thong tin mon hoc\n";
+	cout << "2. Xoa mon hoc\n";
 	cout << "3. Quay ve\n";
 	cout << "4. Thoat\n";
 	return 4;
+}
+int InMenuCapNhat3()
+{
+	system("cls");
+	cout << "----CAP NHAT DIEM SINH VIEN----\n";
+	cout << "1. Xuat file CSV gui giao vien nhap diem\n";
+	cout << "2. Nhap diem len he thong\n";
+	cout << "3. Chinh sua diem\n";
+	return 3;
 }
 bool XlCapNhat(int chon, ListNamHoc& l)
 {
@@ -1134,6 +1153,16 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	}
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
+////
+//void XuatFileCsv()
+//{
+//	//file dssv mon
+//	//copy file he thong vao filePath giao vu nhap
+//	char* Path = new char[100]
+//	cout << "------XUAT FILE CSV DSSV MON-------\n";
+//	cout << "Nhap vao duong dan den vi tri ban muon luu file:\n";
+//
+//}
 
 //HIEN THI
 void hienthiNam(ListNamHoc l, int& lc)
