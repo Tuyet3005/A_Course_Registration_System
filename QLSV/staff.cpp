@@ -941,6 +941,8 @@ void TaoMon(ListNamHoc& l, int nam)
 	NodeMon* head;
 	if (importFilehayNhapTay())
 	{
+		system("cls");
+		cout << "TAO MOI MON HOC\n\n";
 		string file;
 		cout << "File text luu cac mon theo dong co cau truc nhu sau: " << endl;
 		cout << "id mon,ten mon,ten giao vien,so tin chi,ngay hoc 1,buoi hoc 1,ngay hoc 2,buoi hoc 2," << endl << endl;
@@ -981,6 +983,7 @@ void TaoMon(ListNamHoc& l, int nam)
 	//ghi vao file hk htai moi nhat 
 	string fPath = to_string(nam) + "hk" + to_string(i) + ".txt";
 	fstream f (fPath, ios::app);
+	ofstream ff;
 	if (!f.is_open())
 	{
 		cout << "Loi: Khong mo duoc File.." << endl;
@@ -991,6 +994,8 @@ void TaoMon(ListNamHoc& l, int nam)
 	p = head;
 	while (p != temp)
 	{
+		ff.open(to_string(nam) + "hk" + to_string(i) + p->data.id + ".txt");
+		ff.close();
 		f << endl;
 		f << p->data.id << "," << p->data.tenMon << "," << p->data.tenGv << ",";
 		f << p->data.so_tc << ",";
@@ -1000,7 +1005,7 @@ void TaoMon(ListNamHoc& l, int nam)
 		p = p->pNext;
 	}
 	f.close();
-
+	
 	cout <<endl<< "~ TAO MOI MON HOC THANH CONG ~" << endl;
 	cout << "Ban da co the mo dang ky ghi danh vao mon hoc nay!\n";
 };
@@ -1064,6 +1069,7 @@ NodeMon* mondangmo_docfile(string file)////file nay chi co ds mon khong co tg bd
 }
 NodeMon* mondangmo_nhaptay(HocKy* hk)
 {
+	system("cls");
 	cout << "TAO MOI MON HOC" << endl << endl;
 	NodeMon* head = NULL;
 	cout << "Nhap so mon hoc" << endl;
