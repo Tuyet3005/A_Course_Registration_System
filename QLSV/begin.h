@@ -6,6 +6,7 @@
 #include"display.h"
 #include"console.h"
 #include"realtime.h"
+#include"DKKH.h"
 int InMenuBatDau(int ma_tk);
 bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l);
 // TAI DU LIEU TU FILE LEN HE THONG
@@ -25,3 +26,4 @@ string timLop(int id);
 void ThemNodeMon_Sv(NodeMon_Sv*& head, NodeMon* A, NodeSv_Mon* sv_mon);
 void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki);
 void TaiData_Mon(NodeNamHoc* n);
+Sv taiTT_GV(string id);

@@ -1,11 +1,10 @@
-#include"begin.h"
 #include"DKKH.h"
 int main()
 {
+	SetConsole();
 	string tk, mk;
 	short lc = 1;//Ma tk:  0: giao vu ; 1: sinh vien
 	ListNamHoc listNam;
-	//ds tam luu dia chi nodeSv lop
 	listNam.pHead = listNam.pTail = NULL;
 	//tai du lieu list nam hoc tu file len he thong
 	TaiData_Nam(listNam);
@@ -20,31 +19,5 @@ int main()
 		} 		while (!Thoat);
 		//
 	} 	while (true);
-	return 0;
-	/**/
-	//taoDKKH_Gv(2019);
-
-
-
-
-	//fstream f;
-	//f.open("2019n1.txt");
-	//string s;
-	//NodeLop* headSvLop = NULL;
-
-	//while (!f.eof())
-	//{
-	//	//f.clear();
-	//	getline(f, s, ',');
-	//	if (s != "")
-	//	{
-	//		NodeLop* node = new NodeLop;
-	//		node->pNext = NULL;
-	//		node->lop.ten = s;
-	//		node->lop.headSvLop = TaiData_SvLop(node);
-	//		ThemNodeLopHoc(headSvLop, node);
-	//	}
-	//}
-	//viewDsLop(headSvLop);
 	return 0;
 }

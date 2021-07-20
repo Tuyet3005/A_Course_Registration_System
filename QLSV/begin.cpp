@@ -1,4 +1,5 @@
 #include"begin.h"
+
 int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 {
 	system("cls");
@@ -12,6 +13,7 @@ int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 	cout << "\t \t \t \t \t 5. Thoat\n";
 	return 5;//tra ve maxSelect
 }
+
 bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la maTk  0:Giao vu, 1: Sinh vien
 {
 	char lenh;
@@ -22,7 +24,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 		if (lc == 0)
 			GiaoVu(l);
 		else
-			SinhVien(l);
+			SinhVien(l,stoi(tk));
 		break;
 	}
 	case 2:
@@ -35,8 +37,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 		}
 		if (lc == 0)
 		{
-			cout << "BO SUNG THONG TIN CHO GIAO VU !\n";
-			system("pause");
+			viewInfoGV(taiTT_GV(tk));
 			break;
 		}
 	}
@@ -66,6 +67,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 	return false;
 }
 
+
 //NAM HOC 
 void TaiData_Nam(ListNamHoc& l)
 {
@@ -92,6 +94,7 @@ void TaiData_Nam(ListNamHoc& l)
 	f.close();
 }
 
+
 //LOP HOC
 NodeSv_Lop* TaoNodeSv(Sv sv)
 {
@@ -100,6 +103,7 @@ NodeSv_Lop* TaoNodeSv(Sv sv)
 	n->pNext = NULL;
 	return n;
 }
+
 NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 {
 	NodeSv_Lop* headSvLop = NULL;
@@ -132,41 +136,52 @@ NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 			f.clear();
 			getline(f, s, ',');
 			T.cmnd = atoi(s.c_str());
-			ThemNodeSvLop(headSvLop, TaoNodeSv(T));
+			NodeSv_Lop* temp = TaoNodeSv(T);
+			ThemNodeSvLop(headSvLop, temp);
+			temp->headMon[0] = temp->headMon[1] = temp->headMon[2] = NULL;
 		}
 	}
 	f.close();
 	return headSvLop;
 }
+
 void TaiData_Lop(NodeNamHoc* n)
 {
 	fstream f;
 	string s;
 	for (int i = 1; i <= 4; i++)
 	{
-		//mo file ds lop, khoi tao list lop cho sv n1234
-		f.open(to_string(n->data.tg.ngay_bd.y) + 'n'+to_string(i)+".txt");
+		//mo file ds lop
+		f.open(to_string(n->data.tg.ngay_bd.y) + 'n'+to_string(i)+".txt", ios::in | ios::app);
 		if(i!=1)
 		{
+			//neu file nam nay chua dc tao -> sao chep data file nam ngoai sang 
+			//vd: 2020n2.txt chua tao -> sao chep 2019n1.txt sang 
 			getline(f, s);
 			if (s == "")//file trong thi sao chep du lieu nam hoc cu
 			{
+				f.close();
+				f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt", ios::app);
 				fstream f1;
 				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + 'n'+to_string(i-1)+".txt");
 				while (!f1.eof())
 				{
 					getline(f1, s);
-					f << s /*<< "/n"*/;
+					f << s;
+					if (!f.good())
+					{
+						cout << "Loi sao chep lop nam cu sang !\n";
+						system("pause");
+					}
 				}
 				f1.close();//dong file nam cu
 			}
 			f.close();//dong lai file de khoi phuc lai con tro file 
-			f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt");//mo file moi o che do doc de doc lai tu dau file
+			f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt", ios::in);//mo file moi o che do doc de doc lai tu dau file
 		}
 		//doc file, tao node, them node
 		while (!f.eof())
 		{
-			//f.clear();
 			getline(f, s, ',');
 			if (s != "")
 			{
@@ -181,6 +196,7 @@ void TaiData_Lop(NodeNamHoc* n)
 	}
 }
 
+
 //MON HOC 
 void ThemNodeMon(NodeMon*& A, NodeMon* T)//themdau
 {
@@ -192,6 +208,7 @@ void ThemNodeMon(NodeMon*& A, NodeMon* T)//themdau
 		A = T;
 	}
 }
+
 void TaiData_Mon(NodeNamHoc* n)
 {
 	fstream f;
@@ -242,6 +259,8 @@ void TaiData_Mon(NodeNamHoc* n)
 			getline(f, t->data.bh1.buoi, ',');
 			getline(f, t->data.bh2.thu, ',');
 			getline(f, t->data.bh2.buoi, ',');
+			getline(f, s, ',');
+			t->data.MaxSv = stoi(s);
 			getline(f, s);//xoa "\n" ra khoi f
 			t->pNext = NULL;
 			t->headSvMon = NULL;
@@ -252,6 +271,7 @@ void TaiData_Mon(NodeNamHoc* n)
 		f.close();
 	}
 }
+
 NodeLop* timNodeLop(NodeNamHoc* namhoc, int styear, string lop)
 {
 	NodeLop* n = namhoc->data.headLop[styear - 1];
@@ -261,8 +281,9 @@ NodeLop* timNodeLop(NodeNamHoc* namhoc, int styear, string lop)
 			return n;
 		n = n->pNext;
 	}
-	exit(1);
+	return NULL;
 }
+
 NodeSv_Lop* timNodeSv_Lop(NodeSv_Lop* head, int mssv)
 {
 	NodeSv_Lop* t = head;
@@ -273,6 +294,7 @@ NodeSv_Lop* timNodeSv_Lop(NodeSv_Lop* head, int mssv)
 	}
 	exit(1);
 }
+
 Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.txt len ->doc info sv
 {
 	string tenLop = timLop(id);
@@ -314,6 +336,7 @@ Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.
 	f.close();
 	return T;
 }
+
 void ThemNodeMon_Sv(NodeMon_Sv*& head, NodeMon* A, NodeSv_Mon* sv_mon)//them dau
 {
 	NodeMon_Sv* n = new NodeMon_Sv;
@@ -321,9 +344,16 @@ void ThemNodeMon_Sv(NodeMon_Sv*& head, NodeMon* A, NodeSv_Mon* sv_mon)//them dau
 	//tao link tu <nodeMon cua 1 sv: (node n)> den <nodeSv cua chinh sv do trong mon A: sv_mon>
 	n->svMon = sv_mon;
 	//them <node mon vua tao cua 1 sv> vao dau <ds mon cua sv do>
+	if (head == NULL)
+	{
+		head = n;
+		head->pNext = NULL;
+		return;
+	}
 	n->pNext = head;
 	head = n;
 }
+
 void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki)
 {
 	fstream f;
@@ -371,13 +401,12 @@ void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki)
 	}
 	f.close();
 }
-//
+
 string timLop(int id)//tra ve ten lop cua sv co id tuong ung 
 {
 	ifstream f;
 	f.open("SinhVien.txt");
 	string s;
-	bool flag = false;
 	while (!f.eof())
 	{
 		f.clear();
@@ -395,4 +424,44 @@ string timLop(int id)//tra ve ten lop cua sv co id tuong ung
 	}
 	f.close();
 	return s;
+}
+
+
+//GIAO VU
+Sv taiTT_GV(string id)
+{
+	ifstream f;
+	f.open("GiaoVu.txt");
+	string s;
+	Sv gv;
+	while (!f.eof())
+	{
+		f.clear();
+		getline(f, s, ',');
+		if (s == id)
+		{
+			f.clear();
+			getline(f, s, ',');//pass
+			f.clear();
+			getline(f, gv.ten, ',');
+			f.clear();
+			getline(f, gv.ho, ',');
+			f.clear();
+			getline(f, gv.gioi, ',');
+			f.clear();
+			getline(f, s, ',');
+			gv.ngayS.d = stoi(s);
+			gv.ngayS.y = gv.ngayS.d % 10000;
+			gv.ngayS.m = (gv.ngayS.d / 10000) % 100;
+			gv.ngayS.d = gv.ngayS.d / 1000000;
+			f.clear();
+			getline(f, s, ',');
+			gv.cmnd = stoi(s);
+			break;
+		}
+		f.clear();
+		getline(f, s);
+	}
+	f.close();
+	return gv;
 }

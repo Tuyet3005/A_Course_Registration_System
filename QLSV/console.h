@@ -51,6 +51,11 @@ int whereX();
 //screen: get [y]
 int whereY();
 
+void resizeConsole(int width, int height);
+void DisableCtrButton(bool Max);
+void ShowScrollbar(BOOL Show);
+void DisableResizeWindow();
+void SetConsole();
 void TextColor (int color);
 //end----------------------Screen----------------------end
 

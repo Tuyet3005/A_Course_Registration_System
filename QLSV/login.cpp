@@ -19,6 +19,7 @@ bool checkAccount(string tk, string mk, short lc)
 	f.close();
 	return false;
 }
+
 void LogIn(string& tk, string& mk, short& lc)
 {
 	system("cls");
@@ -26,16 +27,17 @@ void LogIn(string& tk, string& mk, short& lc)
 	cout << "Nhap 1 neu ban la hoc sinh, 0 neu ban la giao vu" << endl;
 	do
 	{
-		cout << "Moi nhap: ";
+		cout << "Moi nhap (0-1): ";
 		cin >> lc;
 		if (cin.fail())
 		{
 			cin.clear();
-			cin.ignore();
+			cin.ignore(100, '\n');
 			lc = 2;
 		}
 	} 	while (lc < 0 || lc>1);
 	cout << endl;
+	cin.clear();
 	cin.ignore();
 	char dem = 0;
 	while (dem < 5)
@@ -44,8 +46,7 @@ void LogIn(string& tk, string& mk, short& lc)
 		cin >> tk;
 		cin.ignore();//xoa \n
 		cout << "Mat khau: ";
-		cin.clear();
-		getline(cin, mk);
+		cin >> mk;
 		if (checkAccount(tk, mk, lc)) break;
 		else if (dem < 4) cout << "Ban da nhap sai... Moi nhap lai" << endl;
 		dem++;
@@ -61,6 +62,7 @@ void LogIn(string& tk, string& mk, short& lc)
 	else cout << "DANG NHAP THANH CONG" << endl;
 	system("pause");
 }
+
 void changePass(short lc, string tk, string& mk)
 {
 	string oldpass, newpass;
@@ -93,7 +95,6 @@ void changePass(short lc, string tk, string& mk)
 		if (pos != string::npos)
 			s.replace(pos, mk.length(), newpass);
 		t << s << endl;
-		pos = -1;
 	}
 	mk = newpass;
 	t.close();
