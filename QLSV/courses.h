@@ -56,9 +56,8 @@ NodeSv_Mon* ChonDiemSv(NodeMon* node_mon, int mssv, string lop)
 	return NULL;
 }
 
-NodeSv_Mon* NhapDiemSv(ListNamHoc l)
+NodeSv_Mon* NhapDiemSv(NodeMon* node_mon)
 {
-	NodeMon* node_mon = NhapMonHoc(l);
 	int mssv;
 	string lop;
 	NodeSv_Mon* diem_sv;
@@ -116,7 +115,8 @@ void LuuMonHoc(string filename, NodeMon* mon)
 		{
 			file << mon->data.id << ',' << mon->data.tenMon << ',' << mon->data.tenGv << ',' << mon->data.so_tc << ','
 				<< mon->data.bh1.thu << ',' << mon->data.bh1.buoi << ','
-				<< mon->data.bh2.thu << ',' << mon->data.bh2.buoi << ',';
+				<< mon->data.bh2.thu << ',' << mon->data.bh2.buoi << ','
+				<< mon->data.MaxSv << ',';
 			cout << "Luu mon hoc thanh cong!!!\n";
 			saved = true;
 		}
@@ -219,9 +219,20 @@ void CapNhatMonHoc(ListNamHoc& l)
 	LuuMonHoc(l, node_mon);
 }
 
+float NhapDiem(float diem=-1)
+{
+	while (diem < 0 || diem > 10)
+	{
+		cout << "0 <= diem <= 10. Nhap diem: ";
+		cin >> diem;
+	}
+	return diem;
+}
+
 void CapNhatDiemSv(ListNamHoc& l)
 {
-	NodeSv_Mon* diem_sv = NhapDiemSv(l);
+	NodeMon* node_mon = NhapMonHoc(l);
+	NodeSv_Mon* diem_sv = NhapDiemSv(node_mon);
 	Diem& diem = diem_sv->diem;
 	string input;
 
@@ -229,7 +240,7 @@ void CapNhatDiemSv(ListNamHoc& l)
 	getline(cin, input);
 	try
 	{
-		diem.gk = stof(input);
+		diem.gk = NhapDiem(stof(input));
 	}
 	catch (invalid_argument) {}
 
@@ -237,7 +248,7 @@ void CapNhatDiemSv(ListNamHoc& l)
 	getline(cin, input);
 	try
 	{
-		diem.ck = stof(input);
+		diem.ck = NhapDiem(stof(input));
 	}
 	catch (invalid_argument) {}
 
@@ -245,9 +256,10 @@ void CapNhatDiemSv(ListNamHoc& l)
 	getline(cin, input);
 	try
 	{
-		diem.cong = stof(input);
+		diem.cong = NhapDiem(stof(input));
 	}
 	catch (invalid_argument) {}
 
 	diem.tongket = min((diem.gk + diem.ck * 2.0) / 3 + diem.cong / 10, 10.0);
+	LuuMonHoc(l, node_mon);
 }
