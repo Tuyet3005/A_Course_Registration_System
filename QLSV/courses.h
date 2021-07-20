@@ -90,7 +90,7 @@ string NextLine(string& data)
 }
 
 // Luu mon hoc vao file tuong ung
-void LuuMonHoc(string filename, NodeMon* mon)
+void LuuMonHoc(string filename, NodeMon* mon, bool remove)
 {
 	fstream file(filename, ios::in);
 	string data, line;
@@ -104,7 +104,7 @@ void LuuMonHoc(string filename, NodeMon* mon)
 
 	file.open(filename, ios::out);
 	file << NextLine(data);
-	bool saved = false;
+	bool success = false;
 
 	while (!data.empty())
 	{
@@ -113,25 +113,33 @@ void LuuMonHoc(string filename, NodeMon* mon)
 
 		if (line.find(mon->data.id + ",") == 0)
 		{
-			file << mon->data.id << ',' << mon->data.tenMon << ',' << mon->data.tenGv << ',' << mon->data.so_tc << ','
-				<< mon->data.bh1.thu << ',' << mon->data.bh1.buoi << ','
-				<< mon->data.bh2.thu << ',' << mon->data.bh2.buoi << ','
-				<< mon->data.MaxSv << ',';
-			cout << "Luu mon hoc thanh cong!!!\n";
-			saved = true;
+			if (remove)
+			{
+				cout << "Xoa mon hoc thanh cong!!!\n";
+				success = true;
+			}
+			else
+			{
+				file << mon->data.id << ',' << mon->data.tenMon << ',' << mon->data.tenGv << ',' << mon->data.so_tc << ','
+					<< mon->data.bh1.thu << ',' << mon->data.bh1.buoi << ','
+					<< mon->data.bh2.thu << ',' << mon->data.bh2.buoi << ','
+					<< mon->data.MaxSv << ',';
+				cout << "Luu mon hoc thanh cong!!!\n";
+				success = true;
+			}
 		}
 		else
 		{
 			file << line;
 		}
 	}
-	if (!saved)
+	if (!success)
 		cout << "Khong the tim thay mon hoc " << mon->data.id << " - " << mon->data.tenMon << "!!!\n";
 	file.close();
 }
 
 // Tim va luu vao file tuong ung
-void LuuMonHoc(ListNamHoc& l, NodeMon* node_mon)
+void LuuMonHoc(ListNamHoc& l, NodeMon* node_mon, bool remove=false)
 {
 	for (NodeNamHoc* nam = l.pHead; nam != NULL; nam = nam->pNext)
 	{
@@ -142,7 +150,7 @@ void LuuMonHoc(ListNamHoc& l, NodeMon* node_mon)
 			{
 				if (mon == node_mon)
 				{
-					LuuMonHoc(to_string(nam->data.tg.ngay_bd.y) + "hk" + to_string(stt_hoc_ky + 1) + ".txt", node_mon);
+					LuuMonHoc(to_string(nam->data.tg.ngay_bd.y) + "hk" + to_string(stt_hoc_ky + 1) + ".txt", node_mon, remove);
 				}
 			}
 		}
@@ -217,6 +225,12 @@ void CapNhatMonHoc(ListNamHoc& l)
 	}
 
 	LuuMonHoc(l, node_mon);
+}
+
+void XoaMonHoc(ListNamHoc& l)
+{
+	NodeMon* node_mon = NhapMonHoc(l);
+	LuuMonHoc(l, node_mon, true);
 }
 
 float NhapDiem(float diem=-1)
