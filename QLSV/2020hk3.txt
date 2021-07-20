@@ -1,1 +1,4 @@
 01072021,31082021,
+TD1_de,The duc 1,Thay de thoi,2,Thu Hai,S2,Thu Ba,S3,20,
+KTLT,Ky thuat lap trinh,Nguyen Le Hoang Dung,4,Thu Sau,S3,Thu Sau,S4,25,
+TD1,The duc 1,Duong Van Nam,2,Thu Nam,S1,Thu Nam,S2,20,

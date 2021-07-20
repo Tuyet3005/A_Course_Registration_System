@@ -1007,10 +1007,10 @@ bool importFilehayNhapTay()
 		{
 			cin.ignore();//xoa \n 
 			cout << "File chua thong tin cac mon hoc la file text (.txt) va thong tin moi mon duoc ghi rieng tren mot dong theo cau truc nhu sau:\n";
-			cout << "id mon,ten mon,ten giao vien,so tin chi,ngay hoc 1,buoi hoc 1,ngay hoc 2,buoi hoc 2,\n\n";
+			cout << "id mon,ten mon,ten giao vien,so tin chi,ngay hoc 1,buoi hoc 1,ngay hoc 2,buoi hoc 2,si so toi da,\n\n";
 			Sleep(100);
 			cout << "Chu y khong nen co khoang cach sau cac dau phay!!!\n";
-			cout << "Vi du: KTLT,Ky thuat lap trinh,Nguyen Le Hoang Dung,4,Thu Sau,S3,Thu Sau,S4,\n\n";
+			cout << "Vi du: KTLT,Ky thuat lap trinh,Nguyen Le Hoang Dung,4,Thu Sau,S3,Thu Sau,S4,50,\n\n";
 			Sleep(200);
 			cout << "HAY CHAC CHAN FILE DA DUOC TAO theo dung cau truc de tien hanh ghi thong tin tu file len he thong!\n";
 			system("pause");
@@ -1033,7 +1033,7 @@ void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk)//file nay ch
 		getline(f, s, ',');
 		if (s == "" || s == "\n")
 		{
-			cout << "File trong!!!\n";
+			cout << "Da den cuoi file!!!\n";
 			return;
 		}
 		NodeMon* n = new NodeMon;
@@ -1055,6 +1055,7 @@ void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk)//file nay ch
 				throw "Loi lay du lieu tu file!!!\n";
 			}
 			getline(f, s);//xoa "\n" ra khoi f
+			f.clear();
 		}
 		catch (const char* error)
 		{
@@ -1079,10 +1080,10 @@ void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk)//file nay ch
 		f << n->data.so_tc << ",";
 		f << n->data.bh1.thu << "," << n->data.bh1.buoi << ",";
 		f << n->data.bh2.thu << "," << n->data.bh2.buoi << ",";
-		f << n->data.MaxSv;
+		f << n->data.MaxSv<<",";
 		if (f.good())
 		{
-			cout << "\nTao moi mon hoc thanh cong!\n";
+			cout << "\nTao moi mon hoc "<<n->data.id<<" vua nhap thanh cong!\n";
 		}
 		f.close();
 		f.open(to_string(nam) + "hk" + to_string(stt_hk) + n->data.id + ".txt", ios::out);
@@ -1129,6 +1130,7 @@ void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk)
 		f << n->data.so_tc << ",";
 		f << n->data.bh1.thu << "," << n->data.bh1.buoi << ",";
 		f << n->data.bh2.thu << "," << n->data.bh2.buoi << ",";
+		f << n->data.MaxSv << ",";
 		if (f.good())
 		{
 			cout << "Tao moi mon hoc thanh cong!\n";
@@ -1221,25 +1223,39 @@ void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai
 	string Path;
 	system("cls");
 	cout << "------XUAT CAC FILE CSV DSSV TUNG MON-------\n";
+	if (hk->headMon == NULL)
+	{
+		cout << "Hoc ky nay chua co mon hoc nao dang mo!!!\n";
+		return;
+	}
 	cout << "Nhap duong dan den vi tri ban muon luu cac file danh sach sinh vien :\n";
 	getline(cin, Path);
+	cout << endl;
 	//Duyet cac node mon trong hk 
 	int nam = nodeNam->data.tg.ngay_bd.y;
 	NodeMon* temp = hk->headMon;
 	while (temp)
 	{
-		//mo file dssv mon de sao chep data 
+		//mo file dssv mon
 		ifstream f(to_string(nam) + "hk" + to_string(stt_hk) + temp->data.id + ".txt");
 		if (!f.is_open())
 		{
+			cin.ignore(100, '\n');
 			cout << "Loi!!! Khong tim thay file chua danh sach sinh vien cua mon " << temp->data.id << "!!!\n";
 			cout << "Tiep tuc voi cac mon khac? Nhap Y/N: ";
 			char lenh;
 			cin >> lenh;
+			cin.ignore(100, '\n');
 			if (lenh != 'y' && lenh != 'Y')
 			{
 				cout << "\nXuat file that bai!\n";
 				return;
+			}
+			else
+			{
+				temp = temp->pNext;
+				f.close();
+				continue;
 			}
 		}
 		string s;
@@ -1248,73 +1264,46 @@ void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai
 		getline(f, s, '\n');
 		if (s != "")
 		{
-			do
+			ofs.open(Path + "/" + to_string(nam) + "hk" + to_string(stt_hk) + temp->data.id + ".txt");
+			if (!ofs.is_open())
 			{
-				Path += "/" + to_string(nam) + "hk" + to_string(stt_hk) + temp->data.id + ".txt";
-				ofs.open(Path);
-				if (ofs.is_open())
-				{
-					ofs.close();
-					break;
-				}
-				else
-				{
-					cout << "Loi: Khong the tao file theo duong dan ban vua nhap!!!\n\n";
-					cout << "Ban co muon nhap lai duong dan khac? Nhap Y/N: ";
-					char lenh;
-					cin >> lenh;
-					cin.ignore(100, '\n');
-					if (lenh != 'y' && lenh != 'Y')
-					{
-						cin.clear();
-						cout << "Xuat cac file CSV that bai!!!\n";
-						return;
-					}
-					else
-					{
-						system("cls");
-						cout << "------XUAT CAC FILE CSV DSSV TUNG MON-------\n";
-						cout << "Nhap duong dan den vi tri ban muon luu cac file danh sach sinh vien :\n";
-						getline(cin, Path);
-				}
+				ofs.close();
+				cout << "Loi: Khong the tao file dssv mon " << temp->data.id << " theo duong dan ban vua nhap!!!\n\n";
+				f.close();
+				cout << "Xuat cac file CSV that bai!!!\n";
+				return;
 			}
-			} 	
-			//
-			while (true);
 		}
 		else
 		{
 			cout << "Chua co du lieu ve danh sach sinh vien cua mon hoc nay!!!\n";
 			cout << "Xuat file CSV danh sach sinh vien cua mon " << temp->data.id << " that bai!!!\n";		
-			return;
+			temp = temp->pNext;
+			f.close();
+			system("pause");
+			continue;//di tiep den mon hoc khac 
 		}
 		f.close();
-		//mo file lai de khoi phuc con tro trong file text
+		//BAT DAU SAO CHEP FILE GOC
 		f.open(to_string(nam) + "hk" + to_string(stt_hk) + temp->data.id + ".txt");
 		//lay du lieu tu file cho den het file 
+		getline(f, s);//copy dong dau trong file goc vao s
 		while (true)
 		{
-			getline(f, s, '\n');
-			ofs << s;
-			//ktra neu nhu dong tiep theo co data thi \n => ghi data vao file tiep
-			f.clear();
-			getline(f, s, '\n');
-			if (s != "")
-			{
-				ofs << '\n';
+			if(s!="")
 				ofs << s;
-				f.clear();
-			}
+			f.clear();
+			getline(f, s);//copy dong tiep theo trong file goc vao s
+			//ktra neu nhu dong tiep theo co data thi \n => ghi data vao file o vong lap tiep theo
 			//nguoc lai thi file trong => dung lai
+			if (s != "")
+				ofs << "\n";
 			else
 				break;
 		}	
-		if (f.good())
-		{
-			cout << "\nXuat file CSV mon " << temp->data.id << " thanh cong!!!\n";
-			Sleep(300);
-		}
+		ofs.close();
 		f.close();
+		cout << "Xuat file CSV danh sach sinh vien cua mon " << temp->data.id << " thanh cong!\n";
 		//tiep tuc xuat file dssv cua mon hoc khac...
 		temp = temp->pNext;
 	}

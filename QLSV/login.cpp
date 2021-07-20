@@ -46,7 +46,8 @@ void LogIn(string& tk, string& mk, short& lc)
 		cin >> tk;
 		cin.ignore();//xoa \n
 		cout << "Mat khau: ";
-		cin >> mk;
+		cin.clear();
+		getline(cin, mk);
 		if (checkAccount(tk, mk, lc)) break;
 		else if (dem < 4) cout << "Ban da nhap sai... Moi nhap lai" << endl;
 		dem++;
