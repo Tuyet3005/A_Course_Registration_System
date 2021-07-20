@@ -1169,7 +1169,7 @@ int InMenuCapNhat3()
 {
 	system("cls");
 	cout << "----CAP NHAT DIEM SINH VIEN----\n";
-	cout << "1. Xuat file CSV gui giao vien nhap diem\n";
+	cout << "1. Nhap diem cho sinh vien \n";
 	cout << "2. Nhap diem len he thong\n";
 	cout << "3. Chinh sua diem\n";
 	cout << "4. Quay ve\n";
@@ -1220,15 +1220,15 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 //xuat file dssv mon (copy file he thong roi ghi vao file moi, luu vao duong dan giao vu nhap)
 void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai>
 {
-	string Path;
 	system("cls");
-	cout << "------XUAT CAC FILE CSV DSSV TUNG MON-------\n";
+	cout << "------XUAT CAC FILE CSV DSSV TUNG MON-------\n\n";
 	if (hk->headMon == NULL)
 	{
 		cout << "Hoc ky nay chua co mon hoc nao dang mo!!!\n";
 		return;
 	}
 	cout << "Nhap duong dan den vi tri ban muon luu cac file danh sach sinh vien :\n";
+	string Path;
 	getline(cin, Path);
 	cout << endl;
 	//Duyet cac node mon trong hk 
@@ -1308,6 +1308,149 @@ void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai
 		temp = temp->pNext;
 	}
 }
+
+bool DocDiemTuFile(string file, NodeMon* mon, int siso)// doc tu file tai len he thong
+{
+	ifstream f(file);
+	string s;
+	Diem* dsDiem = new Diem[siso];
+	while (siso > 0)
+	{
+		getline(f, s, ',');//mssv
+		f.clear();
+		getline(f, s, ',');//lop
+		f.clear();
+		getline(f, s, ',');//ki hieu danh dau nhap diem <R: roi, C: chua>
+		if (s == "R")
+		{
+			getline(f, s, ',');
+			dsDiem[siso - 1].gk = stof(s);//dssv trong file nguoc voi dssv tren he thong
+			getline(f, s, ',');
+			dsDiem[siso - 1].ck = stof(s);
+			getline(f, s, ',');
+			dsDiem[siso - 1].cong = stof(s);
+			getline(f, s, ',');
+			dsDiem[siso - 1].tongket = stof(s);
+		}
+		else
+		{
+			delete[] dsDiem;
+			return false;
+		}
+		getline(f, s);//bo \n
+		siso--;
+	}
+	NodeSv_Mon* temp = mon->headSvMon;
+	//khi doc diem vao mang dong da ghi nguoc de doc diem vao ds he thong cho thuan chieu
+	siso = 0;
+	while (temp)
+	{
+		temp->diem = dsDiem[siso++];
+		temp = temp->pNext;
+	}
+	delete[] dsDiem;
+	return true;
+}
+void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk)
+{
+	system("cls");
+	cout << "------NHAP DIEM CHO SINH VIEN TU FILE-------\n\n";
+	if (hk->headMon == NULL)
+	{
+		cout << "Hoc ky nay chua co mon hoc nao dang mo!!!\n";
+		return;
+	}
+	cout << "Can chac chan giao vien chi nhap diem vao file cho sinh vien ma khong thay doi cau truc, trat tu noi dung da co trong file!!!\n";
+	Sleep(300);
+	cout << "Thong nhat tat ca sinh vien deu duoc nhap diem day du truoc khi tai diem len he thong!!!\n";
+	cout << "Cau truc nhap diem cho sinh vien: diem gk, diem ck, diem cong, diem tong ket.\n";
+	cout << "\nNhap duong dan den vi tri luu cac file ma giao vien da nhap diem:\n";
+	string Path;
+	getline(cin, Path);
+	cout << endl;
+	int nam = nodeNam->data.tg.ngay_bd.y;
+	NodeMon* temp = hk->headMon;
+	while (temp)
+	{
+		//tim file 
+		ifstream f(Path + "/" + to_string(nam) + "hk" + to_string(stt_hk) + temp->data.id + ".txt");
+		if (!f.is_open())
+		{
+			cout << "Loi!!! Khong tim thay file diem cua sinh vien mon " << temp->data.id << "!!!\n";
+			cout << "Tiep tuc voi cac mon khac? Nhap Y/N: ";
+			char lenh;
+			cin >> lenh;
+			cout << endl;
+			cin.ignore(100, '\n');
+			if (lenh != 'y' && lenh != 'Y')
+			{
+				cout << "\nNhap diem tu file that bai!\n";
+				return;
+			}
+			else
+			{
+				temp = temp->pNext;
+				f.close();
+				continue;
+			}
+		}
+		string s;
+		ofstream ofs;
+		getline(f, s, '\n');
+		//copy sang file cua he thong 
+		if (s != "")
+		{
+			ofs.open(to_string(nam) + "hk" + to_string(stt_hk) + temp->data.id + ".txt");
+			if (!ofs.is_open())
+			{
+				ofs.close();
+				cout << "Loi: Ghi diem vao file cho sinh vien mon " << temp->data.id << " that bai!!!\n\n";
+				f.close();
+				temp = temp->pNext;
+				continue;
+				}
+		}
+		else
+		{
+			cout << "\nFile trong!!!\n";
+			cout << "Nhap diem tu file cho sinh vien mon " << temp->data.id << " that bai!!!\n";
+			temp = temp->pNext;
+			f.close();
+			continue;//di tiep den mon hoc khac 
+		}
+		f.close();
+		//BAT DAU SAO CHEP FILE 
+		f.open(Path + "/" + to_string(nam) + "hk" + to_string(stt_hk) + temp->data.id + ".txt");
+		//lay du lieu tu file cho den het file 
+		getline(f, s);//copy dong dau trong file goc vao s
+		int siso = 0;//si so sv cua mon
+		while (true)
+		{
+			if (s != "")
+			{
+				ofs << s;
+				siso++;
+			}
+			f.clear();
+			getline(f, s);//copy dong tiep theo trong file goc vao s
+			//ktra neu nhu dong tiep theo co data thi \n => ghi data vao file o vong lap tiep theo
+			//nguoc lai thi file trong => dung lai
+			if (s != "")
+				ofs << "\n";
+			else
+				break;
+		}
+		ofs.close();
+		f.close();
+		//doc len he thong
+		if(DocDiemTuFile(to_string(nam) + "hk" + to_string(stt_hk) + temp->data.id + ".txt", temp, siso))
+			cout << "Nhap diem cho sinh vien mon " << temp->data.id << " thanh cong!\n";
+		else
+			cout << "Nhap diem cho sinh vien mon " << temp->data.id << " that bai!\n";
+		//tiep tuc xuat file dssv cua mon hoc khac...
+		temp = temp->pNext;
+	}
+}
 void TEST(ListNamHoc& l)
 {
 	NodeNamHoc* nodeNam = NodeNamHienTai(l);
@@ -1315,7 +1458,10 @@ void TEST(ListNamHoc& l)
 	HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
 	cin.ignore();//xoa \n khi lua chon truoc do nhan enter
 	XuatFileCsv(nodeNam, hk, stt_hk);
+	system("pause");
+	NhapDiemTuFile(nodeNam, hk, stt_hk);
 }
+
 //HIEN THI
 void hienthiNam(ListNamHoc l, int& lc)
 {
