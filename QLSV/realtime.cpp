@@ -1,4 +1,5 @@
 #include"realtime.h"
+
 tm ThoiGianHeThong()
 {
 	time_t rawTime = time(0);
@@ -6,6 +7,7 @@ tm ThoiGianHeThong()
 	localtime_s(&tmTime, &rawTime);//chuyen gio he thong sang cau truc tm
 	return tmTime;
 }
+
 int NHhientai_nambd()
 {
 	//nam hoc bat dau tu 5/9 nam X den 31/7 nam X+1 
@@ -17,6 +19,7 @@ int NHhientai_nambd()
 		nam_bd = tmTime.tm_year;
 	return 1900 + nam_bd;//struct tm tinh nam tu nam 1900
 }
+
 NodeNamHoc* NodeNamHienTai(ListNamHoc& l)//ktra NH ht co dc tao chua, chua thi co the tao nam hoc hoac tra ve NULL, co roi thi tra ve node NH ht 
 {
 	int nam_bd = NHhientai_nambd();
@@ -51,6 +54,7 @@ NodeNamHoc* NodeNamHienTai(ListNamHoc& l)//ktra NH ht co dc tao chua, chua thi c
 	}
 	return NULL;
 }
+
 bool NamNhuan(int nam)
 {
 	if ((nam % 4 == 0 && nam % 100 != 0) || nam % 400 == 0)
@@ -60,6 +64,7 @@ bool NamNhuan(int nam)
 	return false;
 	// <=> return ((nYear % 4 == 0 && nYear % 100 != 0) || nYear % 400 == 0);
 }
+
 int SoNgayTrongThang(int thang, int nam)
 {
 	int n = 31;
@@ -93,6 +98,7 @@ int SoNgayTrongThang(int thang, int nam)
 	}
 	return n;
 }
+
 bool NgayHopLe(int ngay, int thang, int nam)
 {
 	if (nam < 0)
@@ -109,17 +115,37 @@ bool NgayHopLe(int ngay, int thang, int nam)
 	}
 	return true;
 }
+
 bool GioHopLe(Time t)
 {
 	if (t.gio >= 24 || t.gio < 0)
 		return false;
 	else {
-		if (t.phut < 0 || t.phut>=60)
+		if (t.phut < 0 || t.phut >= 60)
 			return false;
 		else {
-			if (t.giay < 0 || t.giay>=60)
+			if (t.giay < 0 || t.giay >= 60)
 				return false;
 			return true;
 		}
 	}
+}
+
+Ngay _30ngaysau(Ngay ngaybd)
+{
+	Ngay A = ngaybd;
+	A.d += 30;
+	int ngaydu = A.d - SoNgayTrongThang(A.m, A.y);
+	if (ngaydu != 0)
+	{
+		A.d = ngaydu;
+		if (A.m == 12)
+		{
+			A.m = 1;
+			A.y += 1;
+		}
+		else
+			A.m += 1;
+	}
+	return A;
 }

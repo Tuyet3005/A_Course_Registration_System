@@ -1,5 +1,4 @@
 01072021,31082021,
-VTP,Vi tich phan 1B,LadyGaGa,2,Thu Hai,S1,Thu Ba,S2,
-TD2,The duc 2,Vu,3,Thu Sau,S2,Thu Ba,S4,
-TD1,The duc 1,Van,2,Thu Hai,S3,Thu Tu,S1,
-TD3,The duc 3,Thanh,3,Thu Ba,S2,Thu Ba,S1,
+TD2,The duc 2,Vu,3,Thu Sau,S2,Thu Ba,S4,20,
+TD1,The duc 1,Van,2,Thu Hai,S3,Thu Tu,S1,35,
+TD3,The duc 3,Thanh,3,Thu Ba,S2,Thu Ba,S1,25,

@@ -101,17 +101,12 @@ bool XlMenuSv(int chon, ListNamHoc& l, NodeSv_Lop* A)
 	{
 		
 		DKKH_Sv(NodeNamHienTai(l),A, 0);
-		//course registration
-		//xem cac mon da dk trong hk hien tai 
-		//dk mon hoc, chinh sua dk mon <chuc nang chi hoat dong trong tg mo dk mon hoc
 		system("pause");
 		break;
 	}
 	case 3:
 	{
 		DKKH_Sv(NodeNamHienTai(l), A, 1);
-		//opened course
-		//hien thi cac mon
 		system("pause");
 		break;
 	}
@@ -121,7 +116,7 @@ bool XlMenuSv(int chon, ListNamHoc& l, NodeSv_Lop* A)
 	}
 	case 5:
 	{
-		cout << "Ban thuc su muon thoat? Y/N?" << endl;
+		cout << "Ban thuc su muon thoat? Nhap Y/N: " << endl;
 		cin >> lenh;
 		if (lenh == 'Y' || lenh == 'y')
 		{

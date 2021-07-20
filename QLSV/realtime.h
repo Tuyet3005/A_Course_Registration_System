@@ -9,3 +9,4 @@ bool NgayHopLe(int nDay, int nMonth, int nYear);
 int SoNgayTrongThang(int nMonth, int nYear);
 bool NamNhuan(int nYear);
 bool GioHopLe(Time t);
+Ngay _30ngaysau(Ngay ngaybd);

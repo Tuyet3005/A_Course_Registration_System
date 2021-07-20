@@ -95,7 +95,6 @@ void changePass(short lc, string tk, string& mk)
 		if (pos != string::npos)
 			s.replace(pos, mk.length(), newpass);
 		t << s << endl;
-		pos = -1;
 	}
 	mk = newpass;
 	t.close();

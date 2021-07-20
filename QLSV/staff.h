@@ -41,12 +41,17 @@ bool checkTrungMon(HocKy* hk, NodeMon* n);
 void TaoMon(ListNamHoc& l, int nam);
 void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk);
 void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk);
+bool importFilehayNhapTay();
 
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);
 int InMenuCapNhat();
 int InMenuCapNhat2(); //muc 2 cua menu cap nhat chinh
 int InMenuCapNhat3(); //muc 3 cua menu cap nhat chinh
+void TEST(ListNamHoc& l);//test xuat file dssv_mon
+//xuat file dssv mon (copy file he thong roi ghi vao file moi, luu vao duong dan giao vu nhap)
+void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
+
 //HIENTHI
 //neu chua co du lieu
 void hienthiNam(ListNamHoc l, int& lc);
@@ -62,5 +67,3 @@ void hienthiDsLop(NodeLop* head, int& lc);
 void hienthiTTSv_Lop(NodeLop* A, int& lc);
 void hienthiDiem_Lop(NodeLop* A, int& lc);
 bool ChonKihayLop();
-
-
