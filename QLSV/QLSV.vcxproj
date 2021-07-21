@@ -150,6 +150,7 @@
     <ClCompile Include="student.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="classes.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="courses.h" />
     <ClInclude Include="display.h" />

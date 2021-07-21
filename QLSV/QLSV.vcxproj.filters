@@ -80,6 +80,9 @@
     <ClInclude Include="years.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="classes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="GiaoVu.txt">
