@@ -164,8 +164,11 @@ void TaiData_Lop(NodeNamHoc* n)
 				f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt", ios::app);
 				fstream f1;
 				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + 'n'+to_string(i-1)+".txt");
+				if (!f1.is_open())
+					continue;
 				while (!f1.eof())
 				{
+					f.clear();
 					getline(f1, s);
 					f << s;
 					if (!f.good())

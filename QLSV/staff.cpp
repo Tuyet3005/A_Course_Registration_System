@@ -3,6 +3,7 @@
 #include"courses.h"
 #include <conio.h>
 #include<string>
+#include <cwchar>
 
 int InMenuGv()
 {
@@ -151,14 +152,14 @@ bool importFilehayNhapTay(bool chon)
 int InMenuTaoMoi()
 {
 	system("cls");
-	cout << "----MENU TAO MOI----\n";
-	cout << "1. Nam hoc\n";
-	cout << "2. Lop hoc\n";
-	cout << "3. Hoc ky\n";
-	cout << "4. Mon hoc\n";
-	cout << "5. Buoi dang ky khoa hoc\n";
-	cout << "6. Quay ve\n";
-	cout << "7. Thoat\n";
+	cout << "--------------MENU TAO MOI--------------\n";
+	cout << "\t   1. Nam hoc\n";
+	cout << "\t   2. Lop hoc\n";
+	cout << "\t   3. Hoc ky\n";
+	cout << "\t   4. Mon hoc\n";
+	cout << "\t   5. Buoi dang ky khoa hoc\n";
+	cout << "\t   6. Quay ve\n";
+	cout << "\t   7. Thoat\n";
 	return 7;
 }
 bool XlTaoMoi(int chon, ListNamHoc& l)
@@ -174,7 +175,7 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	case 2:
 	{
 		system("cls");
-		cout << "TAO MOI LOP HOC NAM NHAT\n";
+		cout << "------------------------TAO MOI LOP HOC NAM NHAT------------------------\n";
 		NodeNamHoc* n = NodeNamHienTai(l);
 		TaoLopNamNhat(n);
 		system("pause");
@@ -1019,22 +1020,22 @@ void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk)
 int InMenuCapNhat()//dung cho ca menu Cap nhat
 {
 	system("cls");
-	cout << "----MENU CAP NHAT----\n";
-	cout << "1. Them sinh vien nam nhat\n";//nhap tay, import file
-	cout << "2. Mon hoc\n"; // xoa, sua thong tin 
-	cout << "3. Diem sinh vien\n";//xuat file csv dssv mon, nhap diem, sua diem 
-	cout << "4. Quay ve\n";
-	cout << "5. Thoat\n";
+	cout << "-------------MENU CAP NHAT-------------\n";
+	cout << "\t  1. Them sinh vien nam nhat\n";//nhap tay, import file
+	cout << "\t  2. Mon hoc\n"; // xoa, sua thong tin 
+	cout << "\t  3. Diem sinh vien\n";//xuat file csv dssv mon, nhap diem, sua diem 
+	cout << "\t  4. Quay ve\n";
+	cout << "\t  5. Thoat\n";
 	return 5;
 }
 int InMenuCapNhat2()
 {
 	system("cls");
-	cout << "----CAP NHAT MON HOC----\n";
-	cout << "1. Sua thong tin mon hoc\n";
-	cout << "2. Xoa mon hoc\n";
-	cout << "3. Quay ve\n";
-	cout << "4. Thoat\n";
+	cout << "---------------CAP NHAT MON HOC---------------\n";
+	cout << "\t  1. Sua thong tin mon hoc\n";
+	cout << "\t  2. Xoa mon hoc\n";
+	cout << "\t  3. Quay ve\n";
+	cout << "\t  4. Thoat\n";
 	return 4;
 }
 int InMenuCapNhat3()

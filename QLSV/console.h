@@ -56,7 +56,9 @@ void DisableCtrButton(bool Max);
 void ShowScrollbar(BOOL Show);
 void DisableResizeWindow();
 void SetConsole();
+void SetFontSize(int size);
 void TextColor (int color);
+
 //end----------------------Screen----------------------end
 
 

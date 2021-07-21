@@ -1,3 +1,0 @@
-01012021,30062021,
-TRR,Toan Roi Rac,Trung,2,Thu Tu,S3,Thu Hai,S1,30,
-thVTP,Thuc hanh Vi Tich Phan,Aki Le,2,Thu Ba,S2,Thu Bay,S2,35,

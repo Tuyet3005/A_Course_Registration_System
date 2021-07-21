@@ -1,3 +1,4 @@
 05092020,31122020,
-KTLT,Ktlt,Hoang Dung,4,Thu Ba,S1,Thu Sau,S1,30,
-DSTT,Dai so tuyen tinh,Hop,4,Thu Tu,S1,Thu Bay,S1,15,
+TRR,Toan Roi Rac,Trung,2,Thu Tu,S3,Thu Hai,S1,30,
+thVTP,Thuc hanh Vi Tich Phan,Aki Le,2,Thu Ba,S2,Thu Bay,S2,35,
+TVT,Tieng Viet,Ha Thi Ai,3,Thu Hai,S2,Thu Tu,S2,39,
