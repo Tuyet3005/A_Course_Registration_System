@@ -19,6 +19,15 @@ NodeMon* ChonMonHoc(HocKy* hk, string id_mon_hoc)
 	return NULL;
 }
 
+void HienThiDSMon(NodeMon* head_mon)
+{
+	cout << "\nDanh sach mon hoc:\n";
+	for (NodeMon* node_mon = head_mon; node_mon != NULL; node_mon = node_mon->pNext)
+	{
+		cout << "ID: " << node_mon->data.id << ", Ten: " << node_mon->data.tenMon << ", Ten GV: " << node_mon->data.tenGv << '\n';
+	}
+}
+
 NodeMon* NhapMonHoc(ListNamHoc l)
 {
 	string id_mon_hoc;
@@ -27,6 +36,7 @@ NodeMon* NhapMonHoc(ListNamHoc l)
 
 	while (true)
 	{
+		HienThiDSMon(hoc_ky->headMon);
 		cout << "Nhap ID mon hoc: ";
 		getline(cin, id_mon_hoc);
 		mon = ChonMonHoc(hoc_ky, id_mon_hoc);
@@ -208,5 +218,5 @@ void CapNhatMonHoc(ListNamHoc& l)
 void XoaMonHoc(ListNamHoc& l)
 {
 	NodeMon* node_mon = NhapMonHoc(l);
-	LuuMonHoc(l, node_mon, true);
+	LuuMonHoc(l, node_mon,  true);
 }
