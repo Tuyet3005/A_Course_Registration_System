@@ -1068,7 +1068,6 @@ bool XlCapNhat2(ListNamHoc& l, int chon)
 	}
 	case 3:
 	{
-
 		return true;
 	}
 	case 4:
@@ -1110,8 +1109,7 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 	}
 	case 3:
 	{
-		//sua diem
-		break;
+		//suawr dieemr nowi moo dij Tuyeest oi????????????????????????
 	}
 	case 4:
 	{
