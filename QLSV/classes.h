@@ -60,6 +60,24 @@ void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon)
 	cout << "Luu diem thanh cong!!!\n";
 }
 
+void HienThiDSLop(NodeLop* head_lop)
+{
+	cout << "\nDanh sach lop:\n";
+	for (NodeLop* node_lop = head_lop; node_lop != NULL; node_lop = node_lop->pNext)
+	{
+		cout << "Lop: " << node_lop->lop.ten << '\n';
+	}
+}
+
+void HienThiDSSv(NodeSv_Lop* head_sv_lop)
+{
+	cout << "\nDanh sach SV:\n";
+	for (NodeSv_Lop* node_sv_lop = head_sv_lop; node_sv_lop != NULL; node_sv_lop = node_sv_lop->pNext)
+	{
+		cout << "MSSV: " << node_sv_lop->sv.id << ", Ten: " << node_sv_lop->sv.ten << ", CMND: " << node_sv_lop->sv.cmnd << '\n';
+	}
+}
+
 void CapNhatDiemSv(ListNamHoc& l)
 {
 	NodeNamHoc* node_nam = NhapNamHoc(l);
@@ -77,6 +95,7 @@ void CapNhatDiemSv(ListNamHoc& l)
 	string ten_lop;
 	while (true)
 	{
+		HienThiDSLop(head_lop);
 		cout << "Ten lop: ";
 		getline(cin, ten_lop);
 
@@ -97,6 +116,7 @@ void CapNhatDiemSv(ListNamHoc& l)
 	int mssv;
 	while (true)
 	{
+		HienThiDSSv(node_lop->lop.headSvLop);
 		cout << "Nhap MSSV: ";
 		cin >> mssv;
 		cin.ignore();
@@ -123,6 +143,7 @@ void CapNhatDiemSv(ListNamHoc& l)
 	string id_mon;
 	while (true)
 	{
+		HienThiDSMon(head_mon_sv->mon);
 		cout << "Nhap ID mon: ";
 		getline(cin, id_mon);
 		for (node_mon_sv = head_mon_sv; node_mon_sv != NULL; node_mon_sv = node_mon_sv->pNext)
