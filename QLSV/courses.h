@@ -5,9 +5,9 @@
 
 
 // Tra ve mon hoc tuong ung
-NodeMon* ChonMonHoc(HocKy hk, string id_mon_hoc)
+NodeMon* ChonMonHoc(HocKy* hk, string id_mon_hoc)
 {
-	NodeMon* mon_hoc = hk.headMon;
+	NodeMon* mon_hoc = hk->headMon;
 	while (mon_hoc != NULL)
 	{
 		if (mon_hoc->data.id == id_mon_hoc)
@@ -22,7 +22,7 @@ NodeMon* ChonMonHoc(HocKy hk, string id_mon_hoc)
 NodeMon* NhapMonHoc(ListNamHoc l)
 {
 	string id_mon_hoc;
-	HocKy hoc_ky = NhapHocKy(l);
+	HocKy* hoc_ky = NhapHocKy(l);
 	NodeMon* mon = NULL;
 
 	while (true)
@@ -41,45 +41,23 @@ NodeMon* NhapMonHoc(ListNamHoc l)
 	}
 }
 
-NodeSv_Mon* ChonDiemSv(NodeMon* node_mon, int mssv, string lop)
+NodeMon* TimNodeMon(ListNamHoc l, string id_mon)
 {
-	NodeSv_Mon* diem = node_mon->headSvMon;
-
-	while (diem != NULL)
+	for (NodeNamHoc* node_nam = l.pHead; node_nam != NULL; node_nam = node_nam->pNext)
 	{
-		if (diem->mssv == mssv && diem->lop == lop)
+		for (HocKy hoc_ky : node_nam->data.hk)
 		{
-			return diem;
+			for (NodeMon* node_mon = hoc_ky.headMon; node_mon != NULL; node_mon = node_mon->pNext)
+			{
+				if (node_mon->data.id == id_mon)
+				{
+					return node_mon;
+				}
+			}
 		}
-		diem = diem->pNext;
 	}
 	return NULL;
 }
-
-NodeSv_Mon* NhapDiemSv(NodeMon* node_mon)
-{
-	int mssv;
-	string lop;
-	NodeSv_Mon* diem_sv;
-
-	while (true)
-	{
-		cout << "Nhap mssv: ";
-		cin >> mssv;
-		cout << "Nhap lop: ";
-		cin >> lop;
-		diem_sv = ChonDiemSv(node_mon, mssv, lop);
-		if (diem_sv != NULL)
-		{
-			return diem_sv;
-		}
-		else
-		{
-			cout << "Nhap sai thong tin sinh vien.\n";
-		}
-	}
-}
-
 
 string NextLine(string& data)
 {
@@ -231,49 +209,4 @@ void XoaMonHoc(ListNamHoc& l)
 {
 	NodeMon* node_mon = NhapMonHoc(l);
 	LuuMonHoc(l, node_mon, true);
-}
-
-float NhapDiem(float diem=-1)
-{
-	while (diem < 0 || diem > 10)
-	{
-		cout << "0 <= diem <= 10. Nhap diem: ";
-		cin >> diem;
-	}
-	return diem;
-}
-
-void CapNhatDiemSv(ListNamHoc& l)
-{
-	NodeMon* node_mon = NhapMonHoc(l);
-	NodeSv_Mon* diem_sv = NhapDiemSv(node_mon);
-	Diem& diem = diem_sv->diem;
-	string input;
-
-	cout << "Diem giua ky (" << diem.gk << "): ";
-	getline(cin, input);
-	try
-	{
-		diem.gk = NhapDiem(stof(input));
-	}
-	catch (invalid_argument) {}
-
-	cout << "Diem cuoi ky (" << diem.ck << "): ";
-	getline(cin, input);
-	try
-	{
-		diem.ck = NhapDiem(stof(input));
-	}
-	catch (invalid_argument) {}
-
-	cout << "Diem cong (" << diem.cong << "): ";
-	getline(cin, input);
-	try
-	{
-		diem.cong = NhapDiem(stof(input));
-	}
-	catch (invalid_argument) {}
-
-	diem.tongket = min((diem.gk + diem.ck * 2.0) / 3 + diem.cong / 10, 10.0);
-	LuuMonHoc(l, node_mon);
 }

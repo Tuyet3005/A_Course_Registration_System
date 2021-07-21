@@ -16,10 +16,9 @@ HocKy* ChonHocKy(NamHoc nam_hoc, int hoc_ky)
 	}
 }
 
-HocKy NhapHocKy(ListNamHoc l)
+HocKy* NhapHocKy(NodeNamHoc* node_nam)
 {
 	int so_hoc_ky;
-	NodeNamHoc* nam = NhapNamHoc(l);
 	HocKy* hoc_ky;
 
 	while (true)
@@ -27,14 +26,19 @@ HocKy NhapHocKy(ListNamHoc l)
 		cout << "Nhap hoc ky: ";
 		cin >> so_hoc_ky;
 		cin.ignore();
-		hoc_ky = ChonHocKy(nam->data, so_hoc_ky);
+		hoc_ky = ChonHocKy(node_nam->data, so_hoc_ky);
 		if (hoc_ky != NULL)
 		{
-			return *hoc_ky;
+			return hoc_ky;
 		}
 		else
 		{
 			cout << "Nhap sai hoc ky.\n";
 		}
 	}
+}
+
+HocKy* NhapHocKy(ListNamHoc l)
+{
+	return NhapHocKy(NhapNamHoc(l));
 }
