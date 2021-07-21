@@ -8,6 +8,9 @@ int LuaChon(int maxChoice);
 bool XlMenuGv(int chon, ListNamHoc& l);
 void GiaoVu(ListNamHoc& l);
 
+void ThongbaoCautrucFile(bool chon);
+bool importFilehayNhapTay(bool chon);
+
 //TAO MOI
 int InMenuTaoMoi();
 bool XlTaoMoi(int chon, ListNamHoc& l);
@@ -20,11 +23,7 @@ void TaoNam(ListNamHoc& l);
 NodeLop* TaoNodeLop(string ten);
 void ThemNodeLopHoc(NodeLop*& HeadLop, NodeLop* n);
 void HienLopHoc(NodeLop* HeadLop);
-
 void TaoLopNamNhat(NodeNamHoc* node);
-bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head);
-void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv);
-void ThemSvLop(NodeLop* nodeLop);
 //hoc ky
 NodeNamHoc* TimNodeNamHoc(ListNamHoc& l, int nam_bd);
 bool sosanhNgay(Ngay ngay_truoc, Ngay ngay_sau);
@@ -41,16 +40,23 @@ bool checkTrungMon(HocKy* hk, NodeMon* n);
 void TaoMon(ListNamHoc& l, int nam);
 void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk);
 void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk);
-bool importFilehayNhapTay();
 
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);
 int InMenuCapNhat();
 int InMenuCapNhat2(); //muc 2 cua menu cap nhat chinh
 int InMenuCapNhat3(); //muc 3 cua menu cap nhat chinh
-void TEST(ListNamHoc& l);//test xuat file dssv_mon
-//xuat file dssv mon (copy file he thong roi ghi vao file moi, luu vao duong dan giao vu nhap)
+//them sv
+bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head);
+void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv);
+void NhapThongtinSv(NodeSv_Lop* n, int i);
+void ThemSvLop_tay(NodeLop* nodeLop);
+void ThemSvLop_file(NodeLop* nodeLop);
+void ThemSvLopNam1(ListNamHoc& l);
+
 void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
+bool DocDiemTuFile(string file, NodeMon* mon, int siso);
+void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
 
 //HIENTHI
 //neu chua co du lieu

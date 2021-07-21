@@ -1,6 +1,6 @@
 #pragma once
 #include"begin.h"
-void SinhVien(ListNamHoc& l, int tk);//////////nho vo begin sua lai namhientai cua ham nay
+void SinhVien(ListNamHoc& l, int tk);
 Sv findInfo(string tenlop, int tk);
 bool XlMenuSv(int chon, ListNamHoc& l, NodeSv_Lop* A);
 char chonKi();

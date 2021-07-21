@@ -94,6 +94,59 @@ void GiaoVu(ListNamHoc& l)
 	system("cls");
 }
 
+void ThongbaoCautrucFile(bool chon)//import file dssv lop || file thong tin mon
+{
+	cout << endl << endl;
+	//file dssv lop
+	if (chon == 0)
+	{
+		cout << "File chua danh sach sinh vien lop hoc la file text (.txt).\n\n";
+		Sleep(100);
+		cout << "Thong tin moi sinh vien can nam rieng tren mot dong va theo cau truc nhu sau:\n";
+		cout << "<mssv,stt,ten,ho,gioi tinh,ngay sinh,cccd/cmnd,> (vd:  <19120789,04,Tram,Nguyen Ai,Nu,07052001,111111111,> ).\n\n";
+		Sleep(200);
+		cout << "HAY CHAC CHAN FILE DA DUOC TAO theo dung cau truc de tien hanh ghi thong tin tu file len he thong!\n";
+	}
+	// file thong tin mon
+	else
+	{
+		cout << "File chua thong tin cac mon hoc la file text (.txt) va thong tin moi mon duoc ghi rieng tren mot dong theo cau truc nhu sau:\n";
+		cout << "id mon,ten mon,ten giao vien,so tin chi,ngay hoc 1,buoi hoc 1,ngay hoc 2,buoi hoc 2,si so toi da,\n\n";
+		Sleep(100);
+		cout << "Chu y khong nen co khoang cach sau cac dau phay!!!\n";
+		cout << "Vi du: KTLT,Ky thuat lap trinh,Nguyen Le Hoang Dung,4,Thu Sau,S3,Thu Sau,S4,50,\n\n";
+		Sleep(200);
+		cout << "HAY CHAC CHAN FILE DA DUOC TAO theo dung cau truc de tien hanh ghi thong tin tu file len he thong!\n";
+	}
+}
+bool importFilehayNhapTay(bool chon)
+{
+	cout << "--Chon phuong thuc lay thong tin : " << endl;
+	cout << "1. Nhap TAY" << endl;
+	cout << "2. Lay thong tin tu FILE" << endl;
+	int lc;
+	do {
+		cout << "Nhap (1-2): ";
+		cin >> lc;
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(100, '\n');
+			continue;
+		}
+		if (lc == 1)
+			return false;
+		if (lc == 2)
+		{
+			cin.ignore();//xoa \n 
+			ThongbaoCautrucFile(chon);
+			system("pause");
+			return true;
+		}
+	} while (true);
+}
+
+
 //TAO MOI
 int InMenuTaoMoi()
 {
@@ -302,147 +355,10 @@ void HienLopHoc(NodeLop* HeadLop)
 		temp = temp->pNext;
 	}
 }
-bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head)
-{
-	while (head)
-	{
-		if (head->sv.stt == n->sv.stt || n->sv.id == head->sv.id)
-		{
-			cout << "Ban da them sinh vien co STT hoac MSSV tuong tu vao lop roi!\n";
-			return false;
-		}
-		head = head->pNext;
-	}
-	return true;
-}
-//themsv vao theo thu tu tang dan stt
-void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv)
-{
-	//them vao dau 
-	if (headSvLop == NULL || nodeSv->sv.stt < headSvLop->sv.stt)
-	{
-		nodeSv->pNext = headSvLop;
-		headSvLop = nodeSv;
-	}
-	//them vao giua hoac cuoi
-	else
-	{
-		//duyet tim prenode cua node sv co stt lon hon stt cua node sv them vao
-		NodeSv_Lop* temp = headSvLop;
-		while (temp->pNext && (temp->pNext->sv.stt < nodeSv->sv.stt))
-		{
-			temp = temp->pNext;
-		}
-		//noi link prenode (temp) voi n va n voi after node (temp->pNext)
-		nodeSv->pNext = temp->pNext;
-		temp->pNext = nodeSv;
-	}
-}
-void ThemSvLop(NodeLop* nodeLop)
-{
-	system("cls");
-	cout << "----THEM SINH VIEN VAO LOP----\n";
-	cout << "Nhap so luong sinh vien: ";
-	int sl;
-	cin >> sl;
-	for (int i = 0; i < sl; i++)
-	{
-		NodeSv_Lop* n = new NodeSv_Lop;
-		n->pNext = NULL;
-		cout << "\nNhap thong tin sinh vien " << i + 1 << ":\n";
-		while (true)
-		{
-			cout << "Nhap MSSV (vd: 20120399, 18120335, ...):\n";
-			cin >> n->sv.id;
-			if (cin.fail())
-			{
-				cin.clear();
-				cin.ignore();
-				continue;
-			}
-			else if (n->sv.id < 10000000)
-			{
-				cout << "Nhap theo cau truc XXxxxxxx (XX la hai chu so cuoi cua nam hoc bat dau nam nhat cua sinh vien!!!)\n";
-				continue;
-			}
-			else
-				break;
-		}
-		while (true)
-		{
-			cout << "Nhap STT cua sinh vien trong lop:\n";
-			cin >> n->sv.stt;
-			if (cin.fail())
-			{
-				cin.clear();
-				cin.ignore();
-				continue;
-			}
-			else if (n->sv.stt < 1)
-			{
-				cout << "STT phai lon hon 0!!!\n";
-				continue;
-			}
-			else
-				break;
-		}
-		cout << "Nhap ten: (vd: Lan)\n";
-		cin >> n->sv.ten;
-		cin.ignore();
-		cout << "Nhap ho: (Nguyen Thi)\n";
-		getline(cin, n->sv.ho);
-		while (true)
-		{
-			cout << "Nhap gioi tinh (Nu/Nam):\n";
-			cin >> n->sv.gioi;
-			if (n->sv.gioi == "Nu" || n->sv.gioi == "Nam")
-				break;
-		}
-		while (true)
-		{
-			cout << "Nhap lan luot ngay, thang, nam sinh: (vd: neu sinh ngay 1/1/2001 thi nhap 1 1 2001)\n";
-			cin >> n->sv.ngayS.d >> n->sv.ngayS.m >> n->sv.ngayS.y;
-			if (cin.fail())
-			{
-				cin.clear();
-				cin.ignore();
-				continue;
-			}
-			if (NgayHopLe(n->sv.ngayS.d, n->sv.ngayS.m, n->sv.ngayS.y))
-				break;
-		}
-		cin.ignore();
-		cout << "CMND/CCCD: \n";//lieu co loi j se xay ra hon ta 
-		cin >> n->sv.cmnd;
-		if (!checkTrungSv(n, nodeLop->lop.headSvLop))
-			return;
-		ThemNodeSvLop(nodeLop->lop.headSvLop, n);
-		//ghi vao file
-		fstream f(nodeLop->lop.ten + ".txt", ios::app);
-		//<mssv, stt, ten, ho, gioi tinh, ngay sinh, cccd / cmnd,>
-		f << n->sv.id << ',';
-		f << n->sv.stt << ',';
-		f << n->sv.ten << ',';
-		f << n->sv.ho << ',';
-		f << n->sv.gioi << ',';
-		if (n->sv.ngayS.d < 10)
-			f << '0';
-		f << n->sv.ngayS.d;
-		if (n->sv.ngayS.m < 10)
-			f << '0';
-		f << n->sv.ngayS.m;
-		f << n->sv.ngayS.y << ',';
-		f << n->sv.cmnd << ",\n";
-		if (f.good())
-			cout << "Them sinh vien vao lop thanh cong!\n";
-		f.close();
-	}
-}
 void TaoLopNamNhat(NodeNamHoc* node)
 {
 	if (node == NULL)
 		return;
-	node->data.headLop[0] = NULL;
 	int sl = 0;
 	//nhap ten lop moi len file, tao node len he thong
 	cout << "Nhap so luong lop nam nhat muon tao: ";
@@ -497,23 +413,10 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		cout << "Tao lop thanh cong!!!" << endl << endl;
 		system("pause");
 		n->lop.headSvLop = NULL;
-		cout << "\n \nThong bao!\n";
-		cout << "Ban co the thoat chuong trinh hien tai va tien hanh them sinh vien vao lop...\n";
-		cout << "...bang cach dien thong tin sinh vien vao file \"" << ten << ".txt\".\n \n";
-		Sleep(200);
-		cout << "Thong tin moi sinh vien can nam rieng tren mot dong va theo cau truc sau:\n";
-		cout << "<mssv,stt,ten,ho,gioi tinh,ngay sinh,cccd/cmnd,> vd: <19120789,04,Tram,Nguyen Ai,Nu,07052001,111111111,>\n";
-		Sleep(200);
-		cout << "\n \nHoac ban co the them sinh vien bang cach nhap tay ngay bay gio! Y/N???\n";
-		char lc;
-		cin >> lc;
-		if (lc == 'y' || lc == 'Y')
-		{
-			system("pause");
-			ThemSvLop(n);
-		}
 	}
+	cout << "Ban da co the cap nhat dssv cho (cac) lop hoc vua tao!\n";
 }
+
 
 //hoc ky 
 NodeNamHoc* TimNodeNamHoc(ListNamHoc& l, int nam_bd)//tim nam hoc de them hk vao
@@ -952,7 +855,7 @@ void TaoMon(ListNamHoc& l, int nam)
 		return;
 	cout << "TAO MOI MON HOC\n";
 	NodeMon* head;
-	if (importFilehayNhapTay())
+	if (importFilehayNhapTay(1))
 	{
 		system("cls");
 		cout << "TAO MOI MON HOC\n\n";
@@ -986,38 +889,6 @@ void TaoMon(ListNamHoc& l, int nam)
 		mondangmo_nhaptay(nam, hk, i);
 	}
 };
-bool importFilehayNhapTay()
-{
-	cout << "--Chon phuong thuc lay thong tin : " << endl;
-	cout << "1. Nhap TAY" << endl;
-	cout << "2. Lay thong tin tu FILE" << endl;
-	int lc;
-	do {
-		cout << "Moi nhap: ";
-		cin >> lc;
-		if (cin.fail())
-		{
-			cin.clear();
-			cin.ignore(100, '\n');
-			continue;
-		}
-		if (lc == 1)
-			return false;
-		if (lc == 2)
-		{
-			cin.ignore();//xoa \n 
-			cout << "File chua thong tin cac mon hoc la file text (.txt) va thong tin moi mon duoc ghi rieng tren mot dong theo cau truc nhu sau:\n";
-			cout << "id mon,ten mon,ten giao vien,so tin chi,ngay hoc 1,buoi hoc 1,ngay hoc 2,buoi hoc 2,si so toi da,\n\n";
-			Sleep(100);
-			cout << "Chu y khong nen co khoang cach sau cac dau phay!!!\n";
-			cout << "Vi du: KTLT,Ky thuat lap trinh,Nguyen Le Hoang Dung,4,Thu Sau,S3,Thu Sau,S4,50,\n\n";
-			Sleep(200);
-			cout << "HAY CHAC CHAN FILE DA DUOC TAO theo dung cau truc de tien hanh ghi thong tin tu file len he thong!\n";
-			system("pause");
-			return true;
-		}
-	} while (true);
-}
 void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk)//file nay chi co ds mon khong co tg bd
 {
 	ifstream f;
@@ -1144,11 +1015,12 @@ void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk)
 }
 
 //CAP NHAT
+
 int InMenuCapNhat()//dung cho ca menu Cap nhat
 {
 	system("cls");
 	cout << "----MENU CAP NHAT----\n";
-	cout << "1. Xuat dssv mon\n";/*Them sinh vien nam nhat\n";*/
+	cout << "1. Them sinh vien nam nhat\n";//nhap tay, import file
 	cout << "2. Mon hoc\n"; // xoa, sua thong tin 
 	cout << "3. Diem sinh vien\n";//xuat file csv dssv mon, nhap diem, sua diem 
 	cout << "4. Quay ve\n";
@@ -1169,12 +1041,94 @@ int InMenuCapNhat3()
 {
 	system("cls");
 	cout << "----CAP NHAT DIEM SINH VIEN----\n";
-	cout << "1. Nhap diem cho sinh vien \n";
-	cout << "2. Nhap diem len he thong\n";
+	cout << "1. Xuat file cho giao vien nhap diem\n";
+	cout << "2. Nhap diem tu file len he thong\n";
 	cout << "3. Chinh sua diem\n";
 	cout << "4. Quay ve\n";
 	cout << "5. Thoat\n";
 	return 5;
+}
+bool XlCapNhat2(ListNamHoc& l, int chon)
+{
+	switch (chon)
+	{
+	case 1:
+	{
+		//sua thong tin mon
+		CapNhatMonHoc(l);
+		system("pause");
+		break;
+	}
+	case 2:
+	{
+		//xoa mon
+		XoaMonHoc(l);
+		system("pause");
+		break;
+	}
+	case 3:
+	{
+
+		return true;
+	}
+	case 4:
+	{
+		char lenh;
+		cout << "Ban thuc su muon thoat? Nhap Y/N: " << endl;
+		cin >> lenh;
+		if (lenh == 'Y' || lenh == 'y')
+		{
+			exit(0);
+		}
+	}
+	return false;//ngoai tru quay ve va thoat
+	}
+}
+bool XlCapNhat3(ListNamHoc& l, int chon)
+{
+	switch (chon)
+	{
+	case 1:
+	{
+		NodeNamHoc* nodeNam = NodeNamHienTai(l);
+		int stt_hk = 0;
+		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
+		cin.ignore(100, '\n');
+		XuatFileCsv(nodeNam, hk, stt_hk);
+		system("pause");
+		break;
+	}
+	case 2:
+	{
+		NodeNamHoc* nodeNam = NodeNamHienTai(l);
+		int stt_hk = 0;
+		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
+		cin.ignore(100, '\n');
+		NhapDiemTuFile(nodeNam, hk, stt_hk);
+		system("pause");
+		break;
+	}
+	case 3:
+	{
+		//sua diem
+		break;
+	}
+	case 4:
+	{
+		return true;
+	}
+	case 5:
+	{
+		char lenh;
+		cout << "Ban thuc su muon thoat? Nhap Y/N: " << endl;
+		cin >> lenh;
+		if (lenh == 'Y' || lenh == 'y')
+		{
+			exit(0);
+		}
+	}
+	return false;//ngoai tru quay ve va thoat
+	}
 }
 bool XlCapNhat(int chon, ListNamHoc& l)
 {
@@ -1183,22 +1137,29 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	case 1:
 	{
 		//them sv nam nhat
-		//test do xuat dssv 
-		TEST(l);
+		ThemSvLopNam1(l);
 		system("pause");
 		break;
 	}
 	case 2:
 	{
 		//cap nhat mon hoc
-		CapNhatMonHoc(l);
+		bool Thoat = false;
+		do
+		{
+			Thoat = XlCapNhat2(l, LuaChon(InMenuCapNhat2()));
+		} while (!Thoat);
 		system("pause");
 		break;
 	}
 	case 3:
 	{
 		//cap nhat diem sinh vien 
-		CapNhatDiemSv(l);
+		bool Thoat = false;
+		do
+		{
+			Thoat = XlCapNhat3(l, LuaChon(InMenuCapNhat3()));
+		} while (!Thoat);
 		system("pause");
 		break;
 	}
@@ -1217,7 +1178,332 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	}
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
-//xuat file dssv mon (copy file he thong roi ghi vao file moi, luu vao duong dan giao vu nhap)
+//them sv 
+bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head)
+{
+	while (head&&n)
+	{
+		if (head->sv.stt == n->sv.stt || n->sv.id == head->sv.id)
+		{
+			cout << "Ban da them sinh vien co STT hoac MSSV tuong tu vao lop roi!\n";
+			return true;
+		}
+		head = head->pNext;
+	}
+	return false;
+}
+void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv)
+{
+	//them vao dau 
+	if (headSvLop == NULL || nodeSv->sv.stt < headSvLop->sv.stt)
+	{
+		nodeSv->pNext = headSvLop;
+		headSvLop = nodeSv;
+	}
+	//them vao giua hoac cuoi
+	else
+	{
+		//duyet tim prenode cua node sv co stt lon hon stt cua node sv them vao
+		NodeSv_Lop* temp = headSvLop;
+		while (temp->pNext && (temp->pNext->sv.stt < nodeSv->sv.stt))
+		{
+			temp = temp->pNext;
+		}
+		//noi link prenode (temp) voi n va n voi after node (temp->pNext)
+		nodeSv->pNext = temp->pNext;
+		temp->pNext = nodeSv;
+	}
+}
+void NhapThongtinSv(NodeSv_Lop* n, int i)
+{
+	cout << "\nNhap thong tin sinh vien " << i + 1 << ":\n";
+	while (true)
+	{
+		cout << "Nhap MSSV (vd: 20120399, 18120335, ...):\n";
+		cin >> n->sv.id;
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore();
+			continue;
+		}
+		else if (n->sv.id < 10000000)
+		{
+			cout << "Nhap theo cau truc XXxxxxxx (XX la hai chu so cuoi cua nam hoc bat dau nam nhat cua sinh vien!!!)\n";
+			continue;
+		}
+		else
+			break;
+	}
+	while (true)
+	{
+		cout << "Nhap STT cua sinh vien trong lop:\n";
+		cin >> n->sv.stt;
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore();
+			continue;
+		}
+		else if (n->sv.stt < 1)
+		{
+			cout << "STT phai lon hon 0!!!\n";
+			continue;
+		}
+		else
+			break;
+	}
+	cout << "Nhap ten: (vd: Lan)\n";
+	cin >> n->sv.ten;
+	cin.ignore(100,'\n');
+	cout << "Nhap ho: (Nguyen Thi)\n";
+	getline(cin, n->sv.ho);
+	while (true)
+	{
+		cout << "Nhap gioi tinh (Nu/Nam):\n";
+		cin >> n->sv.gioi;
+		if (n->sv.gioi == "Nu" || n->sv.gioi == "Nam")
+			break;
+	}
+	while (true)
+	{
+		cout << "Nhap lan luot ngay, thang, nam sinh: (vd: neu sinh ngay 1/1/2001 thi nhap 1 1 2001)\n";
+		cin >> n->sv.ngayS.d >> n->sv.ngayS.m >> n->sv.ngayS.y;
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore();
+			continue;
+		}
+		if (NgayHopLe(n->sv.ngayS.d, n->sv.ngayS.m, n->sv.ngayS.y))
+			break;
+	}
+	cin.ignore();
+	cout << "CMND/CCCD: \n";//lieu co loi j se xay ra hon ta 
+	cin >> n->sv.cmnd;
+}
+void ThemSvLop_tay(NodeLop* nodeLop)
+{
+	system("cls");
+	cout << "----THEM SINH VIEN VAO LOP " << nodeLop->lop.ten << "----\n";
+	cout << "Nhap so luong sinh vien them vao: ";
+	int sl;
+	cin >> sl;
+	bool flag = false;//danh dau file co data roi hay chua?
+	if (nodeLop->lop.headSvLop)
+		flag = true;
+	for (int i = 0; i < sl; i++)
+	{
+		NodeSv_Lop* n = new NodeSv_Lop;
+		n->pNext = NULL;
+		NhapThongtinSv(n, i);
+		if (checkTrungSv(n, nodeLop->lop.headSvLop))
+			continue;
+		{
+			fstream f(nodeLop->lop.ten + ".txt", ios::app);
+			//<mssv, stt, ten, ho, gioi tinh, ngay sinh, cccd / cmnd,>
+			if (flag)
+				f << endl;
+			f << n->sv.id << ',';
+			f << n->sv.stt << ',';
+			f << n->sv.ten << ',';
+			f << n->sv.ho << ',';
+			f << n->sv.gioi << ',';
+			if (n->sv.ngayS.d < 10)
+				f << '0';
+			f << n->sv.ngayS.d;
+			if (n->sv.ngayS.m < 10)
+				f << '0';
+			f << n->sv.ngayS.m;
+			f << n->sv.ngayS.y << ',';
+			f << n->sv.cmnd << ",";
+			if (f.good())
+				cout << "Them sinh vien vao lop thanh cong!\n";
+			f.close();
+		}
+		ThemNodeSvLop(nodeLop->lop.headSvLop, n);
+		flag = true;
+	}
+}
+void ThemSvLop_file(NodeLop* nodeLop)
+{
+	if (nodeLop == NULL)
+	{
+		cout << "Loi! Chua tao lop!!!\n";
+		return;
+	}
+	system("cls");
+	cout << "----THEM SINH VIEN VAO LOP " << nodeLop->lop.ten << "----\n";
+	string file, s;
+	ifstream f;
+	do
+	{
+		cout << "\nNhap duong dan den den file ban muon lay thong tin:\n";
+		getline(cin, file);
+		f.open(file);
+		if (f.is_open())
+		{
+			getline(f, s);
+			f.close();
+			if (s == "")
+			{
+				cout << "File trong!!!\n";
+				cout << "Them sinh vien tu file that bai!!!\n";
+				return;
+			}
+			break;
+		}
+		f.close();
+		cout << "Loi mo file!!!" << endl;
+		cout << "Ban co muon nhap duong dan file khac? Nhap 'Y' de tiep tuc: ";
+		char lenh;
+		cin >> lenh;
+		if (lenh != 'y' && lenh != 'Y')
+		{
+			cout << "Them sinh vien tu file khong thanh cong!!!\n";
+			return;
+		}
+		else
+		{
+			cin.ignore(100, '\n');
+			continue;
+		}
+	} while (true);
+	f.open(file);
+	fstream ofs(nodeLop->lop.ten + ".txt", ios::app);
+	bool flag = false;
+	if (nodeLop->lop.headSvLop)
+		flag = true;
+	while (!f.eof())
+	{
+		Sv T;
+		f.clear();
+		getline(f, s, ',');
+		try
+		{
+			if (s != "")
+			{
+				f.clear();
+				T.id = stoi(s);
+				f.clear();
+				getline(f, s, ',');
+				T.stt = stoi(s);
+				f.clear();
+				getline(f, T.ten, ',');
+				f.clear();
+				getline(f, T.ho, ',');
+				f.clear();
+				getline(f, T.gioi, ',');
+				f.clear();
+				getline(f, s, ',');
+				T.ngayS.d = stoi(s);
+				T.ngayS.y = T.ngayS.d % 10000;
+				T.ngayS.m = (T.ngayS.d / 10000) % 100;
+				T.ngayS.d = T.ngayS.d / 1000000;
+				f.clear();
+				getline(f, s, ',');
+				T.cmnd = atoi(s.c_str());
+				if (!f.good())
+				{
+					throw - 1;
+				}
+				getline(f, s);//lay \n 
+				NodeSv_Lop* n = TaoNodeSv(T);
+				if (checkTrungSv(n, nodeLop->lop.headSvLop))
+				{
+					cout << "Thong bao: Sinh vien them vao bi trung thong tin (mssv, stt) voi sinh vien da co!\n\n";
+					cout << "Ban co muon tiep tuc lay thong tin sinh vien khac tu file? Nhap Y/N: ";
+					char lenh;
+					cin >> lenh;
+					cout << "\n";
+					if (lenh == 'Y' || lenh == 'y')
+						continue;
+					else
+						break;
+				}
+				else
+				{
+					//ghi vao file
+					{
+						//<mssv, stt, ten, ho, gioi tinh, ngay sinh, cccd / cmnd,>
+						ofs.clear();
+						if (flag)
+							ofs << endl;
+						ofs << n->sv.id << ',';
+						ofs << n->sv.stt << ',';
+						ofs << n->sv.ten << ',';
+						ofs << n->sv.ho << ',';
+						ofs << n->sv.gioi << ',';
+						if (n->sv.ngayS.d < 10)
+							ofs << '0';
+						ofs << n->sv.ngayS.d;
+						if (n->sv.ngayS.m < 10)
+							ofs << '0';
+						ofs << n->sv.ngayS.m;
+						ofs << n->sv.ngayS.y << ',';
+						ofs << n->sv.cmnd << ",";
+					}
+					ThemNodeSvLop(nodeLop->lop.headSvLop, n);
+					n->headMon[0] = n->headMon[1] = n->headMon[2] = NULL;
+					flag = true;
+					cout << "Them sinh vien thanh cong!\n";
+				}
+			}
+			else
+			{
+				cout << "Da den cuoi file!!!\n";
+				ofs.close();
+				return;
+			}
+		}
+		catch (int)
+		{
+			cout << "Lay du lieu tu file that bai!!!\n";
+			return;
+		}
+	}
+}
+void ThemSvLopNam1(ListNamHoc& l)
+{
+	do
+	{
+		NodeLop* head = NodeNamHienTai(l)->data.headLop[0];
+		int max = viewDsLop(head);
+		cout << endl;
+		cout << "------THEM SINH VIEN NAM NHAT VAO LOP------\n";
+		int stt;
+		do
+		{
+			cout << "Nhap STT cua lop ma ban muon them sinh vien vao (1-" << max << "): ";
+			cin >> stt;
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(100, '\n');
+			}
+			else if (stt<1 || stt>max)
+				continue;
+			else
+				break;
+		} while (true);
+		cout << endl;
+		NodeLop* n = head;
+		for (int i = 1; i < stt; i++)
+		{
+			n = n->pNext;
+		}
+		if (importFilehayNhapTay(0))
+			ThemSvLop_file(n);
+		else
+			ThemSvLop_tay(n);
+		cout << "Ban co muon tiep tuc? Nhap Y/N: ";
+		char lenh;
+		cin >> lenh;
+		if (lenh != 'y' && lenh != 'Y')
+			break;
+	} 	while (true);
+}
+//nhap diem 
 void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai>
 {
 	system("cls");
@@ -1277,7 +1563,7 @@ void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai
 		else
 		{
 			cout << "Chua co du lieu ve danh sach sinh vien cua mon hoc nay!!!\n";
-			cout << "Xuat file CSV danh sach sinh vien cua mon " << temp->data.id << " that bai!!!\n";		
+			cout << "Xuat file CSV danh sach sinh vien cua mon " << temp->data.id << " that bai!!!\n";
 			temp = temp->pNext;
 			f.close();
 			system("pause");
@@ -1290,7 +1576,7 @@ void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai
 		getline(f, s);//copy dong dau trong file goc vao s
 		while (true)
 		{
-			if(s!="")
+			if (s != "")
 				ofs << s;
 			f.clear();
 			getline(f, s);//copy dong tiep theo trong file goc vao s
@@ -1300,7 +1586,7 @@ void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai
 				ofs << "\n";
 			else
 				break;
-		}	
+		}
 		ofs.close();
 		f.close();
 		cout << "Xuat file CSV danh sach sinh vien cua mon " << temp->data.id << " thanh cong!\n";
@@ -1308,7 +1594,6 @@ void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai
 		temp = temp->pNext;
 	}
 }
-
 bool DocDiemTuFile(string file, NodeMon* mon, int siso)// doc tu file tai len he thong
 {
 	ifstream f(file);
@@ -1408,7 +1693,7 @@ void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk)
 				f.close();
 				temp = temp->pNext;
 				continue;
-				}
+			}
 		}
 		else
 		{
@@ -1443,23 +1728,13 @@ void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk)
 		ofs.close();
 		f.close();
 		//doc len he thong
-		if(DocDiemTuFile(to_string(nam) + "hk" + to_string(stt_hk) + temp->data.id + ".txt", temp, siso))
+		if (DocDiemTuFile(to_string(nam) + "hk" + to_string(stt_hk) + temp->data.id + ".txt", temp, siso))
 			cout << "Nhap diem cho sinh vien mon " << temp->data.id << " thanh cong!\n";
 		else
 			cout << "Nhap diem cho sinh vien mon " << temp->data.id << " that bai!\n";
 		//tiep tuc xuat file dssv cua mon hoc khac...
 		temp = temp->pNext;
 	}
-}
-void TEST(ListNamHoc& l)
-{
-	NodeNamHoc* nodeNam = NodeNamHienTai(l);
-	int stt_hk = 0;
-	HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
-	cin.ignore();//xoa \n khi lua chon truoc do nhan enter
-	XuatFileCsv(nodeNam, hk, stt_hk);
-	system("pause");
-	NhapDiemTuFile(nodeNam, hk, stt_hk);
 }
 
 //HIEN THI

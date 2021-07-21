@@ -277,10 +277,10 @@ int viewDsNam(ListNamHoc A)
 int viewDsLop(NodeLop* head)
 {
 	system("cls");
-	system("color E4");
+	system("color B0");
 	cout << "---------------------DANH SACH LOP HOC-----------------------" << endl;
 	cout << endl;
-	if (head->lop.headSvLop == NULL)
+	if (head == NULL)
 	{
 		cout << "Hien chua cap nhat du lieu..." << endl;
 		return 0;
