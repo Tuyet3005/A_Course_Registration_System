@@ -44,7 +44,7 @@ void LogIn(string& tk, string& mk, short& lc)
 	setColor(background_color, title_color1);
 	gotoXY(70, HEIGHT / 2 + 3);
 	cout << "Tai khoan: ";
-	gotoXY(70, HEIGHT / 2 + 8);
+	gotoXY(70, HEIGHT / 2 + 7);
 	cout << "Mat khau: ";//check mk bnh ki tu
 	setColor(background_color, text_color);
 	char dem = 0;
@@ -53,26 +53,29 @@ void LogIn(string& tk, string& mk, short& lc)
 		gotoXY(84, HEIGHT / 2 + 3);
 		cin >> tk;
 		cin.ignore();//xoa \n
-		gotoXY(84, HEIGHT / 2 + 8);
+		gotoXY(84, HEIGHT / 2 + 7);
 		cin.clear();
 		getline(cin, mk);
 		if (checkAccount(tk, mk, lc)) break;
 		else if (dem < 4)
 		{
 			gotoXY(88, 40);
+			setColor(background_color, red);
 			cout << "! MAT KHAU HOAC TAI KHOAN KHONG DUNG !";
+			setColor(background_color, text_color);
 			char a = _getch();
 			gotoXY(88, 40);
 			cout << "                                             ";
 			gotoXY(84, HEIGHT / 2 + 3);
 			cout << "                                          ";
-			gotoXY(84, HEIGHT / 2 + 8);
+			gotoXY(84, HEIGHT / 2 + 7);
 			cout << "                                          ";
 		}
 		dem++;
 	}
 	if (dem == 5)
 	{
+		setColor(background_color, red);
 		gotoXY(92, 38);
 		cout << "! DANG NHAP THAT BAI !" << endl;
 		gotoXY(88, 40);
@@ -82,9 +85,12 @@ void LogIn(string& tk, string& mk, short& lc)
 	}
 	else
 	{
+		setColor(background_color, title_color);
 		gotoXY(92, 40);
 		cout << "~ DANG NHAP THANH CONG ~" << endl;
 	}
+	cout << endl;
+	setColor(background_color, text_color);
 	system("pause");
 }
 

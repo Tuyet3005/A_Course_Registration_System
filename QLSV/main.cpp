@@ -1,8 +1,9 @@
 #include"DKKH.h"
 int main()
 {
-	system("color F4");
+	system("color F0");
 	SetConsole();
+	SetFontSize(18);
 	string tk, mk;
 	short lc = 1;//Ma tk:  0: giao vu ; 1: sinh vien
 	ListNamHoc listNam;
@@ -16,7 +17,7 @@ int main()
 		system("cls");
 		do
 		{
-			Thoat = XlMenuBD(LuaChon(InMenuBatDau(lc)), lc, tk, mk, listNam);
+			Thoat = XlMenuBD(InMenuBatDau(lc), lc, tk, mk, listNam);
 		} 		while (!Thoat);
 		//
 	} 	while (true);

@@ -577,9 +577,8 @@ void viewInfoGV(Sv A)
 //HIEN THI
 void background()
 {
-	system("cls");
-	cout << endl;
-	cout << "Welcome to..." << endl << endl << endl;
+	cout << "Chao mung ban den voi he thong quan li sinh vien...";
+	gotoXY(0, 10);
 	setColor(background_color, title_color);
 	cout << "                                                            XXXX                       XXXX                 XXXX            XXXX            XXXX         " << endl;
 	cout << "                                                       XXX         XX              XXX        XX            XXX  XXX    XXX  XXX        XXX        XX    " << endl;
@@ -590,9 +589,9 @@ void background()
 	cout << "                                                        XXX        XXX            XXX          XXX          XXX              XXX          XXX        XXX " << endl;
 	cout << "                                                             XXXX                       XXXX                XXX              XXX              XXXX       " << endl;
 	setColor(background_color, text_color);
-	cout << endl;
-	cout << "                                                                                          Course & Student Management System";
-	gotoXY(0, 15);
+	cout << endl << endl;
+	cout << "                                                                                      Course & Student Management System";
+
 }
 
 void background_Sv()
@@ -646,6 +645,7 @@ void background_Login()
 
 void veHCN(int bd_x,int bd_y,int kt_x,int kt_y)
 {
+	setColor(background_color, title_color1);
 	gotoXY(bd_x, bd_y);
 	cout << (char)218;
 	for (int i = 1; i < kt_x - bd_x; i++)
@@ -663,7 +663,7 @@ void veHCN(int bd_x,int bd_y,int kt_x,int kt_y)
 	for(int i = 1; i < kt_x - bd_x; i++)
 		cout << (char)196;
 	cout << (char)217;
-
+	setColor(background_color, text_color);
 }
                
 int LuaChon_Dep(int title_number, string title[])
@@ -683,8 +683,8 @@ int LuaChon_Dep(int title_number, string title[])
 	kt_y = bd_y + cell_height;
 	for (int i = 0; i < title_number; i++)
 	{
-		veHCN(bd_x, bd_y + i * (cell_height + 3), kt_x, kt_y + i * (cell_height + 3));
-		gotoXY(pos_x[i], bd_y + i * (cell_height + 3) + cell_height/2);
+		veHCN(bd_x, bd_y + i * (cell_height + 2), kt_x, kt_y + i * (cell_height + 2));
+		gotoXY(pos_x[i], bd_y + i * (cell_height + 2) + cell_height/2);
 		cout << title[i];
 	}
 	//chon
@@ -697,13 +697,13 @@ int LuaChon_Dep(int title_number, string title[])
 			temp = _getch();
 			if (temp == 72)//len
 			{
-				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 3) + cell_height / 2);
+				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
 				cout << title[lc];
 				if (lc == 0)
 					lc = title_number-1;
 				else
 					lc--;
-				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 3) + cell_height / 2);
+				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
 				setColor(background_color, title_color1);
 				cout << title[lc];
 				setColor(background_color, text_color);
@@ -711,19 +711,19 @@ int LuaChon_Dep(int title_number, string title[])
 			}
 			else if (temp == 80)//xuong
 			{
-				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 3) + cell_height / 2);
+				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
 				cout << title[lc];
 				if (lc == title_number-1)
 					lc = 0;
 				else
 					lc++;
-				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 3) + cell_height / 2);
+				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
 				setColor(background_color, title_color1);
 				cout << title[lc];
 				setColor(background_color, text_color);
 			}
 		}
 	}
-	return lc + 1;
+	return lc ;
 }
 
