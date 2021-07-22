@@ -6,10 +6,18 @@
 #include<ctime>
 using namespace std;
 
-//font size
-const int lon = 24;//menu, hien thi noi dung ngan  
-const int vua = 21;//hien thi noi dung dai 
-const int nho = 18;//login, giao vu, sinh vien (cai nao co background)
+//color
+#define background_color 15  //trang duc
+#define title_color 5  //tim
+#define title_color1 3 //xanh aqua
+#define text_color 0  //den
+#define red 4                                        
+//draw
+#define cell_width 34
+
+//screen
+#define WIDTH 210
+#define HEIGHT 50
 
 //THOI GIAN
 struct Time
@@ -119,4 +127,3 @@ struct ListNamHoc
 	NodeNamHoc* pHead;
 	NodeNamHoc* pTail;
 };
-

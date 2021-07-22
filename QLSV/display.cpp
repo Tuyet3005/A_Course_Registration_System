@@ -584,3 +584,157 @@ void viewInfoGV(Sv A)
 	drawTable(2, 5, posCol, posRow);
 	system("pause");
 }
+
+//HIEN THI
+void background()
+{
+	cout << "Chao mung ban den voi he thong quan li sinh vien...";
+	gotoXY(0, 10);
+	setColor(background_color, title_color);
+	cout << "                                                            XXXX                       XXXX                 XXXX            XXXX            XXXX         " << endl;
+	cout << "                                                       XXX         XX              XXX        XX            XXX  XXX    XXX  XXX        XXX        XX    " << endl;
+	cout << "                                                    XXX                            XXX                      XXX      XXX     XXX        XXX              " << endl;
+	cout << "                                                  XXX                                   XXX                 XXX       X      XXX              XXX        " << endl;
+	cout << "                                                  XXX                                          XXX          XXX              XXX                    XXX  " << endl;
+	cout << "                                                    XXX                XX        XX              XXX        XXX              XXX        XX            XXX" << endl;
+	cout << "                                                        XXX        XXX            XXX          XXX          XXX              XXX          XXX        XXX " << endl;
+	cout << "                                                             XXXX                       XXXX                XXX              XXX              XXXX       " << endl;
+	setColor(background_color, text_color);
+	cout << endl << endl;
+	cout << "                                                                                      Course & Student Management System";
+
+}
+
+void background_Sv()
+{
+	setColor(background_color, title_color);
+	gotoXY(0, 5);
+	cout << "                                                   xxxxx     xx  xxxxx       xx   xxx       xx         xxx             xx   xx   xxxxxxxxxx  xxxxx       xx" << endl;
+	cout << "                                                xxx     xx   xx  xxx xx      xx   xxx       xx          xxx           xx    xx   xxx         xxx xx      xx" << endl;
+	cout << "                                               xxx           xx  xxx  xx     xx   xxx       xx           xxx         xx     xx   xxx         xxx  xx     xx" << endl;
+	cout << "                                                  xxxx       xx  xxx   xx    xx   xxx       xx            xxx       xx      xx   xxxxxx      xxx   xx    xx" << endl;
+	cout << "                                                      xxxx   xx  xxx    xx   xx   xxxxxxxxxxxx             xxx     xx       xx   xxxxxx      xxx    xx   xx" << endl;
+	cout << "                                              xx         xxx xx  xxx     xx  xx   xxxxxxxxxxxx              xxx   xx        xx   xxx         xxx     xx  xx" << endl;
+	cout << "                                               xxx      xxx  xx  xxx      xx xx   xxx       xx               xxx xx         xx   xxx         xxx      xx xx" << endl;
+	cout << "                                                   xxxx      xx  xxx       xxxx   xxx       xx                xxxx          xx   xxxxxxxxxxx xxx       xxxx" << endl;
+	cout << endl << endl;
+	setColor(background_color, text_color);
+}
+
+void background_Gv()
+{
+	setColor(background_color, title_color);
+	gotoXY(0, 5);
+	cout << endl << endl;
+	cout << "                                                        xxxxx       xx         xxxx               xxxxx              xxx             xx  xxx          xx" << endl;
+	cout << "                                                     xxx      xx    xx        xxx xx          xxx        xx           xxx           xx   xxx          xx" << endl;
+	cout << "                                                   xxx              xx       xxx   xx       xxx            xx          xxx         xx    xxx          xx" << endl;
+	cout << "                                                  xxx               xx      xxx     xx     xxx              xx          xxx       xx     xxx          xx" << endl;
+	cout << "                                                  xxx         xxxxx xx     xxxxxxxxxxxx    xxx              xx           xxx     xx      xxx          xx" << endl;
+	cout << "                                                   xxx         xxx  xx    xxxxxxxxxxxxxx    xxx            xx             xxx   xx       xxx          xx" << endl;
+	cout << "                                                     xxx    xxxxxx  xx   xxx           xx      xxx      xx                 xxx xx         xxxx       xx " << endl;
+	cout << "                                                        xxxxx  xxx  xx  xxx             xx         xxxxx                    xxxx            xxxxxxxxx   " << endl;
+	setColor(background_color, text_color);
+	cout << endl << endl;
+}
+
+void background_Login()
+{
+	setColor(background_color, title_color);
+	gotoXY(0, 10);
+	cout << "                                      xxxxxxxx             xxxx         xxxxx       xx         xxx            xxxx        xx  xxx        xx        xxxx         xxxxxxxx    " << endl;
+	cout << "                                      xxx     xxx         xxx xx        xxx xx      xx     xxx    xx          xxx xx      xx  xxx        xx       xxx xx        xxx    xxx  " << endl;
+	cout << "                                      xxx       xx       xxx   xx       xxx  xx     xx   xxx                  xxx  xx     xx  xxx        xx      xxx   xx       xxx      xx " << endl;
+	cout << "                                      xxx        xx     xxxxxxxxxx      xxx   xx    xx  xxx                   xxx   xx    xx  xxxxxxxxxxxxx     xxxxxxxxxx      xxx    xxx  " << endl;
+	cout << "                                      xxx        xx    xxxxxxxxxxxx     xxx    xx   xx  xxx     xxxxxx        xxx    xx   xx  xxxxxxxxxxxxx    xxxxxxxxxxxx     xxxxxxx     " << endl;
+	cout << "                                      xxx       xx    xxx         xx    xxx     xx  xx   xxx       xxx        xxx     xx  xx  xxx        xx   xxx         xx    xxx         " << endl;
+	cout << "                                      xxx     xxx    xxx           xx   xxx      xx xx     xxx    xxxx        xxx      xx xx  xxx        xx  xxx           xx   xxx         " << endl;
+	cout << "                                      xxxxxxxx      xxx             xx  xxx       xxxx       xxxxx xxx        xxx        xxx  xxx        xx xxx             xx  xxx         " << endl;
+	setColor(background_color, text_color);
+	cout << endl << endl;
+}
+
+void veHCN(int bd_x,int bd_y,int kt_x,int kt_y)
+{
+	setColor(background_color, title_color1);
+	gotoXY(bd_x, bd_y);
+	cout << (char)218;
+	for (int i = 1; i < kt_x - bd_x; i++)
+		cout << (char)196;
+	cout << (char)191;
+	for (int i = 1; i < kt_y - bd_y; i++)
+	{
+		gotoXY(bd_x, bd_y + i);
+		cout << (char)179;
+		gotoXY(kt_x, bd_y + i);
+		cout << (char)179;
+	}
+	gotoXY(bd_x, kt_y);
+	cout << (char)192;
+	for(int i = 1; i < kt_x - bd_x; i++)
+		cout << (char)196;
+	cout << (char)217;
+	setColor(background_color, text_color);
+}
+               
+int LuaChon_Dep(int title_number, string title[])
+{
+	int* pos_x=new int[title_number];
+	for (int i = 0; i < title_number; i++)
+		pos_x[i] = WIDTH / 2 - title[i].length() / 2;
+	int cell_height = 0;
+	int bd_x, bd_y, kt_x, kt_y;
+	if (title_number > 2)//do menu chinh
+		cell_height = 2;
+	else
+		cell_height = 4;//dang nhap
+	bd_x = WIDTH / 2 - cell_width / 2;
+	bd_y = HEIGHT / 2 ;
+	kt_x = bd_x + cell_width;
+	kt_y = bd_y + cell_height;
+	for (int i = 0; i < title_number; i++)
+	{
+		veHCN(bd_x, bd_y + i * (cell_height + 2), kt_x, kt_y + i * (cell_height + 2));
+		gotoXY(pos_x[i], bd_y + i * (cell_height + 2) + cell_height/2);
+		cout << title[i];
+	}
+	//chon
+	int lc = 1;
+	int temp = 72;
+	while (temp != 13)//ko enter
+	{
+		if (_kbhit())
+		{
+			temp = _getch();
+			if (temp == 72)//len
+			{
+				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
+				cout << title[lc];
+				if (lc == 0)
+					lc = title_number-1;
+				else
+					lc--;
+				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
+				setColor(background_color, title_color1);
+				cout << title[lc];
+				setColor(background_color, text_color);
+				//mau
+			}
+			else if (temp == 80)//xuong
+			{
+				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
+				cout << title[lc];
+				if (lc == title_number-1)
+					lc = 0;
+				else
+					lc++;
+				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
+				setColor(background_color, title_color1);
+				cout << title[lc];
+				setColor(background_color, text_color);
+			}
+		}
+	}
+	return lc ;
+}
+

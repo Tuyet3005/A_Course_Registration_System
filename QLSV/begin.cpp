@@ -3,16 +3,18 @@
 int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 {
 	system("cls");
-	SetFontSize(nho);
-	BackGround();
-	cout << endl;
-	cout << "\t \t \t CHAO MUNG BAN DEN VOI HE THONG QUAN LY SINH VIEN\n";
-	cout << "\t \t \t \t \t 1. Vao he thong chinh\n";
+	gotoXY(0, 2);
+	background();
+	cout << endl << endl;
+	//setColor(background_color, title_color1);
+	string title[5] = { "HE THONG CHINH","THONG TIN CA NHAN","DOI MAT KHAU","DANG XUAT","THOAT" };
+	/*cout << "\t \t \t \t \t 1. Vao he thong chinh\n";
+
 	cout << "\t \t \t \t \t 2. Xem thong tin cua ban\n";
 	cout << "\t \t \t \t \t 3. Doi mat khau\n";
 	cout << "\t \t \t \t \t 4. Dang xuat\n";
-	cout << "\t \t \t \t \t 5. Thoat\n";
-	return 5;//tra ve maxSelect
+	cout << "\t \t \t \t \t 5. Thoat\n";*/
+	return LuaChon_Dep(5, title);//tra ve maxSelect
 }
 
 bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la maTk  0:Giao vu, 1: Sinh vien
