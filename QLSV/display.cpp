@@ -58,6 +58,7 @@ void drawTable(int Row, int Col, int posCol[], int posRow)//posRow la hang bat d
 
 int viewDsSvLop(NodeLop* A)
 {
+	SetFontSize(lon);
 	system("cls");
 	cout << "----------------------------------------DANH SACH LOP " << A->lop.ten << "--------------------------------------" << endl;
 	cout << endl;
@@ -120,6 +121,7 @@ void BackGround()
 
 int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 {
+	SetFontSize(vua);
 	cout << "---------------------------------------------DANH SACH MON KI " << ki << "----------------------------------------" << endl;
 	cout << endl;
 	if (head == NULL)
@@ -164,6 +166,7 @@ int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 int viewDsSvMon(NodeMon* A)
 {
 	system("cls");
+	SetFontSize(vua);
 	cout << "---------------------------------------DANH SACH SINH VIEN MON " << A->data.tenMon << "--------------------------------------" << endl;
 	cout << endl;
 	if (A->headSvMon == NULL)
@@ -211,6 +214,7 @@ int viewDsSvMon(NodeMon* A)
 int viewDsKi(NodeNamHoc* A)
 {
 	system("cls");
+	SetFontSize(lon);
 	cout << "---------------------------------------------DANH SACH KI NAM HOC " << A->data.tg.ngay_bd.y << " - " << A->data.tg.ngay_bd.y + 1 << "-------------------------------------------" << endl;
 	cout << endl;
 	if (A->data.hk[0].tg.ngay_bd.d == NULL)
@@ -243,6 +247,7 @@ int viewDsKi(NodeNamHoc* A)
 int viewDsNam(ListNamHoc A)
 {
 	system("cls");
+	SetFontSize(lon);
 	cout << "---------------------------------------DANH SACH NAM HOC----------------------------------" << endl;
 	cout << endl;
 	if (A.pHead == NULL)
@@ -277,7 +282,7 @@ int viewDsNam(ListNamHoc A)
 int viewDsLop(NodeLop* head)
 {
 	system("cls");
-	system("color B0");
+	SetFontSize(lon);
 	cout << "---------------------DANH SACH LOP HOC-----------------------" << endl;
 	cout << endl;
 	if (head == NULL)
@@ -312,6 +317,7 @@ int viewDsLop(NodeLop* head)
 int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 {
 	system("cls");
+	SetFontSize(vua);
 	cout << "-------------------------------------KET QUA HOC TAP - HOC KI " << ki << "----------------------------------" << endl;
 	cout << endl;
 	if (sv->headMon == NULL)
@@ -366,6 +372,7 @@ void viewInfoSv(Sv A)
 {
 	system("cls");
 	cout << endl;
+	SetFontSize(lon);
 	cout << "----------------------------------------THONG TIN CA NHAN--------------------------------------" << endl;
 	cout << endl;
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
@@ -398,6 +405,7 @@ void viewInfoSv(Sv A)
 
 int viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
 {
+	SetFontSize(vua);
 	cout << "------------------------------------------------KET QUA DANG KI HOC PHAN KI " << ki << "----------------------------------------------" << endl;
 	cout << endl;
 	if (A == NULL)
@@ -441,6 +449,7 @@ int viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
 
 int viewDiem_Lop(NodeLop* A, int ki)
 {
+	SetFontSize(vua);
 	//TINH GPA
 	bool flag = tinhGPA_SvvaLop(A, ki);
 	//
@@ -506,6 +515,7 @@ int viewDiem_Lop(NodeLop* A, int ki)
 //TINH GPA
 bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 {
+	SetFontSize(vua);
 	NodeSv_Lop* pSv = t->lop.headSvLop;
 	NodeMon_Sv* pMon;
 	float sum;
@@ -549,6 +559,7 @@ void viewInfoGV(Sv A)
 {
 	system("cls");
 	cout << endl;
+	SetFontSize(lon);
 	cout << "---------------------------THONG TIN CA NHAN-------------------------------------" << endl;
 	string title[] = { "HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posRow = whereY();

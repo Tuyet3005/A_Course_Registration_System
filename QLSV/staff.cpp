@@ -151,6 +151,7 @@ bool importFilehayNhapTay(bool chon)
 int InMenuTaoMoi()
 {
 	system("cls");
+	SetFontSize(lon);
 	cout << "--------------MENU TAO MOI--------------\n";
 	cout << "\t   1. Nam hoc\n";
 	cout << "\t   2. Lop hoc\n";
@@ -317,7 +318,6 @@ void TaoNam(ListNamHoc& l)
 		cout << "Tao nam hoc moi thanh cong!!!" << endl;
 	system("pause");
 	system("cls");
-	HienNamHoc(l);
 	system("pause");
 }
 
@@ -369,6 +369,8 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		cin.ignore();
 		sl = 0;
 	}
+	if (sl == 0)
+		return;
 	for (int i = 0; i < sl; i++)
 	{
 		string ten;
@@ -1019,6 +1021,7 @@ void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk)
 int InMenuCapNhat()//dung cho ca menu Cap nhat
 {
 	system("cls");
+	SetFontSize(lon);
 	cout << "-------------MENU CAP NHAT-------------\n";
 	cout << "\t  1. Them sinh vien nam nhat\n";//nhap tay, import file
 	cout << "\t  2. Mon hoc\n"; // xoa, sua thong tin 
@@ -1030,6 +1033,7 @@ int InMenuCapNhat()//dung cho ca menu Cap nhat
 int InMenuCapNhat2()
 {
 	system("cls");
+	SetFontSize(lon);
 	cout << "---------------CAP NHAT MON HOC---------------\n";
 	cout << "\t  1. Sua thong tin mon hoc\n";
 	cout << "\t  2. Xoa mon hoc\n";
@@ -1040,6 +1044,7 @@ int InMenuCapNhat2()
 int InMenuCapNhat3()
 {
 	system("cls");
+	SetFontSize(lon);
 	cout << "----CAP NHAT DIEM SINH VIEN----\n";
 	cout << "1. Xuat file cho giao vien nhap diem\n";
 	cout << "2. Nhap diem tu file len he thong\n";
@@ -1465,6 +1470,7 @@ void ThemSvLopNam1(ListNamHoc& l)
 {
 	do
 	{
+		SetFontSize(24);
 		NodeLop* head = NodeNamHienTai(l)->data.headLop[0];
 		int max = viewDsLop(head);
 		cout << endl;
@@ -1927,7 +1933,6 @@ void hienthiDiem_Lop(NodeLop* A, int& lc)
 bool ChonKihayLop()
 {
 	system("cls");
-
 	cout << "Nhan 1 neu ban muon xem KI HOC - MON HOC" << endl;
 	cout << "Nhan 2 neu ban muon xem LOP HOC - SINH VIEN" << endl;
 	char temp = NULL;

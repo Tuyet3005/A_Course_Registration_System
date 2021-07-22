@@ -9,6 +9,7 @@ int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 	//setColor(background_color, title_color1);
 	string title[5] = { "HE THONG CHINH","THONG TIN CA NHAN","DOI MAT KHAU","DANG XUAT","THOAT" };
 	/*cout << "\t \t \t \t \t 1. Vao he thong chinh\n";
+
 	cout << "\t \t \t \t \t 2. Xem thong tin cua ban\n";
 	cout << "\t \t \t \t \t 3. Doi mat khau\n";
 	cout << "\t \t \t \t \t 4. Dang xuat\n";
@@ -49,7 +50,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 	}
 	case 4:
 	{
-		cout << "Ban se dang xuat ra khoi tai khoan nay? Y?N?" << endl;
+		cout << "Ban se dang xuat ra khoi tai khoan nay? Y/N?" << endl;
 		cin >> lenh;
 		if (lenh == 'Y' || lenh == 'y')
 			return true;

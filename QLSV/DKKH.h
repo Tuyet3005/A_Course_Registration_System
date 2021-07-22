@@ -15,7 +15,6 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head);
 void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc);
 //GV
 void taoDKKH_Gv(NodeNamHoc* H);
-bool importFilehayNhapTay();
 bool askforsure(ThoiGian& tg, Time& tmBD, Time& tmKT, int ki);
 bool xuatFile_DKKH(ThoiGian tg, Time tmBD, Time tmKT,int ki);
 bool askY_N();
