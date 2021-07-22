@@ -191,6 +191,7 @@ void CapNhatMonHoc(ListNamHoc& l)
 
 		cout << "Buoi hoc " << stt_buoi << " - thu (" << buoi.thu << ")\n";
 		HienLuaChonThu(1);
+		cout << "Nhap lua chon: ";
 		getline(cin, input);
 		try
 		{
@@ -200,6 +201,7 @@ void CapNhatMonHoc(ListNamHoc& l)
 
 		cout << "Buoi hoc " << stt_buoi << " - gio (" << buoi.buoi << "): ";
 		HienLuaChonGio();
+		cout << "Nhap lua chon: ";
 		getline(cin, input);
 		try
 		{

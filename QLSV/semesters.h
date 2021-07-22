@@ -3,39 +3,18 @@
 #include "years.h"
 
 
-// Tra ve hoc ky tuong ung
-HocKy* ChonHocKy(NamHoc nam_hoc, int hoc_ky)
-{
-	hoc_ky -= 1;
-	if (hoc_ky < size(nam_hoc.hk))
-	{
-		return &nam_hoc.hk[hoc_ky];
-	}
-	else {
-		return NULL;
-	}
-}
-
 HocKy* NhapHocKy(NodeNamHoc* node_nam)
 {
-	int so_hoc_ky;
+	int so_hoc_ky = -1;
 	HocKy* hoc_ky;
 
-	while (true)
+	while (so_hoc_ky < 1 || so_hoc_ky > 3)
 	{
-		cout << "Nhap hoc ky: ";
+		cout << "Nhap hoc ky (1 <= HK <= 3): ";
 		cin >> so_hoc_ky;
 		cin.ignore();
-		hoc_ky = ChonHocKy(node_nam->data, so_hoc_ky);
-		if (hoc_ky != NULL)
-		{
-			return hoc_ky;
-		}
-		else
-		{
-			cout << "Nhap sai hoc ky.\n";
-		}
 	}
+	return &node_nam->data.hk[so_hoc_ky - 1];
 }
 
 HocKy* NhapHocKy(ListNamHoc l)
