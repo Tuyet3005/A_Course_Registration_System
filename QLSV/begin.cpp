@@ -3,6 +3,7 @@
 int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 {
 	system("cls");
+	SetFontSize(nho);
 	BackGround();
 	cout << endl;
 	cout << "\t \t \t CHAO MUNG BAN DEN VOI HE THONG QUAN LY SINH VIEN\n";

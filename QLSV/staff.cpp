@@ -152,6 +152,7 @@ bool importFilehayNhapTay(bool chon)
 int InMenuTaoMoi()
 {
 	system("cls");
+	SetFontSize(lon);
 	cout << "--------------MENU TAO MOI--------------\n";
 	cout << "\t   1. Nam hoc\n";
 	cout << "\t   2. Lop hoc\n";
@@ -1021,6 +1022,7 @@ void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk)
 int InMenuCapNhat()//dung cho ca menu Cap nhat
 {
 	system("cls");
+	SetFontSize(lon);
 	cout << "-------------MENU CAP NHAT-------------\n";
 	cout << "\t  1. Them sinh vien nam nhat\n";//nhap tay, import file
 	cout << "\t  2. Mon hoc\n"; // xoa, sua thong tin 
@@ -1032,6 +1034,7 @@ int InMenuCapNhat()//dung cho ca menu Cap nhat
 int InMenuCapNhat2()
 {
 	system("cls");
+	SetFontSize(lon);
 	cout << "---------------CAP NHAT MON HOC---------------\n";
 	cout << "\t  1. Sua thong tin mon hoc\n";
 	cout << "\t  2. Xoa mon hoc\n";
@@ -1042,6 +1045,7 @@ int InMenuCapNhat2()
 int InMenuCapNhat3()
 {
 	system("cls");
+	SetFontSize(lon);
 	cout << "----CAP NHAT DIEM SINH VIEN----\n";
 	cout << "1. Xuat file cho giao vien nhap diem\n";
 	cout << "2. Nhap diem tu file len he thong\n";

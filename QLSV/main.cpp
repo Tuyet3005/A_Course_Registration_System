@@ -11,6 +11,7 @@ int main()
 	TaiData_Nam(listNam);
 	do
 	{
+		SetFontSize(nho);
 		bool Thoat = false;
 		LogIn(tk, mk, lc);//dn sai thi tu dong thoat ra luon
 		system("cls");

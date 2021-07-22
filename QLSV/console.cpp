@@ -112,7 +112,6 @@ void SetConsole()
 	DisableResizeWindow();
 	ShowScrollbar(0);
 	//font 
-	SetFontSize(24);
 }
 void SetFontSize(int size)
 {

@@ -7,8 +7,9 @@
 using namespace std;
 
 //font size
-const int SZ = 24;
-const int sz = 21;
+const int lon = 24;//menu, hien thi noi dung ngan  
+const int vua = 21;//hien thi noi dung dai 
+const int nho = 18;//login, giao vu, sinh vien (cai nao co background)
 
 //THOI GIAN
 struct Time

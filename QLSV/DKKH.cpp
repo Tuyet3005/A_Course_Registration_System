@@ -126,7 +126,7 @@ void xoaLC(int dem, int mon, int ki, NodeSv_Lop* A, NodeMon* head)
 int viewDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)
 {
 	system("cls");
-	SetFontSize(sz);
+	SetFontSize(vua);
 	gotoXY(55, 1);
 	int mon;// so mon dc mo
 	cout << "DANG KI HOC PHAN" << endl << endl;

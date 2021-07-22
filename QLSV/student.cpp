@@ -4,7 +4,6 @@
 #include"DKKH.h"
 int InMenuSv()
 {
-	SetFontSize(SZ);
 	system("cls");
 	cout << "------HE THONG QUAN LY SINH VIEN------\n";
 	cout << "\t <Giao dien sinh vien>\n";
