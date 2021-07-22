@@ -1,6 +1,7 @@
 #include"DKKH.h"
 int main()
 {
+	system("color F4");
 	SetConsole();
 	string tk, mk;
 	short lc = 1;//Ma tk:  0: giao vu ; 1: sinh vien

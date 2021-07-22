@@ -1,4 +1,5 @@
 #include"login.h"
+#include"display.h"
 
 bool checkAccount(string tk, string mk, short lc)
 {
@@ -23,8 +24,10 @@ bool checkAccount(string tk, string mk, short lc)
 void LogIn(string& tk, string& mk, short& lc)
 {
 	system("cls");
-	cout << "--------------------DANG NHAP------------------------" << endl;
-	cout << "Nhap 1 neu ban la hoc sinh, 0 neu ban la giao vu" << endl;
+	background_Login();
+	string title[2] = { "SINH VIEN","GIAO VU" };
+	lc=LuaChon_Dep(2, title);
+	/*cout << "Nhap 1 neu ban la hoc sinh, 0 neu ban la giao vu" << endl;
 	do
 	{
 		cout << "Moi nhap (0-1): ";
@@ -35,32 +38,53 @@ void LogIn(string& tk, string& mk, short& lc)
 			cin.ignore(100, '\n');
 			lc = 2;
 		}
-	} 	while (lc < 0 || lc>1);
-	cout << endl;
-	cin.clear();
-	cin.ignore();
+	} 	while (lc < 0 || lc>1);*/
+	system("cls");
+	background_Login();
+	setColor(background_color, title_color1);
+	gotoXY(70, HEIGHT / 2 + 3);
+	cout << "Tai khoan: ";
+	gotoXY(70, HEIGHT / 2 + 8);
+	cout << "Mat khau: ";//check mk bnh ki tu
+	setColor(background_color, text_color);
 	char dem = 0;
 	while (dem < 5)
 	{
-		cout << "Tai khoan: ";
+		gotoXY(84, HEIGHT / 2 + 3);
 		cin >> tk;
 		cin.ignore();//xoa \n
-		cout << "Mat khau: ";
+		gotoXY(84, HEIGHT / 2 + 8);
 		cin.clear();
 		getline(cin, mk);
 		if (checkAccount(tk, mk, lc)) break;
-		else if (dem < 4) cout << "Ban da nhap sai... Moi nhap lai" << endl;
+		else if (dem < 4)
+		{
+			gotoXY(88, 40);
+			cout << "! MAT KHAU HOAC TAI KHOAN KHONG DUNG !";
+			char a = _getch();
+			gotoXY(88, 40);
+			cout << "                                             ";
+			gotoXY(84, HEIGHT / 2 + 3);
+			cout << "                                          ";
+			gotoXY(84, HEIGHT / 2 + 8);
+			cout << "                                          ";
+		}
 		dem++;
 	}
-	cout << endl;
 	if (dem == 5)
 	{
-		cout << "DANG NHAP THAT BAI" << endl;
-		cout << "Nhap sai 5 lan... Ban bi buoc thoat!!!" << endl;
+		gotoXY(92, 38);
+		cout << "! DANG NHAP THAT BAI !" << endl;
+		gotoXY(88, 40);
+		cout << "Nhap sai 5 lan... Ban bi buoc thoat" << endl;
 		system("pause");
 		exit(0);
 	}
-	else cout << "DANG NHAP THANH CONG" << endl;
+	else
+	{
+		gotoXY(92, 40);
+		cout << "~ DANG NHAP THANH CONG ~" << endl;
+	}
 	system("pause");
 }
 

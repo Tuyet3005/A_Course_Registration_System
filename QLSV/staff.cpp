@@ -8,8 +8,7 @@
 int InMenuGv()
 {
 	system("cls");
-	cout << "------HE THONG QUAN LY SINH VIEN------\n";
-	cout << "\t <Giao dien giao vu>\n";
+	background_Gv();
 	cout << "	1. Tao moi\n";
 	cout << "	2. Cap nhat\n";
 	cout << "	3. Hien thi\n";

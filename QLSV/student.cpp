@@ -5,8 +5,7 @@
 int InMenuSv()
 {
 	system("cls");
-	cout << "------HE THONG QUAN LY SINH VIEN------\n";
-	cout << "\t <Giao dien sinh vien>\n";
+	background_Sv();
 	cout << "	1. Cac mon hoc cua toi\n";
 	cout << "	2. Dang ky mon hoc \n";//co the dk them hoac xoa -> check conflict 
 	cout << "	3. Cac mon hoc dang mo\n";
