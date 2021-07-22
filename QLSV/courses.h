@@ -28,10 +28,9 @@ void HienThiDSMon(NodeMon* head_mon)
 	}
 }
 
-NodeMon* NhapMonHoc(ListNamHoc l)
+NodeMon* NhapMonHoc(HocKy* hoc_ky)
 {
 	string id_mon_hoc;
-	HocKy* hoc_ky = NhapHocKy(l);
 	NodeMon* mon = NULL;
 
 	while (true)
@@ -49,6 +48,11 @@ NodeMon* NhapMonHoc(ListNamHoc l)
 			cout << "Nhap sai ID mon hoc.\n";
 		}
 	}
+}
+
+NodeMon* NhapMonHoc(ListNamHoc l)
+{
+	return NhapMonHoc(NhapHocKy(l));
 }
 
 NodeMon* TimNodeMon(ListNamHoc l, string id_mon)
@@ -219,6 +223,28 @@ void CapNhatMonHoc(ListNamHoc& l)
 
 void XoaMonHoc(ListNamHoc& l)
 {
-	NodeMon* node_mon = NhapMonHoc(l);
-	LuuMonHoc(l, node_mon,  true);
+	NodeNamHoc* node_nam = NhapNamHoc(l);
+
+	int so_hoc_ky = -1;
+	HocKy* hoc_ky;
+
+	while (so_hoc_ky < 1 || so_hoc_ky > 3)
+	{
+		cout << "Nhap hoc ky (1 <= HK <= 3): ";
+		cin >> so_hoc_ky;
+		cin.ignore();
+	}
+	hoc_ky = &node_nam->data.hk[so_hoc_ky - 1];
+
+	NodeMon* node_mon = NhapMonHoc(hoc_ky);
+	LuuMonHoc(l, node_mon, true);
+	string filename = to_string(node_nam->data.tg.ngay_bd.y) + "hk" + to_string(so_hoc_ky) + node_mon->data.id + ".txt";
+	remove(filename.c_str());
+
+	NodeMon* next = node_mon->pNext;
+	NodeMon** p;
+	for (p = &hoc_ky->headMon; *p != node_mon; p = &(*p)->pNext);
+	(*p)->pNext = NULL;
+	delete* p;
+	*p = next;
 }
