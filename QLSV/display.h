@@ -2,7 +2,7 @@
 #include"variable.h"
 #include"student.h"
 #include"console.h"
-void drawTable(int Row, int Col, int posCol[], int posRow, int size);
+void drawTable(int Row, int Col, int posCol[], int posRow);
 int viewDsSvLop(NodeLop* A);
 void BackGround();
 int viewDsMonHk(NodeMon* head, int ki);//tra ve so mon dung trong dkhp
