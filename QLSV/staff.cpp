@@ -9,13 +9,8 @@ int InMenuGv()
 {
 	system("cls");
 	background_Gv();
-	cout << "	1. Tao moi\n";
-	cout << "	2. Cap nhat\n";
-	cout << "	3. Hien thi\n";
-	cout << "	4. Quay ve menu bat dau\n";
-	cout << "	5. Thoat\n";
-	cout << "--------------------------------------\n";
-	return 5;//lua chon lon nhat la 5
+	string title[5] = { "TAO MOI","CAP NHAT","HIEN THI","QUAY VE","THOAT" };
+	return LuaChon_Dep(5,title);//lua chon lon nhat la 5
 }
 int LuaChon(int maxChoice)
 {
@@ -45,18 +40,16 @@ bool XlMenuGv(int chon, ListNamHoc& l)
 	{
 		do
 		{
-			Thoat = XlTaoMoi(LuaChon(InMenuTaoMoi()), l);
+			Thoat = XlTaoMoi(InMenuTaoMoi(), l);
 		} while (!Thoat);
-		system("pause");
 		break;
 	}
 	case 2:
 	{
 		do
 		{
-			Thoat = XlCapNhat(LuaChon(InMenuCapNhat()), l);
+			Thoat = XlCapNhat(InMenuCapNhat(), l);
 		} while (!Thoat);
-		system("pause");
 		break;
 	}
 	case 3:
@@ -65,7 +58,6 @@ bool XlMenuGv(int chon, ListNamHoc& l)
 		int lc = 1;
 		hienthiNam(l, lc);
 		Thoat = true;
-		system("pause");
 		break;
 	}
 	case 4:
@@ -74,14 +66,17 @@ bool XlMenuGv(int chon, ListNamHoc& l)
 	}
 	case 5:
 	{
-		cout << "Ban thuc su muon thoat? Y/N?" << endl;
-		cin >> lenh;
-		if (lenh == 'Y' || lenh == 'y')
+		system("cls");
+		background_Gv();
+		if (Ask_YN("Ban thuc su muon THOAT?"))
 		{
+			gotoXY(0, HEIGHT - 4);
 			exit(0);
 		}
 	}
 	}
+	gotoXY(0, HEIGHT - 4);
+	system("pause");
 	return false;
 }
 void GiaoVu(ListNamHoc& l)
@@ -89,7 +84,7 @@ void GiaoVu(ListNamHoc& l)
 	bool Thoat = false;
 	do
 	{
-		Thoat = XlMenuGv((LuaChon(InMenuGv())), l);
+		Thoat = XlMenuGv(InMenuGv(), l);
 	} while (!Thoat);
 	system("cls");
 }
@@ -151,16 +146,10 @@ bool importFilehayNhapTay(bool chon)
 int InMenuTaoMoi()
 {
 	system("cls");
-	SetFontSize(lon);
-	cout << "--------------MENU TAO MOI--------------\n";
-	cout << "\t   1. Nam hoc\n";
-	cout << "\t   2. Lop hoc\n";
-	cout << "\t   3. Hoc ky\n";
-	cout << "\t   4. Mon hoc\n";
-	cout << "\t   5. Buoi dang ky khoa hoc\n";
-	cout << "\t   6. Quay ve\n";
-	cout << "\t   7. Thoat\n";
-	return 7;
+	printA_Sentence("-- TAO MOI --", 3);
+	background_Gv();
+	string title[7] = { "NAM HOC","LOP HOC","HOC KI","MON HOC","BUOI DANG KI KHOA HOC","QUAY VE","THOAT"};
+	return LuaChon_Dep(7, title);
 }
 bool XlTaoMoi(int chon, ListNamHoc& l)
 {
@@ -178,14 +167,12 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 		cout << "------------------------TAO MOI LOP HOC NAM NHAT------------------------\n";
 		NodeNamHoc* n = NodeNamHienTai(l);
 		TaoLopNamNhat(n);
-		system("pause");
 		break;
 	}
 	case 3:
 	{
 		system("cls");
 		TaoHocKy(l);
-		system("pause");
 		break;
 	}
 	case 4:
@@ -194,13 +181,11 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 		NodeNamHoc* n = NodeNamHienTai(l);
 		int nam = n->data.tg.ngay_bd.y;
 		TaoMon(l, nam);
-		system("pause");
 		break;
 	}
 	case 5:
 	{
 		taoDKKH_Gv(NodeNamHienTai(l));
-		system("pause");
 		break;
 	}
 	case 6:
@@ -209,15 +194,17 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	}
 	case 7:
 	{
-		char lenh;
-		cout << "Ban thuc su muon thoat? Y/N?" << endl;
-		cin >> lenh;
-		if (lenh == 'Y' || lenh == 'y')
+		system("cls");
+		background_Gv();
+		if (Ask_YN("Ban thuc su muon THOAT?"))
 		{
+			gotoXY(0, HEIGHT - 4);
 			exit(0);
 		}
 	}
 	}
+	gotoXY(0, HEIGHT - 4);
+	system("pause");
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
 
@@ -1021,37 +1008,26 @@ void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk)
 int InMenuCapNhat()//dung cho ca menu Cap nhat
 {
 	system("cls");
-	SetFontSize(lon);
-	cout << "-------------MENU CAP NHAT-------------\n";
-	cout << "\t  1. Them sinh vien nam nhat\n";//nhap tay, import file
-	cout << "\t  2. Mon hoc\n"; // xoa, sua thong tin 
-	cout << "\t  3. Diem sinh vien\n";//xuat file csv dssv mon, nhap diem, sua diem 
-	cout << "\t  4. Quay ve\n";
-	cout << "\t  5. Thoat\n";
-	return 5;
+	printA_Sentence("-- CAP NHAT --", 2);
+	background_Gv();
+	string title[5] = { "THEM SINH VIEN NAM NHAT","CAP NHAT MON HOC","DIEM SINH VIEN","QUAY VE","THOAT" };
+	return LuaChon_Dep(5,title);
 }
 int InMenuCapNhat2()
 {
 	system("cls");
-	SetFontSize(lon);
-	cout << "---------------CAP NHAT MON HOC---------------\n";
-	cout << "\t  1. Sua thong tin mon hoc\n";
-	cout << "\t  2. Xoa mon hoc\n";
-	cout << "\t  3. Quay ve\n";
-	cout << "\t  4. Thoat\n";
-	return 4;
+	printA_Sentence("-- CAP NHAT MON HOC --", 2);
+	background_Gv();
+	string title[4] = { "SUA THONG TIN MON HOC","XOA MON HOC","QUAY VE","THOAT" };
+	return LuaChon_Dep(4, title);
 }
 int InMenuCapNhat3()
 {
 	system("cls");
-	SetFontSize(lon);
-	cout << "----CAP NHAT DIEM SINH VIEN----\n";
-	cout << "1. Xuat file cho giao vien nhap diem\n";
-	cout << "2. Nhap diem tu file len he thong\n";
-	cout << "3. Chinh sua diem\n";
-	cout << "4. Quay ve\n";
-	cout << "5. Thoat\n";
-	return 5;
+	printA_Sentence("-- CAP NHAT DIEM SINH VIEN--", 2);
+	background_Gv();
+	string title[5] = { "XUAT FILE DE GV NHAP DIEM","NHAP DIEM TU FILE","CHINH SUA DIEM","QUAY VE","THOAT" };
+	return LuaChon_Dep(5, title);
 }
 bool XlCapNhat2(ListNamHoc& l, int chon)
 {
@@ -1061,14 +1037,12 @@ bool XlCapNhat2(ListNamHoc& l, int chon)
 	{
 		//sua thong tin mon
 		CapNhatMonHoc(l);
-		system("pause");
 		break;
 	}
 	case 2:
 	{
 		//xoa mon
 		XoaMonHoc(l);
-		system("pause");
 		break;
 	}
 	case 3:
@@ -1077,14 +1051,16 @@ bool XlCapNhat2(ListNamHoc& l, int chon)
 	}
 	case 4:
 	{
-		char lenh;
-		cout << "Ban thuc su muon thoat? Nhap Y/N: " << endl;
-		cin >> lenh;
-		if (lenh == 'Y' || lenh == 'y')
+		system("cls");
+		background_Gv();
+		if (Ask_YN("Ban thuc su muon THOAT?"))
 		{
+			gotoXY(0, HEIGHT - 4);
 			exit(0);
 		}
 	}
+	gotoXY(0, HEIGHT - 4);
+	system("pause");
 	return false;//ngoai tru quay ve va thoat
 	}
 }
@@ -1099,7 +1075,6 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
 		cin.ignore(100, '\n');
 		XuatFileCsv(nodeNam, hk, stt_hk);
-		system("pause");
 		break;
 	}
 	case 2:
@@ -1109,7 +1084,6 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
 		cin.ignore(100, '\n');
 		NhapDiemTuFile(nodeNam, hk, stt_hk);
-		system("pause");
 		break;
 	}
 	case 3:
@@ -1122,14 +1096,16 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 	}
 	case 5:
 	{
-		char lenh;
-		cout << "Ban thuc su muon thoat? Nhap Y/N: " << endl;
-		cin >> lenh;
-		if (lenh == 'Y' || lenh == 'y')
+		system("cls");
+		background_Gv();
+		if (Ask_YN("Ban thuc su muon THOAT?"))
 		{
+			gotoXY(0, HEIGHT - 4);
 			exit(0);
 		}
 	}
+	gotoXY(0, HEIGHT - 4);
+	system("pause");
 	return false;//ngoai tru quay ve va thoat
 	}
 }
@@ -1141,7 +1117,6 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	{
 		//them sv nam nhat
 		ThemSvLopNam1(l);
-		system("pause");
 		break;
 	}
 	case 2:
@@ -1150,9 +1125,8 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 		bool Thoat = false;
 		do
 		{
-			Thoat = XlCapNhat2(l, LuaChon(InMenuCapNhat2()));
+			Thoat = XlCapNhat2(l,InMenuCapNhat2());
 		} while (!Thoat);
-		system("pause");
 		break;
 	}
 	case 3:
@@ -1161,9 +1135,8 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 		bool Thoat = false;
 		do
 		{
-			Thoat = XlCapNhat3(l, LuaChon(InMenuCapNhat3()));
+			Thoat = XlCapNhat3(l, InMenuCapNhat3());
 		} while (!Thoat);
-		system("pause");
 		break;
 	}
 	case 4:
@@ -1172,13 +1145,17 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	}
 	case 5:
 	{
-		char lenh;
-		cout << "Ban thuc su muon thoat? Y/N?" << endl;
-		cin >> lenh;
-		if (lenh == 'y' || lenh == 'Y')
+		system("cls");
+		background_Gv();
+		if (Ask_YN("Ban thuc su muon THOAT?"))
+		{
+			gotoXY(0, HEIGHT - 4);
 			exit(0);
+		}
 	}
 	}
+	gotoXY(0, HEIGHT - 4);
+	system("pause");
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
 //them sv 

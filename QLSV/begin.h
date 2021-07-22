@@ -8,7 +8,8 @@
 #include"realtime.h"
 #include"DKKH.h"
 int InMenuBatDau(int ma_tk);
-bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l);
+bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l);
+bool Ask_YN(string cauhoi);
 // TAI DU LIEU TU FILE LEN HE THONG
 //NAM HOC 
 void TaiData_Nam(ListNamHoc& l);

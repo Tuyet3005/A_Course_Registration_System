@@ -58,7 +58,6 @@ void drawTable(int Row, int Col, int posCol[], int posRow)//posRow la hang bat d
 
 int viewDsSvLop(NodeLop* A)
 {
-	SetFontSize(lon);
 	system("cls");
 	cout << "----------------------------------------DANH SACH LOP " << A->lop.ten << "--------------------------------------" << endl;
 	cout << endl;
@@ -121,7 +120,6 @@ void BackGround()
 
 int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 {
-	SetFontSize(vua);
 	cout << "---------------------------------------------DANH SACH MON KI " << ki << "----------------------------------------" << endl;
 	cout << endl;
 	if (head == NULL)
@@ -166,7 +164,6 @@ int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 int viewDsSvMon(NodeMon* A)
 {
 	system("cls");
-	SetFontSize(vua);
 	cout << "---------------------------------------DANH SACH SINH VIEN MON " << A->data.tenMon << "--------------------------------------" << endl;
 	cout << endl;
 	if (A->headSvMon == NULL)
@@ -214,7 +211,6 @@ int viewDsSvMon(NodeMon* A)
 int viewDsKi(NodeNamHoc* A)
 {
 	system("cls");
-	SetFontSize(lon);
 	cout << "---------------------------------------------DANH SACH KI NAM HOC " << A->data.tg.ngay_bd.y << " - " << A->data.tg.ngay_bd.y + 1 << "-------------------------------------------" << endl;
 	cout << endl;
 	if (A->data.hk[0].tg.ngay_bd.d == NULL)
@@ -247,7 +243,6 @@ int viewDsKi(NodeNamHoc* A)
 int viewDsNam(ListNamHoc A)
 {
 	system("cls");
-	SetFontSize(lon);
 	cout << "---------------------------------------DANH SACH NAM HOC----------------------------------" << endl;
 	cout << endl;
 	if (A.pHead == NULL)
@@ -282,7 +277,6 @@ int viewDsNam(ListNamHoc A)
 int viewDsLop(NodeLop* head)
 {
 	system("cls");
-	SetFontSize(lon);
 	cout << "---------------------DANH SACH LOP HOC-----------------------" << endl;
 	cout << endl;
 	if (head == NULL)
@@ -317,7 +311,6 @@ int viewDsLop(NodeLop* head)
 int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 {
 	system("cls");
-	SetFontSize(vua);
 	cout << "-------------------------------------KET QUA HOC TAP - HOC KI " << ki << "----------------------------------" << endl;
 	cout << endl;
 	if (sv->headMon == NULL)
@@ -372,7 +365,6 @@ void viewInfoSv(Sv A)
 {
 	system("cls");
 	cout << endl;
-	SetFontSize(lon);
 	cout << "----------------------------------------THONG TIN CA NHAN--------------------------------------" << endl;
 	cout << endl;
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
@@ -405,7 +397,6 @@ void viewInfoSv(Sv A)
 
 int viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
 {
-	SetFontSize(vua);
 	cout << "------------------------------------------------KET QUA DANG KI HOC PHAN KI " << ki << "----------------------------------------------" << endl;
 	cout << endl;
 	if (A == NULL)
@@ -449,7 +440,6 @@ int viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
 
 int viewDiem_Lop(NodeLop* A, int ki)
 {
-	SetFontSize(vua);
 	//TINH GPA
 	bool flag = tinhGPA_SvvaLop(A, ki);
 	//
@@ -515,7 +505,6 @@ int viewDiem_Lop(NodeLop* A, int ki)
 //TINH GPA
 bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 {
-	SetFontSize(vua);
 	NodeSv_Lop* pSv = t->lop.headSvLop;
 	NodeMon_Sv* pMon;
 	float sum;
@@ -559,7 +548,6 @@ void viewInfoGV(Sv A)
 {
 	system("cls");
 	cout << endl;
-	SetFontSize(lon);
 	cout << "---------------------------THONG TIN CA NHAN-------------------------------------" << endl;
 	string title[] = { "HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posRow = whereY();
@@ -589,19 +577,19 @@ void viewInfoGV(Sv A)
 void background()
 {
 	cout << "Chao mung ban den voi he thong quan li sinh vien...";
-	gotoXY(0, 10);
+	gotoXY(0, 6);
 	setColor(background_color, title_color);
-	cout << "                                                            XXXX                       XXXX                 XXXX            XXXX            XXXX         " << endl;
-	cout << "                                                       XXX         XX              XXX        XX            XXX  XXX    XXX  XXX        XXX        XX    " << endl;
-	cout << "                                                    XXX                            XXX                      XXX      XXX     XXX        XXX              " << endl;
-	cout << "                                                  XXX                                   XXX                 XXX       X      XXX              XXX        " << endl;
-	cout << "                                                  XXX                                          XXX          XXX              XXX                    XXX  " << endl;
-	cout << "                                                    XXX                XX        XX              XXX        XXX              XXX        XX            XXX" << endl;
-	cout << "                                                        XXX        XXX            XXX          XXX          XXX              XXX          XXX        XXX " << endl;
-	cout << "                                                             XXXX                       XXXX                XXX              XXX              XXXX       " << endl;
+	cout << "                                              XXXX                       XXXX                 XXXX            XXXX            XXXX         " << endl;
+	cout << "                                         XXX         XX              XXX        XX            XXX  XXX    XXX  XXX        XXX        XX    " << endl;
+	cout << "                                      XXX                            XXX                      XXX      XXX     XXX        XXX              " << endl;
+	cout << "                                    XXX                                   XXX                 XXX       X      XXX              XXX        " << endl;
+	cout << "                                    XXX                                          XXX          XXX              XXX                    XXX  " << endl;
+	cout << "                                      XXX                XX        XX              XXX        XXX              XXX        XX            XXX" << endl;
+	cout << "                                          XXX        XXX            XXX          XXX          XXX              XXX          XXX        XXX " << endl;
+	cout << "                                               XXXX                       XXXX                XXX              XXX              XXXX       " << endl;
 	setColor(background_color, text_color);
-	cout << endl << endl;
-	cout << "                                                                                      Course & Student Management System";
+	cout << endl;
+	cout << "                                                                     Course & Student Management System";
 
 }
 
@@ -609,14 +597,14 @@ void background_Sv()
 {
 	setColor(background_color, title_color);
 	gotoXY(0, 5);
-	cout << "                                                   xxxxx     xx  xxxxx       xx   xxx       xx         xxx             xx   xx   xxxxxxxxxx  xxxxx       xx" << endl;
-	cout << "                                                xxx     xx   xx  xxx xx      xx   xxx       xx          xxx           xx    xx   xxx         xxx xx      xx" << endl;
-	cout << "                                               xxx           xx  xxx  xx     xx   xxx       xx           xxx         xx     xx   xxx         xxx  xx     xx" << endl;
-	cout << "                                                  xxxx       xx  xxx   xx    xx   xxx       xx            xxx       xx      xx   xxxxxx      xxx   xx    xx" << endl;
-	cout << "                                                      xxxx   xx  xxx    xx   xx   xxxxxxxxxxxx             xxx     xx       xx   xxxxxx      xxx    xx   xx" << endl;
-	cout << "                                              xx         xxx xx  xxx     xx  xx   xxxxxxxxxxxx              xxx   xx        xx   xxx         xxx     xx  xx" << endl;
-	cout << "                                               xxx      xxx  xx  xxx      xx xx   xxx       xx               xxx xx         xx   xxx         xxx      xx xx" << endl;
-	cout << "                                                   xxxx      xx  xxx       xxxx   xxx       xx                xxxx          xx   xxxxxxxxxxx xxx       xxxx" << endl;
+	cout << "                                      xxxxx     xx  xxxxx       xx   xxx       xx         xxx             xx   xx   xxxxxxxxxx  xxxxx       xx" << endl;
+	cout << "                                   xxx     xx   xx  xxx xx      xx   xxx       xx          xxx           xx    xx   xxx         xxx xx      xx" << endl;
+	cout << "                                  xxx           xx  xxx  xx     xx   xxx       xx           xxx         xx     xx   xxx         xxx  xx     xx" << endl;
+	cout << "                                     xxxx       xx  xxx   xx    xx   xxx       xx            xxx       xx      xx   xxxxxx      xxx   xx    xx" << endl;
+	cout << "                                         xxxx   xx  xxx    xx   xx   xxxxxxxxxxxx             xxx     xx       xx   xxxxxx      xxx    xx   xx" << endl;
+	cout << "                                 xx         xxx xx  xxx     xx  xx   xxxxxxxxxxxx              xxx   xx        xx   xxx         xxx     xx  xx" << endl;
+	cout << "                                  xxx      xxx  xx  xxx      xx xx   xxx       xx               xxx xx         xx   xxx         xxx      xx xx" << endl;
+	cout << "                                      xxxx      xx  xxx       xxxx   xxx       xx                xxxx          xx   xxxxxxxxxxx xxx       xxxx" << endl;
 	cout << endl << endl;
 	setColor(background_color, text_color);
 }
@@ -626,14 +614,14 @@ void background_Gv()
 	setColor(background_color, title_color);
 	gotoXY(0, 5);
 	cout << endl << endl;
-	cout << "                                                        xxxxx       xx         xxxx               xxxxx              xxx             xx  xxx          xx" << endl;
-	cout << "                                                     xxx      xx    xx        xxx xx          xxx        xx           xxx           xx   xxx          xx" << endl;
-	cout << "                                                   xxx              xx       xxx   xx       xxx            xx          xxx         xx    xxx          xx" << endl;
-	cout << "                                                  xxx               xx      xxx     xx     xxx              xx          xxx       xx     xxx          xx" << endl;
-	cout << "                                                  xxx         xxxxx xx     xxxxxxxxxxxx    xxx              xx           xxx     xx      xxx          xx" << endl;
-	cout << "                                                   xxx         xxx  xx    xxxxxxxxxxxxxx    xxx            xx             xxx   xx       xxx          xx" << endl;
-	cout << "                                                     xxx    xxxxxx  xx   xxx           xx      xxx      xx                 xxx xx         xxxx       xx " << endl;
-	cout << "                                                        xxxxx  xxx  xx  xxx             xx         xxxxx                    xxxx            xxxxxxxxx   " << endl;
+	cout << "                                           xxxxx       xx         xxxx               xxxxx              xxx             xx  xxx          xx" << endl;
+	cout << "                                        xxx      xx    xx        xxx xx          xxx        xx           xxx           xx   xxx          xx" << endl;
+	cout << "                                      xxx              xx       xxx   xx       xxx            xx          xxx         xx    xxx          xx" << endl;
+	cout << "                                     xxx               xx      xxx     xx     xxx              xx          xxx       xx     xxx          xx" << endl;
+	cout << "                                     xxx         xxxxx xx     xxxxxxxxxxxx    xxx              xx           xxx     xx      xxx          xx" << endl;
+	cout << "                                      xxx         xxx  xx    xxxxxxxxxxxxxx    xxx            xx             xxx   xx       xxx          xx" << endl;
+	cout << "                                        xxx    xxxxxx  xx   xxx           xx      xxx      xx                 xxx xx         xxxx       xx " << endl;
+	cout << "                                           xxxxx  xxx  xx  xxx             xx         xxxxx                    xxxx            xxxxxxxxx   " << endl;
 	setColor(background_color, text_color);
 	cout << endl << endl;
 }
@@ -641,15 +629,15 @@ void background_Gv()
 void background_Login()
 {
 	setColor(background_color, title_color);
-	gotoXY(0, 10);
-	cout << "                                      xxxxxxxx             xxxx         xxxxx       xx         xxx            xxxx        xx  xxx        xx        xxxx         xxxxxxxx    " << endl;
-	cout << "                                      xxx     xxx         xxx xx        xxx xx      xx     xxx    xx          xxx xx      xx  xxx        xx       xxx xx        xxx    xxx  " << endl;
-	cout << "                                      xxx       xx       xxx   xx       xxx  xx     xx   xxx                  xxx  xx     xx  xxx        xx      xxx   xx       xxx      xx " << endl;
-	cout << "                                      xxx        xx     xxxxxxxxxx      xxx   xx    xx  xxx                   xxx   xx    xx  xxxxxxxxxxxxx     xxxxxxxxxx      xxx    xxx  " << endl;
-	cout << "                                      xxx        xx    xxxxxxxxxxxx     xxx    xx   xx  xxx     xxxxxx        xxx    xx   xx  xxxxxxxxxxxxx    xxxxxxxxxxxx     xxxxxxx     " << endl;
-	cout << "                                      xxx       xx    xxx         xx    xxx     xx  xx   xxx       xxx        xxx     xx  xx  xxx        xx   xxx         xx    xxx         " << endl;
-	cout << "                                      xxx     xxx    xxx           xx   xxx      xx xx     xxx    xxxx        xxx      xx xx  xxx        xx  xxx           xx   xxx         " << endl;
-	cout << "                                      xxxxxxxx      xxx             xx  xxx       xxxx       xxxxx xxx        xxx        xxx  xxx        xx xxx             xx  xxx         " << endl;
+	gotoXY(0, 7);
+	cout << "                       xxxxxxxx             xxxx         xxxxx       xx         xxx            xxxx        xx  xxx        xx        xxxx         xxxxxxxx    " << endl;
+	cout << "                       xxx     xxx         xxx xx        xxx xx      xx     xxx    xx          xxx xx      xx  xxx        xx       xxx xx        xxx    xxx  " << endl;
+	cout << "                       xxx       xx       xxx   xx       xxx  xx     xx   xxx                  xxx  xx     xx  xxx        xx      xxx   xx       xxx      xx " << endl;
+	cout << "                       xxx        xx     xxxxxxxxxx      xxx   xx    xx  xxx                   xxx   xx    xx  xxxxxxxxxxxxx     xxxxxxxxxx      xxx    xxx  " << endl;
+	cout << "                       xxx        xx    xxxxxxxxxxxx     xxx    xx   xx  xxx     xxxxxx        xxx    xx   xx  xxxxxxxxxxxxx    xxxxxxxxxxxx     xxxxxxx     " << endl;
+	cout << "                       xxx       xx    xxx         xx    xxx     xx  xx   xxx       xxx        xxx     xx  xx  xxx        xx   xxx         xx    xxx         " << endl;
+	cout << "                       xxx     xxx    xxx           xx   xxx      xx xx     xxx    xxxx        xxx      xx xx  xxx        xx  xxx           xx   xxx         " << endl;
+	cout << "                       xxxxxxxx      xxx             xx  xxx       xxxx       xxxxx xxx        xxx        xxx  xxx        xx xxx             xx  xxx         " << endl;
 	setColor(background_color, text_color);
 	cout << endl << endl;
 }
@@ -689,7 +677,7 @@ int LuaChon_Dep(int title_number, string title[])
 	else
 		cell_height = 4;//dang nhap
 	bd_x = WIDTH / 2 - cell_width / 2;
-	bd_y = HEIGHT / 2 ;
+	bd_y = HEIGHT / 2 - 1;
 	kt_x = bd_x + cell_width;
 	kt_y = bd_y + cell_height;
 	for (int i = 0; i < title_number; i++)
@@ -699,8 +687,12 @@ int LuaChon_Dep(int title_number, string title[])
 		cout << title[i];
 	}
 	//chon
-	int lc = 1;
-	int temp = 72;
+	int lc = 0;
+	int temp = 0;
+	gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
+	setColor(background_color, title_color1);
+	cout << title[lc];
+	setColor(background_color, text_color);
 	while (temp != 13)//ko enter
 	{
 		if (_kbhit())
@@ -735,6 +727,11 @@ int LuaChon_Dep(int title_number, string title[])
 			}
 		}
 	}
-	return lc ;
+	return lc +1;
 }
 
+void printA_Sentence(string a, int line)
+{
+	gotoXY(WIDTH / 2 - a.length() / 2, line);
+	cout << a;
+}

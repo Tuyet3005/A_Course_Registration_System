@@ -27,3 +27,4 @@ void veHCN(int bd_x, int bd_y, int kt_x, int kt_y);
 
 int LuaChon_Dep(int title_number, string title[]);
 
+void printA_Sentence(string a, int line);

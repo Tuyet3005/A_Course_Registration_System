@@ -1,25 +1,25 @@
 #include"DKKH.h"
+
 int main()
 {
 	system("color F0");
 	SetConsole();
 	SetFontSize(18);
 	string tk, mk;
-	short lc = 1;//Ma tk:  0: giao vu ; 1: sinh vien
+	bool lc = true;//true là sv, false là gv
 	ListNamHoc listNam;
 	listNam.pHead = listNam.pTail = NULL;
 	//tai du lieu list nam hoc tu file len he thong
 	TaiData_Nam(listNam);
 	do
 	{
-		SetFontSize(nho);
 		bool Thoat = false;
 		LogIn(tk, mk, lc);//dn sai thi tu dong thoat ra luon
 		system("cls");
 		do
 		{
 			Thoat = XlMenuBD(InMenuBatDau(lc), lc, tk, mk, listNam);
-		} 		while (!Thoat);
+		}while (!Thoat);
 		//
 	} 	while (true);
 	return 0;

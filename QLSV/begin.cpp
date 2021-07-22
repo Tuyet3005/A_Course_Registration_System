@@ -3,42 +3,34 @@
 int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 {
 	system("cls");
-	gotoXY(0, 2);
+	gotoXY(0, 1);
 	background();
 	cout << endl << endl;
-	//setColor(background_color, title_color1);
 	string title[5] = { "HE THONG CHINH","THONG TIN CA NHAN","DOI MAT KHAU","DANG XUAT","THOAT" };
-	/*cout << "\t \t \t \t \t 1. Vao he thong chinh\n";
-
-	cout << "\t \t \t \t \t 2. Xem thong tin cua ban\n";
-	cout << "\t \t \t \t \t 3. Doi mat khau\n";
-	cout << "\t \t \t \t \t 4. Dang xuat\n";
-	cout << "\t \t \t \t \t 5. Thoat\n";*/
-	return LuaChon_Dep(5, title);//tra ve maxSelect
+	return LuaChon_Dep(5, title);
 }
 
-bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la maTk  0:Giao vu, 1: Sinh vien
+bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false la giao vu, true la sv
 {
-	char lenh;
 	switch (chon)
 	{
 	case 1:
 	{
-		if (lc == 0)
+		if (!role)
 			GiaoVu(l);
 		else
-			SinhVien(l,stoi(tk));
+			SinhVien(l, stoi(tk));
 		break;
 	}
 	case 2:
 	{
 		cout << "Hien thi thong tin cua tai khoan";
-		if (lc == 1)//tra ve sinh vien
+		if (true)//tra ve sinh vien
 		{
 			viewInfoSv(findInfo(stoi(tk)));
 			break;
 		}
-		if (lc == 0)
+		else 
 		{
 			viewInfoGV(taiTT_GV(tk));
 			break;
@@ -46,30 +38,43 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 	}
 	case 3:
 	{
-		changePass(lc, tk, mk);
+		changePass(role, tk, mk);
 	}
 	case 4:
 	{
-		cout << "Ban se dang xuat ra khoi tai khoan nay? Y/N?" << endl;
-		cin >> lenh;
-		if (lenh == 'Y' || lenh == 'y')
+		system("cls");
+		gotoXY(0, 1);
+		background();
+		if (Ask_YN("Ban se DANG XUAT ra khoi tai khoan nay?"))
+		{
+			gotoXY(0, HEIGHT - 4);
+			system("pause");
 			return true;
-		system("pause");
+		}
 		break;
 	}
 	case 5:
 	{
-		cout << "Ban thuc su muon thoat? Y/N?" << endl;
-		cin >> lenh;
-		if (lenh == 'Y' || lenh == 'y')
+		system("cls");
+		gotoXY(0, 1);
+		background();
+		if (Ask_YN("Ban that su muon THOAT ?"))
 		{
+			gotoXY(0, HEIGHT - 4);
 			exit(0);
 		}
 	}
 	}
 	return false;
 }
-
+bool Ask_YN(string cauhoi)//hang in ra cau hoi
+{
+	setColor(background_color, red);
+	printA_Sentence(cauhoi,HEIGHT/2-3);
+	setColor(background_color, text_color);
+	string title[2] = { "Dung vay","No no, Khong he"};
+	return LuaChon_Dep(2, title)-2;
+}
 
 //NAM HOC 
 void TaiData_Nam(ListNamHoc& l)
