@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include "console.h"
-#include "begin.h""
+#include "begin.h"
 
 int inputKey()
 {
@@ -108,7 +108,7 @@ void DisableResizeWindow()
 void SetConsole()
 {
 	resizeConsole(1920, 1080);
-	DisableCtrButton(0);
+	DisableCtrButton(1);
 	DisableResizeWindow();
 	ShowScrollbar(0);
 	//font 

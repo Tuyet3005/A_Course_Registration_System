@@ -5,15 +5,6 @@
 19190678,kaka,19HOH4,
 20120435,bicbic,20DTV1,
 20120440,chauchau,20CTT3,
-20120399,kimtuyen,20DTV1,
+20120399,tuyen,20DTV1,
 20120422,anhtuyet,20CTT3,
-
-
-
-
-
-
-
-
-
 

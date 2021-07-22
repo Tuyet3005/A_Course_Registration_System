@@ -17,7 +17,6 @@ bool XlTaoMoi(int chon, ListNamHoc& l);
 //nam hoc
 NodeNamHoc* TaoNodeNam();
 void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n);
-int HienNamHoc(ListNamHoc l);
 void TaoNam(ListNamHoc& l);
 //lop hoc
 NodeLop* TaoNodeLop(string ten);

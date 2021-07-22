@@ -9,12 +9,10 @@ using namespace std;
 //SV
 void readFileDKKH(ThoiGian& tg, Time& tmBD, Time& tmKT, int& ki)
 {
-	ifstream fin;
-	fin.open("DKKH.txt");
+	fstream fin;
+	fin.open("DKKH.txt", ios::in | ios::app);
 	string s;
 	//ngaybd
-	if (!fin.is_open())
-		throw 0;
 	getline(fin, s);
 	if (s == "")//file trong
 		throw - 1;
@@ -86,6 +84,11 @@ bool cobuoiDKKH(ThoiGian tg, Time tmBD, Time tmKT)//doc file DKKH.txt
 
 void xoaLC(int dem, int mon, int ki, NodeSv_Lop* A, NodeMon* head)
 {
+	if (dem == 0)
+	{
+		cout << "Ban chua dang ky mon hoc nao!" << endl;
+		return;
+	}
 	char ask = 'Y';
 	int lc;
 	cout << "~ Nhap STT mon muon xoa (theo danh sach mon ban da dang ki)" << endl;
@@ -100,14 +103,15 @@ void xoaLC(int dem, int mon, int ki, NodeSv_Lop* A, NodeMon* head)
 	} while (true);
 
 	NodeMon_Sv* temp2 = A->headMon[ki - 1];
+	//di chuyen den prenode cua node muon xoa
 	for (int i = 1; i < lc - 1; i++)
 		temp2 = temp2->pNext;
-	//xoa sv trong ds mon
+	//xoa sv trong ds sv mon
 	if (temp2->svMon->mssv == A->sv.id)
 		temp2->pNext->svMon = temp2->pNext->svMon->pNext;
 	else
 	{
-		NodeSv_Mon* temp = temp2->pNext->svMon;
+		NodeSv_Mon* temp = temp2->pNext->svMon;//node svMon cua mon hoc ma sv muon xoa 
 		while (temp->pNext->mssv != A->sv.id)
 		{
 			temp = temp->pNext;
@@ -122,6 +126,7 @@ void xoaLC(int dem, int mon, int ki, NodeSv_Lop* A, NodeMon* head)
 int viewDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)
 {
 	system("cls");
+	SetFontSize(sz);
 	gotoXY(55, 1);
 	int mon;// so mon dc mo
 	cout << "DANG KI HOC PHAN" << endl << endl;
@@ -308,6 +313,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)//node mon la ds mon dc mo
 				x++;
 				continue;
 			}
+			temp = NULL;//xoa du lieu cu
 			temp = _getch();
 			viewDKKH_Sv(A->headMon[ki - 1], ki, head);
 			x = whereX();
@@ -399,9 +405,7 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 	}
 	catch (int error)
 	{
-		if (error == 0)
-			cout << "! KHONG MO DUOC FILE .. QUAY LAI SAU !" << endl;
-		else
+		if (error == -1)
 			cout << "Hien khong co buoi DKKH nao..." << endl;
 	}
 }
@@ -452,7 +456,7 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	if (H->data.hk[ki - 1].tg.ngay_bd.d == NULL)//hk chua tao
 	{
 		cout << "! HOC KI NAY CHUA DUOC TAO !" << endl;
-		cout << "--Hay vao muc TAO MOI de tao hoc ki, sau do vao muc CAP NHAT de them mon hoc cho ki nay " << endl;
+		cout << "--Hay vao muc TAO MOI de tao hoc ki va them mon hoc!-- " << endl;
 		return;
 	}
 	//hk da ket thuc hoac da bd
@@ -492,15 +496,14 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	}
 	catch (int error)
 	{
-		if (error == 0)//KO MO FILE DC
+		if (error == 0)//file trong 
 		{
-			cout << "! KHONG THE KIEM TRA THAO TAC NAY.. QUAY LAI SAU !" << endl;
-			return;
+			//OK!!!
 		}
 	}
 	if (H->data.hk[ki - 1].headMon == NULL)//chua co mon nao
 	{
-		cout << "! CAC MON HOC CHO HOC KI NAY CHUA DUOC CAP NHAT !" << endl << endl;
+		cout << "! CHUA TAO MON HOC CHO HOC KY NAY !" << endl << endl;
 		cout << "--Hay vao muc CAP NHAT de them mon hoc cho ki nay " << endl;
 		return;
 	}
@@ -563,7 +566,6 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	system("cls");
 	cout << endl << "! TAO BUOI DANG KI KHOA HOC THAT BAI !" << endl << endl;
 }
-
 void nhapNgayGio(Ngay& ngay, Time& t)
 {
 	cout << "-Nhap lan luot ngay, thang, nam : " << endl;

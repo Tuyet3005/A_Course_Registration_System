@@ -47,7 +47,7 @@ bool XlMenuBD(int chon, short lc, string tk, string& mk, ListNamHoc& l)//lc la m
 	}
 	case 4:
 	{
-		cout << "Ban se dang xuat ra khoi tai khoan nay? Y?N?" << endl;
+		cout << "Ban se dang xuat ra khoi tai khoan nay? Y/N?" << endl;
 		cin >> lenh;
 		if (lenh == 'Y' || lenh == 'y')
 			return true;

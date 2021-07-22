@@ -5,6 +5,11 @@
 #include<iomanip>
 #include<ctime>
 using namespace std;
+
+//font size
+const int SZ = 24;
+const int sz = 19;
+
 //THOI GIAN
 struct Time
 {

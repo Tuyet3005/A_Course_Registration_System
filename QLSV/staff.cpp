@@ -318,7 +318,6 @@ void TaoNam(ListNamHoc& l)
 		cout << "Tao nam hoc moi thanh cong!!!" << endl;
 	system("pause");
 	system("cls");
-	HienNamHoc(l);
 	system("pause");
 }
 
@@ -370,6 +369,8 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		cin.ignore();
 		sl = 0;
 	}
+	if (sl == 0)
+		return;
 	for (int i = 0; i < sl; i++)
 	{
 		string ten;
@@ -1466,6 +1467,7 @@ void ThemSvLopNam1(ListNamHoc& l)
 {
 	do
 	{
+		SetFontSize(24);
 		NodeLop* head = NodeNamHienTai(l)->data.headLop[0];
 		int max = viewDsLop(head);
 		cout << endl;
@@ -1928,7 +1930,6 @@ void hienthiDiem_Lop(NodeLop* A, int& lc)
 bool ChonKihayLop()
 {
 	system("cls");
-
 	cout << "Nhan 1 neu ban muon xem KI HOC - MON HOC" << endl;
 	cout << "Nhan 2 neu ban muon xem LOP HOC - SINH VIEN" << endl;
 	char temp = NULL;
