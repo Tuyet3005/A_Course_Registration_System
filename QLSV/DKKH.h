@@ -7,7 +7,7 @@
 void readFileDKKH(ThoiGian& tg, Time& tmBD, Time& tmKT, int& ki);
 bool sosanhNgayGio(Ngay tg1, Time t1, Ngay tg2, Time t2);
 bool cobuoiDKKH(ThoiGian tg, Time tmBD, Time tmKT);
-void xoaLC(int dem, int mon, int ki, NodeSv_Lop* A, NodeMon* head);
+void xoaLC(int dem, int mon, int ki, NodeSv_Lop*& A, NodeMon*& head);//tham chieu de tien so sanh hon 
 int viewDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head);
 bool BuoiHocHopLe(NodeMon* mon, NodeMon_Sv* dadk);
 bool themMon(NodeSv_Lop* A, int ki, int stt, NodeMon* head);
