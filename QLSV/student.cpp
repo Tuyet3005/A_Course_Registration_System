@@ -6,13 +6,8 @@ int InMenuSv()
 {
 	system("cls");
 	background_Sv();
-	cout << "	1. Cac mon hoc cua toi\n";
-	cout << "	2. Dang ky mon hoc \n";//co the dk them hoac xoa -> check conflict 
-	cout << "	3. Cac mon hoc dang mo\n";
-	cout << "	4. Quay ve \n";
-	cout << "	5. Thoat\n";
-	cout << "--------------------------------------\n";
-	return 5;//lua chon lon nhat la 6
+	string title[5] = { "CAC MON HOC CUA TOI","DANG KI MON HOC","CAC MON DANG MO","QUAY VE","THOAT" };
+	return LuaChon_Dep(5, title);
 }
 Sv findInfo(string tenlop, int tk)//tim Info sv
 {
@@ -80,7 +75,7 @@ void SinhVien(ListNamHoc& l,int tk)
 	bool Thoat = false;
 	do
 	{
-		Thoat = XlMenuSv((LuaChon(InMenuSv())), l,SV);
+		Thoat = XlMenuSv(InMenuSv(), l,SV);
 	} while (!Thoat);
 	system("cls");
 }
@@ -98,7 +93,6 @@ bool XlMenuSv(int chon, ListNamHoc& l, NodeSv_Lop* A)
 	}
 	case 2:
 	{
-		
 		DKKH_Sv(NodeNamHienTai(l),A, 0);
 		system("pause");
 		break;
@@ -115,10 +109,11 @@ bool XlMenuSv(int chon, ListNamHoc& l, NodeSv_Lop* A)
 	}
 	case 5:
 	{
-		cout << "Ban thuc su muon thoat? Nhap Y/N: " << endl;
-		cin >> lenh;
-		if (lenh == 'Y' || lenh == 'y')
+		system("cls");
+		background_Sv();
+		if(Ask_YN("Ban thuc su muon THOAT?"))
 		{
+			gotoXY(0, HEIGHT - 4);
 			exit(0);
 		}
 	}

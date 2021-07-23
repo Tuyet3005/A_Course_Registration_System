@@ -13,11 +13,11 @@ using namespace std;
 #define text_color 0  //den
 #define red 4                                        
 //draw
-#define cell_width 34
+#define cell_width 28
 
 //screen
-#define WIDTH 210
-#define HEIGHT 50
+#define WIDTH 172
+#define HEIGHT 43
 
 //THOI GIAN
 struct Time
