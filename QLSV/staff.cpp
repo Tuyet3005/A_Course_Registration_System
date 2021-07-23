@@ -2037,8 +2037,6 @@ void GhiFileMon(string filename, NodeMon* mon, bool remove)
 	while (!data.empty())
 	{
 		line = NextLine(data);
-		file << '\n';
-
 		if (line.find(mon->data.id + ",") == 0)
 		{
 			if (remove)
@@ -2058,7 +2056,7 @@ void GhiFileMon(string filename, NodeMon* mon, bool remove)
 		}
 		else
 		{
-			file << line;
+			file << '\n' <<  line;
 		}
 	}
 	if (!success)
