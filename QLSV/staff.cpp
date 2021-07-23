@@ -1,10 +1,5 @@
-#include"staff.h"//GIAO VU
-#include"display.h"
-#include"courses.h"
-#include <conio.h>
-#include<string>
-#include <cwchar>
-
+#include"staff.h"
+//GIAO VU
 int InMenuGv()
 {
 	system("cls");
@@ -75,8 +70,8 @@ bool XlMenuGv(int chon, ListNamHoc& l)
 		}
 	}
 	}
-	gotoXY(0, HEIGHT - 4);
-	system("pause");
+	/*gotoXY(0, HEIGHT - 4);
+	system("pause");*/
 	return false;
 }
 void GiaoVu(ListNamHoc& l)
@@ -141,7 +136,6 @@ bool importFilehayNhapTay(bool chon)
 	} while (true);
 }
 
-
 //TAO MOI
 int InMenuTaoMoi()
 {
@@ -164,7 +158,6 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	case 2:
 	{
 		system("cls");
-		cout << "------------------------TAO MOI LOP HOC NAM NHAT------------------------\n";
 		NodeNamHoc* n = NodeNamHienTai(l);
 		TaoLopNamNhat(n);
 		break;
@@ -303,9 +296,6 @@ void TaoNam(ListNamHoc& l)
 	ThemNodeNamHoc(l, n);
 	if (n)
 		cout << "Tao nam hoc moi thanh cong!!!" << endl;
-	system("pause");
-	system("cls");
-	system("pause");
 }
 
 //lop hoc  
@@ -348,6 +338,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		return;
 	int sl = 0;
 	//nhap ten lop moi len file, tao node len he thong
+	cout << "------------------------TAO MOI LOP HOC NAM NHAT------------------------\n";
 	cout << "Nhap so luong lop nam nhat muon tao: ";
 	cin >> sl;
 	if (cin.fail() || sl < 0)
@@ -400,12 +391,11 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		ThemNodeLopHoc(node->data.headLop[0], n);
 		//da cap nhat du lieu lop moi vao file trong ham TaoNodeLop
 		cout << "Tao lop thanh cong!!!" << endl << endl;
-		system("pause");
+		Sleep(500);
 		n->lop.headSvLop = NULL;
 	}
 	cout << "Ban da co the cap nhat dssv cho (cac) lop hoc vua tao!\n";
 }
-
 
 //hoc ky 
 NodeNamHoc* TimNodeNamHoc(ListNamHoc& l, int nam_bd)//tim nam hoc de them hk vao
@@ -1003,9 +993,9 @@ void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk)
 	}
 }
 
-//CAP NHAT
 
-int InMenuCapNhat()//dung cho ca menu Cap nhat
+//CAP NHAT
+int InMenuCapNhat()
 {
 	system("cls");
 	printA_Sentence("-- CAP NHAT --", 2);
@@ -1036,12 +1026,14 @@ bool XlCapNhat2(ListNamHoc& l, int chon)
 	case 1:
 	{
 		//sua thong tin mon
+		system("cls");
 		CapNhatMonHoc(l);
 		break;
 	}
 	case 2:
 	{
 		//xoa mon
+		system("cls");
 		XoaMonHoc(l);
 		break;
 	}
@@ -1070,6 +1062,7 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 	{
 	case 1:
 	{
+		system("cls");
 		NodeNamHoc* nodeNam = NodeNamHienTai(l);
 		int stt_hk = 0;
 		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
@@ -1079,6 +1072,7 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 	}
 	case 2:
 	{
+		system("cls");
 		NodeNamHoc* nodeNam = NodeNamHienTai(l);
 		int stt_hk = 0;
 		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
@@ -1088,7 +1082,9 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 	}
 	case 3:
 	{
-		//suawr dieemr nowi moo dij Tuyeest oi????????????????????????
+		system("cls");
+		CapNhatDiemSv(l);
+		break;
 	}
 	case 4:
 	{
@@ -1158,6 +1154,59 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	system("pause");
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
+
+NodeNamHoc* ChonNamHoc(ListNamHoc l, int nam_hoc)
+{
+	NodeNamHoc* nam = l.pHead;
+	while (nam != NULL)
+	{
+		if (nam->data.tg.ngay_bd.y == nam_hoc)
+		{
+			return nam;
+		}
+		nam = nam->pNext;
+	}
+	return NULL;
+}
+NodeNamHoc* NhapNamHoc(ListNamHoc l)
+{
+	int nam_hoc;
+	NodeNamHoc* nam;
+
+	while (true)
+	{
+		cout << "Nhap nam hoc: ";
+		cin >> nam_hoc;
+		cin.ignore();
+		nam = ChonNamHoc(l, nam_hoc);
+		if (nam != NULL)
+		{
+			return nam;
+		}
+		else
+		{
+			cout << "Nhap sai nam hoc.\n";
+		}
+	}
+}
+HocKy* NhapHocKy(NodeNamHoc* node_nam)
+{
+	int so_hoc_ky = -1;
+	HocKy* hoc_ky;
+
+	while (so_hoc_ky < 1 || so_hoc_ky > 3)
+	{
+		cout << "Nhap hoc ky (1 <= HK <= 3): ";
+		cin >> so_hoc_ky;
+		cin.ignore();
+	}
+	return &node_nam->data.hk[so_hoc_ky - 1];
+}
+HocKy* TimHocKy(ListNamHoc l)
+{
+	return NhapHocKy(NhapNamHoc(l));
+}
+
 //them sv 
 bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head)
 {
@@ -1447,7 +1496,6 @@ void ThemSvLopNam1(ListNamHoc& l)
 {
 	do
 	{
-		SetFontSize(24);
 		NodeLop* head = NodeNamHienTai(l)->data.headLop[0];
 		int max = viewDsLop(head);
 		cout << endl;
@@ -1484,6 +1532,7 @@ void ThemSvLopNam1(ListNamHoc& l)
 			break;
 	} 	while (true);
 }
+
 //nhap diem 
 void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai>
 {
@@ -1717,6 +1766,427 @@ void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk)
 		temp = temp->pNext;
 	}
 }
+
+//sua diem
+float NhapDiem(float diem)
+{
+	while (diem < 0 || diem > 10)
+	{
+		cout << "0 <= diem <= 10. Nhap diem: ";
+		cin >> diem;
+		cin.ignore();
+	}
+	return diem;
+}
+void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon)
+{
+	fstream file(filename, ios::in);
+	string data = "", line;
+	while (!file.eof())
+	{
+		getline(file, line);
+		if (line.empty())
+			break;
+		data += line + '\n';
+	}
+	data = data.substr(0, data.length() - 1);
+	file.close();
+
+	file.open(filename, ios::out);
+	bool success = false, wrote = false;
+
+	while (!data.empty())
+	{
+		if (wrote)
+			file << '\n';
+		line = NextLine(data);
+
+		if (line.find(to_string(node_sv_mon->mssv) + "," + node_sv_mon->lop + ",") == 0)
+		{
+			file << node_sv_mon->mssv << ',' << node_sv_mon->lop << ',' << "R" << ','
+				<< node_sv_mon->diem.gk << ','
+				<< node_sv_mon->diem.ck << ','
+				<< node_sv_mon->diem.gk << ','
+				<< node_sv_mon->diem.tongket << ',';
+			success = true;
+		}
+		else
+		{
+			file << line;
+		}
+	}
+	if (!success)
+		file << node_sv_mon->mssv << ',' << node_sv_mon->lop << ',' << "R" << ','
+		<< node_sv_mon->diem.gk << ','
+		<< node_sv_mon->diem.ck << ','
+		<< node_sv_mon->diem.gk << ','
+		<< node_sv_mon->diem.tongket << ',';
+	file.close();
+	cout << "Luu diem thanh cong!!!\n";
+}
+void HienThiDSLop(NodeLop* head_lop)
+{
+	cout << "\nDanh sach lop:\n";
+	for (NodeLop* node_lop = head_lop; node_lop != NULL; node_lop = node_lop->pNext)
+	{
+		cout << "Lop: " << node_lop->lop.ten << '\n';
+	}
+}
+void HienThiDSSv(NodeSv_Lop* head_sv_lop)
+{
+	cout << "\nDanh sach SV:\n";
+	for (NodeSv_Lop* node_sv_lop = head_sv_lop; node_sv_lop != NULL; node_sv_lop = node_sv_lop->pNext)
+	{
+		cout << "MSSV: " << node_sv_lop->sv.id << ", Ten: " << node_sv_lop->sv.ten << ", CMND: " << node_sv_lop->sv.cmnd << '\n';
+	}
+}
+void CapNhatDiemSv(ListNamHoc& l)
+{
+	NodeNamHoc* node_nam = NhapNamHoc(l);
+	int nam_hoc = node_nam->data.tg.ngay_bd.y;
+	int nam_sv = -1;
+	while (nam_sv < 1 || nam_sv > 4)
+	{
+		cout << "Nhap nam (sv nam 1, nam 2, ...): ";
+		cin >> nam_sv;
+		cin.ignore();
+	}
+
+	NodeLop* head_lop = node_nam->data.headLop[nam_sv - 1];
+	NodeLop* node_lop;
+	string ten_lop;
+	while (true)
+	{
+		HienThiDSLop(head_lop);
+		cout << "Ten lop: ";
+		getline(cin, ten_lop);
+
+		for (node_lop = head_lop; node_lop != NULL; node_lop = node_lop->pNext)
+		{
+			if (node_lop->lop.ten == ten_lop)
+			{
+				break;
+			}
+		}
+		// Thu lai
+		if (node_lop == NULL)
+			continue;
+		break;
+	}
+
+	NodeSv_Lop* node_sv_lop;
+	int mssv;
+	while (true)
+	{
+		HienThiDSSv(node_lop->lop.headSvLop);
+		cout << "Nhap MSSV: ";
+		cin >> mssv;
+		cin.ignore();
+
+		for (node_sv_lop = node_lop->lop.headSvLop; node_sv_lop != NULL; node_sv_lop = node_sv_lop->pNext)
+		{
+			if (node_sv_lop->sv.id == mssv)
+				break;
+		}
+		if (node_sv_lop != NULL)
+			break;
+	}
+
+	int hoc_ky = -1;
+	while (hoc_ky < 1 || hoc_ky > 3)
+	{
+		cout << "Nhap hoc ky (1 <= HK <= 3): ";
+		cin >> hoc_ky;
+		cin.ignore();
+	}
+
+	NodeMon_Sv*& head_mon_sv = node_sv_lop->headMon[hoc_ky - 1];
+	NodeMon_Sv* node_mon_sv;
+	string id_mon;
+	while (true)
+	{
+		HienThiDSMon(head_mon_sv->mon);
+		cout << "Nhap ID mon: ";
+		getline(cin, id_mon);
+		for (node_mon_sv = head_mon_sv; node_mon_sv != NULL; node_mon_sv = node_mon_sv->pNext)
+		{
+			if (node_mon_sv->mon->data.id == id_mon)
+				break;
+		}
+		if (node_mon_sv != NULL)
+			break;
+	}
+
+	NodeSv_Mon* node_sv_mon;
+	for (node_sv_mon = node_mon_sv->mon->headSvMon; node_sv_mon != NULL; node_sv_mon = node_sv_mon->pNext)
+	{
+		if (node_sv_mon->mssv == mssv && node_sv_mon->lop == ten_lop)
+			break;
+	}
+	if (node_sv_mon == NULL)
+	{
+		// Tao NodeSv_Mon moi neu can
+		node_sv_mon = new NodeSv_Mon;
+		node_sv_mon->mssv = mssv;
+		node_sv_mon->lop = ten_lop;
+		node_sv_mon->pNext = node_mon_sv->mon->headSvMon;
+		node_mon_sv->mon->headSvMon = node_sv_mon;
+		ThemNodeMon_Sv(node_mon_sv, node_mon_sv->mon, node_sv_mon);
+	}
+
+	Diem& diem = node_sv_mon->diem;
+	string input = "-1";
+
+	cout << "Diem giua ky (" << diem.gk << "): ";
+	getline(cin, input);
+	try
+	{
+		diem.gk = NhapDiem(stof(input));
+	}
+	catch (invalid_argument) {}
+
+	cout << "Diem cuoi ky (" << diem.ck << "): ";
+	getline(cin, input);
+	try
+	{
+		diem.ck = NhapDiem(stof(input));
+	}
+	catch (invalid_argument) {}
+
+	cout << "Diem cong (" << diem.cong << "): ";
+	getline(cin, input);
+	try
+	{
+		diem.cong = NhapDiem(stof(input));
+	}
+	catch (invalid_argument) {}
+
+	diem.tongket = min((diem.gk + diem.ck * 2.0) / 3 + diem.cong / 10, 10.0);
+
+	string filename = to_string(nam_hoc) + "hk" + to_string(hoc_ky) + id_mon + ".txt";
+	LuuDiemSv(filename, node_sv_mon);
+}
+
+//sua, xoa mon
+NodeMon* ChonMonHoc(HocKy* hk, string id_mon_hoc)
+{
+	NodeMon* mon_hoc = hk->headMon;
+	while (mon_hoc != NULL)
+	{
+		if (mon_hoc->data.id == id_mon_hoc)
+		{
+			return mon_hoc;
+		}
+		mon_hoc = mon_hoc->pNext;
+	}
+	return NULL;
+}
+void HienThiDSMon(NodeMon* head_mon)
+{
+	cout << "\nDanh sach mon hoc:\n";
+	for (NodeMon* node_mon = head_mon; node_mon != NULL; node_mon = node_mon->pNext)
+	{
+		cout << "ID: " << node_mon->data.id << ", Ten: " << node_mon->data.tenMon << ", Ten GV: " << node_mon->data.tenGv << '\n';
+	}
+}
+NodeMon* NhapMonHoc(HocKy* hoc_ky)
+{
+	string id_mon_hoc;
+	NodeMon* mon = NULL;
+
+	while (true)
+	{
+		HienThiDSMon(hoc_ky->headMon);
+		cout << "Nhap ID mon hoc: ";
+		getline(cin, id_mon_hoc);
+		mon = ChonMonHoc(hoc_ky, id_mon_hoc);
+		if (mon != NULL)
+		{
+			return mon;
+		}
+		else
+		{
+			cout << "Nhap sai ID mon hoc.\n";
+		}
+	}
+}
+NodeMon* NhapMonHoc(ListNamHoc l)
+{
+	return NhapMonHoc(TimHocKy(l));
+}
+string NextLine(string& data)
+{
+	size_t pos = data.find('\n');
+	string line = data.substr(0, pos);
+	data = pos != string::npos ? data.substr(pos + 1) : "";
+	return line;
+}
+// Luu mon hoc vao file tuong ung
+void GhiFileMon(string filename, NodeMon* mon, bool remove)
+{
+	fstream file(filename, ios::in);
+	string data, line;
+	getline(file, data);
+	while (!file.eof())
+	{
+		getline(file, line);
+		data += '\n' + line;
+	}
+	file.close();
+
+	file.open(filename, ios::out);
+	file << NextLine(data);
+	bool success = false;
+
+	while (!data.empty())
+	{
+		line = NextLine(data);
+		file << '\n';
+
+		if (line.find(mon->data.id + ",") == 0)
+		{
+			if (remove)
+			{
+				cout << "Xoa mon hoc thanh cong!!!\n";
+				success = true;
+			}
+			else
+			{
+				file << mon->data.id << ',' << mon->data.tenMon << ',' << mon->data.tenGv << ',' << mon->data.so_tc << ','
+					<< mon->data.bh1.thu << ',' << mon->data.bh1.buoi << ','
+					<< mon->data.bh2.thu << ',' << mon->data.bh2.buoi << ','
+					<< mon->data.MaxSv << ',';
+				cout << "Luu mon hoc thanh cong!!!\n";
+				success = true;
+			}
+		}
+		else
+		{
+			file << line;
+		}
+	}
+	if (!success)
+		cout << "Khong the tim thay mon hoc " << mon->data.id << " - " << mon->data.tenMon << "!!!\n";
+	file.close();
+}
+// Tim va luu vao file tuong ung
+void LuuMonHoc(ListNamHoc& l, NodeMon* node_mon, bool remove)
+{
+	for (NodeNamHoc* nam = l.pHead; nam != NULL; nam = nam->pNext)
+	{
+		for (int stt_hoc_ky = 0; stt_hoc_ky <= 2; stt_hoc_ky++)
+		{
+			HocKy hoc_ky = nam->data.hk[stt_hoc_ky];
+			for (NodeMon* mon = hoc_ky.headMon; mon != NULL; mon = mon->pNext)
+			{
+				if (mon == node_mon)
+				{
+					GhiFileMon(to_string(nam->data.tg.ngay_bd.y) + "hk" + to_string(stt_hoc_ky + 1) + ".txt", node_mon, remove);
+				}
+			}
+		}
+	}
+}
+void CapNhatMonHoc(ListNamHoc& l)
+{
+	NodeMon* node_mon = NhapMonHoc(l);
+	MonHoc& mon = node_mon->data;
+	string input;
+
+	cout << "Nhap thong tin moi. De trong va nhan enter de giu nguyen.\n";
+
+	cout << "Ten mon (" << mon.tenMon << "): ";
+	getline(cin, input);
+	if (!input.empty()) mon.tenMon = input;
+
+	cout << "Ten giao vien (" << mon.tenGv << "): ";
+	getline(cin, input);
+	if (!input.empty()) mon.tenGv = input;
+
+	cout << "So tin chi (" << mon.so_tc << "): ";
+	getline(cin, input);
+	try
+	{
+		mon.so_tc = stoi(input);
+	}
+	catch (invalid_argument) {}
+
+	cout << "So sinh vien toi da (" << mon.MaxSv << "): ";
+	getline(cin, input);
+	try
+	{
+		mon.MaxSv = stoi(input);
+	}
+	catch (invalid_argument) {}
+
+	for (int stt_buoi = 1; stt_buoi <= 2; stt_buoi++)
+	{
+		BuoiHoc buoi;
+		if (stt_buoi == 1)
+		{
+			BuoiHoc& buoi = mon.bh1;
+		}
+		else
+		{
+			BuoiHoc& buoi = mon.bh2;
+		}
+
+		cout << "Buoi hoc " << stt_buoi << " - thu (" << buoi.thu << ")\n";
+		HienLuaChonThu(1);
+		cout << "Nhap lua chon: ";
+		getline(cin, input);
+		try
+		{
+			XulyThu(stoi(input), buoi);
+		}
+		catch (invalid_argument) {}
+
+		cout << "Buoi hoc " << stt_buoi << " - gio (" << buoi.buoi << "): ";
+		HienLuaChonGio();
+		cout << "Nhap lua chon: ";
+		getline(cin, input);
+		try
+		{
+			int selection = stoi(input);
+			if (selection >= 1 && selection <= 4)
+			{
+				buoi.buoi = "S" + input;
+			}
+		}
+		catch (invalid_argument) {}
+	}
+
+	LuuMonHoc(l, node_mon);
+}
+void XoaMonHoc(ListNamHoc& l)
+{
+	system("cls");
+	cout << "--------------------XOA MON HOC-------------------------\n";
+	NodeNamHoc* node_nam = NhapNamHoc(l);
+	int so_hoc_ky = -1;
+	HocKy* hoc_ky;
+
+	while (so_hoc_ky < 1 || so_hoc_ky > 3)
+	{
+		cout << "Nhap hoc ky (1 <= HK <= 3): ";
+		cin >> so_hoc_ky;
+		cin.ignore();
+	}
+	hoc_ky = &node_nam->data.hk[so_hoc_ky - 1];
+
+	NodeMon* node_mon = NhapMonHoc(hoc_ky);
+	LuuMonHoc(l, node_mon, true);
+	string filename = to_string(node_nam->data.tg.ngay_bd.y) + "hk" + to_string(so_hoc_ky) + node_mon->data.id + ".txt";
+	remove(filename.c_str());
+
+	NodeMon* next = node_mon->pNext;
+	NodeMon** p;
+	for (p = &hoc_ky->headMon; *p != node_mon; p = &(*p)->pNext);
+	(*p)->pNext = NULL;
+	delete* p;
+	*p = next;
+}
+
 
 //HIEN THI
 void hienthiNam(ListNamHoc l, int& lc)
