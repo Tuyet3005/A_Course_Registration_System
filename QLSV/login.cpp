@@ -83,7 +83,6 @@ void changePass(bool role, string tk, string& mk)
 	string oldpass, newpass;
 	system("cls");
 	cout << "-----------------DOI MAT KHAU-----------------------" << endl;
-	cin.ignore();
 	bool flag = false;
 	while (!flag)
 	{
@@ -97,7 +96,7 @@ void changePass(bool role, string tk, string& mk)
 	cin.clear();
 	getline(cin, newpass);
 	ifstream f;
-	if (!role) f.open("SinhVien.txt");
+	if (role) f.open("SinhVien.txt");
 	else f.open("GiaoVu.txt");
 	string s = "";
 	ofstream t;
