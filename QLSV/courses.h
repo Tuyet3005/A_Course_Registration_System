@@ -55,24 +55,6 @@ NodeMon* NhapMonHoc(ListNamHoc l)
 	return NhapMonHoc(NhapHocKy(l));
 }
 
-NodeMon* TimNodeMon(ListNamHoc l, string id_mon)
-{
-	for (NodeNamHoc* node_nam = l.pHead; node_nam != NULL; node_nam = node_nam->pNext)
-	{
-		for (HocKy hoc_ky : node_nam->data.hk)
-		{
-			for (NodeMon* node_mon = hoc_ky.headMon; node_mon != NULL; node_mon = node_mon->pNext)
-			{
-				if (node_mon->data.id == id_mon)
-				{
-					return node_mon;
-				}
-			}
-		}
-	}
-	return NULL;
-}
-
 string NextLine(string& data)
 {
 	size_t pos = data.find('\n');
@@ -90,7 +72,7 @@ void LuuMonHoc(string filename, NodeMon* mon, bool remove)
 	while (!file.eof())
 	{
 		getline(file, line);
-		data += '\n' + line;	
+		data += '\n' + line;
 	}
 	file.close();
 
@@ -181,41 +163,53 @@ void CapNhatMonHoc(ListNamHoc& l)
 	}
 	catch (invalid_argument) {}
 
-	for (int stt_buoi = 1; stt_buoi <= 2; stt_buoi++)
+	while (true)
 	{
-		BuoiHoc buoi;
-		if (stt_buoi == 1)
+		for (int stt_buoi = 1; stt_buoi <= 2; stt_buoi++)
 		{
-			BuoiHoc& buoi = mon.bh1;
+			BuoiHoc buoi;
+			if (stt_buoi == 1)
+			{
+				BuoiHoc& buoi = mon.bh1;
+			}
+			else
+			{
+				BuoiHoc& buoi = mon.bh2;
+			}
+
+			cout << "Buoi hoc " << stt_buoi << " - thu (" << buoi.thu << ")\n";
+			HienLuaChonThu(1);
+			cout << "Nhap lua chon: ";
+			getline(cin, input);
+			try
+			{
+				XulyThu(stoi(input), buoi);
+			}
+			catch (invalid_argument) {}
+
+			cout << "Buoi hoc " << stt_buoi << " - gio (" << buoi.buoi << "): ";
+			HienLuaChonGio();
+			cout << "Nhap lua chon: ";
+			getline(cin, input);
+			try
+			{
+				int selection = stoi(input);
+				if (selection >= 1 && selection <= 4)
+				{
+					buoi.buoi = "S" + input;
+				}
+			}
+			catch (invalid_argument) {}
+		}
+		
+		if ((mon.bh1.buoi == mon.bh2.buoi) && (mon.bh1.thu == mon.bh2.thu))
+		{
+			cout << "2 buoi hoc trung nhau! Nhap lai!\n";
 		}
 		else
 		{
-			BuoiHoc& buoi = mon.bh2;
+			break;
 		}
-
-		cout << "Buoi hoc " << stt_buoi << " - thu (" << buoi.thu << ")\n";
-		HienLuaChonThu(1);
-		cout << "Nhap lua chon: ";
-		getline(cin, input);
-		try
-		{
-			XulyThu(stoi(input), buoi);
-		}
-		catch (invalid_argument) {}
-
-		cout << "Buoi hoc " << stt_buoi << " - gio (" << buoi.buoi << "): ";
-		HienLuaChonGio();
-		cout << "Nhap lua chon: ";
-		getline(cin, input);
-		try
-		{
-			int selection = stoi(input);
-			if (selection >= 1 && selection <= 4)
-			{
-				buoi.buoi = "S" + input;
-			}
-		}
-		catch (invalid_argument) {}
 	}
 
 	LuuMonHoc(l, node_mon);
