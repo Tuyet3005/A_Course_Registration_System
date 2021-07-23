@@ -133,7 +133,7 @@ int viewDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)
 	mon = viewDsMonHk(head, ki);
 	cout << endl;
 	//hien thi ds mon da dk mot hoc sinh
-	viewMondaDk(A, ki);
+	viewMondaDk(A,ki, whereY());
 	cout << endl << endl;
 	cout << "~ HUONG DAN ~" << endl;
 	cout << "--Nhap STT mon hoc ban muon dang ki va nhan ENTER de nhap tiep " << endl;
@@ -561,6 +561,7 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	system("cls");
 	cout << endl << "! TAO BUOI DANG KI KHOA HOC THAT BAI !" << endl << endl;
 }
+
 void nhapNgayGio(Ngay& ngay, Time& t)
 {
 	cout << "-Nhap lan luot ngay, thang, nam : " << endl;

@@ -143,5 +143,5 @@ void Xlviewmondk(NodeSv_Lop* A)
 {
 	char ki = chonKi();
 	system("cls");
-	viewMondaDk(A->headMon[ki-1], (int)ki);
+	viewMondaDk(A->headMon[ki-1], (int)ki,2);
 }
