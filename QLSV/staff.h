@@ -60,8 +60,6 @@ NodeMon* ChonMonHoc(HocKy* hk, string id_mon_hoc);
 void HienThiDSMon(NodeMon* head_mon);
 NodeMon* NhapMonHoc(HocKy* hoc_ky);
 NodeMon* NhapMonHoc(ListNamHoc l);
-NodeMon* TimNodeMon(ListNamHoc l, string id_mon);
-string NextLine(string& data);
 void GhiFileMon(string filename, NodeMon* mon, bool remove);
 void LuuMonHoc(ListNamHoc& l, NodeMon* node_mon, bool remove = false);
 void CapNhatMonHoc(ListNamHoc& l);
