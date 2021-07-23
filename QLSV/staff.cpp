@@ -2136,27 +2136,38 @@ void CapNhatMonHoc(ListNamHoc& l)
 
 			cout << "Buoi hoc " << stt_buoi << " - thu (" << buoi.thu << ")\n";
 			HienLuaChonThu(1);
-			cout << "Nhap lua chon: ";
-			getline(cin, input);
-			try
+			
+			int selection = -1;
+			while (selection < 1 || selection > 6)
 			{
-				XulyThu(stoi(input), buoi);
+				cout << "Nhap lua chon: ";
+				getline(cin, input);
+				try
+				{
+					selection = stoi(input);
+					XulyThu(selection, buoi);
+				}
+				catch (invalid_argument) { break; }
 			}
-			catch (invalid_argument) {}
 
 			cout << "Buoi hoc " << stt_buoi << " - gio (" << buoi.buoi << "): ";
 			HienLuaChonGio();
-			cout << "Nhap lua chon: ";
-			getline(cin, input);
-			try
+
+			selection = -1;
+			while (selection < 1 || selection > 4)
 			{
-				int selection = stoi(input);
-				if (selection >= 1 && selection <= 4)
+				cout << "Nhap lua chon: ";
+				getline(cin, input);
+				try
 				{
-					buoi.buoi = "S" + input;
+					int selection = stoi(input);
+					if (selection >= 1 && selection <= 4)
+					{
+						buoi.buoi = "S" + input;
+					}
 				}
+				catch (invalid_argument) { break; }
 			}
-			catch (invalid_argument) {}
 		}
 
 		if ((mon.bh1.buoi == mon.bh2.buoi) && (mon.bh1.thu == mon.bh2.thu))
