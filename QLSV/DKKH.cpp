@@ -82,7 +82,7 @@ bool cobuoiDKKH(ThoiGian tg, Time tmBD, Time tmKT)//doc file DKKH.txt
 	return false;
 }
 
-void xoaLC(int dem, int mon, int ki, NodeSv_Lop*& A, NodeMon*& head)
+void xoaLC(int dem, int mon, int ki, NodeSv_Lop* A, NodeMon* head)
 {
 	if (dem == 0)
 	{
@@ -108,7 +108,7 @@ void xoaLC(int dem, int mon, int ki, NodeSv_Lop*& A, NodeMon*& head)
 		temp2 = temp2->pNext;
 	//xoa nodeMon_sv ra khoi ds mon cua sv
 	NodeMon_Sv* delMon_sv = NULL;
-	if (temp2->mon == head) //xoa mon dau (stt=1)
+	if (lc == 1) //xoa mon dau (stt=1)
 	{
 		A->headMon[ki - 1] = temp2->pNext;
 		delMon_sv = temp2;
@@ -120,41 +120,30 @@ void xoaLC(int dem, int mon, int ki, NodeSv_Lop*& A, NodeMon*& head)
 	}
 
 	//xoa nodeSvMon ra khoi dssv cua mon
-	NodeSv_Mon* temp = head->headSvMon;
-	if (head->headSvMon->mssv == A->sv.id)
+	//node sv dau cua mon dang muon xoa
+	NodeSv_Mon* svHead = delMon_sv->mon->headSvMon;
+	if (svHead->mssv == A->sv.id)
 	{
-		head->headSvMon = temp->pNext;
-		delete temp;
-		head->data.num_Sv--;
+		delMon_sv->mon->headSvMon = svHead->pNext;
+		delete svHead;
+		delMon_sv->mon->data.num_Sv--;
+		delete delMon_sv;//xoa node Mon_sv sau khi da thay doi cac con tro tuong ung tren nam trong struct cua delMon_sv
 		return;
 	}
-	//duyet toi pre-delSvMon
-	while (temp->pNext)
+	//duyet toi pre-delSvMon (ko can thiet lam vi sv moi dc them vao DAU => sure! )
+	while (svHead->pNext) 
 	{
-		if (temp->pNext->mssv == A->sv.id)
+		if (svHead->pNext->mssv == A->sv.id)
 		{
-			NodeSv_Mon* delSv = temp->pNext;
-			temp->pNext = delSv->pNext;
+			NodeSv_Mon* delSv = svHead->pNext;
+			svHead->pNext = delSv->pNext;
 			delete delSv;
-			head->data.num_Sv--;
+			delMon_sv->mon->data.num_Sv--;
+			delete delMon_sv;
 			return;
 		}
+		svHead = svHead->pNext;
 	}
-	//giam si so
-	//sau temp2 = temp2->next
-	////if (temp2->svMon->mssv == A->sv.id)
-	////	temp2->pNext->svMon = temp2->pNext->svMon->pNext;
-	////else
-	////{
-	////	NodeSv_Mon* temp = temp2->pNext->svMon;//node svMon cua mon hoc ma sv muon xoa 
-	////	while (temp->pNext->mssv != A->sv.id)
-	////	{
-	////		temp = temp->pNext;
-	////	}
-	////	temp->pNext = temp->pNext->pNext;
-	////}
-	////xoa mon trong ds mon cua sv
-	//temp2->pNext = temp2->pNext->pNext;
 }
 
 int viewDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)
@@ -186,6 +175,7 @@ bool BuoiHocHopLe(NodeMon* mon, NodeMon_Sv* dadk)//check siso, check mon da dk, 
 	if (mon->data.num_Sv == mon->data.MaxSv)
 	{
 		cout << "Mon hoc da du so luong sinh vien dang ki... Hay chon mon khac !" << endl;
+		Sleep(1000);
 		return false;
 	}
 	NodeMon_Sv* pdadk = dadk;
@@ -212,11 +202,6 @@ bool BuoiHocHopLe(NodeMon* mon, NodeMon_Sv* dadk)//check siso, check mon da dk, 
 
 bool themMon(NodeSv_Lop* A, int ki, int stt, NodeMon* head)//them dau
 {
-	if (head->data.MaxSv == head->data.num_Sv)
-	{
-		cout << "Mon hoc nay da du so luong dang ky!\n";//hay la chi hien thi cac mon con duoc dk thoi nhi???
-		return false;
-	}
 	NodeMon* temp = head;
 	for (int i = 1; i < stt; i++)
 	{
@@ -241,7 +226,7 @@ bool themMon(NodeSv_Lop* A, int ki, int stt, NodeMon* head)//them dau
 	return true;
 }
 
-void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)//node mon la ds mon dc mo, nodemonofsv la ds mon ma sv da dk
+void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 {
 	int mon = viewDKKH_Sv(A->headMon[ki - 1], ki, head);
 	string s = "";
@@ -295,6 +280,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)//node mon la ds mon dc mo
 						if (dem >= 5)
 						{
 							cout << "! Da dang ki du 5 mon, ban khong the dang ki them.. " << endl << endl;
+							system("pause");
 						}
 						if (themMon(A, ki, key, head))
 						{
