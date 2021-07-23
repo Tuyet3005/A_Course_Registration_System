@@ -75,8 +75,6 @@ bool XlMenuGv(int chon, ListNamHoc& l)
 		}
 	}
 	}
-	gotoXY(0, HEIGHT - 4);
-	system("pause");
 	return false;
 }
 void GiaoVu(ListNamHoc& l)
@@ -146,7 +144,7 @@ bool importFilehayNhapTay(bool chon)
 int InMenuTaoMoi()
 {
 	system("cls");
-	printA_Sentence("-- TAO MOI --", 3);
+	printA_Sentence("-- TAO MOI --", 1);
 	background_Gv();
 	string title[7] = { "NAM HOC","LOP HOC","HOC KI","MON HOC","BUOI DANG KI KHOA HOC","QUAY VE","THOAT"};
 	return LuaChon_Dep(7, title);
@@ -203,8 +201,6 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 		}
 	}
 	}
-	gotoXY(0, HEIGHT - 4);
-	system("pause");
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
 
@@ -1059,8 +1055,6 @@ bool XlCapNhat2(ListNamHoc& l, int chon)
 			exit(0);
 		}
 	}
-	gotoXY(0, HEIGHT - 4);
-	system("pause");
 	return false;//ngoai tru quay ve va thoat
 	}
 }
@@ -1104,8 +1098,6 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 			exit(0);
 		}
 	}
-	gotoXY(0, HEIGHT - 4);
-	system("pause");
 	return false;//ngoai tru quay ve va thoat
 	}
 }
@@ -1154,8 +1146,6 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 		}
 	}
 	}
-	gotoXY(0, HEIGHT - 4);
-	system("pause");
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
 }
 //them sv 
@@ -1765,10 +1755,9 @@ int Chon(int maxChoice)
 		if (_kbhit())
 		{
 			temp = _getch();
-			s += temp;
 			if (temp == 13)//enter
 			{
-				if (s != "\r")
+				if (s != "")
 				{
 					key = stoi(s);
 					if (key == 0 || key > maxChoice)
@@ -1808,6 +1797,7 @@ int Chon(int maxChoice)
 			}
 			else
 			{
+				s += temp;
 				cout << temp;
 				x++;
 			}

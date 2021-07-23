@@ -20,13 +20,15 @@ void drawTable(int Row, int Col, int posCol[], int posRow)//posRow la hang bat d
 			a = 192;
 			b = 193;
 			c = 217;
+			gotoXY(posCol[0], posRow + 2 * Row);
 			cout << char(a);
-			for (int j = 0; j < Col; j++)
+			for (int j = 0; j < Col - 1; j++)
 			{
 				for (int t = 0; t < posCol[j + 1] - posCol[j] - 1; t++) cout << char(196);
-				if (j != Col - 1) cout << char(b);
+				cout << char(b);
 			}
-			cout << char(c) << endl;
+			for (int t = 0; t < posCol[Col] - posCol[Col - 1] - 1; t++) cout << char(196);
+			cout << char(c);
 			break;
 		}
 		else if (i == 1)
@@ -39,28 +41,33 @@ void drawTable(int Row, int Col, int posCol[], int posRow)//posRow la hang bat d
 		{
 		}
 		//ve bien
+		gotoXY(posCol[0], posRow + 2 * i);
 		cout << char(a);
-		for (int j = 0; j < Col; j++)
+		for (int j = 0; j < Col - 1; j++)
 		{
 			for (int t = 0; t < posCol[j + 1] - posCol[j] - 1; t++) cout << char(196);
-			if (j != Col - 1) cout << char(b);
+			cout << char(b);
 		}
-		cout << char(c) << endl;
+		for (int t = 0; t < posCol[Col] - posCol[Col-1] - 1; t++) cout << char(196);
+		cout << char(c);
 		//ve hang de dien thong tin
 		for (int j = 0; j < Col + 1; j++)
 		{
 			gotoXY(posCol[j], posRow + 1 + 2 * i);
 			cout << char(179);
 		}
-		cout << endl;
 	}
+	cout << endl;
 }
 
 int viewDsSvLop(NodeLop* A)
 {
 	system("cls");
-	cout << "----------------------------------------DANH SACH LOP " << A->lop.ten << "--------------------------------------" << endl;
-	cout << endl;
+	setColor(background_color, title_color);
+	printA_Sentence("~ DANH SACH LOP ~",2);
+	setColor(background_color, title_color1);
+	printA_Sentence(A->lop.ten, 3);
+	gotoXY(10, 6);
 	if (A->lop.headSvLop == NULL)
 	{
 		cout << "Hien chua cap nhat du lieu..." << endl;
@@ -69,11 +76,15 @@ int viewDsSvLop(NodeLop* A)
 	int posRow = whereY();
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posCol[8] = { 0,6,17,43,55,67,81,95 };
-	for (int j = 0; j < 8; j++)
+	int space = WIDTH / 2 - posCol[7]/2;
+	setColor(background_color, text_color);
+	for (int j = 0; j < 7; j++)
 	{
+		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	posCol[7] += space;
 	cout.clear();
 	NodeSv_Lop* p = A->lop.headSvLop;
 	int i = 1;
@@ -120,8 +131,12 @@ void BackGround()
 
 int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 {
-	cout << "---------------------------------------------DANH SACH MON KI " << ki << "----------------------------------------" << endl;
-	cout << endl;
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ DANH SACH MON ~", 2);
+	setColor(background_color, title_color1);
+	printA_Sentence("Ki "+to_string(ki), 3);
+	gotoXY(10, 6);
 	if (head == NULL)
 	{
 		cout << "Hien chua cap nhat du lieu..." << endl;
@@ -130,11 +145,15 @@ int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 	string title[] = { "STT", "ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC" };
 	int posRow = whereY();
 	int posCol[8] = { 0,6,15,45,75,90,105,140 };
+	int space = WIDTH / 2 - posCol[7] / 2;
+	setColor(background_color, text_color);
 	for (int j = 0; j < 7; j++)
 	{
+		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	posCol[7] += space;
 	cout.clear();
 	NodeMon* p = head;
 	int i = 1;
@@ -164,8 +183,11 @@ int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 int viewDsSvMon(NodeMon* A)
 {
 	system("cls");
-	cout << "---------------------------------------DANH SACH SINH VIEN MON " << A->data.tenMon << "--------------------------------------" << endl;
-	cout << endl;
+	setColor(background_color, title_color);
+	printA_Sentence("~ DANH SACH SINH VIEN MON ~", 2);
+	setColor(background_color, title_color1);
+	printA_Sentence(A->data.tenMon, 3);
+	gotoXY(10, 6);
 	if (A->headSvMon == NULL)
 	{
 		cout << "Danh sach sinh vien dang trong..." << endl;
@@ -174,11 +196,15 @@ int viewDsSvMon(NodeMon* A)
 	string title[] = { "STT","MSSV","HO","TEN","GK","CK","CONG","TONG KET" };
 	int posRow = whereY();
 	int posCol[9] = { 0,6,17,43,55,65,75,85,100 };
+	int space = WIDTH / 2 - posCol[8] / 2;
+	setColor(background_color, text_color);
 	for (int j = 0; j < 8; j++)
 	{
+		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	posCol[8] += space;
 	cout.clear();
 	NodeSv_Mon* p = A->headSvMon;
 	int i = 1;
@@ -211,8 +237,11 @@ int viewDsSvMon(NodeMon* A)
 int viewDsKi(NodeNamHoc* A)
 {
 	system("cls");
-	cout << "---------------------------------------------DANH SACH KI NAM HOC " << A->data.tg.ngay_bd.y << " - " << A->data.tg.ngay_bd.y + 1 << "-------------------------------------------" << endl;
-	cout << endl;
+	setColor(background_color, title_color);
+	printA_Sentence("~ DANH SACH KI ~", 2);
+	setColor(background_color, title_color1);
+	printA_Sentence("Nam hoc: " + to_string(A->data.tg.ngay_bd.y) + " - " + to_string(A->data.tg.ngay_bd.y + 1), 3);
+	gotoXY(10, 6);
 	if (A->data.hk[0].tg.ngay_bd.d == NULL)
 	{
 		cout << "Hien chua co ki hoc nao duoc tao..." << endl;
@@ -221,11 +250,15 @@ int viewDsKi(NodeNamHoc* A)
 	string title[] = { "KI","THOI GIAN" };
 	int posRow = whereY();
 	int posCol[3] = { 0,5,35 };
+	int space = WIDTH / 2 - posCol[2] / 2;
+	setColor(background_color, text_color);
 	for (int j = 0; j < 2; j++)
 	{
+		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	posCol[2] += space;
 	cout.clear();
 	int i = 0;
 	for (; A->data.hk[i].tg.ngay_bd.d != NULL && i < 3; i++)
@@ -243,8 +276,10 @@ int viewDsKi(NodeNamHoc* A)
 int viewDsNam(ListNamHoc A)
 {
 	system("cls");
-	cout << "---------------------------------------DANH SACH NAM HOC----------------------------------" << endl;
-	cout << endl;
+	setColor(background_color, title_color);
+	printA_Sentence("~ DANH SACH NAM HOC ~", 2);
+	setColor(background_color, title_color1);
+	gotoXY(10, 6);
 	if (A.pHead == NULL)
 	{
 		cout << "Hien chua cap nhat du lieu..." << endl;
@@ -252,12 +287,16 @@ int viewDsNam(ListNamHoc A)
 	}
 	string title[] = { "STT","NAM HOC" };
 	int posRow = whereY();
-	int posCol[7] = { 0,6,25 };
+	int posCol[3] = { 0,6,25 };
+	int space = WIDTH / 2 - posCol[2] / 2;
+	setColor(background_color, text_color);
 	for (int j = 0; j < 2; j++)
 	{
+		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	posCol[2] += space;
 	cout.clear();
 	NodeNamHoc* p = A.pHead;
 	int i = 1;
@@ -277,8 +316,11 @@ int viewDsNam(ListNamHoc A)
 int viewDsLop(NodeLop* head)
 {
 	system("cls");
-	cout << "---------------------DANH SACH LOP HOC-----------------------" << endl;
-	cout << endl;
+	setColor(background_color, title_color);
+	printA_Sentence("~ DANH SACH LOP HOC ~", 2);
+	setColor(background_color, title_color1);
+	cout << endl << "nam bnh";
+	gotoXY(10, 6);
 	if (head == NULL)
 	{
 		cout << "Hien chua cap nhat du lieu..." << endl;
@@ -286,12 +328,16 @@ int viewDsLop(NodeLop* head)
 	}
 	string title[] = { "STT","TEN LOP" };
 	int posRow = whereY();
-	int posCol[3] = { 0,6,16 };
+	int posCol[3] = { 0,6,20 };
+	int space = WIDTH / 2 - posCol[2] / 2;
+	setColor(background_color, text_color);
 	for (int j = 0; j < 2; j++)
 	{
+		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	posCol[2] += space;
 	cout.clear();
 	NodeLop* p = head;
 	int i = 1;
@@ -311,8 +357,11 @@ int viewDsLop(NodeLop* head)
 int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 {
 	system("cls");
-	cout << "-------------------------------------KET QUA HOC TAP - HOC KI " << ki << "----------------------------------" << endl;
-	cout << endl;
+	setColor(background_color, title_color);
+	printA_Sentence("~ KET QUA HOC TAP ~", 2);
+	setColor(background_color, title_color1);
+	printA_Sentence("Hoc ki : " + to_string(ki), 3);
+	gotoXY(10, 6);
 	if (sv->headMon == NULL)
 	{
 		cout << "Hien chua cap nhat du lieu..." << endl;
@@ -321,12 +370,16 @@ int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 	NodeMon_Sv* p = sv->headMon[ki - 1];
 	string title[] = { "STT","ID MON","TEN MON","GK","CK","CONG","TONG KET" };
 	int posRow = whereY();
-	int posCol[] = { 0,6,20, 30,9,9,9,9 };
+	int posCol[] = { 0,6,20,30,9,9,9,9 };
+	int space = WIDTH / 2 - posCol[7] / 2;
+	setColor(background_color, text_color);
 	for (int j = 0; j < 7; j++)
 	{
+		posCol[j]+=space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	posCol[7] += space;
 	cout.clear();
 	int i = 1;
 	for (; p != NULL; i++)
@@ -364,17 +417,22 @@ int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 void viewInfoSv(Sv A)
 {
 	system("cls");
-	cout << endl;
-	cout << "----------------------------------------THONG TIN CA NHAN--------------------------------------" << endl;
-	cout << endl;
+	setColor(background_color, title_color);
+	printA_Sentence("~ THONG TIN CA NHAN ~", 2);
+	setColor(background_color, title_color1);
+	gotoXY(10, 6);
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posRow = whereY();
 	int posCol[8] = { 0,6,17,43,55,67,85,95 };
+	int space = WIDTH / 2 - posCol[7] / 2;
+	setColor(background_color, text_color);
 	for (int j = 0; j < 7; j++)//ghi title
 	{
+		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	posCol[7] += space;
 	cout.clear();
 	gotoXY(posCol[0] + 2, posRow + 3);
 	cout << A.stt;
@@ -395,10 +453,13 @@ void viewInfoSv(Sv A)
 	system("pause");
 }
 
-int viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
+int viewMondaDk(NodeMon_Sv* A, int ki,int line)//show thong tin mon hoc cua 1 sv
 {
-	cout << "------------------------------------------------KET QUA DANG KI HOC PHAN KI " << ki << "----------------------------------------------" << endl;
-	cout << endl;
+	setColor(background_color, title_color);
+	printA_Sentence("~ KET QUA DANG KI HOC PHAN ~", line);
+	setColor(background_color, title_color1);
+	printA_Sentence("Hoc ki : " + to_string(ki), line + 1);
+	gotoXY(10, line +2);
 	if (A == NULL)
 	{
 		cout << "Danh sach mon da dang ki trong..." << endl;
@@ -406,12 +467,16 @@ int viewMondaDk(NodeMon_Sv* A, int ki)//show thong tin mon hoc cua 1 sv
 	}
 	int posRow = whereY();
 	string title[] = { "STT","ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC" };
-	int posCol[8] = { 0,6,15,45,75,90,105,140 };
+	int posCol[8] = { 0,6,15,45,75,90,105,150 };
+	int space = WIDTH / 2 - posCol[7] / 2;
+	setColor(background_color, text_color);
 	for (int j = 0; j < 7; j++)
 	{
+		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	posCol[7] += space;
 	cout.clear();
 	NodeMon_Sv* p = A;
 	int i = 1;
@@ -444,9 +509,13 @@ int viewDiem_Lop(NodeLop* A, int ki)
 	bool flag = tinhGPA_SvvaLop(A, ki);
 	//
 	system("cls");
-	cout << "-------------------------------------KET QUA HOC TAP - LOP " << A->lop.ten << " - KI " << ki << "----------------------------------" << endl;
-	cout << endl;
-	if (A == NULL)
+	setColor(background_color, title_color);
+	printA_Sentence("~ KET QUA HOC TAP ~", 2);
+	setColor(background_color, title_color1);
+	printA_Sentence("Hoc ki : " + to_string(ki), 3);
+	printA_Sentence("Lop : " + A->lop.ten, 4);
+	gotoXY(10, 6);
+	if (A->lop.headSvLop == NULL)
 	{
 		cout << "Hien chua cap nhat du lieu..." << endl;
 		return 0;
@@ -454,11 +523,15 @@ int viewDiem_Lop(NodeLop* A, int ki)
 	string title[] = { "STT","MSSV","HO","TEN","ID MON","TK","ID MON","TK","ID MON","TK","ID MON","TK","ID MON","TK","GPA" };
 	int posRow = whereY();
 	int posCol[16] = { 0,6,17,43,55,65,70,80,85,95,100,110,115,125,130,140 };
+	int space = WIDTH / 2 - posCol[15] / 2;
+	setColor(background_color, text_color);
 	for (int j = 0; j < 15; j++)
 	{
+		posCol[j] += space;
 		gotoXY(posCol[j] + 1, posRow + 1);
 		cout << title[j];
 	}
+	posCol[15] += space;
 	cout.clear();
 	NodeSv_Lop* pSv = A->lop.headSvLop;
 	NodeMon_Sv* pMon;
@@ -485,7 +558,7 @@ int viewDiem_Lop(NodeLop* A, int ki)
 			cout << pMon->svMon->diem.tongket;
 			pMon = pMon->pNext;
 		}
-		gotoXY(posCol[j - 1] + 1, posRow + 1 + 2 * i);
+		gotoXY(posCol[j] + 1, posRow + 1 + 2 * i);
 		cout << pSv->GPA[ki - 1];
 		pSv = pSv->pNext;
 	}
@@ -495,7 +568,7 @@ int viewDiem_Lop(NodeLop* A, int ki)
 	if (flag)
 		cout << A->lop.GPA;
 	else
-		cout << "Chua cap nhat";
+		cout << "0";
 	gotoXY(0, posRow);
 	drawTable(i, 15, posCol, posRow);
 	gotoXY(0, posRow + i * 2 + 4);
@@ -514,6 +587,11 @@ bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 	int sumlop = 0;
 	while (pSv != NULL)
 	{
+		if (pSv->headMon[ki - 1] == NULL)
+		{
+			pSv = pSv->pNext;
+			continue;
+		}
 		pMon = pSv->headMon[ki - 1];
 		sum = 0;
 		tin = 0;
@@ -547,16 +625,25 @@ bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 void viewInfoGV(Sv A)
 {
 	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ THONG TIN CA NHAN ~", 2);
+	setColor(background_color, title_color1);
+	printA_Sentence("GIAO VU", 3);
+	gotoXY(10, 6);
+	system("cls");
 	cout << endl;
-	cout << "---------------------------THONG TIN CA NHAN-------------------------------------" << endl;
 	string title[] = { "HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posRow = whereY();
 	int posCol[6] = { 0,26,38,50,68,78 };
+	int space = WIDTH / 2 - posCol[5] / 2;
+	setColor(background_color, text_color);
 	for (int j = 0; j < 5; j++)//ghi title
 	{
+		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	posCol[5] += space;
 	cout.clear();
 	gotoXY(posCol[0] + 2, posRow + 3);
 	cout << A.ho;
@@ -596,7 +683,7 @@ void background()
 void background_Sv()
 {
 	setColor(background_color, title_color);
-	gotoXY(0, 5);
+	gotoXY(0, 6);
 	cout << "                                      xxxxx     xx  xxxxx       xx   xxx       xx         xxx             xx   xx   xxxxxxxxxx  xxxxx       xx" << endl;
 	cout << "                                   xxx     xx   xx  xxx xx      xx   xxx       xx          xxx           xx    xx   xxx         xxx xx      xx" << endl;
 	cout << "                                  xxx           xx  xxx  xx     xx   xxx       xx           xxx         xx     xx   xxx         xxx  xx     xx" << endl;
@@ -612,8 +699,7 @@ void background_Sv()
 void background_Gv()
 {
 	setColor(background_color, title_color);
-	gotoXY(0, 5);
-	cout << endl << endl;
+	gotoXY(0, 6);
 	cout << "                                           xxxxx       xx         xxxx               xxxxx              xxx             xx  xxx          xx" << endl;
 	cout << "                                        xxx      xx    xx        xxx xx          xxx        xx           xxx           xx   xxx          xx" << endl;
 	cout << "                                      xxx              xx       xxx   xx       xxx            xx          xxx         xx    xxx          xx" << endl;
@@ -675,9 +761,9 @@ int LuaChon_Dep(int title_number, string title[])
 	if (title_number > 2)//do menu chinh
 		cell_height = 2;
 	else
-		cell_height = 4;//dang nhap
+		cell_height = 4;//dang nhap + Y_n
 	bd_x = WIDTH / 2 - cell_width / 2;
-	bd_y = HEIGHT / 2 - 1;
+	bd_y = HEIGHT / 2 + ((title_number == 7) ? (-5) : 0);
 	kt_x = bd_x + cell_width;
 	kt_y = bd_y + cell_height;
 	for (int i = 0; i < title_number; i++)
