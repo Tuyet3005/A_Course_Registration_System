@@ -1,2 +1,2 @@
 05092020,31122020,
-TRR,Toan Roi Rac,Trung,2,Thu Tu,S3,Thu Hai,S1,30,
+TRR,Toan Roi Rac,Trung,2,Thu Tu,S3,Thu Ba,S4,30,

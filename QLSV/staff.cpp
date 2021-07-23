@@ -1991,6 +1991,11 @@ NodeMon* ChonMonHoc(HocKy* hk, string id_mon_hoc)
 }
 void HienThiDSMon(NodeMon* head_mon)
 {
+	if (head_mon == NULL)
+	{
+		cout << "Danh sach mon hoc trong!\n";
+		return;
+	}
 	cout << "\nDanh sach mon hoc:\n";
 	for (NodeMon* node_mon = head_mon; node_mon != NULL; node_mon = node_mon->pNext)
 	{
@@ -2119,68 +2124,60 @@ void CapNhatMonHoc(ListNamHoc& l)
 		mon.MaxSv = stoi(input);
 	}
 	catch (invalid_argument) {}
-
-	while (true)
+	do
 	{
-		for (int stt_buoi = 1; stt_buoi <= 2; stt_buoi++)
+		for (int i = 1; i < 3; i++)
 		{
-			BuoiHoc buoi;
-			if (stt_buoi == 1)
+			int lc;
+			HienLuaChonThu(i);
+			do
 			{
-				BuoiHoc& buoi = mon.bh1;
+				cout << "Nhap lua chon (1-6): ";
+				cin >> lc;
+				if (cin.fail())
+				{
+					cin.clear();
+					cin.ignore(100, '\n');
+					lc = 0;
+				}
+			} while (lc < 1 || lc>6);
+			if (i == 1)
+				XulyThu(lc, mon.bh1);
+			else
+				XulyThu(lc, mon.bh2);
+			HienLuaChonGio();
+			do
+			{
+				cout << "Nhap lua chon (1-4): ";
+				cin >> lc;
+				if (cin.fail())
+				{
+					cin.clear();
+					cin.ignore(100, '\n');
+					lc = 0;
+				}
+			} while (lc < 1 || lc>4);
+			if (i == 1)
+			{
+				mon.bh1.buoi = "S";
+				mon.bh1.buoi += to_string(lc);
 			}
 			else
 			{
-				BuoiHoc& buoi = mon.bh2;
-			}
-
-			cout << "Buoi hoc " << stt_buoi << " - thu (" << buoi.thu << ")\n";
-			HienLuaChonThu(1);
-			
-			int selection = -1;
-			while (selection < 1 || selection > 6)
-			{
-				cout << "Nhap lua chon: ";
-				getline(cin, input);
-				try
-				{
-					selection = stoi(input);
-					XulyThu(selection, buoi);
-				}
-				catch (invalid_argument) { break; }
-			}
-
-			cout << "Buoi hoc " << stt_buoi << " - gio (" << buoi.buoi << "): ";
-			HienLuaChonGio();
-
-			selection = -1;
-			while (selection < 1 || selection > 4)
-			{
-				cout << "Nhap lua chon: ";
-				getline(cin, input);
-				try
-				{
-					int selection = stoi(input);
-					if (selection >= 1 && selection <= 4)
-					{
-						buoi.buoi = "S" + input;
-					}
-				}
-				catch (invalid_argument) { break; }
+				mon.bh2.buoi = "S";
+				mon.bh2.buoi += to_string(lc);
 			}
 		}
-
 		if ((mon.bh1.buoi == mon.bh2.buoi) && (mon.bh1.thu == mon.bh2.thu))
 		{
-			cout << "2 buoi hoc trung nhau! Nhap lai!\n";
+			cout << "Hai buoi hoc trung nhau!!! Vui long nhap lai!\n";
 		}
 		else
 		{
+			LuuMonHoc(l, node_mon);
 			break;
 		}
-	}
-
-	LuuMonHoc(l, node_mon);
+	} 	while (true);	
 }
 void XoaMonHoc(ListNamHoc& l)
 {
