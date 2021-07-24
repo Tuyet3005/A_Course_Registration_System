@@ -84,6 +84,7 @@ void hienthiKi(NodeNamHoc* A, int& lc);
 void hienthiDsMon(NodeMon* head, int& lc);
 void hienthiDsSv_Mon(NodeMon* A, int& lc);
 void end(int& lc);
+int chonSt_Year();
 //lop
 bool ChonTThayDiem_Lop();
 void hienthiDsLop(NodeLop* head, int& lc);

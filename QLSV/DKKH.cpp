@@ -431,7 +431,8 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 	else
 	{
 		system("cls");
-		cout << "Hien khong co buoi DKKH nao..." << endl << endl;
+		printA_Sentence("Hien khong co buoi DKKH nao...", HEIGHT / 2 - 2);
+		cout << endl << endl;
 	}	
 }
 

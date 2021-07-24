@@ -26,7 +26,7 @@ void LogIn(string& tk, string& mk, bool& lc)
 	system("cls");
 	background_Login();
 	string title[2] = { "SINH VIEN","GIAO VU" };
-	lc=LuaChon_Dep(2, title)-2;
+	lc=LuaChon_Menu(2, title,4, HEIGHT / 2)-2;
 	system("cls");
 	background_Login();
 	setColor(background_color, title_color1);
