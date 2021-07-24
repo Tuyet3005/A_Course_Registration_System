@@ -400,12 +400,20 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 			runDKKH_Sv(A, ki, head);
 		}
 		else
-			cout << "Hien khong co buoi DKKH nao..." << endl << endl;
+		{
+			system("cls");
+			printA_Sentence("Hien khong co buoi DKKH nao...", HEIGHT / 2 - 2);
+			cout << endl << endl;
+		}
 	}
 	catch (int error)
 	{
 		if (error == -1)
-			cout << "Hien khong co buoi DKKH nao..." << endl;
+		{
+			system("cls");
+			printA_Sentence("Hien khong co buoi DKKH nao...", HEIGHT / 2 - 2);
+			cout << endl << endl;
+		}
 	}
 }
 

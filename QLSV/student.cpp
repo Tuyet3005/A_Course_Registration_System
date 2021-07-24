@@ -7,7 +7,7 @@ int InMenuSv()
 	system("cls");
 	background_Sv();
 	string title[5] = { "CAC MON HOC CUA TOI","DANG KI MON HOC","CAC MON DANG MO","QUAY VE","THOAT" };
-	return LuaChon_Dep(5, title);
+	return LuaChon_Menu(5, title,2, HEIGHT / 2);
 }
 Sv findInfo(string tenlop, int tk)//tim Info sv
 {
@@ -121,27 +121,18 @@ bool XlMenuSv(int chon, ListNamHoc& l, NodeSv_Lop* A)
 	return false;
 }
 //viewmondk
-char chonKi()
+int chonKi()
 {
 	system("cls");
-	cout << "Ban muon xem mon da dk cua ki may ? 1/2/3?" << endl;
-	cout << "Hay nhan phim tuong uong" << endl;
-	char k;
-	while (true)
-	{
-		if (_kbhit())
-		{
-			k = _getch();
-			if (k >= 49 && k <= 51)
-			{
-				return k - 48;
-			}
-		}
-	}
+	setColor(background_color, title_color1);
+	printA_Sentence("Ban muon xem ds mon cua ki may?", HEIGHT / 2 - 10);
+	string title[] = { "KI 1","KI 2","KI 3","KI 4" };
+	return LuaChon_Menu(4, title, 2, HEIGHT / 2 - 7);
 }
 void Xlviewmondk(NodeSv_Lop* A)
 {
-	char ki = chonKi();
+	int ki = chonKi();
 	system("cls");
 	viewMondaDk(A->headMon[ki-1], (int)ki,2);
+	cout << endl;
 }

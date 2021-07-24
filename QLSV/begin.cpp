@@ -7,7 +7,7 @@ int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 	background();
 	cout << endl << endl;
 	string title[5] = { "HE THONG CHINH","THONG TIN CA NHAN","DOI MAT KHAU","DANG XUAT","THOAT" };
-	return LuaChon_Dep(5, title);
+	return LuaChon_Menu(5, title,2,HEIGHT/2);
 }
 
 bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false la giao vu, true la sv
@@ -73,7 +73,7 @@ bool Ask_YN(string cauhoi)//hang in ra cau hoi
 	printA_Sentence(cauhoi,HEIGHT/2-2);
 	setColor(background_color, text_color);
 	string title[2] = { "Dung vay","No no, Khong he"};
-	return LuaChon_Dep(2, title)-2;
+	return LuaChon_Menu(2, title,4, HEIGHT / 2)-2;
 }
 
 //NAM HOC 

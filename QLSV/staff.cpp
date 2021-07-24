@@ -10,26 +10,26 @@ int InMenuGv()
 	system("cls");
 	background_Gv();
 	string title[5] = { "TAO MOI","CAP NHAT","HIEN THI","QUAY VE","THOAT" };
-	return LuaChon_Dep(5,title);//lua chon lon nhat la 5
+	return LuaChon_Menu(5,title,2,HEIGHT/2);//lua chon lon nhat la 5
 }
-int LuaChon(int maxChoice)
-{
-	int chon;
-	do
-	{
-		cout << "Nhap lua chon cua ban: " << endl;
-		cin >> chon;
-		if (cin.fail())
-		{
-			cin.clear();
-			cin.ignore();
-			chon = 0;
-		}
-	}
-	//trong khoang lua chon, dung kieu du lieu
-	while (cin.fail() || chon < 1 || chon > maxChoice);
-	return chon;
-}
+//int LuaChon(int maxChoice)
+//{
+//	int chon;
+//	do
+//	{
+//		cout << "Nhap lua chon cua ban: " << endl;
+//		cin >> chon;
+//		if (cin.fail())
+//		{
+//			cin.clear();
+//			cin.ignore();
+//			chon = 0;
+//		}
+//	}
+//	//trong khoang lua chon, dung kieu du lieu
+//	while (cin.fail() || chon < 1 || chon > maxChoice);
+//	return chon;
+//}
 bool XlMenuGv(int chon, ListNamHoc& l)
 {
 	char lenh;//thoat thi nhap Y/y
@@ -147,7 +147,7 @@ int InMenuTaoMoi()
 	printA_Sentence("-- TAO MOI --", 1);
 	background_Gv();
 	string title[7] = { "NAM HOC","LOP HOC","HOC KI","MON HOC","BUOI DANG KI KHOA HOC","QUAY VE","THOAT"};
-	return LuaChon_Dep(7, title);
+	return LuaChon_Menu(7, title,2, HEIGHT / 2);
 }
 bool XlTaoMoi(int chon, ListNamHoc& l)
 {
@@ -1007,7 +1007,7 @@ int InMenuCapNhat()//dung cho ca menu Cap nhat
 	printA_Sentence("-- CAP NHAT --", 2);
 	background_Gv();
 	string title[5] = { "THEM SINH VIEN NAM NHAT","CAP NHAT MON HOC","DIEM SINH VIEN","QUAY VE","THOAT" };
-	return LuaChon_Dep(5,title);
+	return LuaChon_Menu(5,title,2, HEIGHT / 2);
 }
 int InMenuCapNhat2()
 {
@@ -1015,7 +1015,7 @@ int InMenuCapNhat2()
 	printA_Sentence("-- CAP NHAT MON HOC --", 2);
 	background_Gv();
 	string title[4] = { "SUA THONG TIN MON HOC","XOA MON HOC","QUAY VE","THOAT" };
-	return LuaChon_Dep(4, title);
+	return LuaChon_Menu(4, title,2, HEIGHT / 2);
 }
 int InMenuCapNhat3()
 {
@@ -1023,7 +1023,7 @@ int InMenuCapNhat3()
 	printA_Sentence("-- CAP NHAT DIEM SINH VIEN--", 2);
 	background_Gv();
 	string title[5] = { "XUAT FILE DE GV NHAP DIEM","NHAP DIEM TU FILE","CHINH SUA DIEM","QUAY VE","THOAT" };
-	return LuaChon_Dep(5, title);
+	return LuaChon_Menu(5, title,2, HEIGHT / 2);
 }
 bool XlCapNhat2(ListNamHoc& l, int chon)
 {
@@ -1711,7 +1711,7 @@ void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk)
 //HIEN THI
 void hienthiNam(ListNamHoc l, int& lc)
 {
-	lc = Chon(viewDsNam(l));
+	lc = LuaChon_HienThi(whereY(),viewDsNam(l));
 	if (lc == -1 || lc == 0)
 	{
 		//quay lai man hinh chinh
@@ -1724,90 +1724,95 @@ void hienthiNam(ListNamHoc l, int& lc)
 		hienthiKi(temp, lc);
 	else		//view lop
 	{
-		system("cls");
-		cout << "Ban muon xem lop cua hoc sinh nam may? 1/2/3/4?" << endl;
-		cout << "Nhan phim tuong tu de chon.." << endl;
-		char k = NULL;
-		while (true)
-		{
-			k = _getch();
-			if (k >= 49 && k <= 52)//1
-				break;
-		}
-		hienthiDsLop(temp->data.headLop[(int)k - 49], lc);
+		///////
+		hienthiDsLop(temp->data.headLop[chonSt_Year()-1], lc);
 	}
 	if (lc == -1)
 		hienthiNam(l, lc);
 }
-int Chon(int maxChoice)
+//int Chon(int maxChoice)
+//{
+//	int key;
+//	char temp;
+//	string s;
+//	cout << "--Nhan ESC de thoat" << endl;
+//	cout << "--Nhan phim B de quay lai menu truoc" << endl << endl;
+//	cout << "Moi nhap (nhap STT): " << endl;
+//	int x = whereX();
+//	int y = whereY();
+//	while (true)
+//	{
+//		gotoXY(x, y);
+//		if (_kbhit())
+//		{
+//			temp = _getch();
+//			if (temp == 13)//enter
+//			{
+//				if (s != "")
+//				{
+//					key = stoi(s);
+//					if (key == 0 || key > maxChoice)
+//						cout << endl << "STT khong hop le... Hay nhap lai !";
+//					else
+//						return key;
+//					x = 0;
+//					y += 2;
+//				}
+//				s = "";
+//			}
+//			else if (temp == 27)
+//			{
+//				cout << "Ban that su muon thoat khoi Hien Thi? Y/N?" << endl;
+//				if (askY_N())
+//					return 0;
+//				else
+//					y += 2;
+//			}
+//			else if (temp == 'B' || temp == 'b')
+//				return -1;
+//			else if (temp == 8)//xoa
+//			{
+//				s.pop_back();//bo dau backspace
+//				s.pop_back();
+//				if (x != 0)
+//				{
+//					x--;
+//					gotoXY(x, y);
+//					cout << ' ';
+//					gotoXY(x, y);
+//				}
+//			}
+//			else if (temp < 48 || temp>57)
+//			{
+//
+//			}
+//			else
+//			{
+//				s += temp;
+//				cout << temp;
+//				x++;
+//			}
+//		}
+//	}
+//}
+int chonSt_Year()
 {
-	int key;
-	char temp;
-	string s;
-	cout << "--Nhan ESC de thoat" << endl;
-	cout << "--Nhan phim B de quay lai menu truoc" << endl << endl;
-	cout << "Moi nhap (nhap STT): " << endl;
-	int x = whereX();
-	int y = whereY();
-	while (true)
-	{
-		gotoXY(x, y);
-		if (_kbhit())
-		{
-			temp = _getch();
-			if (temp == 13)//enter
-			{
-				if (s != "")
-				{
-					key = stoi(s);
-					if (key == 0 || key > maxChoice)
-						cout << endl << "STT khong hop le... Hay nhap lai !";
-					else
-						return key;
-					x = 0;
-					y += 2;
-				}
-				s = "";
-			}
-			else if (temp == 27)
-			{
-				cout << "Ban that su muon thoat khoi Hien Thi? Y/N?" << endl;
-				if (askY_N())
-					return 0;
-				else
-					y += 2;
-			}
-			else if (temp == 'B' || temp == 'b')
-				return -1;
-			else if (temp == 8)//xoa
-			{
-				s.pop_back();//bo dau backspace
-				s.pop_back();
-				if (x != 0)
-				{
-					x--;
-					gotoXY(x, y);
-					cout << ' ';
-					gotoXY(x, y);
-				}
-			}
-			else if (temp < 48 || temp>57)
-			{
-
-			}
-			else
-			{
-				s += temp;
-				cout << temp;
-				x++;
-			}
-		}
-	}
+	system("cls");
+	setColor(background_color, title_color1);
+	printA_Sentence("Ban muon xem lop cua hoc sinh nam may?", HEIGHT / 2 - 10);
+	string title[] = { "NAM 1","NAM 2","NAM 3","NAM 4"};
+	return LuaChon_Menu(4, title, 2, HEIGHT / 2-7);
 }
 //ki
 void hienthiKi(NodeNamHoc* A, int& lc)
 {
-	lc = Chon(viewDsKi(A));
+	int c = viewDsKi(A);
+	if (c == 0)//ds trong
+	{
+		end(lc);
+		return;
+	}
+	lc = LuaChon_HienThi(whereY(),c);
 	if (lc == 0 || lc == -1)//thoat
 		return;
 	hienthiDsMon(A->data.hk[lc - 1].headMon, lc);
@@ -1817,7 +1822,13 @@ void hienthiKi(NodeNamHoc* A, int& lc)
 void hienthiDsMon(NodeMon* head, int& lc)
 {
 	system("cls");
-	lc = Chon(viewDsMonHk(head, lc));
+	int c = viewDsMonHk(head, lc);
+	if (c == 0)//ds trong
+	{
+		end(lc);
+		return;
+	}
+	lc = LuaChon_HienThi(whereY(),c);
 	if (lc == 0 || lc == -1)
 		return;
 	NodeMon* temp = head;
@@ -1834,47 +1845,27 @@ void hienthiDsSv_Mon(NodeMon* A, int& lc)/////////
 }
 void end(int& lc)
 {
-	cout << "Nhan ESC de THOAT khoi HIEN THI" << endl;
-	cout << "Nhan phim B de quay lai menu truoc" << endl;
-	char temp = NULL;
-	while (true)
-	{
-		temp = _getch();
-		if (temp == 27)
-		{
-			cout << "Ban that su muon thoat khoi Hien Thi? Y/N?" << endl;
-			if (askY_N())
-			{
-				lc = 0;
-				return;
-			}
-		}
-		else if (toupper(temp) == 'B')
-		{
-			lc = -1;
-			return;
-		}
-	}
+	string title[] = { "QUAY LAI","THOAT" };
+	lc = LuaChon_Menu(2, title, 2, whereY()+1) - 2;
 }
 //lop 
-bool ChonTThayDiem_Lop()
+bool ChonTThayDiem_Lop()//true la TT, false la diem
 {
 	system("cls");
-	cout << "Nhan 1 neu ban muon xem THONG TIN SINH VIEN" << endl;
-	cout << "Nhan 2 neu ban muon xem DIEM - GPA" << endl;
-	char temp = NULL;
-	while (true)
-	{
-		temp = _getch();
-		if (temp == 49)//1
-			return true;
-		else if (temp == 50)//2
-			return false;
-	}
+	setColor(background_color, title_color1);
+	printA_Sentence("Ban muon xem gi ?",HEIGHT/2-5);
+	string title[] = { "THONG TIN SINH VIEN","DIEM - GPA" };
+	return LuaChon_Menu(2, title, 2, HEIGHT / 2 -2)-2;
 }
 void hienthiDsLop(NodeLop* head, int& lc)
 {
-	lc = Chon(viewDsLop(head));
+	int c = viewDsLop(head);
+	if (c == 0)
+	{
+		end(lc);
+		return;
+	}
+	lc = LuaChon_HienThi(whereY(), c);
 	if (lc == 0 || lc == -1) 
 		return;
 	NodeLop* temp = head;
@@ -1900,15 +1891,8 @@ void hienthiDiem_Lop(NodeLop* A, int& lc)
 bool ChonKihayLop()
 {
 	system("cls");
-	cout << "Nhan 1 neu ban muon xem KI HOC - MON HOC" << endl;
-	cout << "Nhan 2 neu ban muon xem LOP HOC - SINH VIEN" << endl;
-	char temp = NULL;
-	while (true)
-	{
-		temp = _getch();
-		if (temp == 49)//1
-			return true;
-		else if (temp == 50)//2
-			return false;
-	}
+	setColor(background_color, title_color1);
+	printA_Sentence("Ban muon xem gi ?", HEIGHT / 2 - 5);
+	string title[] = { "KI HOC - MON HOC","LOP HOC - SINH VIEN" };
+	return LuaChon_Menu(2, title, 2, HEIGHT / 2 -2) - 2;
 }

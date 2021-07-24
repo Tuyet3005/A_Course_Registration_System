@@ -70,20 +70,21 @@ int viewDsSvLop(NodeLop* A)
 	gotoXY(10, 6);
 	if (A->lop.headSvLop == NULL)
 	{
-		cout << "Hien chua cap nhat du lieu..." << endl;
+		setColor(background_color, text_color);
+		printA_Sentence("Hien chua cap nhat du lieu...",whereY());
 		return 0;
 	}
 	int posRow = whereY();
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
-	int posCol[8] = { 0,6,17,43,55,67,81,95 };
+	int posCol[8] = { 0,6,17,43,55,67,81,96 };
 	int space = WIDTH / 2 - posCol[7]/2;
-	setColor(background_color, text_color);
 	for (int j = 0; j < 7; j++)
 	{
 		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[7] += space;
 	cout.clear();
 	NodeSv_Lop* p = A->lop.headSvLop;
@@ -139,20 +140,21 @@ int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 	gotoXY(10, 6);
 	if (head == NULL)
 	{
-		cout << "Hien chua cap nhat du lieu..." << endl;
+		setColor(background_color, text_color);
+		printA_Sentence("Hien chua cap nhat du lieu...", whereY());
 		return 0;
 	}
 	string title[] = { "STT", "ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC" };
 	int posRow = whereY();
 	int posCol[8] = { 0,6,15,45,75,90,105,140 };
 	int space = WIDTH / 2 - posCol[7] / 2;
-	setColor(background_color, text_color);
 	for (int j = 0; j < 7; j++)
 	{
 		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[7] += space;
 	cout.clear();
 	NodeMon* p = head;
@@ -190,20 +192,21 @@ int viewDsSvMon(NodeMon* A)
 	gotoXY(10, 6);
 	if (A->headSvMon == NULL)
 	{
-		cout << "Danh sach sinh vien dang trong..." << endl;
+		setColor(background_color, text_color);
+		printA_Sentence("Danh sach sinh vien dang trong...", whereY());
 		return 0;
 	}
 	string title[] = { "STT","MSSV","HO","TEN","GK","CK","CONG","TONG KET" };
 	int posRow = whereY();
 	int posCol[9] = { 0,6,17,43,55,65,75,85,100 };
 	int space = WIDTH / 2 - posCol[8] / 2;
-	setColor(background_color, text_color);
 	for (int j = 0; j < 8; j++)
 	{
 		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[8] += space;
 	cout.clear();
 	NodeSv_Mon* p = A->headSvMon;
@@ -244,20 +247,21 @@ int viewDsKi(NodeNamHoc* A)
 	gotoXY(10, 6);
 	if (A->data.hk[0].tg.ngay_bd.d == NULL)
 	{
-		cout << "Hien chua co ki hoc nao duoc tao..." << endl;
+		setColor(background_color, text_color);
+		printA_Sentence("Hien chua co ki hoc nao duoc tao...", whereY());
 		return 0;
 	}
 	string title[] = { "KI","THOI GIAN" };
 	int posRow = whereY();
 	int posCol[3] = { 0,5,35 };
 	int space = WIDTH / 2 - posCol[2] / 2;
-	setColor(background_color, text_color);
 	for (int j = 0; j < 2; j++)
 	{
 		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[2] += space;
 	cout.clear();
 	int i = 0;
@@ -282,20 +286,21 @@ int viewDsNam(ListNamHoc A)
 	gotoXY(10, 6);
 	if (A.pHead == NULL)
 	{
-		cout << "Hien chua cap nhat du lieu..." << endl;
+		setColor(background_color, text_color);
+		printA_Sentence("Hien chua cap nhat du lieu...", whereY());
 		return 0;
 	}
 	string title[] = { "STT","NAM HOC" };
 	int posRow = whereY();
 	int posCol[3] = { 0,6,25 };
 	int space = WIDTH / 2 - posCol[2] / 2;
-	setColor(background_color, text_color);
 	for (int j = 0; j < 2; j++)
 	{
 		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[2] += space;
 	cout.clear();
 	NodeNamHoc* p = A.pHead;
@@ -319,24 +324,26 @@ int viewDsLop(NodeLop* head)
 	setColor(background_color, title_color);
 	printA_Sentence("~ DANH SACH LOP HOC ~", 2);
 	setColor(background_color, title_color1);
-	cout << endl << "nam bnh";
+	int nam = NHhientai_nambd();
+	printA_Sentence("Nam hoc : " + to_string(nam) + " - " + to_string(nam + 1), 3);
 	gotoXY(10, 6);
 	if (head == NULL)
 	{
-		cout << "Hien chua cap nhat du lieu..." << endl;
+		setColor(background_color, text_color);
+		printA_Sentence("Hien chua cap nhat du lieu...", whereY());
 		return 0;
 	}
 	string title[] = { "STT","TEN LOP" };
 	int posRow = whereY();
 	int posCol[3] = { 0,6,20 };
 	int space = WIDTH / 2 - posCol[2] / 2;
-	setColor(background_color, text_color);
 	for (int j = 0; j < 2; j++)
 	{
 		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[2] += space;
 	cout.clear();
 	NodeLop* p = head;
@@ -364,7 +371,8 @@ int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 	gotoXY(10, 6);
 	if (sv->headMon == NULL)
 	{
-		cout << "Hien chua cap nhat du lieu..." << endl;
+		setColor(background_color, text_color);
+		printA_Sentence("Hien chua cap nhat du lieu...", whereY());
 		return 0;
 	}
 	NodeMon_Sv* p = sv->headMon[ki - 1];
@@ -372,13 +380,13 @@ int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 	int posRow = whereY();
 	int posCol[] = { 0,6,20,30,9,9,9,9 };
 	int space = WIDTH / 2 - posCol[7] / 2;
-	setColor(background_color, text_color);
 	for (int j = 0; j < 7; j++)
 	{
 		posCol[j]+=space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[7] += space;
 	cout.clear();
 	int i = 1;
@@ -420,18 +428,20 @@ void viewInfoSv(Sv A)
 	setColor(background_color, title_color);
 	printA_Sentence("~ THONG TIN CA NHAN ~", 2);
 	setColor(background_color, title_color1);
+	printA_Sentence("SINH VIEN", 3);
 	gotoXY(10, 6);
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posRow = whereY();
 	int posCol[8] = { 0,6,17,43,55,67,85,95 };
 	int space = WIDTH / 2 - posCol[7] / 2;
-	setColor(background_color, text_color);
+	setColor(background_color, title_color1);
 	for (int j = 0; j < 7; j++)//ghi title
 	{
 		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[7] += space;
 	cout.clear();
 	gotoXY(posCol[0] + 2, posRow + 3);
@@ -462,20 +472,21 @@ int viewMondaDk(NodeMon_Sv* A, int ki,int line)//show thong tin mon hoc cua 1 sv
 	gotoXY(10, line +2);
 	if (A == NULL)
 	{
-		cout << "Danh sach mon da dang ki trong..." << endl;
+		setColor(background_color, text_color);
+		printA_Sentence("Ban chua dang ki mon nao...", whereY());
 		return 0;
 	}
 	int posRow = whereY();
 	string title[] = { "STT","ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC" };
 	int posCol[8] = { 0,6,15,45,75,90,105,150 };
 	int space = WIDTH / 2 - posCol[7] / 2;
-	setColor(background_color, text_color);
 	for (int j = 0; j < 7; j++)
 	{
 		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[7] += space;
 	cout.clear();
 	NodeMon_Sv* p = A;
@@ -517,20 +528,21 @@ int viewDiem_Lop(NodeLop* A, int ki)
 	gotoXY(10, 6);
 	if (A->lop.headSvLop == NULL)
 	{
-		cout << "Hien chua cap nhat du lieu..." << endl;
+		setColor(background_color, text_color);
+		printA_Sentence("Hien chua cap nhat du lieu...", whereY());
 		return 0;
 	}
 	string title[] = { "STT","MSSV","HO","TEN","ID MON","TK","ID MON","TK","ID MON","TK","ID MON","TK","ID MON","TK","GPA" };
 	int posRow = whereY();
 	int posCol[16] = { 0,6,17,43,55,65,70,80,85,95,100,110,115,125,130,140 };
 	int space = WIDTH / 2 - posCol[15] / 2;
-	setColor(background_color, text_color);
 	for (int j = 0; j < 15; j++)
 	{
 		posCol[j] += space;
 		gotoXY(posCol[j] + 1, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[15] += space;
 	cout.clear();
 	NodeSv_Lop* pSv = A->lop.headSvLop;
@@ -575,7 +587,7 @@ int viewDiem_Lop(NodeLop* A, int ki)
 	return i - 1;
 }
 
-//TINH GPA
+//TINH GPA //co bug nhung chua fix
 bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 {
 	NodeSv_Lop* pSv = t->lop.headSvLop;
@@ -630,19 +642,17 @@ void viewInfoGV(Sv A)
 	setColor(background_color, title_color1);
 	printA_Sentence("GIAO VU", 3);
 	gotoXY(10, 6);
-	system("cls");
-	cout << endl;
 	string title[] = { "HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posRow = whereY();
-	int posCol[6] = { 0,26,38,50,68,78 };
+	int posCol[6] = { 0,26,38,50,68,80 };
 	int space = WIDTH / 2 - posCol[5] / 2;
-	setColor(background_color, text_color);
 	for (int j = 0; j < 5; j++)//ghi title
 	{
 		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
+	setColor(background_color, text_color);
 	posCol[5] += space;
 	cout.clear();
 	gotoXY(posCol[0] + 2, posRow + 3);
@@ -751,19 +761,14 @@ void veHCN(int bd_x,int bd_y,int kt_x,int kt_y)
 	setColor(background_color, text_color);
 }
                
-int LuaChon_Dep(int title_number, string title[])
+int LuaChon_Menu(int title_number, string title[],int cell_height,int line)
 {
 	int* pos_x=new int[title_number];
 	for (int i = 0; i < title_number; i++)
 		pos_x[i] = WIDTH / 2 - title[i].length() / 2;
-	int cell_height = 0;
 	int bd_x, bd_y, kt_x, kt_y;
-	if (title_number > 2)//do menu chinh
-		cell_height = 2;
-	else
-		cell_height = 4;//dang nhap + Y_n
 	bd_x = WIDTH / 2 - cell_width / 2;
-	bd_y = HEIGHT / 2 + ((title_number == 7) ? (-5) : 0);
+	bd_y = line + ((title_number == 7) ? (-5) : 0);
 	kt_x = bd_x + cell_width;
 	kt_y = bd_y + cell_height;
 	for (int i = 0; i < title_number; i++)
@@ -814,6 +819,144 @@ int LuaChon_Dep(int title_number, string title[])
 		}
 	}
 	return lc +1;
+}
+                      
+int LuaChon_HienThi(int line, int max)
+{
+	line++;
+	int bd_x, bd_y, kt_x, kt_y;
+	int Cell_width = 22;
+	int cell_height = 2;
+	bd_x = WIDTH / 2 - Cell_width / 2;
+	bd_y = line + 4 ;
+	kt_x = bd_x + Cell_width;
+	kt_y = bd_y + cell_height;
+	string title[2] = { "QUAY VE","THOAT" };
+	for (int i = 0; i < 2; i++)
+	{
+		veHCN(bd_x, bd_y + i * (cell_height + 2), kt_x, kt_y + i * (cell_height + 2));
+		printA_Sentence(title[i], bd_y + i * (cell_height + 2) + cell_height / 2);
+	}
+	setColor(background_color, title_color1);
+	printA_Sentence("Nhap lua chon (STT)", line);
+	setColor(background_color, text_color);
+	printA_Sentence("_________________________", line + 1);
+	gotoXY(WIDTH / 2, line + 2);
+	char temp;
+	char lc = -1;
+	string s = "";
+	setColor(background_color, text_color);
+	char key;
+	while (true)//ko enter
+	{
+		if (_kbhit())
+		{
+			temp = _getch();
+			//neu enter
+			if (temp == 13)
+			{
+				if (lc == -1)
+				{
+					if (s.length() == 0)
+						continue;
+					else
+					{
+						key = stoi(s);
+						if (key > 0 && key < max + 1)
+							return key;
+						else
+						{
+							setColor(background_color, red);
+							printA_Sentence("Khong hop le !", line + 2);
+							temp = _getch();
+							printA_Sentence("                 ", line + 2);
+							setColor(background_color, text_color);
+							s = "";
+							continue;
+						}
+					}
+				}
+				return lc-1;//0 la thoat, -1 la quay ve
+			}
+			else if (temp == 72)//len
+			{
+
+				if (lc == -1)
+				{
+					printA_Sentence("Nhap lua chon (STT)", line);
+					lc = 1;
+				}
+				else
+				{
+					printA_Sentence(title[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
+					lc--;
+					if (lc == -1)
+					{
+						setColor(background_color, title_color1);
+						printA_Sentence("Nhap lua chon (STT)", line);
+						gotoXY(WIDTH / 2, line + 2);
+						setColor(background_color, text_color);
+						continue;
+					}
+				}
+				setColor(background_color, title_color1);
+				printA_Sentence(title[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
+				setColor(background_color, text_color);
+				//mau
+			}
+			else if (temp == 80)//xuong
+			{
+				if (lc == -1)
+					printA_Sentence("Nhap lua chon (STT)", line);
+				else
+					printA_Sentence(title[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
+				if (lc == 1)
+				{
+					lc = -1;
+					setColor(background_color, title_color1);
+					printA_Sentence("Nhap lua chon (STT)", line);
+					gotoXY(WIDTH / 2, line + 2);
+				}
+				else
+				{
+					lc++;
+					setColor(background_color, title_color1);
+					printA_Sentence(title[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
+				}
+				setColor(background_color, text_color);
+			}
+			else if (temp >= 48 && temp <= 57 && lc == -1)
+			{
+				setColor(background_color, title_color1);
+				s += temp;
+				printA_Sentence(s, line + 2);
+				if (s.length() >= 10)
+				{
+					setColor(background_color, red);
+					printA_Sentence("Khong hop le !", line + 2);
+					temp = _getch();
+					printA_Sentence("                 ", line + 2);
+					gotoXY(WIDTH / 2, line + 2);
+					s = "";
+				}
+				setColor(background_color, text_color);
+			}
+			else if (temp == 8 && lc == -1)//xoa
+			{
+				setColor(background_color, title_color1);
+				if (s.length() == 0)
+					continue;
+				s.pop_back();
+				printA_Sentence("  "+s+"  ", line + 2);
+				setColor(background_color, text_color);
+			}
+			else
+			{
+
+			}
+		}
+	}
+	return lc + 1;
 }
 
 void printA_Sentence(string a, int line)

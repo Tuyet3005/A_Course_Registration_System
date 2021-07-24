@@ -26,7 +26,7 @@ void LogIn(string& tk, string& mk, bool& lc)
 	system("cls");
 	background_Login();
 	string title[2] = { "SINH VIEN","GIAO VU" };
-	lc=LuaChon_Dep(2, title)-2;
+	lc=LuaChon_Menu(2, title,4, HEIGHT / 2)-2;
 	system("cls");
 	background_Login();
 	setColor(background_color, title_color1);
@@ -97,7 +97,7 @@ void changePass(bool role, string tk, string& mk)
 	cin.clear();
 	getline(cin, newpass);
 	ifstream f;
-	if (!role) f.open("SinhVien.txt");
+	if (role) f.open("SinhVien.txt");
 	else f.open("GiaoVu.txt");
 	string s = "";
 	ofstream t;
