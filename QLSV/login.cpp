@@ -131,7 +131,6 @@ void changePass(bool role, string tk, string& mk)
 		if (oldpass == mk) break;
 		else cout << "\nNhap sai mat khau... moi nhap lai!" << endl;
 	}
-	int size = 0;
 	cout << "\nNhap mat khau moi (toi da 20 ki tu): ";
 	cin.clear();
 	newpass = typePass();
@@ -149,13 +148,49 @@ void changePass(bool role, string tk, string& mk)
 	ofstream t;
 	t.open("trunggian.txt");
 	int pos = -1;
+	getline(f, s, ',');
+	t << s << ',';
+	//tr.hop tim thay tk ngay 1st line
+	if (s == tk)
+	{
+		getline(f, s);//lay phan con lai cua line
+		pos = s.find(mk);
+		if (pos != string::npos)
+		{
+			s.replace(pos, mk.length(), newpass);
+		}
+		t << s;
+	}
+	else
+	{
+		while (true)//chac chan SE tim duoc tk thi moi den cuoi file !
+		{
+			getline(f, s);//lay tiep phan con lai cua dong truoc do (ko chua tk dang tim)
+			t << s;
+			f.clear();
+			getline(f, s, ',');//chuyen sang dong ke (chac chan se tim thay tk roi moi eof)
+			t << "\n" << s << ",";
+			if (s == tk)
+			{
+				getline(f, s);
+				pos = s.find(mk);
+				if (pos != string::npos)
+				{
+					s.replace(pos, mk.length(), newpass);
+				}
+				t << s;
+				break;
+			}
+		}
+	}
+	//da doi mk trong file --> sao chep toan bo du lieu con lai 
 	while (!f.eof())
 	{
 		getline(f, s);
-		pos = s.find(mk);
-		if (pos != string::npos)
-			s.replace(pos, mk.length(), newpass);
-		t << s << endl;
+		if (s != "")
+		{
+			t << endl << s;
+		}
 	}
 	mk = newpass;
 	t.close();
