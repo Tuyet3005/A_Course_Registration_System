@@ -62,10 +62,14 @@ void setColor(int Background_color, int Text_color)
 	int color_code = Background_color * 16 + Text_color;
 	SetConsoleTextAttribute(hStdout, color_code);
 }
+BOOL WINAPI SetConsoleTitle(
+	_In_ LPCTSTR lpConsoleTitle
+);
 void SetConsole()
 {
 	resizeConsole(1980, 1080);
 	DisableResizeWindow();
+	SetConsoleTitle(L"The Courses & Students Management System");
 	ShowScrollbar(0);
 }
 void SetFontSize(int size)
