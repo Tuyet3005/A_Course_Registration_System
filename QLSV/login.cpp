@@ -83,7 +83,6 @@ void changePass(bool role, string tk, string& mk)
 	string oldpass, newpass;
 	system("cls");
 	cout << "-----------------DOI MAT KHAU-----------------------" << endl;
-	cin.ignore();
 	bool flag = false;
 	while (!flag)
 	{

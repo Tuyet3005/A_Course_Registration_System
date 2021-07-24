@@ -386,35 +386,24 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 	ThoiGian tg;
 	Time tmBD, tmKT;
 	int ki;
-	try {
-		readFileDKKH(tg, tmBD, tmKT, ki);
-		NodeMon* head = HT->data.hk[ki - 1].headMon;
-		if (lc == 1)//view
-		{
-			system("cls");
-			viewDsMonHk(head, ki);
-			return;
-		}
-		if (cobuoiDKKH(tg, tmBD, tmKT))
-		{
-			runDKKH_Sv(A, ki, head);
-		}
-		else
-		{
-			system("cls");
-			printA_Sentence("Hien khong co buoi DKKH nao...", HEIGHT / 2 - 2);
-			cout << endl << endl;
-		}
-	}
-	catch (int error)
+	readFileDKKH(tg, tmBD, tmKT, ki);
+	NodeMon* head = HT->data.hk[ki - 1].headMon;
+	if (lc == 1)//view
 	{
-		if (error == -1)
-		{
-			system("cls");
-			printA_Sentence("Hien khong co buoi DKKH nao...", HEIGHT / 2 - 2);
-			cout << endl << endl;
-		}
+		system("cls");
+		viewDsMonHk(head, ki);
+		return;
 	}
+	if (cobuoiDKKH(tg, tmBD, tmKT))
+	{
+		runDKKH_Sv(A, ki, head);
+	}
+	else
+	{
+		system("cls");
+		printA_Sentence("Hien khong co buoi DKKH nao...", HEIGHT / 2 - 2);
+		cout << endl << endl;
+	}	
 }
 
 
@@ -431,8 +420,8 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	cout << "--Ban can TAO MOI hoc ki va CAP NHAT danh sach mon hoc truoc khi tao buoi dang ki khoa hoc" << endl << endl;
 	cout << "Ban co that su muon tao buoi dang ki khoa hoc ? Y/N?" << endl;
 	char check;
-	cin.clear();
-	cin.ignore();
+	/*cin.clear();
+	cin.ignore();*/
 	if (!askY_N())
 		return;
 	system("cls");
