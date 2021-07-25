@@ -24,7 +24,6 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 	}
 	case 2:
 	{
-		cout << "Hien thi thong tin cua tai khoan";
 		if (role)//tra ve sinh vien
 		{
 			viewInfoSv(findInfo(stoi(tk)));
@@ -49,6 +48,7 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 		{
 			gotoXY(0, HEIGHT - 4);
 			system("pause");
+			cin.ignore(100, '\n');
 			return true;
 		}
 		break;
@@ -321,30 +321,30 @@ Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.
 		getline(f, s, ',');
 		if (s == to_string(id))
 		{
+			T.id = id;
+			f.clear();
+			getline(f, s, ',');
+			T.stt = atoi(s.c_str());
+			f.clear();
+			getline(f, T.ten, ',');
+			f.clear();
+			getline(f, T.ho, ',');
+			f.clear();
+			getline(f, T.gioi, ',');
+			f.clear();
+			getline(f, s, ',');
+			T.ngayS.d = atoi(s.c_str());
+			T.ngayS.y = T.ngayS.d % 10000;
+			T.ngayS.m = (T.ngayS.d / 10000) % 100;
+			T.ngayS.d = T.ngayS.d / 1000000;
+			f.clear();
+			getline(f, s, ',');
+			T.cmnd = atoi(s.c_str());
 			break;
 		}
 		f.clear();
 		getline(f, s);//bo qua cac data thua cua sv khac
 	}
-	T.id = id;
-	f.clear();
-	getline(f, s, ',');
-	T.stt = atoi(s.c_str());
-	f.clear();
-	getline(f, T.ten, ',');
-	f.clear();
-	getline(f, T.ho, ',');
-	f.clear();
-	getline(f, T.gioi, ',');
-	f.clear();
-	getline(f, s, ',');
-	T.ngayS.d = atoi(s.c_str());
-	T.ngayS.y = T.ngayS.d % 10000;
-	T.ngayS.m = (T.ngayS.d / 10000) % 100;
-	T.ngayS.d = T.ngayS.d / 1000000;
-	f.clear();
-	getline(f, s, ',');
-	T.cmnd = atoi(s.c_str());
 	f.close();
 	return T;
 }
@@ -418,7 +418,7 @@ string timLop(int id)//tra ve ten lop cua sv co id tuong ung
 {
 	ifstream f;
 	f.open("SinhVien.txt");
-	string s;
+	string s ="";
 	while (!f.eof())
 	{
 		f.clear();

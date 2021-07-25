@@ -1,2 +1,4 @@
 05092020,31122020,
-TRR,Toan Roi Rac,Trung,2,Thu Tu,S3,Thu Ba,S4,30,
+VLDC,Vat ly dai cuong,Le Tran,3,Thu Tu,S1,Thu Tu,S2,59,
+DSTT,Dai so tuyen tinh,Le Van Hop,4,Thu Ba,S1,Thu Ba,S2,100,
+TCC,Toan Cao Cap,Le Trung Kien,4,Thu Nam,S2,Thu Nam,S3,39,

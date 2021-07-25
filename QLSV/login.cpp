@@ -1,6 +1,45 @@
 #include"login.h"
 #include"display.h"
 
+string typePass()
+{
+	string pass = "";
+	int dem = 0;
+	//luu toa do ban dau 
+	int x = whereX();
+	int y = whereY();
+	do
+	{
+		char c = _getch();
+		if (c == '\b')//nhan phim backspace 
+		{
+			if (dem == 0)
+			{
+				gotoXY(x, y);
+				continue;
+			}
+			gotoXY(whereX() - 1, y);
+			cout << " ";
+			gotoXY(whereX() - 1, y);//quay lai vi tri " "
+			dem--;
+			pass = pass.substr(0, dem);
+		}
+		else if (c == '\r' || c == '\n')
+		{
+			if (dem < 5)//ko dc enter khi mk it hon 5 ki tu 
+				continue;
+			else
+				break;
+		}
+		else
+		{
+			pass += c;
+			dem++;
+			cout << "*";
+		}
+	} while (dem < 20);
+	return pass;
+}
 bool checkAccount(string tk, string mk, bool lc)
 {
 	ifstream f;
@@ -43,7 +82,7 @@ void LogIn(string& tk, string& mk, bool& lc)
 		cin.ignore();//xoa \n
 		gotoXY(80, HEIGHT / 2 + 7);
 		cin.clear();
-		getline(cin, mk);
+		mk = typePass();
 		if (checkAccount(tk, mk, lc)) break;
 		else if (dem < 4)
 		{
@@ -88,13 +127,38 @@ void changePass(bool role, string tk, string& mk)
 	{
 		cout << "Nhap mat khau cu: ";
 		cin.clear();
-		getline(cin, oldpass);
+		oldpass = typePass();
 		if (oldpass == mk) break;
-		else cout << "Nhap sai mat khau... moi nhap lai !" << endl;
+		else cout << "\nNhap sai mat khau... moi nhap lai!" << endl;
 	}
-	cout << "Nhap mat khau moi: ";
-	cin.clear();
-	getline(cin, newpass);
+	while (true)
+	{
+		cout << "\nNhap mat khau moi (it nhat 5 ki tu, toi da 20 ki tu): ";
+		cin.clear();
+		newpass = typePass();
+		if (newpass != mk)
+			break;
+		else
+		{
+			cout << "\nMat khau moi phai khac voi mat khau cu!\n";
+			cout << "Ban co muon tiep tuc nhap mat khau moi? Nhap Y de tiep tuc: ";
+			char lenh;
+			cin >> lenh;
+			if (lenh != 'Y' && lenh != 'y')
+			{
+				cout << "Doi mat khau khong thanh cong!\n";
+				system("pause");
+				return;
+			}
+		}
+	}
+	cout << "\nNhap lai mat khau moi de xac nhan: ";
+	if (typePass() != newpass)
+	{
+		cout << "\nDoi mat khau khong thanh cong!\n";
+		system("pause");
+		return;
+	}
 	ifstream f;
 	if (role) f.open("SinhVien.txt");
 	else f.open("GiaoVu.txt");
@@ -102,17 +166,55 @@ void changePass(bool role, string tk, string& mk)
 	ofstream t;
 	t.open("trunggian.txt");
 	int pos = -1;
+	getline(f, s, ',');
+	t << s << ',';
+	//tr.hop tim thay tk ngay 1st line
+	if (s == tk)
+	{
+		getline(f, s);//lay phan con lai cua line
+		pos = s.find(mk);
+		if (pos != string::npos)
+		{
+			s.replace(pos, mk.length(), newpass);
+		}
+		t << s;
+	}
+	else
+	{
+		while (true)//chac chan SE tim duoc tk thi moi den cuoi file !
+		{
+			getline(f, s);//lay tiep phan con lai cua dong truoc do (ko chua tk dang tim)
+			t << s;
+			f.clear();
+			getline(f, s, ',');//chuyen sang dong ke (chac chan se tim thay tk roi moi eof)
+			t << "\n" << s << ",";
+			if (s == tk)
+			{
+				getline(f, s);
+				pos = s.find(mk);
+				if (pos != string::npos)
+				{
+					s.replace(pos, mk.length(), newpass);
+				}
+				t << s;
+				break;
+			}
+		}
+	}
+	//da doi mk trong file --> sao chep toan bo du lieu con lai 
 	while (!f.eof())
 	{
 		getline(f, s);
-		pos = s.find(mk);
-		if (pos != string::npos)
-			s.replace(pos, mk.length(), newpass);
-		t << s << endl;
+		if (s != "")
+		{
+			t << endl << s;
+		}
 	}
 	mk = newpass;
 	t.close();
 	f.close();
 	remove((role) ? "SinhVien.txt" : "GiaoVu.txt");
 	rename("trunggian.txt", (role) ? "SinhVien.txt" : "GiaoVu.txt");
+	cout << "\nDoi mat khau thanh cong!\n";
+	system("pause");
 }

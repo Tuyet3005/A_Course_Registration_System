@@ -75,14 +75,15 @@ struct NodeMon
 };
 struct HocKy
 {
-	NodeMon* headMon;
+	NodeMon* headMon = NULL;
 	ThoiGian tg;//thoi gian bd, kt
 };
 //LOP HOC
 struct Sv
 {
-	int stt;//dem tu 1
-	int id, cmnd;
+	int stt = NULL;//dem tu 1
+	int id = NULL;
+	int cmnd = NULL;
 	string ten, ho, gioi;
 	Ngay ngayS;//ngaySinh
 };
