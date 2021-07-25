@@ -67,6 +67,7 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 	}
 	return false;
 }
+
 bool Ask_YN(string cauhoi)//hang in ra cau hoi
 {
 	setColor(background_color, red);

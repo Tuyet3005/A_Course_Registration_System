@@ -369,16 +369,16 @@ int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 	setColor(background_color, title_color1);
 	printA_Sentence("Hoc ki : " + to_string(ki), 3);
 	gotoXY(10, 6);
-	if (sv->headMon == NULL)
+	if (sv->headMon[ki-1] == NULL)
 	{
 		setColor(background_color, text_color);
-		printA_Sentence("Hien chua cap nhat du lieu...", whereY());
+		printA_Sentence("Ban chua dang ki mon hoc nao...", whereY());
 		return 0;
 	}
 	NodeMon_Sv* p = sv->headMon[ki - 1];
 	string title[] = { "STT","ID MON","TEN MON","GK","CK","CONG","TONG KET" };
 	int posRow = whereY();
-	int posCol[] = { 0,6,20,30,9,9,9,9 };
+	int posCol[] = { 0,6,16,46,53,60,69,82 };
 	int space = WIDTH / 2 - posCol[7] / 2;
 	for (int j = 0; j < 7; j++)
 	{
@@ -432,7 +432,7 @@ void viewInfoSv(Sv A)
 	gotoXY(10, 6);
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posRow = whereY();
-	int posCol[8] = { 0,6,17,43,55,67,85,95 };
+	int posCol[8] = { 0,6,17,43,55,67,85,98 };
 	int space = WIDTH / 2 - posCol[7] / 2;
 	setColor(background_color, title_color1);
 	for (int j = 0; j < 7; j++)//ghi title
@@ -580,7 +580,7 @@ int viewDiem_Lop(NodeLop* A, int ki)
 	if (flag)
 		cout << A->lop.GPA;
 	else
-		cout << "0";
+		cout << 0;
 	gotoXY(0, posRow);
 	drawTable(i, 15, posCol, posRow);
 	gotoXY(0, posRow + i * 2 + 4);
@@ -629,6 +629,8 @@ bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 		}
 		pSv = pSv->pNext;
 	}
+	if (dem == 0)//chua co hs nao dk mon hoc
+		return false;
 	t->lop.GPA[ki - 1] = sumlop / dem;
 	return true;
 }
@@ -963,4 +965,347 @@ void printA_Sentence(string a, int line)
 {
 	gotoXY(WIDTH / 2 - a.length() / 2, line);
 	cout << a;
+}
+
+//DKKH
+void nhapNgay_ve(int line)
+{
+	line++;
+	gotoXY(55, line);
+	setColor(background_color, text_color);
+	cout << "Ngay/Thang/Nam";
+	veHCN(80, line - 1, 80 + 36, line + 1);
+	gotoXY(80 + 10, line);
+	cout << '/';
+	gotoXY(80 + 20, line);
+	cout << '/';
+}
+
+Ngay nhapNgay_nhap(int line)
+{
+	line++;
+	gotoXY(55, line);
+	setColor(background_color, title_color1);
+	cout << "Ngay/Thang/Nam";
+	char pre = 0;
+	char temp = 0;
+	char state = 0;
+	string day = "", month = "", year = "";
+	gotoXY(80 + 2, line);
+	Ngay t;
+	setColor(background_color, text_color);
+	while (true)
+	{
+		if (_kbhit())
+		{
+			temp = _getch();
+			//enter
+			if (temp == 13)
+			{
+				if (day == "" || month == "" || year == "")
+				{
+					setColor(background_color, red);
+					gotoXY(82, line + 2);
+					cout << "Khong duoc de trong !";
+					temp = _getch();
+					gotoXY(82, line + 2);
+					cout << "                         ";
+					setColor(background_color, text_color);
+					gotoXY(80 + state * 10 + 2, line);
+					continue;
+				}
+				t.d = stoi(day);
+				t.m = stoi(month);
+				t.y = stoi(year);
+				if (NgayHopLe(t.d, t.m, t.y))
+					break;
+				setColor(background_color, red);
+				gotoXY(82, line + 2);
+				cout << "Thong tin khong hop le !";
+				temp = _getch();
+				gotoXY(82, line + 2);
+				cout << "                         ";
+				for (int i = 0; i < 3; i++)
+				{
+					gotoXY(80 + i * 10 + 2, line);
+					cout << "     ";
+				}
+				setColor(background_color, text_color);
+				gotoXY(80 + state * 10 + 2, line);
+			}
+			else if (temp == 75)//trai
+			{
+				if (state == 0)
+					state = 2;
+				else
+					state--;
+				gotoXY(80 + state * 10 + 2, line);
+			}
+			else if (temp == 77)//phai
+			{
+				if (state == 2)
+					state = 0;
+				else
+					state++;
+				gotoXY(80 + state * 10 + 2, line);
+			}
+			else if (temp == 8)//xoa
+			{
+				if (state == 0)
+				{
+					if (day == "")
+						continue;
+					day.pop_back();
+					gotoXY(80 + state * 10 + 2, line);
+					cout << day << " ";
+					gotoXY(80 + state * 10 + 2 + day.length(), line);
+				}
+				else if (state == 1)
+				{
+					if (month == "")
+						continue;
+					month.pop_back();
+					gotoXY(80 + state * 10 + 2, line);
+					cout << month << " ";
+					gotoXY(80 + state * 10 + 2 + month.length(), line);
+				}
+				else
+				{
+					if (year == "")
+						continue;
+					year.pop_back();
+					gotoXY(80 + state * 10 + 2, line);
+					cout << year << " ";
+					gotoXY(80 + state * 10 + 2 + year.length(), line);
+				}
+			}
+			else if (temp >= 48 && temp <= 57)// nhap so
+			{
+				cout << temp;
+				if (state == 0)//nhap ngay
+				{
+					if ((pre < 48 || pre>57)&&pre!=8)
+					{
+						gotoXY(80 + state * 10 + 2, line);
+						cout << temp << "    ";
+						day = "";
+						gotoXY(80 + state * 10 + 2 + 1, line);
+					}
+					day += temp;
+					if (stoi(day) > 31)
+					{
+						setColor(background_color, red);
+						printA_Sentence("       Ngay khong hop le !       ", line + 2);
+						temp = _getch();
+						gotoXY(80 + state * 10 + 2, line);
+						cout << "     ";
+						printA_Sentence("                              ", line + 2);
+						setColor(background_color, text_color);
+						day = "";
+						gotoXY(80 + state * 10 + 2, line);
+					}
+				}
+				else if (state == 1)//nhap thang
+				{
+					if ((pre < 48 || pre>57)&&pre!=8)
+					{
+						gotoXY(80 + state * 10 + 2, line);
+						cout << temp << "    ";
+						gotoXY(80 + state * 10 + 2 + 1, line);
+						month = "";
+					}
+					month += temp;
+					if (stoi(month) > 12)
+					{
+						setColor(background_color, red);
+						printA_Sentence("       Thang khong hop le !       ", line + 2);
+						temp = _getch();
+						gotoXY(80 + state * 10 + 2, line);
+						cout << "     ";
+						printA_Sentence("                              ", line + 2);
+						setColor(background_color, text_color);
+						month = "";
+						gotoXY(80 + state * 10 + 2, line);
+					}
+				}
+				else
+				{
+					if ((pre < 48 || pre>57)&&pre!=8)
+					{
+						gotoXY(80 + state * 10 + 2, line);
+						cout << temp << "    ";
+						gotoXY(80 + state * 10 + 2+1, line);
+						year = "";
+					}
+					year += temp;
+					if (year.length() >= 5)
+					{
+						setColor(background_color, red);
+						printA_Sentence("       Nam khong hop le !       ", line + 2);
+						temp = _getch();
+						gotoXY(80 + state * 10 + 2, line);
+						cout << "     ";
+						printA_Sentence("                              ", line + 2);
+						setColor(background_color, text_color);
+						year = "";
+						gotoXY(80 + state * 10 + 2, line);
+					}
+				}
+			}
+			else {
+				continue;
+			}
+			pre = temp;
+		}
+	}
+	gotoXY(55, line);
+	cout << "Ngay/Thang/Nam";
+	return t;
+}
+
+void nhapGio_ve(int line)
+{
+	line++;
+	gotoXY(55, line);
+	setColor(background_color, text_color);
+	cout << "Gio : Phut";
+	veHCN(80, line - 1, 80 + 20, line + 1);
+	gotoXY(80 + 10, line);
+	cout << ':';
+}   
+
+Time nhapGio_nhap(int line)
+{
+	line++;
+	gotoXY(55, line);
+	setColor(background_color, title_color1);
+	cout << "Gio : Phut";
+	char pre = 0;
+	char temp = 0;
+	char state = 0;
+	string hour = "", mins = "";
+	gotoXY(80 + 2, line);
+	Time t;
+	setColor(background_color, text_color);
+	while (true)
+	{
+		if (_kbhit())
+		{
+			temp = _getch();
+			//enter
+			if (temp == 13)
+			{
+				if (hour == "" || mins == "" )
+				{
+					setColor(background_color, red);
+					gotoXY(82, line + 2);
+					cout << "Khong duoc de trong !";
+					gotoXY(82, line + 2);
+					temp = _getch();
+					cout << "                         ";
+					setColor(background_color, text_color);
+					gotoXY(80 + state * 10 + 2, line);
+					continue;
+				}
+				t.gio = stoi(hour);
+				t.phut = stoi(mins);
+				break;
+			}
+			else if (temp == 75)//trai
+			{
+				if (state == 0)
+					state = 1;
+				else
+					state--;
+				gotoXY(80 + state * 10 + 2, line);
+			}
+			else if (temp == 77)//phai
+			{
+				if (state == 1)
+					state = 0;
+				else
+					state++;
+				gotoXY(80 + state * 10 + 2, line);
+			}
+			else if (temp == 8)//xoa
+			{
+				if (state == 0)
+				{
+					if (hour == "")
+						continue;
+					hour.pop_back();
+					gotoXY(80 + state * 10 + 2, line);
+					cout << hour << " ";
+					gotoXY(80 + state * 10 + 2 + hour.length(), line);
+				}
+				else
+				{
+					if (mins == "")
+						continue;
+					mins.pop_back();
+					gotoXY(80 + state * 10 + 2, line);
+					cout << mins << " ";
+					gotoXY(80 + state * 10 + 2 + mins.length(), line);
+				}
+			}
+			else if (temp >= 48 && temp <= 57)// nhap so
+			{
+				cout << temp;
+				if (state == 0)//nhap gio
+				{
+					if ((pre < 48 || pre>57)&&pre!=8)
+					{
+						gotoXY(80 + state * 10 + 2, line);
+						cout <<temp<< "    ";
+						hour = "";
+						gotoXY(80 + state * 10 + 2 + 1, line);
+					}
+					hour += temp;
+					if (stoi(hour) > 23)
+					{
+						setColor(background_color, red);
+						printA_Sentence("       Gio khong hop le !       ", line + 2);
+						temp = _getch();
+						gotoXY(80 + state * 10 + 2, line);
+						cout << "     ";
+						printA_Sentence("                              ", line + 2);
+						setColor(background_color, text_color);
+						hour = "";
+						gotoXY(80 + state * 10 + 2, line);
+					}
+				}
+				else//nhap phut
+				{
+					if ((pre < 48 || pre>57)&&pre!=8)
+					{
+						gotoXY(80 + state * 10 + 2, line);
+						cout << temp << "    ";
+						mins = "";
+						gotoXY(80 + state * 10 + 2 + 1, line);
+					}
+					mins += temp;
+					if (stoi(mins) > 59)
+					{
+						setColor(background_color, red);
+						printA_Sentence("       Phut khong hop le !       ", line + 2);
+						temp = _getch();
+						gotoXY(80 + state * 10 + 2, line);
+						cout << "     ";
+						printA_Sentence("                              ", line + 2);
+						setColor(background_color, text_color);
+						mins = "";
+						gotoXY(80 + state * 10 + 2, line);
+					}
+				}
+			}
+			else
+			{
+				continue;
+			}
+			pre = temp;
+		}
+	}
+	gotoXY(55, line);
+	cout << "Ngay : Gio";
+	return t;
 }

@@ -88,7 +88,6 @@ bool XlMenuSv(int chon, ListNamHoc& l, NodeSv_Lop* A)
 	case 1:
 	{
 		Xlviewmondk(A);
-		system("pause");
 		break;
 	}
 	case 2:
@@ -121,18 +120,31 @@ bool XlMenuSv(int chon, ListNamHoc& l, NodeSv_Lop* A)
 	return false;
 }
 //viewmondk
-int chonKi()
+int chonKi(string cauhoi)
 {
-	system("cls");
 	setColor(background_color, title_color1);
-	printA_Sentence("Ban muon xem ds mon cua ki may?", HEIGHT / 2 - 10);
-	string title[] = { "KI 1","KI 2","KI 3","KI 4" };
-	return LuaChon_Menu(4, title, 2, HEIGHT / 2 - 7);
+	printA_Sentence(cauhoi, HEIGHT / 2 - 8);
+	string title[] = { "KI 1","KI 2","KI 3" };
+	return LuaChon_Menu(3, title, 2, HEIGHT / 2 - 5);
 }
 void Xlviewmondk(NodeSv_Lop* A)
 {
-	int ki = chonKi();
 	system("cls");
-	viewMondaDk(A->headMon[ki-1], (int)ki,2);
-	cout << endl;
+	int ki = chonKi("Ban muon xem ds mon cua ki may?");
+	system("cls");
+	setColor(background_color, red);
+	printA_Sentence("Ban muon xem gi ?", HEIGHT / 2 - 4);
+	string title[2] = { "THONG TIN LOP HOC","BANG DIEM"};
+	if (LuaChon_Menu(2, title, 4, HEIGHT / 2-2) == 1)
+	{
+		system("cls");
+		viewMondaDk(A->headMon[ki - 1], (int)ki, 2);
+	}
+	else
+	{
+		viewSvScore(A, ki);
+	}
+	setColor(background_color, title_color1);
+	printA_Sentence("<-- Nhan nut bat ki de quay lai", HEIGHT - 5);
+	char pause = _getch();
 }
