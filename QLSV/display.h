@@ -30,3 +30,12 @@ int LuaChon_Menu(int title_number, string title[] ,int cell_height,int line);
 int LuaChon_HienThi(int line, int max);
 
 void printA_Sentence(string a, int line);
+
+//DKKH
+void nhapNgay_ve(int line);
+
+Ngay nhapNgay_nhap(int line);
+
+void nhapGio_ve(int line);
+
+Time nhapGio_nhap(int line);

@@ -2,7 +2,6 @@
 #include"begin.h"
 
 int InMenuGv();
-int LuaChon(int maxChoice);
 bool XlMenuGv(int chon, ListNamHoc& l);
 void GiaoVu(ListNamHoc& l);
 
@@ -79,7 +78,6 @@ void HienThiDSSv(NodeSv_Lop* head_sv_lop);
 //HIENTHI
 //neu chua co du lieu
 void hienthiNam(ListNamHoc l, int& lc);
-int Chon(int maxChoice);
 //ki
 void hienthiKi(NodeNamHoc* A, int& lc);
 void hienthiDsMon(NodeMon* head, int& lc);

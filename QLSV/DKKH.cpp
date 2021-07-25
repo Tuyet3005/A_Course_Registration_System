@@ -443,51 +443,7 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 1 buoi cho 1 hoc ki duy nhat
 {
 	system("cls");
-	cout << "----------------------------------TAO BUOI DANG KI KHOA HOC-------------------------------" << endl;
-	cout << endl;
-	cout << "~ HUONG DAN ~" << endl;
-	cout << "--Ban chi co the tao buoi dang ki khoa hoc cho hoc ki CHUA BAT DAU cua nam hoc nay" << endl;
-	cout << "--Ban chi co the tao MOT buoi dang ki khoa hoc cho MOT ki hoc" << endl;
-	cout << "--Thoi gian cho 1 buoi dang ki khoa hoc KHONG QUA 30 ngay" << endl;
-	cout << "--Ban can TAO MOI hoc ki va CAP NHAT danh sach mon hoc truoc khi tao buoi dang ki khoa hoc" << endl << endl;
-	cout << "Ban co that su muon tao buoi dang ki khoa hoc ? Y/N?" << endl;
-	char check;
-	/*cin.clear();
-	cin.ignore();*/
-	if (!askY_N())
-		return;
-	system("cls");
-	cout << "----------------------------------TAO BUOI DANG KI KHOA HOC-------------------------------" << endl;
-	cout << endl;
-	int ki;
-	cin.clear();
-	cout << "--Nhap ki hoc " << endl;
-	do {
-		cout << "Hay nhap: ";
-		cin >> ki;
-		if (cin.fail())
-		{
-			cin.clear();
-			cin.ignore(100, '\n');
-			continue;
-		}
-		else if (ki < 1 || ki>3)
-		{
-			continue;
-		}
-		else
-			break;
-	} while (true);
-
-	//KT KI HOC HOP LE
-
-	if (H->data.hk[ki - 1].tg.ngay_bd.d == NULL)//hk chua tao
-	{
-		cout << "! HOC KI NAY CHUA DUOC TAO !" << endl;
-		cout << "--Hay vao muc TAO MOI de tao hoc ki va them mon hoc!-- " << endl;
-		return;
-	}
-	//hk da ket thuc hoac da bd
+	//lay tg hien tai
 	tm now = ThoiGianHeThong();
 	Ngay Dnow;
 	Dnow.d = now.tm_mday;
@@ -496,103 +452,180 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	Time Tnow;
 	Tnow.gio = now.tm_hour;
 	Tnow.phut = now.tm_min;
+	//neu 3 hoc ki da bat dau thi thoi
+	setColor(background_color, title_color);
+	if (H->data.hk[2].tg.ngay_bd.d != NULL && sosanhNgay(H->data.hk[2].tg.ngay_bd, Dnow))
+	{
+		printA_Sentence("-- TAT CA CAC KI DA BAT DAU --", HEIGHT / 2 - 2);
+		setColor(background_color, text_color);
+		printA_Sentence("Ban khong can tao buoi DKKH nao nua...", HEIGHT / 2);
+		gotoXY(0, HEIGHT - 3);
+		system("pause");
+		return;
+	}
+	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 5);
+	setColor(background_color, title_color1);
+	printA_Sentence("~ HUONG DAN ~", 9);
+	setColor(background_color, text_color);
+	gotoXY(WIDTH / 4 + 3, 11);
+	cout << "--Ban chi co the tao buoi dang ki khoa hoc cho hoc ki CHUA BAT DAU cua nam hoc nay";
+	gotoXY(WIDTH / 4 + 3, 12);
+	cout << "--Ban chi co the tao MOT buoi dang ki khoa hoc cho MOT ki hoc";
+	gotoXY(WIDTH / 4 + 3, 13);
+	cout << "--Buoi DKKH chi duoc to chuc trong khoang thoi gian 30 NGAY truoc khi hoc ki bat dau";
+	gotoXY(WIDTH / 4 + 3, 14);
+	cout << "--Ban can TAO MOI hoc ki va CAP NHAT danh sach mon hoc truoc khi tao buoi dang ki khoa hoc";
+	gotoXY(0, 16);
+	if (!Ask_YN("Ban co that su muon tao buoi dang ki khoa hoc ?"))
+		return;
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 5);
+	int ki= chonKi("Ban muon tao buoi DKKH cho ki nao?");
+
+	//KT KI HOC HOP LE
+	system("cls");
+	//chua toi tg de mo dk kh cho ki nay//trong vong 30 ngay
+	if (sosanhNgay(_30ngaysau(Dnow), H->data.hk[ki - 1].tg.ngay_bd))
+	{
+		setColor(background_color, red);
+		printA_Sentence("! CHUA TOI THOI GIAN CAN DE TAO BUOI DKKH !", HEIGHT / 2 - 1);
+		return;
+	}
+	if (H->data.hk[ki - 1].tg.ngay_bd.d == NULL)//hk chua tao
+	{
+		setColor(background_color, red);
+		printA_Sentence("! HOC KI NAY CHUA DUOC TAO !", HEIGHT / 2 - 2);
+		setColor(background_color, text_color);
+		printA_Sentence("Hay vao muc TAO MOI de tao hoc ki va them mon hoc", HEIGHT / 2 );
+		return;
+	}
+	//hk da ket thuc hoac da bd
 	if (sosanhNgay(H->data.hk[ki - 1].tg.ngay_kt, Dnow))
 	{
-		cout << "! HOC KI NAY DA KET THUC !" << endl;
+		setColor(background_color, red);
+		printA_Sentence("! HOC KI NAY DA KET THUC !", HEIGHT / 2 - 1);
+		//setColor(background_color, text_color);
 		return;
 	}
 	if (sosanhNgay(H->data.hk[ki - 1].tg.ngay_bd, Dnow))
 	{
-		cout << "! HOC KI NAY DA BAT DAU !" << endl;
+		setColor(background_color, red);
+		printA_Sentence("! HOC KI NAY DA BAT DAU !", HEIGHT / 2 - 1);
+		//setColor(background_color, text_color);
 		return;
 	}
+	if (H->data.hk[ki - 1].headMon == NULL)//chua co mon nao
+	{
+		setColor(background_color, red);
+		printA_Sentence("! CHUA TAO MON HOC CHO HOC KY NAY !", HEIGHT / 2 - 2);
+		setColor(background_color, text_color);
+		printA_Sentence("Hay vao muc CAP NHAT de them mon hoc cho ki nay", HEIGHT / 2);
+		return;
+	}
+	
 	//da co buoi dkkh cho ki nay
 	ThoiGian tg;
 	Time tmBD, tmKT;
 	tmBD.giay = tmKT.giay = 0;
-	try {
-		int File_Ki;
-		string s;
-		readFileDKKH(tg, tmBD, tmKT, File_Ki);
-		if (File_Ki == ki)
-		{
-			cout << endl << "! DA TAO BUOI DANG KI KHOA HOC CHO KI NAY !" << endl << endl;
-			cout << "Ban co muon TAO LAI buoi dang ki khoa hoc cho ki nay? Y/N?" << endl;
-			if (!askY_N())
-				return;
-		}
-	}
-	catch (int error)
+	int File_Ki;
+	readFileDKKH(tg, tmBD, tmKT, File_Ki);
+	if (File_Ki == ki)
 	{
-		if (error == 0)//file trong 
-		{
-			//OK!!!
-		}
-	}
-	if (H->data.hk[ki - 1].headMon == NULL)//chua co mon nao
-	{
-		cout << "! CHUA TAO MON HOC CHO HOC KY NAY !" << endl << endl;
-		cout << "--Hay quay ve menu truoc va vao muc TAO MOI de them mon hoc cho ki nay!" << endl;
-		return;
-	}
-
+		setColor(background_color, red);
+		printA_Sentence("! DA TAO BUOI DANG KI KHOA HOC CHO KI NAY !", HEIGHT / 2 - 4);
+		if (!Ask_YN("Ban co muon TAO LAI buoi dang ki khoa hoc cho ki nay?"))
+			return;
+	}	
+  
 	//SAU KHI NHAP KI THANH CONG
 
+	char pause;
 	ThoiGian tHK = H->data.hk[ki - 1].tg;//tg hocki
 	bool flagbd = true;//chua nhap ngay bd
 	do {
 		system("cls");
-		cout << "----------------------------------TAO BUOI DANG KI KHOA HOC-------------------------------" << endl;
-		cout << endl;
+		setColor(background_color, title_color);
+		printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 5);
 		//in ra tg hk va tg nam hoc
-		cout << "Thoi gian HOC KI " << ki << ": " << tHK.ngay_bd.d << '/' << tHK.ngay_bd.m << '/' << tHK.ngay_bd.y << " - " << tHK.ngay_kt.d << '/' << tHK.ngay_kt.m << '/' << tHK.ngay_kt.y << endl;
+		setColor(background_color, text_color);
+		printA_Sentence("Thoi gian HOC KI " + to_string(ki) + ": " + to_string(tHK.ngay_bd.d) + '/' + to_string(tHK.ngay_bd.m) + '/' + to_string(tHK.ngay_bd.y) + " - " + to_string(tHK.ngay_kt.d) + '/' + to_string(tHK.ngay_kt.m) + '/' + to_string(tHK.ngay_kt.y), 9);
+		//in ra cho nhap ngay bd
+		
 		if (flagbd)
 		{
-			cout << endl << "--NGAY BAT DAU " << endl;
-			nhapNgayGio(tg.ngay_bd, tmBD);
+			setColor(background_color, title_color1);
+			printA_Sentence("- NGAY BAT DAU -", 11);
+			nhapNgay_ve(13);
+			nhapGio_ve(18);
+			tg.ngay_bd=nhapNgay_nhap(13);
+			tmBD = nhapGio_nhap(18);
+			//nhapNgayGio(tg.ngay_bd, tmBD);
 			//ss tg hien tai vs tgbd
 			if (!sosanhNgayGio(Dnow, Tnow, tg.ngay_bd, tmBD))//so sanh voi tg hien tai
 			{
-				cout << "! BUOI DANG KI PHAI DUOC BAT DAU SAU THOI GIAN HIEN TAI !" << endl << endl;
-				system("pause");
+				setColor(background_color, red);
+				printA_Sentence("! BUOI DANG KI PHAI DUOC BAT DAU SAU THOI GIAN HIEN TAI !", HEIGHT - 8);
+				pause = _getch();
 				continue;
 			}
-			system("pause");
+			//ss ngay bd voi ngay bd hk
+			if(!sosanhNgay(tg.ngay_bd,tHK.ngay_bd))
+			{
+				setColor(background_color, red);
+				printA_Sentence("! BUOI DANG KI PHAI DUOC BAT DAU TRUOC KHI HOC KI BAT DAU !", HEIGHT - 8);
+				pause = _getch();
+				continue;
+			}
+			setColor(background_color, title_color1);
+			printA_Sentence("An phim bat ki de tiep tuc -->", HEIGHT - 8);
+			pause = _getch();
 			flagbd = false;
 			continue;
 		}
 		else
 		{
-			cout << endl << "--NGAY BAT DAU " << tmBD.gio << "h" << tmBD.phut << "ph  ngay " << tg.ngay_bd.d << "/" << tg.ngay_bd.m << endl;
+			setColor(background_color, title_color1);
+			printA_Sentence("- NGAY BAT DAU " + to_string(tmBD.gio) + 'h' + to_string(tmBD.phut) + "ph  ngay " + to_string(tg.ngay_bd.d) + "/" + to_string(tg.ngay_bd.m) + "/" + to_string(tg.ngay_bd.y), 11);
 		}
-
-		cout << "--NGAY KET THUC " << endl;
-		nhapNgayGio(tg.ngay_kt, tmKT);
-		if (sosanhNgayGio(tg.ngay_bd, tmBD, tg.ngay_kt, tmKT))//ss tg bd vs tg kt + 
+		setColor(background_color, title_color1);
+		printA_Sentence("- NGAY KET THUC -", 13);
+		nhapNgay_ve(15);
+		nhapGio_ve(21);
+		tg.ngay_kt = nhapNgay_nhap(15);
+		tmKT = nhapGio_nhap(21);
+		//nhapNgayGio(tg.ngay_kt, tmKT);
+		if (sosanhNgayGio(tg.ngay_bd, tmBD, tg.ngay_kt, tmKT))//ss tg bd vs tg kt
 		{
-			if (sosanhNgayGio(tg.ngay_kt, tmKT, _30ngaysau(tg.ngay_bd), tmBD))//thoi han buoi dk là khong qua 30 ngay
-			{
-				if (sosanhNgay(tg.ngay_kt, tHK.ngay_bd))
-					break;
-				cout << "! BUOI DANG KI PHAI KET THUC TRUOC NGAY BAT DAU HOC KI !" << endl;
-			}
-			else
-				cout << "! THOI HAN BUOI DANG KI KHONG QUA 30 NGAY !" << endl;
+			if (sosanhNgay(tg.ngay_kt, tHK.ngay_bd))
+				break;
+			setColor(background_color, red);
+			printA_Sentence("! BUOI DANG KI PHAI KET THUC TRUOC NGAY BAT DAU HOC KI !", HEIGHT - 8);
+			pause = _getch();
 		}
 		else
-			cout << "! NGAY KET THUC PHAI SAU NGAY BAT DAU !" << endl;
-		system("pause");
+		{
+			setColor(background_color, red);
+			printA_Sentence("! NGAY KET THUC PHAI SAU NGAY BAT DAU !", HEIGHT - 8);
+			pause = _getch();
+		}
 	} while (true);
-	system("pause");
+	setColor(background_color, title_color1);
+	printA_Sentence("An phim bat ki de tiep tuc -->", HEIGHT - 8);
+	pause = _getch();
 	if (askforsure(tg, tmBD, tmKT, ki))
 		if (xuatFile_DKKH(tg, tmBD, tmKT, ki))
 		{
 			system("cls");
-			cout << "~ TAO THANH CONG BUOI DANG KI KHOA HOC ~" << endl;
+			setColor(background_color, title_color);
+			printA_Sentence("~ TAO THANH CONG BUOI DANG KI KHOA HOC ~", HEIGHT / 2);
+			pause = _getch();
 			return;
 		}
 	system("cls");
-	cout << endl << "! TAO BUOI DANG KI KHOA HOC THAT BAI !" << endl << endl;
+	setColor(background_color, red);
+	printA_Sentence("! TAO BUOI DANG KI KHOA HOC THAT BAI !", HEIGHT / 2);
+	pause = _getch();
 }
 
 void nhapNgayGio(Ngay& ngay, Time& t)
@@ -634,35 +667,19 @@ void nhapNgayGio(Ngay& ngay, Time& t)
 bool askforsure(ThoiGian& tg, Time& tmBD, Time& tmKT, int ki)
 {
 	system("cls");
-	cout << "-------------------------TAO BUOI DANG KI KHOA HOC-------------------------" << endl << endl;
-	cout << "Ban da tao buoi dang ki khoa hoc ki " << ki << ": " << endl;
-	cout << "--BAT DAU vao luc  :  " << tmBD.gio << "h" << tmBD.phut << "ph  ngay " << tg.ngay_bd.d << "/" << tg.ngay_bd.m << endl;
-	cout << "--KET THUC vao luc :  " << tmKT.gio << "h" << tmKT.phut << "ph  ngay " << tg.ngay_kt.d << "/" << tg.ngay_kt.m << endl;
-	cout << endl;
-	cout << "Nhan 1 de XAC NHAN, 2 de HUY" << endl;
-	int lc;
-	do
-	{
-		cout << "Hay nhap: " << endl;
-		cin >> lc;
-		if (cin.fail())
-		{
-			cin.clear();
-			cin.ignore();
-			continue;
-		}
-		else if (lc == 1)
-		{
-			return true;
-		}
-		else if (lc == 2)
-		{
-			cout << "Ban co chac chan HUY buoi hoc vua tao? Y/N?" << endl;
-			if (askY_N())
-				return false;
-			return askforsure(tg, tmBD, tmKT, ki);
-		}
-	} while (true);
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 5);
+	setColor(background_color, title_color1);
+	printA_Sentence("Ban da tao buoi dang ki khoa hoc ki " + ki, 7);
+	gotoXY(WIDTH / 3, 9);
+	cout << "--BAT DAU vao luc  :  " << tmBD.gio << "h" << tmBD.phut << "ph";
+	gotoXY(WIDTH*4 / 7, 9);
+	cout << "Ngay " << tg.ngay_bd.d << '/' << tg.ngay_bd.m << '/' << tg.ngay_bd.y;
+	gotoXY(WIDTH / 3, 11);
+	cout << "--KET THUC vao luc  :  " << tmKT.gio << "h" << tmKT.phut << "ph";
+	gotoXY(WIDTH*4 / 7, 11);
+	cout << "Ngay " << tg.ngay_kt.d << '/' << tg.ngay_kt.m << '/' << tg.ngay_kt.y;
+	return Ask_YN("Ban chac chan muon tao buoi DKKH nay ?");
 }
 
 bool askY_N()

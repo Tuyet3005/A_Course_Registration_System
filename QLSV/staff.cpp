@@ -7,24 +7,6 @@ int InMenuGv()
 	string title[5] = { "TAO MOI","CAP NHAT","HIEN THI","QUAY VE","THOAT" };
 	return LuaChon_Menu(5,title,2,HEIGHT/2);//lua chon lon nhat la 5
 }
-//int LuaChon(int maxChoice)
-//{
-//	int chon;
-//	do
-//	{
-//		cout << "Nhap lua chon cua ban: " << endl;
-//		cin >> chon;
-//		if (cin.fail())
-//		{
-//			cin.clear();
-//			cin.ignore();
-//			chon = 0;
-//		}
-//	}
-//	//trong khoang lua chon, dung kieu du lieu
-//	while (cin.fail() || chon < 1 || chon > maxChoice);
-//	return chon;
-//}
 bool XlMenuGv(int chon, ListNamHoc& l)
 {
 	char lenh;//thoat thi nhap Y/y
@@ -2258,71 +2240,6 @@ void hienthiNam(ListNamHoc l, int& lc)
 	if (lc == -1)
 		hienthiNam(l, lc);
 }
-//int Chon(int maxChoice)
-//{
-//	int key;
-//	char temp;
-//	string s;
-//	cout << "--Nhan ESC de thoat" << endl;
-//	cout << "--Nhan phim B de quay lai menu truoc" << endl << endl;
-//	cout << "Moi nhap (nhap STT): " << endl;
-//	int x = whereX();
-//	int y = whereY();
-//	while (true)
-//	{
-//		gotoXY(x, y);
-//		if (_kbhit())
-//		{
-//			temp = _getch();
-//			if (temp == 13)//enter
-//			{
-//				if (s != "")
-//				{
-//					key = stoi(s);
-//					if (key == 0 || key > maxChoice)
-//						cout << endl << "STT khong hop le... Hay nhap lai !";
-//					else
-//						return key;
-//					x = 0;
-//					y += 2;
-//				}
-//				s = "";
-//			}
-//			else if (temp == 27)
-//			{
-//				cout << "Ban that su muon thoat khoi Hien Thi? Y/N?" << endl;
-//				if (askY_N())
-//					return 0;
-//				else
-//					y += 2;
-//			}
-//			else if (temp == 'B' || temp == 'b')
-//				return -1;
-//			else if (temp == 8)//xoa
-//			{
-//				s.pop_back();//bo dau backspace
-//				s.pop_back();
-//				if (x != 0)
-//				{
-//					x--;
-//					gotoXY(x, y);
-//					cout << ' ';
-//					gotoXY(x, y);
-//				}
-//			}
-//			else if (temp < 48 || temp>57)
-//			{
-//
-//			}
-//			else
-//			{
-//				s += temp;
-//				cout << temp;
-//				x++;
-//			}
-//		}
-//	}
-//}
 int chonSt_Year()
 {
 	system("cls");
