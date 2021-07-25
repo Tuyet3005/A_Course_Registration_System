@@ -131,9 +131,27 @@ void changePass(bool role, string tk, string& mk)
 		if (oldpass == mk) break;
 		else cout << "\nNhap sai mat khau... moi nhap lai!" << endl;
 	}
-	cout << "\nNhap mat khau moi (toi da 20 ki tu): ";
-	cin.clear();
-	newpass = typePass();
+	while (true)
+	{
+		cout << "\nNhap mat khau moi (it nhat 5 ki tu, toi da 20 ki tu): ";
+		cin.clear();
+		newpass = typePass();
+		if (newpass != mk)
+			break;
+		else
+		{
+			cout << "\nMat khau moi phai khac voi mat khau cu!\n";
+			cout << "Ban co muon tiep tuc nhap mat khau moi? Nhap Y de tiep tuc: ";
+			char lenh;
+			cin >> lenh;
+			if (lenh != 'Y' && lenh != 'y')
+			{
+				cout << "Doi mat khau khong thanh cong!\n";
+				system("pause");
+				return;
+			}
+		}
+	}
 	cout << "\nNhap lai mat khau moi de xac nhan: ";
 	if (typePass() != newpass)
 	{
