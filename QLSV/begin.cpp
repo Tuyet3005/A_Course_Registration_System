@@ -25,19 +25,18 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 	case 2:
 	{
 		if (role)//tra ve sinh vien
-		{
 			viewInfoSv(findInfo(stoi(tk)));
-			break;
-		}
 		else 
-		{
 			viewInfoGV(taiTT_GV(tk));
-			break;
-		}
+		setColor(background_color, title_color1);
+		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
+		char pause = _getch();
+		break;
 	}
 	case 3:
 	{
-		changePass(role, tk, mk);
+		if (!changePass(role, tk, mk))
+			break;
 	}
 	case 4:
 	{
@@ -47,7 +46,6 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 		if (Ask_YN("Ban se DANG XUAT ra khoi tai khoan nay?"))
 		{
 			gotoXY(0, HEIGHT - 4);
-			system("pause");
 			cin.ignore(100, '\n');
 			return true;
 		}

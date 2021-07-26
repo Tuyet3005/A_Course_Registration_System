@@ -27,7 +27,17 @@ string typePass()
 		else if (c == '\r' || c == '\n')
 		{
 			if (dem < 5)//ko dc enter khi mk it hon 5 ki tu 
+			{
+				x = whereX();
+				y = whereY();
+				setColor(background_color, red);
+				printA_Sentence("! MAT KHAU PHAI PHAI CO TU 5 DEN 20 KI TU !", HEIGHT - 6);
+				setColor(background_color, text_color);
+				c = _getch();
+				printA_Sentence("                                             ", HEIGHT - 6);
+				gotoXY(x, y);
 				continue;
+			}
 			else
 				break;
 		}
@@ -37,9 +47,10 @@ string typePass()
 			dem++;
 			cout << "*";
 		}
-	} while (dem < 20);
+	} while (dem <= 20);
 	return pass;
 }
+
 bool checkAccount(string tk, string mk, bool lc)
 {
 	ifstream f;
@@ -75,6 +86,7 @@ void LogIn(string& tk, string& mk, bool& lc)
 	cout << "Mat khau: ";//check mk bnh ki tu
 	setColor(background_color, text_color);
 	char dem = 0;
+	char pause;
 	while (dem < 5)
 	{
 		gotoXY(80, HEIGHT / 2 + 3);
@@ -84,12 +96,12 @@ void LogIn(string& tk, string& mk, bool& lc)
 		cin.clear();
 		mk = typePass();
 		if (checkAccount(tk, mk, lc)) break;
-		else if (dem < 4)
+		else
 		{
 			setColor(background_color, red);
 			printA_Sentence("! MAT KHAU HOAC TAI KHOAN KHONG DUNG !", HEIGHT - 6);
 			setColor(background_color, text_color);
-			char a = _getch();
+			pause = _getch();
 			printA_Sentence("                                          ", HEIGHT - 6);
 			gotoXY(80, HEIGHT / 2 + 3);
 			cout << "                                          ";
@@ -117,47 +129,86 @@ void LogIn(string& tk, string& mk, bool& lc)
 	system("pause");
 }
 
-void changePass(bool role, string tk, string& mk)
+bool changePass(bool role, string tk, string& mk)
 {
 	string oldpass, newpass;
 	system("cls");
-	cout << "-----------------DOI MAT KHAU-----------------------" << endl;
-	bool flag = false;
-	while (!flag)
+	setColor(background_color, title_color);
+	printA_Sentence("~ DOI MAT KHAU ~", 5);
+	char pause;
+	gotoXY(50, 12);
+	setColor(background_color, title_color1);
+	cout << "Nhap mat khau cu: ";
+	setColor(background_color, text_color);
+	//cin.clear();
+	while (true)
 	{
-		cout << "Nhap mat khau cu: ";
+		gotoXY(80, 12);
 		cin.clear();
 		oldpass = typePass();
 		if (oldpass == mk) break;
-		else cout << "\nNhap sai mat khau... moi nhap lai!" << endl;
+		else
+		{
+			setColor(background_color, red);
+			printA_Sentence("! MAT KHAU KHONG DUNG !", HEIGHT - 6);
+			setColor(background_color, text_color);
+			pause = _getch();
+			printA_Sentence("                                          ", HEIGHT - 6);
+			gotoXY(80, 12);
+			cout << "                                                     ";
+			gotoXY(80, 12);
+		}
 	}
+
+	gotoXY(50, 15);
+	setColor(background_color, title_color1);
+	cout << "Nhap mat khau moi: ";
+	setColor(background_color, text_color);
 	while (true)
 	{
-		cout << "\nNhap mat khau moi (it nhat 5 ki tu, toi da 20 ki tu): ";
+		gotoXY(80, 15);
 		cin.clear();
 		newpass = typePass();
 		if (newpass != mk)
 			break;
 		else
 		{
-			cout << "\nMat khau moi phai khac voi mat khau cu!\n";
-			cout << "Ban co muon tiep tuc nhap mat khau moi? Nhap Y de tiep tuc: ";
-			char lenh;
-			cin >> lenh;
-			if (lenh != 'Y' && lenh != 'y')
-			{
-				cout << "Doi mat khau khong thanh cong!\n";
-				system("pause");
-				return;
-			}
+			setColor(background_color, red);
+			printA_Sentence("! MAT KHAU MOI PHAI KHAC VOI MAT KHAU CU !", HEIGHT - 6);
+			setColor(background_color, text_color);
+			pause = _getch();
+			printA_Sentence("                                          ", HEIGHT - 6);
+			gotoXY(80, 15);
+			cout << "                                                     ";
+			gotoXY(80, 15);
 		}
 	}
-	cout << "\nNhap lai mat khau moi de xac nhan: ";
-	if (typePass() != newpass)
+	gotoXY(50, 18);
+	setColor(background_color, title_color1);
+	cout << "Nhap lai mat khau moi: ";
+	setColor(background_color, text_color);
+	gotoXY(80, 18);
+	while (typePass() != newpass)
 	{
-		cout << "\nDoi mat khau khong thanh cong!\n";
-		system("pause");
-		return;
+		setColor(background_color, red);
+		printA_Sentence("! MAT KHAU VUA NHAP KHONG KHOP !", HEIGHT - 6);
+		setColor(background_color, text_color);
+		pause = _getch();
+		printA_Sentence("                                          ", HEIGHT - 6);
+		gotoXY(80, 18);
+		cout << "                                                     ";
+		gotoXY(80, 18);
+	}
+	system("cls");
+	if (!Ask_YN("Ban chac chan muon doi mat khau nhu da nhap ?"))
+	{
+		system("cls");
+		setColor(background_color, red);
+		printA_Sentence("! DOI MAT KHAU THAT BAI !", HEIGHT /2);
+		setColor(background_color, title_color1);
+		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT -4);
+		pause = _getch();
+		return false;
 	}
 	ifstream f;
 	if (role) f.open("SinhVien.txt");
@@ -215,6 +266,10 @@ void changePass(bool role, string tk, string& mk)
 	f.close();
 	remove((role) ? "SinhVien.txt" : "GiaoVu.txt");
 	rename("trunggian.txt", (role) ? "SinhVien.txt" : "GiaoVu.txt");
-	cout << "\nDoi mat khau thanh cong!\n";
-	system("pause");
+	setColor(background_color, title_color);
+	printA_Sentence("~ DOI MAT KHAU THANH CONG ~", HEIGHT / 2);
+	setColor(background_color, title_color1);
+	printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 4);
+	pause = _getch();
+	return true;
 }

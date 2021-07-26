@@ -132,11 +132,12 @@ void BackGround()
 
 int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 {
+	int nam = NHhientai_nambd();
 	system("cls");
 	setColor(background_color, title_color);
 	printA_Sentence("~ DANH SACH MON ~", 2);
 	setColor(background_color, title_color1);
-	printA_Sentence("Ki "+to_string(ki), 3);
+	printA_Sentence("Ki "+to_string(ki)+"    Nam hoc : "+to_string(nam)+" - "+to_string(nam+1), 3);
 	gotoXY(10, 6);
 	if (head == NULL)
 	{
