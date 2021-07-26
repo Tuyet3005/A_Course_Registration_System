@@ -1297,8 +1297,11 @@ void NhapThongtinSv(NodeSv_Lop* n, int i)
 	}
 	cin.ignore();
 	cout << "CMND/CCCD: \n";
-	cin >> n->sv.cmnd;
-
+	char* temp = new char[13];
+	cin.getline(temp, 13, '\n');
+	int size = strlen(temp) + 1;
+	n->sv.cmnd = new char[size];
+	strcpy_s(n->sv.cmnd, size, temp);
 }
 void GhiThongtinSv(NodeLop* nodeLop, NodeSv_Lop* n)//sau khi dien thong tin sv => check trung => ghi vao file
 {
@@ -1440,7 +1443,9 @@ void ThemSvLop_file(NodeLop* nodeLop)
 				T.ngayS.d = T.ngayS.d / 1000000;
 				f.clear();
 				getline(f, s, ',');
-				T.cmnd = atoi(s.c_str());
+				int size = s.length() + 1;
+				T.cmnd = new char[size];
+				strcpy_s(T.cmnd, size, s.c_str());
 				if (!f.good())
 				{
 					throw - 1;

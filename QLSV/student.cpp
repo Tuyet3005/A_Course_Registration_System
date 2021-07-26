@@ -43,7 +43,9 @@ Sv findInfo(string tenlop, int tk)//tim Info sv trong file Lop
 			T.ngayS.d = T.ngayS.d / 1000000;
 			f.clear();
 			getline(f, s, ',');
-			T.cmnd = stoi(s);
+			int size = s.length() + 1;
+			T.cmnd = new char[size];
+			strcpy_s(T.cmnd, size, s.c_str());
 		}
 		f.clear();
 		getline(f, s);
