@@ -27,15 +27,15 @@ bool XungdotTg(HocKy* hktruoc, Ngay ngBD_hksau, int hkTr, int hkS);
 void TaoHocKy(ListNamHoc& l);
 //mon hoc 
 HocKy* HkHienTai(ListNamHoc& l, NodeNamHoc* n, int& i);
-void NhapNodeMon(NodeMon* n);
-void HienLuaChonThu(int buoi);
-void HienLuaChonGio();
+bool NhapNodeMon(NodeMon* n);
+int HienLuaChonThu(int line);
+string HienLuaChonGio(int line);
 void XulyThu(int lc, BuoiHoc& bh);
 void NhapTgMon(NodeMon* n);
-bool checkTrungMon(HocKy* hk, NodeMon* n);
+bool checkTrungMon(NodeMon* head, NodeMon* n);
 void TaoMon(ListNamHoc& l, int nam);
-void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk);
-void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk);
+NodeMon* mondangmo_docfile(string file, int nam, int stt_hk);
+NodeMon* mondangmo_nhaptay(int nam, int stt_hk);
 
 //CAP NHAT
 bool XlCapNhat(int chon, ListNamHoc& l);
@@ -74,6 +74,7 @@ float NhapDiem(float diem);
 void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon);
 void HienThiDSLop(NodeLop* head_lop);
 void HienThiDSSv(NodeSv_Lop* head_sv_lop);
+NodeMon* timNodeMon_CapNhat(ListNamHoc l);
 
 //HIENTHI
 //neu chua co du lieu

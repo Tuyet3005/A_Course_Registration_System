@@ -974,7 +974,7 @@ void nhapNgay_ve(int line)
 	line++;
 	gotoXY(55, line);
 	setColor(background_color, text_color);
-	cout << "Ngay/Thang/Nam";
+	cout << "Ngay / Thang / Nam";
 	veHCN(80, line - 1, 80 + 36, line + 1);
 	gotoXY(80 + 10, line);
 	cout << '/';

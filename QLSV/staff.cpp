@@ -1,5 +1,6 @@
 #include"staff.h"
-
+#include<iostream>
+using namespace std;
 //GIAO VU
 int InMenuGv()
 {
@@ -134,7 +135,6 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	{
 		system("cls");
 		TaoNam(l);
-		system("pause");
 		break;
 	}
 	case 2:
@@ -142,14 +142,12 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 		system("cls");
 		NodeNamHoc* n = NodeNamHienTai(l);
 		TaoLopNamNhat(n);
-		system("pause");
 		break;
 	}
 	case 3:
 	{
 		system("cls");
 		TaoHocKy(l);
-		system("pause");
 		break;
 	}
 	case 4:
@@ -158,7 +156,6 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 		NodeNamHoc* n = NodeNamHienTai(l);
 		int nam = n->data.tg.ngay_bd.y;
 		TaoMon(l, nam);
-		system("pause");
 		break;
 	}
 	case 5:
@@ -194,10 +191,11 @@ NodeNamHoc* TaoNodeNam()
 	string temp;
 	char c;
 	f.open("listnam.txt", ios::in | ios::app);
-	int x = whereX();
-	int y = whereY();
 	setColor(background_color, title_color1);
 	cout << "Nhap nam bat dau nam hoc: ";
+	int x = whereX()+5;
+	int y = whereY();
+	gotoXY(x, y);
 	setColor(background_color, text_color);
 	do
 	{
@@ -216,6 +214,8 @@ NodeNamHoc* TaoNodeNam()
 		}
 		else if (c == '\r' || c == '\n')
 		{
+			if (temp == "")
+				continue;
 			if (stoi(temp) < NHhientai_nambd())
 			{
 				system("cls");
@@ -256,7 +256,6 @@ NodeNamHoc* TaoNodeNam()
 	f.close();
 	n->pNext = NULL;
 	return n;
-	}
 }
 void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n)
 {
@@ -297,13 +296,16 @@ void TaoNam(ListNamHoc& l)
   {
 	setColor(background_color, title_color);
 	printA_Sentence("~ TAO MOI MOT NAM HOC ~", 5);
+	gotoXY(WIDTH/3 +5, 12);
 	NodeNamHoc* n = TaoNodeNam();
 	ThemNodeNamHoc(l, n);
 	if (n) 
 	{
 		int nam = n->data.tg.ngay_bd.y;
-		cout << "Tao nam hoc " << nam << " - " << nam + 1 << " thanh cong!" << endl;
+		setColor(background_color, title_color);
+		printA_Sentence("~ TAO NAM HOC "+to_string(nam)+" - "+to_string(nam+1)+ " THANH CONG ~", HEIGHT-5);
 	}
+	char pause = _getch();
 }
 
 //lop hoc  
@@ -346,50 +348,126 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		return;
 	int sl = 0;
 	//nhap ten lop moi len file, tao node len he thong
-	cout << "------------------------TAO MOI LOP HOC NAM NHAT------------------------\n";
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO MOI LOP HOC NAM NHAT ~",5);
+	gotoXY(WIDTH / 3, 10);
+	setColor(background_color, title_color1);
 	cout << "Nhap so luong lop nam nhat muon tao: ";
-	cin >> sl;
-	if (cin.fail() || sl < 0)
+	string temp;
+	char c;
+	int x = whereX() + 5;
+	int y = whereY();
+	gotoXY(x, y);
+	setColor(background_color, text_color);
+	do
 	{
-		cin.clear();
-		cin.ignore();
-		sl = 0;
-	}
+		char c = _getch();
+		if (c == '\b')//nhan phim backspace 
+		{
+			if (temp == "")
+			{
+				gotoXY(x, y);
+				continue;
+			}
+			gotoXY(whereX() - 1, y);
+			cout << " ";
+			gotoXY(whereX() - 1, y);//quay lai vi tri " "
+			temp.pop_back();
+		}
+		else if (c == '\r' || c == '\n')
+		{
+			if (temp == "")
+				continue;
+			break;
+		}
+		else if (c >= 48 && c <= 57)
+		{
+			temp += c;
+			cout << c;
+		}
+	} while (true);
+	sl = stoi(temp);////////////////////////////////////////ko tao
+	char pause;
 	if (sl == 0)
+	{
+		system("cls");
+		setColor(background_color, title_color);
+		printA_Sentence("~ TAO MOI LOP HOC NAM NHAT THANH CONG ~", HEIGHT / 2 - 2);
+		setColor(background_color, title_color1);
+		printA_Sentence("Ban hay vao muc CAP NHAT de them lop hoc nam nhat", HEIGHT / 2);
+		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
+		pause = _getch();
 		return;
+	}
+	/// an phim to continue
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO MOI LOP HOC NAM NHAT ~", 5);
+	setColor(background_color, title_color1);
+	printA_Sentence("- Luu y: Ten lop hoc co cau truc <khoa><ma nganh><ma lop> -", 7);
+
+	setColor(background_color, text_color);
+	printA_Sentence("Vd: 20CTT3", 8);
+	x = WIDTH / 3;
+	y = 10;
+	bool trungTen = false;
+	int nam = NHhientai_nambd();
 	for (int i = 0; i < sl; i++)
 	{
+		//y = whereY();
+		trungTen = false;
+		gotoXY(x, y);
 		string ten;
-		cout << "\nNhap ten lop " << i + 1 << ": ";
-		cin >> ten;
+		cout << "Nhap ten lop : ";
+		while (true)
+		{
+			gotoXY(x + 19, y);
+			getline(cin, ten);
+			if (sizeof(ten) == 0)
+			{
+				cin.ignore();
+				continue;
+			}
+			if ((int)ten[0]*10+(int)ten[1]-480-48==nam)
+			{
+				setColor(background_color, red);
+				printA_Sentence("! TEN LOP KHONG HOP LE !", y + 3);
+				setColor(background_color, text_color);
+				printA_Sentence("Cau truc ten lop: <khoa><ma nganh><ma lop>", y + 4);
+				pause = _getch();
+				printA_Sentence("                               ", y + 3);
+				printA_Sentence("                                           ", y + 4);
+				ten = "";
+				continue;
+			}
+			break;
+		}
 		//ktra co bi trung ten lop
 		NodeLop* temp = node->data.headLop[0];
-		bool trungTen = false;
 		while (temp != NULL)
 		{
 			if (temp->lop.ten == ten)
 			{
-				cout << "Loi: Lop nay da duoc tao truoc do tren he thong!!!\n";
+				setColor(background_color, red);
+				printA_Sentence("! LOP DA DUOC TAO TRUOC DO !", y + 3);
+				pause = _getch();
+				printA_Sentence("                                ", y + 3);
+				setColor(background_color, text_color);
 				trungTen = true;
 				break;
 			}
-			else
-			{
-				temp = temp->pNext;
-			}
+			temp = temp->pNext;
 		}
 		if (trungTen)
 		{
-			char lenh;
-			cout << "Ban co muon nhap lai ten lop " << i + 1 << "? Y/N?\n";
-			cin >> lenh;
-			if (lenh == 'Y' || lenh == 'y')
-			{
-				i--;
-			}
-			continue;//chay vong lap for ke tiep, bo qua cac lenh ben duoi
+			ten = "";
+			gotoXY(x, y);
+			cout << "                          ";
+			gotoXY(x, y);
+			i--;
+			cin.ignore();
+			continue;
 		}
-		//ko bi trung thi tao node va ghi ten lop vo file
 		fstream f;
 		f.open(to_string(node->data.tg.ngay_bd.y) + "n1.txt", ios::app);//file lop nam1 
 		f << ten << ",";
@@ -397,12 +475,24 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		f.close();
 		NodeLop* n = TaoNodeLop(ten);
 		ThemNodeLopHoc(node->data.headLop[0], n);
-		//da cap nhat du lieu lop moi vao file trong ham TaoNodeLop
-		cout << "Tao lop thanh cong!!!" << endl << endl;
-		Sleep(500);
 		n->lop.headSvLop = NULL;
+		system("cls");
+		setColor(background_color, title_color);
+		printA_Sentence("~ TAO MOI LOP HOC NAM NHAT ~", 5);
+		gotoXY(0, 8);
+		viewDsLop(node->data.headLop[0]);
+		y = whereY() + 3;
 	}
-	cout << "Ban da co the cap nhat dssv cho (cac) lop hoc vua tao!\n";
+	setColor(background_color, title_color1);
+	printA_Sentence("Nhan phim bat ki de tiep tuc -->", HEIGHT - 5);
+	pause = _getch();
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO MOI LOP HOC NAM NHAT THANH CONG ~", HEIGHT / 2 - 2);
+	setColor(background_color, title_color1);
+	printA_Sentence("Ban da co the cap nhat dssv cho (cac) lop hoc vua tao", HEIGHT / 2 );
+	printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT -5);
+	pause = _getch();
 }
 
 //hoc ky 
@@ -472,70 +562,68 @@ bool XungdotTg(HocKy* hktruoc, Ngay ngBD_hksau, int hkTr, int hkS)
 void TaoHocKy(ListNamHoc& l)
 {
 	int hk = 0;
+	int nam_bd;//nam bat dau cua nam hoc tuong ung ngay kt do user nhap vao
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO MOI HOC KI ~",5);
+	hk = chonKi("Ban muon tao ki may ?");
+	char pause;
+	//lay tg hien tai
+	tm now = ThoiGianHeThong();
+	Ngay Dnow;
+	Dnow.d = now.tm_mday;
+	Dnow.m = now.tm_mon + 1;
+	Dnow.y = now.tm_year + 1900;
+	//nhap thoi gian bat dau, ket thuc 
 	Ngay ngBD;
 	Ngay ngKT;
-	int nam_bd;//nam bat dau cua nam hoc tuong ung ngay kt do user nhap vao
-	cout << "TAO MOI HOC KY\n";
-	while (hk < 1 || hk>3)
-	{
-		cout << "Nhap vao so thu tu cua hoc ky (1,2,3): ";
-		cin >> hk;
-		if (cin.fail())
+	bool flagbd = true;//chua nhap ngay bd
+	do {
+		system("cls");
+		setColor(background_color, title_color);
+		printA_Sentence("~ TAO MOI HOC KI ~", 5);
+
+		if (flagbd)
 		{
-			cin.clear();
-			cin.ignore();
-			hk = 0;
+			setColor(background_color, title_color1);
+			printA_Sentence("- NGAY BAT DAU -", 11);
+			nhapNgay_ve(13);
+			ngBD = nhapNgay_nhap(13);
+			//nhapNgayGio(tg.ngay_bd, tmBD);
+			//ss tg hien tai vs tgbd
+			if (!sosanhNgay(Dnow, ngBD))//so sanh voi tg hien tai
+			{
+				setColor(background_color, red);
+				printA_Sentence("! HOC KI PHAI DUOC BAT DAU SAU THOI GIAN HIEN TAI !", HEIGHT - 8);
+				pause = _getch();
+				continue;
+			}
+			setColor(background_color, title_color1);
+			printA_Sentence("An phim bat ki de tiep tuc -->", HEIGHT - 8);
+			pause = _getch();
+			flagbd = false;
+			continue;
 		}
-	}
-	cout << endl;
-	//nhap thoi gian bat dau, ket thuc 
-	{
-		ngBD.d = 0;
-		ngKT.d = 0;
-		do
+		else
 		{
-			if (ngBD.d == 0)
-			{
-				cout << "Nhap lan luot ngay, thang, nam bat dau cua hoc ky nhu vd sau '5 9 2021':\n";
-				cin >> ngBD.d >> ngBD.m >> ngBD.y;
-				if (cin.fail())//check ngay thang nam phu hop!
-				{
-					cin.clear();
-					cin.ignore();
-					ngBD.d = 0;
-					continue;
-				}
-				else if (!NgayHopLe(ngBD.d, ngBD.m, ngBD.y))
-				{
-					ngBD.d = 0;
-					continue;
-				}
-			}
-			if (ngKT.d == 0)
-			{
-				cout << "Nhap lan luot ngay, thang, nam ket thuc cua hoc ky nhu vd sau '31 07 2021':\n";
-				cin >> ngKT.d >> ngKT.m >> ngKT.y;
-				if (cin.fail())
-				{
-					cin.clear();
-					cin.ignore();
-					ngKT.d = 0;
-					continue;
-				}
-				else if (!NgayHopLe(ngKT.d, ngKT.m, ngKT.y))
-				{
-					ngKT.d = 0;
-					continue;
-				}
-			}
-			if (!sosanhNgay(ngBD, ngKT))
-			{
-				cout << "LOI! Ngay bat dau phai TRUOC ngay ket thuc!!!\nVui long nhap lai!\n";
-				ngBD.d = 0;
-				ngKT.d = 0;
-			}
-		} while (ngBD.d == 0 || ngKT.d == 0);
-	}
+			setColor(background_color, title_color1);
+			printA_Sentence("- NGAY BAT DAU :   " + to_string(ngBD.d) + "/" + to_string(ngBD.m) + "/" + to_string(ngBD.y), 11);
+		}
+
+		setColor(background_color, title_color1);
+		printA_Sentence("- NGAY KET THUC -", 13);
+		nhapNgay_ve(15);
+		ngKT = nhapNgay_nhap(15);
+		//nhapNgayGio(tg.ngay_kt, tmKT);
+		if (!sosanhNgay(ngBD, ngKT))//ss tg bd vs tg kt
+		{
+			setColor(background_color, red);
+			printA_Sentence("! NGAY KET THUC PHAI SAU NGAY BAT DAU !", HEIGHT - 8);
+			pause = _getch();
+		}
+		else
+			break;
+	} while (true);
 	//do tim node nam hoc tuong ung de them hoc ky vao
 	if (ngKT.m < 8)
 		nam_bd = ngKT.y - 1;//nam hoc bat dau tu dau thang 9 nam X den het thang 7 nam X+1 
@@ -544,6 +632,20 @@ void TaoHocKy(ListNamHoc& l)
 	NodeNamHoc* nodeNam = TimNodeNamHoc(l, nam_bd);
 	if (nodeNam)
 	{
+		//da tao ki chua
+		fstream f;
+		string s;
+		string filePath = to_string(nam_bd) + "hk" + to_string(hk) + ".txt";
+		f.open(filePath, ios::in);
+		//da tao hk truoc do roi -> return;
+		if (f.is_open() && (f >> s) && (s != " "))
+		{
+			f.close();
+			setColor(background_color, red);
+			printA_Sentence("~ KI HOC DA DUOC TAO ~", HEIGHT - 5);
+			pause = _getch();
+			return;
+		}
 		HocKy* hockyP = NULL;
 		switch (hk)
 		{
@@ -572,65 +674,53 @@ void TaoHocKy(ListNamHoc& l)
 			break;
 		}
 		}
-		fstream f;
-		string s;
-		string filePath = to_string(nam_bd) + "hk" + to_string(hk) + ".txt";
-		f.open(filePath, ios::in);
-		//da tao hk truoc do roi -> return;
-		if (f.is_open() && (f >> s) && (s != " "))
+		hockyP->headMon = NULL;
+		hockyP->tg.ngay_bd = ngBD;
+		hockyP->tg.ngay_kt = ngKT;
+		f.open(filePath, ios::out);
+		//ghi du lieu thoi gian vao file theo cau truc "ddmmyyyy,ddmmyyyy,\n"
+		//ghi ngay BD
+		if (ngBD.d < 10)
 		{
-			f.close();
-			cout << "Ban da tao hoc ky nay truoc do roi!!!\n";
-			system("pause");
-			return;
+			f << "0";//neu ngay <10 thi ghi them so 0 o truoc 
 		}
-		else
+		f << ngBD.d;
+		//ghi thang BD
+		if (ngBD.m < 10)
 		{
-			f.close();
-			hockyP->headMon = NULL;
-			hockyP->tg.ngay_bd = ngBD;
-			hockyP->tg.ngay_kt = ngKT;
-			f.open(filePath, ios::out);
-			//ghi du lieu thoi gian vao file theo cau truc "ddmmyyyy,ddmmyyyy,\n"
-			{
-				//ghi ngay BD
-				if (ngBD.d < 10)
-				{
-					f << "0";//neu ngay <10 thi ghi them so 0 o truoc 
-				}
-				f << ngBD.d;
-				//ghi thang BD
-				if (ngBD.m < 10)
-				{
-					f << "0";//neu ngay <10 thi ghi them so 0 o truoc 
-				}
-				f << ngBD.m;
-				//ghi nam BD
-				f << ngBD.y << ",";
-				//ghi ngay KT
-				if (ngKT.d < 10)
-				{
-					f << "0";//neu ngay <10 thi ghi them so 0 o truoc 
-				}
-				f << ngKT.d;
-				//ghi thang KT
-				if (ngKT.m < 10)
-				{
-					f << "0";//neu ngay <10 thi ghi them so 0 o truoc 
-				}
-				f << ngKT.m;
-				//ghi nam KT
-				f << ngKT.y << ",";
-			}
-			f.close();
-			cout << "Tao moi hoc ky thanh cong!\n";			
-			return;
+			f << "0";//neu ngay <10 thi ghi them so 0 o truoc 
 		}
+		f << ngBD.m;
+		//ghi nam BD
+		f << ngBD.y << ",";
+		//ghi ngay KT
+		if (ngKT.d < 10)
+		{
+			f << "0";//neu ngay <10 thi ghi them so 0 o truoc 
+		}
+		f << ngKT.d;
+		//ghi thang KT
+		if (ngKT.m < 10)
+		{
+			f << "0";//neu ngay <10 thi ghi them so 0 o truoc 
+		}
+		f << ngKT.m;
+		//ghi nam KT
+		f << ngKT.y << ",";
+		f.close();
+		setColor(background_color, title_color);
+		printA_Sentence("~ TAO MOI HOC KI THANH CONG ~", HEIGHT /2 - 1);
+		pause = _getch();
+		return;
 	}
 	//ko tao nam hoc tuong ung thi ko them hk vao 
 	else
 	{
-		cout << "Tao moi hoc ky khong thanh cong!\n";
+		setColor(background_color, red);
+		printA_Sentence("! TAO MOI HOC KI KHONG THANH CONG !", HEIGHT / 2 - 2);
+		setColor(background_color, text_color);
+		printA_Sentence("Ban chua tao nam hoc nen khong the tao hoc ki", HEIGHT / 2 );
+		pause = _getch();
 	}
 }
 
@@ -713,76 +803,40 @@ void XulyThu(int lc, BuoiHoc& bh)
 	}
 	}
 }
-void HienLuaChonThu(int buoi)
+int HienLuaChonThu(int line)
 {
-	cout << "\nBuoi " << buoi << ":\n";
-	cout << "1. Thu Hai \t 2. Thu Ba \t 3. Thu Tu\n";
-	cout << "4. Thu Nam \t 5. Thu Sau \t 6. Thu Bay\n";
+	string title_buoihoc[] = { "Thu Hai","Thu Ba","Thu Tu","Thu Nam","Thu Sau","Thu Bay" };
+	return LuaChon_Menu(6, title_buoihoc, 2, line);
 }
-void HienLuaChonGio()
+string HienLuaChonGio(int line)
 {
-	cout << "\nKhung gio:\n";
-	cout << "1. S1 (07:30)\t 2. S2 (09:30)\n";
-	cout << "3. S3 (13:30)\t 4. S4 (15:30)\n";
+	string title_gio[] = { "S1 (07:30)","S2 (09:30)","S3 (13:30)","S4 (15:30)" };
+	return 'S' + to_string(LuaChon_Menu(4, title_gio, 2, 12));
 }
 void NhapTgMon(NodeMon* n)
 {
-	do
-	{
-		cout << "Chon thoi gian cua hai buoi hoc trong tuan:\n";
-		for (int i = 1; i < 3; i++)
-		{
-			int lc;
-			HienLuaChonThu(i);
-			do
-			{
-				cout << "Nhap lua chon (1-6): ";
-				cin >> lc;
-				if (cin.fail())
-				{
-					cin.clear();
-					cin.ignore(100,'\n');
-					lc = 0;
-				}
-			} while (lc < 1 || lc>6);
-			if (i == 1)
-				XulyThu(lc, n->data.bh1);
-			else
-				XulyThu(lc, n->data.bh2);
-			HienLuaChonGio();
-			do
-			{
-				cout << "Nhap lua chon (1-4): ";
-				cin >> lc;
-				if (cin.fail())
-				{
-					cin.clear();
-					cin.ignore(100, '\n');
-					lc = 0;
-				}
-			}  while (lc < 1 || lc>4);
-			if (i == 1)
-			{
-				n->data.bh1.buoi = "S";
-				n->data.bh1.buoi += to_string(lc);
-			}
-			else 
-			{
-				n->data.bh2.buoi = "S";
-				n->data.bh2.buoi += to_string(lc);
-			}
-		}
-		if ((n->data.bh1.buoi == n->data.bh2.buoi) && (n->data.bh1.thu == n->data.bh2.thu))
-		{
-			cout << "Hai buoi hoc trung nhau!!! Vui long nhap lai!\n";
-		}
-		else
-			break;
-	} while (true);
+	printA_Sentence("- CHON BUOI HOC THU NHAT -", 8);
+	XulyThu(HienLuaChonThu(12), n->data.bh1);
+	system("cls");
+
+	setColor(background_color, title_color);
+	printA_Sentence("- CHON KHUNG GIO BUOI HOC THU NHAT -", 8);
+	n->data.bh1.buoi = HienLuaChonGio(12);
+
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("- CHON BUOI HOC THU HAI -", 8);
+	XulyThu(HienLuaChonThu(12), n->data.bh2);
+	system("cls");
+
+	setColor(background_color, title_color);
+	printA_Sentence("- CHON KHUNG GIO BUOI HOC THU HAI -", 8);
+	n->data.bh2.buoi = HienLuaChonGio(12);
+
 }
-bool checkTrungMon(HocKy* hk, NodeMon* n)
+bool checkTrungMon(NodeMon* head, NodeMon* n)
 {
-	NodeMon* t = hk->headMon;
+	NodeMon* t = head;
 	if (t == NULL)
 		return false;//ds trong
 	while (t)
@@ -799,42 +853,151 @@ bool checkTrungMon(HocKy* hk, NodeMon* n)
 	}
 	return false;
 }
-void NhapNodeMon(NodeMon* n)
+bool NhapNodeMon(NodeMon* n)
 {
+	system("cls");
+	int x = WIDTH / 3 + 5;
+	int y = whereY();
 	n->pNext = NULL;
-	cout << "\nNhap thong tin mon hoc:\n";
+	printA_Sentence("- NHAP THONG TIN MON HOC -", y);
+	y += 3;
+	setColor(background_color, title_color1);
+	gotoXY(x, y);
 	cout << "Ten mon: ";
-	cin.ignore();
-	getline(cin, n->data.tenMon);
+	string s;
+	char pause;
+	while (true)
+	{
+		gotoXY(x + 30,y);
+		cin.ignore();
+		getline(cin, s);
+		if (sizeof(s) == 0)
+		{
+			continue;
+		}
+		n->data.tenMon = s;
+		break;
+	}
+	y += 2;
+	gotoXY(x, y);
 	cout << "Ma mon hoc: ";
-	getline(cin, n->data.id);
+	while (true)
+	{
+		gotoXY(x + 30, y);
+		cin.ignore();
+		getline(cin, s);
+		if (sizeof(s) == 0)
+		{
+			continue;
+		}
+		n->data.id = s;
+		break;
+	}
+	y += 2;
+	gotoXY(x, y);
 	cout << "Ten giao vien giang day: ";
-	getline(cin, n->data.tenGv);
+	while (true)
+	{
+		gotoXY(x + 30, y);
+		cin.ignore();
+		getline(cin, s);
+		if (sizeof(s) == 0)
+		{
+			continue;
+		}
+		n->data.tenGv = s;
+		break;
+	}
+	y += 2;
+	x += 30;
+	gotoXY(x-30, y);
+	cout << "So tin chi: ";
+	char c;
+	s = "";
 	do
 	{
-		cout << "So tin chi: ";
-		cin >> n->data.so_tc;
-		if (cin.fail())
+		char c = _getch();
+		if (c == '\b')//nhan phim backspace 
 		{
-			cin.clear();
-			cin.ignore();
-			n->data.so_tc = 0;
+			if (s == "")
+			{
+				gotoXY(x, y);
+				continue;
+			}
+			gotoXY(whereX() - 1, y);
+			cout << " ";
+			gotoXY(whereX() - 1, y);//quay lai vi tri " "
+			s.pop_back();
 		}
-	} while (n->data.so_tc < 1);
+		else if (c == '\r' || c == '\n')
+		{
+			if (s == "")
+				continue;
+			if (stoi(s) == 0)
+			{
+				gotoXY(x, y);
+				cout << " ";
+				gotoXY(x, y);
+				continue;
+			}
+			n->data.so_tc = stoi(s);
+			break;
+		}
+		else if (c >= 48 && c <= 57)
+		{
+			s += c;
+			cout << c;
+		}
+	} while (true);
+	y += 2;
+	gotoXY(x-30, y);
+	cout << "So luong sinh vien toi da: ";
+	s = "";
 	do
 	{
-		cout << "So luong sinh vien toi da: ";
-		cin >> n->data.MaxSv;
-		if (cin.fail() || n->data.MaxSv < 0)
+		char c = _getch();
+		if (c == '\b')//nhan phim backspace 
 		{
-			cout << "Nhap sai kieu du lieu cho so luong sinh vien!\n";
-			cout << "Vui long nhap lai!\n";
-			cin.clear();
-			cin.ignore();
-			n->data.MaxSv = 0;
+			if (s == "")
+			{
+				gotoXY(x, y);
+				continue;
+			}
+			gotoXY(whereX() - 1, y);
+			cout << " ";
+			gotoXY(whereX() - 1, y);//quay lai vi tri " "
+			s.pop_back();
 		}
-	} while (n->data.MaxSv == 0);
+		else if (c == '\r' || c == '\n')
+		{
+			if (s == "")
+				continue;
+			if (stoi(s) == 0||stoi(s)>50)
+			{
+				gotoXY(x, y);
+				cout << "   ";
+				gotoXY(x, y);
+				continue;
+			}
+			n->data.MaxSv = stoi(s);
+			break;
+		}
+		else if (c >= 48 && c <= 57)
+		{
+			s += c;
+			cout << c;
+		}
+	} while (true);
+	system("cls");
 	NhapTgMon(n);
+	if ((n->data.bh1.buoi == n->data.bh2.buoi) && (n->data.bh1.thu == n->data.bh2.thu))
+	{
+		setColor(background_color, red);
+		printA_Sentence("! HAI BUOI HOC TRUNG NHAU... NHAP LAI !", HEIGHT - 4);
+		pause = _getch();
+		return false;
+	}
+	return true;
 }
 void TaoMon(ListNamHoc& l, int nam)
 {
@@ -842,51 +1005,129 @@ void TaoMon(ListNamHoc& l, int nam)
 	HocKy* hk = HkHienTai(l, NodeNamHienTai(l), i);
 	if (hk == NULL)
 		return;
-	cout << "TAO MOI MON HOC\n";
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO MOI MON HOC ~", 5);
 	NodeMon* head;
-	if (importFilehayNhapTay(1))
+	string title[2] = { "NHAP TAY","LAY TU FILE" };
+	int x = WIDTH / 3 + 5, y = 10;
+	char pause;
+	string file;
+	NodeMon* re = NULL;
+	setColor(background_color, title_color1);
+	printA_Sentence("Chon phuong thuc lay du lieu:", 10);
+	if (LuaChon_Menu(2,title,2,12)-1)
 	{
 		system("cls");
-		cout << "TAO MOI MON HOC\n\n";
-		string file;
+		setColor(background_color, title_color);
+		printA_Sentence("~ TAO MOI MON HOC ~", 5);
 		ifstream f;
-		do {
-			cout << "Nhap duong dan: " << endl;
-			getline(cin, file, '\n');
+		gotoXY(x, y);
+		setColor(background_color, text_color);
+		cout << "Nhap duong dan: " << endl;
+		while (true)
+		{
+			gotoXY(x + 19, y);
+			getline(cin, file,'\n');
+			if (sizeof(file) == 0)
+			{
+				cin.ignore();
+				continue;
+			}
 			f.open(file);
 			if (f.good())
 			{
 				f.close();
 				break;
 			}
-			cout << "Loi mo file!!!" << endl;
-			cout << "Ban co muon nhap duong dan file khac? Nhap 'Y' de tiep tuc: ";
-			char lenh;
-			cin >> lenh;
-			if (lenh != 'y' && lenh != 'Y')
+			setColor(background_color, red);
+			printA_Sentence("! KHONG THE MO FILE !", HEIGHT - 5);
+			pause = _getch();
+			system("cls");
+			if (!Ask_YN("Ban co muon nhap duong dan file khac ?"))
 			{
-				cin.clear();
-				cin.ignore(100, '\n');
-				cout << "Tao mon khong thanh cong!!!\n";
-				system("pause");
+				setColor(background_color, red);
+				printA_Sentence("! TAO MON KHONG THANH CONG !", HEIGHT /2 -1);
+				pause = _getch();
 				return;
 			}
-		} while (true);
-		mondangmo_docfile(file, nam, hk, i);
+		}
+		re=mondangmo_docfile(file, nam, i);
 	}
 	else
 	{
-		mondangmo_nhaptay(nam, hk, i);
+		re=mondangmo_nhaptay(nam, i);
 	}
+	if (re == NULL)
+	{
+		setColor(background_color, red);
+		printA_Sentence("! TAO MOI MON HOC THAT BAI !", HEIGHT - 5);
+		pause = _getch();
+		return;
+	}
+	//in ra ds mon
+	viewDsMonHk(re, i);
+	setColor(background_color, title_color1);
+	printA_Sentence("            - DANH SACH MON VUA DUOC NHAP -              ", 3);
+	printA_Sentence("                                                      ", 2);
+	pause = _getch();
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO MOI MON HOC ~", 5);
+	setColor(background_color, title_color1);
+	printA_Sentence("Luu y: Cac mon hoc trong danh sach truoc, neu da duoc tao thi se bi bo qua", HEIGHT - 4);
+	if (!Ask_YN("Ban that su muon tao moi nhung mon hoc nay?"))
+	{
+		system("cls");
+		setColor(background_color, red);
+		printA_Sentence("! TAO MOI MON HOC THAT BAI !", HEIGHT / 2 - 1);
+		pause = _getch();
+		return;
+	}
+	printA_Sentence("                                                                                     ", HEIGHT - 4);
+	NodeMon* n = re;
+	while (n != NULL)
+	{
+		if (checkTrungMon(hk->headMon, n))
+		{
+			n = n->pNext;
+			continue;
+		}
+		//ghi vao file hk htai moi nhat 
+		string fPath = to_string(nam) + "hk" + to_string(i) + ".txt";
+		fstream f;
+		f.open(fPath, ios::in | ios::app);
+		f << endl;
+		f << n->data.id << "," << n->data.tenMon << "," << n->data.tenGv << ",";
+		f << n->data.so_tc << ",";
+		f << n->data.bh1.thu << "," << n->data.bh1.buoi << ",";
+		f << n->data.bh2.thu << "," << n->data.bh2.buoi << ",";
+		f << n->data.MaxSv << ",";
+		f.close();
+		f.open(to_string(nam) + "hk" + to_string(i) + n->data.id + ".txt", ios::out);
+		f.close();
+		n = n->pNext;
+	}
+	n = re;
+	while (n->pNext != NULL)
+		n = n->pNext;
+	n->pNext = hk->headMon;
+	hk->headMon = re;
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO MOI MON HOC THANH CONG ~", HEIGHT / 2);
+	setColor(background_color, title_color1);
+	printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
+	pause = _getch();
 };
-void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk)//file nay chi co ds mon khong co tg bd
+NodeMon* mondangmo_docfile(string file, int nam, int stt_hk)//file nay chi co ds mon khong co tg bd
 {
+	NodeMon* head = NULL;
 	ifstream f;
 	f.open(file);
+	char pause;
 	if (!f.is_open())
 	{
-		cout << "Loi: Khong the mo file!" << endl;
-		return;
+		return NULL;
 	}
 	string s;
 	while (!f.eof())
@@ -894,8 +1135,8 @@ void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk)//file nay ch
 		getline(f, s, ',');
 		if (s == "" || s == "\n")
 		{
-			cout << "Da den cuoi file!!!\n";
-			return;
+			//cout << "Da den cuoi file!!!\n";
+			return head;
 		}
 		NodeMon* n = new NodeMon;
 		n->data.id = s;
@@ -913,99 +1154,93 @@ void mondangmo_docfile(string file, int nam, HocKy* hk, int stt_hk)//file nay ch
 			n->data.MaxSv = stoi(s);
 			if (!f.good())
 			{
-				throw "Loi lay du lieu tu file!!!\n";
+				//throw "Loi lay du lieu tu file!!!\n";
+				throw 0;
 			}
 			getline(f, s);//xoa "\n" ra khoi f
 			f.clear();
 		}
-		catch (const char* error)
+		catch (int error)
 		{
-			cerr << error;
-			cout << "\nTao moi mon hoc that bai!!!\n";
-			system("pause");
-			return;
+			system("cls");
+			setColor(background_color, red);
+			printA_Sentence("! TAO MOI MON HOC THAT BAI !", HEIGHT / 2 - 2);
+			setColor(background_color, text_color);
+			printA_Sentence("Khong lay duoc du lieu tu file", HEIGHT / 2 );
+			pause = _getch();
+			return NULL;
 		}
 		n->pNext = NULL;
 		n->headSvMon = NULL;
-		if (checkTrungMon(hk, n))
-		{
-			cout << "Ban da tao mon hoc nay truoc do roi!\n";
-			system("pause");
-			return;
-		}
-		ThemNodeMon(hk->headMon, n);//them vao list mon cua hoc ky? A ko phai node hk , can ktra n co trung mon hay ko?
-		//ghi vao file hk htai moi nhat 
-		string fPath = to_string(nam) + "hk" + to_string(stt_hk) + ".txt";
-		fstream f;
-		f.open(fPath, ios::in | ios::app);
-		f << endl;
-		f << n->data.id << "," << n->data.tenMon << "," << n->data.tenGv << ",";
-		f << n->data.so_tc << ",";
-		f << n->data.bh1.thu << "," << n->data.bh1.buoi << ",";
-		f << n->data.bh2.thu << "," << n->data.bh2.buoi << ",";
-		f << n->data.MaxSv<<",";
-		if (f.good())
-		{
-			cout << "\nTao moi mon hoc "<<n->data.id<<" vua nhap thanh cong!\n";
-		}
-		f.close();
-		f.open(to_string(nam) + "hk" + to_string(stt_hk) + n->data.id + ".txt", ios::out);
-		f.close();
-		cout << "Ban da co the mo dang ky ghi danh vao mon hoc nay!\n";
-		system("pause");
+		ThemNodeMon(head, n);
 	}
 }
-void mondangmo_nhaptay(int nam, HocKy* hk, int stt_hk)
+NodeMon* mondangmo_nhaptay(int nam, int stt_hk)
 {
+	NodeMon* head = NULL;
 	system("cls");
-	cout << "TAO MOI MON HOC" << endl << endl;
-	cout << "Nhap so mon hoc muon tao:" << endl;
-	int somon = 0;
-	while (true)
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO MOI MON HOC ~", 5);
+	gotoXY(WIDTH / 3 + 5, 10);
+	cout << "Nhap so mon hoc muon tao: ";
+	setColor(background_color, title_color1);
+	int x = whereX() +5;
+	int y = whereY();
+	char c;
+	string temp;
+	gotoXY(x, y);
+	setColor(background_color, text_color);
+	do
 	{
-		cout << "Moi nhap: " << endl;
-		cin >> somon;
-		if (cin.fail())
+		char c = _getch();
+		if (c == '\b')//nhan phim backspace 
 		{
-			cin.clear();
-			cin.ignore(100, '\n');
-			continue;
+			if (temp == "")
+			{
+				gotoXY(x, y);
+				continue;
+			}
+			gotoXY(whereX() - 1, y);
+			cout << " ";
+			gotoXY(whereX() - 1, y);//quay lai vi tri " "
+			temp.pop_back();
 		}
-		if (somon > 0)
+		else if (c == '\r' || c == '\n')
+		{
+			if (temp == "")
+				continue;
 			break;
-	}
+		}
+		else if (c >= 48 && c <= 57)
+		{
+			temp += c;
+			cout << c;
+		}
+	} while (true);
+	int somon = stoi(temp);
+	system("cls");
+	char pause;
 	for (int i = 0; i < somon; i++)
 	{
 		NodeMon* n = new NodeMon;
-		cout << endl << "--Mon hoc " << i + 1 << endl;
-		NhapNodeMon(n);
-		if (checkTrungMon(hk, n))
+		//cout << endl << "Mon hoc " << i + 1 << endl;
+		cin.ignore();
+		if (!NhapNodeMon(n))
 		{
-			cout << "Ban da tao mon hoc nay truoc do roi!\n";
+			i--;
 			continue;
 		}
-		ThemNodeMon(hk->headMon, n);
-		//ghi vao file hk htai moi nhat 
-		string fPath = to_string(nam) + "hk" + to_string(stt_hk) + ".txt";
-		fstream f;
-		f.open(fPath, ios::in | ios::app);
-		f << endl;
-		f << n->data.id << "," << n->data.tenMon << "," << n->data.tenGv << ",";
-		f << n->data.so_tc << ",";
-		f << n->data.bh1.thu << "," << n->data.bh1.buoi << ",";
-		f << n->data.bh2.thu << "," << n->data.bh2.buoi << ",";
-		f << n->data.MaxSv << ",";
-		if (f.good())
+		if (checkTrungMon(head, n))
 		{
-			cout << "Tao moi mon hoc thanh cong!\n";
+			setColor(background_color, red);
+			printA_Sentence("         ! MON HOC DA DUOC TAO !         ", HEIGHT-3);			
+			pause = _getch();
+			continue;
 		}
-		f.close();
-		//tao file de ghi dssv mon
-		f.open(to_string(nam) + "hk" + to_string(stt_hk) + n->data.id + ".txt", ios::out);
-		f.close();
-		cout << "Ban da co the mo dang ky ghi danh vao mon hoc nay!\n";
-		system("pause");
+		ThemNodeMon(head, n);
 	}
+	pause = _getch();
+	return head;
 }
 
 
@@ -2112,26 +2347,39 @@ void LuuMonHoc(ListNamHoc& l, NodeMon* node_mon, bool remove)
 }
 void CapNhatMonHoc(ListNamHoc& l)
 {
-	cout << "-------------------CAP NHAT MON HOC-------------------\n";
-	NodeMon* node_mon = NhapMonHoc(l);
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ CAP NHAT MON HOC ~", 5);
+	NodeMon* node_mon = timNodeMon_CapNhat(l);
+	//NodeMon* node_mon = NhapMonHoc(l);
 	if (node_mon == NULL)
 	{
+		//cout that bai
 		system("pause");
 		return;
 	}
 	MonHoc& mon = node_mon->data;
 	string input;
+	setColor(background_color, title_color1);
+	printA_Sentence("Nhap thong tin moi. De trong va nhan enter de giu nguyen", 8);
+	setColor(background_color, text_color);
+	int  x = WIDTH / 3 + 5;
+	int y = 10;
+	char pause;
 
-	cout << "Nhap thong tin moi. De trong va nhan enter de giu nguyen.\n";
-
+	gotoXY(x, y);
 	cout << "Ten mon (" << mon.tenMon << "): ";
 	getline(cin, input);
 	if (!input.empty()) mon.tenMon = input;
 
+	y += 2;
+	gotoXY(x, y);
 	cout << "Ten giao vien (" << mon.tenGv << "): ";
 	getline(cin, input);
 	if (!input.empty()) mon.tenGv = input;
 
+	y += 2;
+	gotoXY(x, y);
 	cout << "So tin chi (" << mon.so_tc << "): ";
 	getline(cin, input);
 	try
@@ -2140,6 +2388,8 @@ void CapNhatMonHoc(ListNamHoc& l)
 	}
 	catch (invalid_argument) {}
 
+	y += 2;
+	gotoXY(x, y);
 	cout << "So sinh vien toi da (" << mon.MaxSv << "): ";
 	getline(cin, input);
 	try
@@ -2149,59 +2399,62 @@ void CapNhatMonHoc(ListNamHoc& l)
 	catch (invalid_argument) {}
 	do
 	{
-		for (int i = 1; i < 3; i++)
-		{
-			string lc;
-			HienLuaChonThu(i);
-			do
-			{
-				if(i==1)
-					cout << "Nhap lua chon [1-6] ("<<mon.bh1.thu<<"): ";
-				else
-					cout << "Nhap lua chon [1-6] (" << mon.bh2.thu << "): ";
-				getline(cin, lc);
-				if (lc == "")
-					break;//ko doi buoi hoc!
-				else if(stoi(lc) > 0 && stoi(lc) < 7)
-				{
-					if (i == 1)
-						XulyThu(stoi(lc), mon.bh1);
-					else
-						XulyThu(stoi(lc), mon.bh2);
-					break;
-				}
-			} while (true);
-			lc = "";
-			HienLuaChonGio();
-			do
-			{
-				if (i == 1)
-					cout << "Nhap lua chon [1-4] (" << mon.bh1.buoi << "): ";
-				else
-					cout << "Nhap lua chon [1-4] (" << mon.bh2.buoi << "): ";
-				getline(cin, lc);
-				if (lc == "")
-					break;//ko nhap thi tiep tuc
-				else if(stoi(lc) > 0 && stoi(lc) < 5)
-				{
-					if (i == 1)
-					{
-						mon.bh1.buoi = "S";
-						mon.bh1.buoi += lc;
-					}
-					else
-					{
-						mon.bh2.buoi = "S";
-						mon.bh2.buoi += lc;
-					}
-					break;
-				}
-			} while (true);
+		NhapTgMon(node_mon);
+		//for (int i = 1; i < 3; i++)
+		//{
+		//	string lc;
+		//	HienLuaChonThu(i);
+		//	do
+		//	{
+		//		if(i==1)
+		//			cout << "Nhap lua chon [1-6] ("<<mon.bh1.thu<<"): ";
+		//		else
+		//			cout << "Nhap lua chon [1-6] (" << mon.bh2.thu << "): ";
+		//		getline(cin, lc);
+		//		if (lc == "")
+		//			break;//ko doi buoi hoc!
+		//		else if(stoi(lc) > 0 && stoi(lc) < 7)
+		//		{
+		//			if (i == 1)
+		//				XulyThu(stoi(lc), mon.bh1);
+		//			else
+		//				XulyThu(stoi(lc), mon.bh2);
+		//			break;
+		//		}
+		//	} while (true);
+		//	lc = "";
+		//	HienLuaChonGio();
+		//	do
+		//	{
+		//		if (i == 1)
+		//			cout << "Nhap lua chon [1-4] (" << mon.bh1.buoi << "): ";
+		//		else
+		//			cout << "Nhap lua chon [1-4] (" << mon.bh2.buoi << "): ";
+		//		getline(cin, lc);
+		//		if (lc == "")
+		//			break;//ko nhap thi tiep tuc
+		//		else if(stoi(lc) > 0 && stoi(lc) < 5)
+		//		{
+		//			if (i == 1)
+		//			{
+		//				mon.bh1.buoi = "S";
+		//				mon.bh1.buoi += lc;
+		//			}
+		//			else
+		//			{
+		//				mon.bh2.buoi = "S";
+		//				mon.bh2.buoi += lc;
+		//			}
+		//			break;
+		//		}
+		//	} while (true);
 			
-		}
+		//}
 		if ((mon.bh1.buoi == mon.bh2.buoi) && (mon.bh1.thu == mon.bh2.thu))
 		{
-			cout << "Hai buoi hoc trung nhau!!! Vui long nhap lai!\n";
+			setColor(background_color, red);
+			printA_Sentence("! HAI BUOI HOC TRUNG NHAU... NHAP LAI !", HEIGHT - 4);
+			pause = _getch();
 		}
 		else
 		{
@@ -2239,6 +2492,36 @@ void XoaMonHoc(ListNamHoc& l)
 	*p = next;
 }
 
+NodeMon* timNodeMon_CapNhat(ListNamHoc l)
+{
+	int lc = LuaChon_HienThi(whereY(), viewDsNam(l));
+	if (lc == -1 || lc == 0)
+	{
+		//quay lai man hinh chinh
+		return NULL;
+	}
+	NodeNamHoc* temp = l.pHead;
+	for (int i = 1; i < lc; i++)
+		temp = temp->pNext;
+	system("cls");
+	int ki = chonKi("Chon hoc ki:");
+	int c = viewDsMonHk(temp->data.hk[ki-1].headMon, lc);
+	if (c == 0)
+	{
+		end(lc);
+		return NULL;
+	}
+	lc = LuaChon_HienThi(whereY(), c);
+	if (lc == 0)
+		return NULL;
+	else if (lc == -1)
+		return timNodeMon_CapNhat(l);
+	NodeMon* temp1 = temp->data.hk[ki - 1].headMon;
+	for (int i = 1; i < lc; i++)
+		temp1 = temp1->pNext;
+	return temp1;
+}
+
 
 //HIEN THI
 void hienthiNam(ListNamHoc l, int& lc)
@@ -2266,7 +2549,7 @@ int chonSt_Year()
 {
 	system("cls");
 	setColor(background_color, title_color1);
-	printA_Sentence("Ban muon xem lop cua hoc sinh nam may?", HEIGHT / 2 - 10);
+	printA_Sentence("Ban muon chon lop cua hoc sinh nam may?", HEIGHT / 2 - 10);
 	string title[] = { "NAM 1","NAM 2","NAM 3","NAM 4"};
 	return LuaChon_Menu(4, title, 2, HEIGHT / 2-7);
 }
