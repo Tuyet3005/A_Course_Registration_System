@@ -1,4 +1,5 @@
 #include"staff.h"
+
 //GIAO VU
 int InMenuGv()
 {
@@ -190,40 +191,59 @@ NodeNamHoc* TaoNodeNam()
 	NodeNamHoc* n = new NodeNamHoc;
 	int nam_bd;
 	fstream f;
+	string temp;
+	char c;
 	f.open("listnam.txt", ios::in | ios::app);
+	int x = whereX();
+	int y = whereY();
+	setColor(background_color, title_color1);
+	cout << "Nhap nam bat dau nam hoc: ";
+	setColor(background_color, text_color);
 	do
 	{
-		cout << "Nhap nam bat dau nam hoc: ";
-		cin >> nam_bd;
-		if (cin.fail())
+		char c = _getch();
+		if (c == '\b')//nhan phim backspace 
 		{
-			cin.clear();
-			cin.ignore();
-			nam_bd = -1;
-		}
-		if (nam_bd < NHhientai_nambd())
-		{
-			cout << "Ban co chac muon tao mot nam hoc cu da qua? Y/N?\n";
-			char lenh;
-			cin >> lenh;
-			if (lenh == 'Y' || lenh == 'y')
+			if (temp == "")
 			{
-				break;
+				gotoXY(x, y);
+				continue;
 			}
-			else
-				return NULL;
+			gotoXY(whereX() - 1, y);
+			cout << " ";
+			gotoXY(whereX() - 1, y);//quay lai vi tri " "
+			temp.pop_back();
 		}
-	} while (nam_bd < NHhientai_nambd());
-	string temp = "";
+		else if (c == '\r' || c == '\n')
+		{
+			if (stoi(temp) < NHhientai_nambd())
+			{
+				system("cls");
+				if (Ask_YN("Ban co chac muon tao mot nam hoc cu da qua?"))
+					break;
+				else
+					return NULL;
+			}
+			break;
+		}
+		else if (c >= 48 && c <= 57)
+		{
+			temp += c;
+			cout << c;
+		}
+	} while (true);
+	string s = "";
+	nam_bd = stoi(temp);
 	while (!f.eof())//ktra lo nhap nam trung voi nam da tao!!!!
 	{
 		f.clear();
-		getline(f, temp, ',');
-		if (temp != "")//file da chua du lieu
+		getline(f, s, ',');
+		if (s != "")//file da chua du lieu
 		{
-			if (stoi(temp) == nam_bd)
+			if (stoi(s) == nam_bd)
 			{
-				cout << "Nam hoc da duoc tao truoc do!!!" << endl << endl;
+				setColor(background_color, red);
+				printA_Sentence("! NAM HOC DA DUOC TAO TRUOC DO !", HEIGHT - 5);
 				return NULL;
 			}
 		}
@@ -236,6 +256,7 @@ NodeNamHoc* TaoNodeNam()
 	f.close();
 	n->pNext = NULL;
 	return n;
+	}
 }
 void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n)
 {
@@ -274,7 +295,8 @@ int HienNamHoc(ListNamHoc l)
 }
 void TaoNam(ListNamHoc& l)
   {
-	cout << "--------TAO MOI MOT NAM HOC--------\n";
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO MOI MOT NAM HOC ~", 5);
 	NodeNamHoc* n = TaoNodeNam();
 	ThemNodeNamHoc(l, n);
 	if (n) 
