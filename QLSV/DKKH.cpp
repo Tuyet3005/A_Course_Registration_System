@@ -112,7 +112,6 @@ void xoaLC(int dem, int mon, int ki, NodeSv_Lop* A, NodeMon* head)
 	{
 		A->headMon[ki - 1] = temp2->pNext;
 		delMon_sv = temp2;
-		dem--;
 	}
 	else
 	{
@@ -237,7 +236,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 	int dem = 0;
 	NodeMon** keep;
 	int nkeep = 0;
-	if (A != NULL)//da dk
+	if (A->headMon[ki-1] != NULL)//da dk
 	{
 		NodeMon_Sv* t = A->headMon[ki - 1];
 		while (t != NULL)
@@ -262,17 +261,18 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 		gotoXY(x, y);
 		if (_kbhit())
 		{
+			cin.clear();
 			temp = _getch();
-			s += temp;
 			if (temp == 13)//enter
 			{
-				if (s != "\r")
+				if (s != "")
 				{
 					key = stoi(s);
 					if (key == 0 || key > mon)// ko co stt trong ds
 					{
 						cout << endl;
 						cout << "STT khong ton tai... Hay nhap lai !" << endl;
+						system("pause");
 						y += 2;
 						x = 0;
 					}
@@ -292,6 +292,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 							s = "";
 							continue;
 						}
+						system("pause");
 						s = "";
 					}
 				}
@@ -321,6 +322,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 				if (dem == 0)
 				{
 					cout << "Ban chua dang ky mon hoc nao!" << endl;
+					system("pause");
 					continue;
 				}
 				cout << "~ Ban chac chan muon xoa tat ca cac mon da dang ki? Y/N?" << endl;
@@ -340,6 +342,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 				continue;
 			else
 			{
+				s += temp;
 				cout << temp;
 				x++;
 				continue;
@@ -365,9 +368,9 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 	while (pMon_Sv)
 	{
 		flag = false;//reuse
-		for (int i = 0; i < nkeep; i++)
+		for (int i = 0; i < nkeep; i++)//ss mon nay dc dk trc do chua
 		{
-			if (pMon_Sv->mon == keep[i])
+			if (pMon_Sv->mon == keep[i])//vi cac mon duoc them se nam o DAU
 			{
 				flagkeep[i] = true;
 				flag = true;
@@ -377,7 +380,9 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 		if (!flag)//ghi tt sv vao mon do vo file
 		{
 			f.open(to_string(nam) + "hk" + to_string(ki) + pMon_Sv->mon->data.id + ".txt", ios::app);
-			f << A->sv.id << ',' << lop << ",C," << endl;
+			if (pMon_Sv->mon->headSvMon->pNext)
+				f << endl;
+			f << A->sv.id << ',' << lop << ",C,";
 			f.close();
 		}
 		pMon_Sv = pMon_Sv->pNext;
@@ -424,18 +429,21 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 	{
 		system("cls");
 		viewDsMonHk(head, ki);
-		return;
 	}
-	if (cobuoiDKKH(tg, tmBD, tmKT))
-	{
-		runDKKH_Sv(A, ki, head);
+	else {
+		if (cobuoiDKKH(tg, tmBD, tmKT))
+		{
+			runDKKH_Sv(A, ki, head);
+		}
+		else
+		{
+			system("cls");
+			printA_Sentence("Hien khong co buoi DKKH nao...", HEIGHT / 2 - 2);
+		}
 	}
-	else
-	{
-		system("cls");
-		printA_Sentence("Hien khong co buoi DKKH nao...", HEIGHT / 2 - 2);
-		cout << endl << endl;
-	}	
+	setColor(background_color, title_color1);
+	printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
+	char pause = _getch();
 }
 
 
@@ -670,14 +678,15 @@ bool askforsure(ThoiGian& tg, Time& tmBD, Time& tmKT, int ki)
 	setColor(background_color, title_color);
 	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 5);
 	setColor(background_color, title_color1);
-	printA_Sentence("Ban da tao buoi dang ki khoa hoc ki " + ki, 7);
-	gotoXY(WIDTH / 3, 9);
+	printA_Sentence("Ban da tao buoi dang ki khoa hoc ki " + to_string(ki), 10);
+	setColor(background_color, text_color);
+	gotoXY(WIDTH / 3, 13);
 	cout << "--BAT DAU vao luc  :  " << tmBD.gio << "h" << tmBD.phut << "ph";
-	gotoXY(WIDTH*4 / 7, 9);
+	gotoXY(WIDTH*4 / 7, 13);
 	cout << "Ngay " << tg.ngay_bd.d << '/' << tg.ngay_bd.m << '/' << tg.ngay_bd.y;
-	gotoXY(WIDTH / 3, 11);
+	gotoXY(WIDTH / 3, 15);
 	cout << "--KET THUC vao luc  :  " << tmKT.gio << "h" << tmKT.phut << "ph";
-	gotoXY(WIDTH*4 / 7, 11);
+	gotoXY(WIDTH*4 / 7, 15);
 	cout << "Ngay " << tg.ngay_kt.d << '/' << tg.ngay_kt.m << '/' << tg.ngay_kt.y;
 	return Ask_YN("Ban chac chan muon tao buoi DKKH nay ?");
 }
