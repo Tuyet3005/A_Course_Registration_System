@@ -1855,7 +1855,7 @@ void CapNhatDiemSv(ListNamHoc& l)
 	int nam_sv = -1;
 	while (nam_sv < 1 || nam_sv > 4)
 	{
-		cout << "\nNhap nam (sv nam 1, nam 2, ...): ";
+		cout << "\nNhap nam (1, 2, 3, 4): ";
 		cin >> nam_sv;
 		if (cin.fail())
 		{
@@ -1907,7 +1907,7 @@ void CapNhatDiemSv(ListNamHoc& l)
 	int hoc_ky = -1;
 	while (hoc_ky < 1 || hoc_ky > 3)
 	{
-		cout << "Nhap hoc ky (1 <= HK <= 3): ";
+		cout << "Nhap hoc ky (1, 2, 3): ";
 		cin >> hoc_ky;
 		cin.ignore();
 	}
@@ -1947,7 +1947,7 @@ void CapNhatDiemSv(ListNamHoc& l)
 	}
 
 	Diem& diem = node_sv_mon->diem;
-	string input = "-1";
+	string input;
 
 	cout << "Diem giua ky (" << diem.gk << "): ";
 	getline(cin, input);
@@ -2105,7 +2105,7 @@ void CapNhatMonHoc(ListNamHoc& l)
 	MonHoc& mon = node_mon->data;
 	string input;
 
-	cout << "Nhap thong tin moi. De trong va nhan enter de giu nguyen.\n";
+	cout << "Nhap thong tin moi. De trong de giu nguyen.\n";
 
 	cout << "Ten mon (" << mon.tenMon << "): ";
 	getline(cin, input);
@@ -2184,7 +2184,7 @@ void CapNhatMonHoc(ListNamHoc& l)
 		}
 		if ((mon.bh1.buoi == mon.bh2.buoi) && (mon.bh1.thu == mon.bh2.thu))
 		{
-			cout << "Hai buoi hoc trung nhau!!! Vui long nhap lai!\n";
+			cout << "Hai buoi hoc trung nhau! Vui long nhap lai!\n";
 		}
 		else
 		{
@@ -2203,7 +2203,7 @@ void XoaMonHoc(ListNamHoc& l)
 
 	while (so_hoc_ky < 1 || so_hoc_ky > 3)
 	{
-		cout << "Nhap hoc ky (1 <= HK <= 3): ";
+		cout << "Nhap hoc ky (1, 2, 3): ";
 		cin >> so_hoc_ky;
 		cin.ignore();
 	}
