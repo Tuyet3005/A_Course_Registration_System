@@ -1,5 +1,2 @@
 28072021,31072021,
 VTP,Vi Tich Phan,Le Van Chanh,2,Thu Hai,S1,Thu Tu,S3,45,
-DSTT,Dai So Tuyen Tinh,Le Van Hop,2,Thu Ba,S2,Thu Bay,S4,50,
-ttHCM,Tu Tuong HCM,Nguyen Dung,1,Thu Nam,S1,Thu Hai,S1,38,
-TD,The Duc,Le Van Hien,2,Thu Tu,S3,Thu Tu,S4,35,
