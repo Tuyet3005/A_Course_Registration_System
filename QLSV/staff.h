@@ -50,31 +50,23 @@ void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv);
 void ThemSvLop_tay(NodeLop* nodeLop);
 void ThemSvLop_file(NodeLop* nodeLop);
 void ThemSvLopNam1(ListNamHoc& l);
-//nhap -> tim -> sua 
-NodeNamHoc* ChonNamHoc(ListNamHoc l, int nam_hoc);
-NodeNamHoc* NhapNamHoc(ListNamHoc l);
-HocKy* NhapHocKy(NodeNamHoc* node_nam);
-HocKy* TimHocKy(ListNamHoc l);
 //sua info mon
-NodeMon* ChonMonHoc(HocKy* hk, string id_mon_hoc);
-void HienThiDSMon(NodeMon*& head_mon);
-NodeMon* NhapMonHoc(HocKy* hoc_ky);
-NodeMon* NhapMonHoc(ListNamHoc l);
 void GhiFileMon(string filename, NodeMon* mon, bool remove);
-void LuuMonHoc(ListNamHoc& l, NodeMon* node_mon, bool remove = false);
 void CapNhatMonHoc(ListNamHoc& l);
+NodeMon* timNodeMon_CapNhat(ListNamHoc& l, int& nam, int& ki, NodeMon*& headmonHK);
 //xoa mon
 void XoaMonHoc(ListNamHoc& l);
+//xoa mon ra khoi ds mon cua sv (neu co sv dang ky)
+bool XoaMon_sv(ListNamHoc& l, NodeMon*& headmonHK, NodeMon* mon, int nam, int ki);
 //diem 
-void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
-bool DocDiemTuFile(string file, NodeMon* mon, int siso);
-void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
-void CapNhatDiemSv(ListNamHoc& l);
-float NhapDiem(float diem);
-void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon);
-void HienThiDSLop(NodeLop* head_lop);
-void HienThiDSSv(NodeSv_Lop* head_sv_lop);
-NodeMon* timNodeMon_CapNhat(ListNamHoc l);
+//void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
+//bool DocDiemTuFile(string file, NodeMon* mon, int siso);
+//void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
+//void CapNhatDiemSv(ListNamHoc& l);
+//float NhapDiem(float diem);
+//void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon);
+//void HienThiDSLop(NodeLop* head_lop);
+//void HienThiDSSv(NodeSv_Lop* head_sv_lop);
 
 //HIENTHI
 //neu chua co du lieu
