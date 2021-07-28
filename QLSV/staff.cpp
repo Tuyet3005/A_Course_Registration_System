@@ -85,7 +85,7 @@ void ThongbaoCautrucFile(bool chon)//import file dssv lop || file thong tin mon
 		cout << "Thong tin moi sinh vien can nam rieng tren mot dong va theo cau truc nhu sau:";
 		y++;
 		gotoXY(x, y);
-		cout << "<mssv,stt,ten,ho,gioi tinh,ngay sinh,cccd/cmnd,> (vd:  <19120789,04,Tram,Nguyen Ai,Nu,07052001,111111111,> ).";
+		cout << "<mssv,stt,ten,ho,gioi tinh,ngay sinh,cccd/cmnd,> (vd:  <19120789,4,Tram,Nguyen Ai,Nu,07052001,111111111,> ).";
 		Sleep(200);
 		y += 2;
 		gotoXY(x, y);
@@ -183,7 +183,6 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 	case 5:
 	{
 		taoDKKH_Gv(NodeNamHienTai(l));
-		//system("pause");
 		break;
 	}
 	case 6:
@@ -440,7 +439,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		trungTen = false;
 		gotoXY(x, y);
 		string ten;
-		cout << "Nhap ten lop " << i << ": ";
+		cout << "Nhap ten lop " << i + 1 << ": ";
 		while (true)
 		{
 			gotoXY(x + 19, y);
@@ -450,7 +449,8 @@ void TaoLopNamNhat(NodeNamHoc* node)
 				cin.ignore();
 				continue;
 			}
-			if ((int)ten[0] * 10 + (int)ten[1] - 480 - 48 == nam)
+			//kiem tra chi dung doi voi cac nh 2000~ 
+			if (stoi(ten.substr(0,2)) != nam % 2000)
 			{
 				setColor(background_color, red);
 				printA_Sentence("! TEN LOP KHONG HOP LE !", y + 3);
@@ -836,6 +836,7 @@ string HienLuaChonGio(int line)
 }
 void NhapTgMon(NodeMon* n)
 {
+	system("cls");
 	printA_Sentence("- CHON BUOI HOC THU NHAT -", 8);
 	XulyThu(HienLuaChonThu(12), n->data.bh1);
 	system("cls");
@@ -1015,14 +1016,17 @@ bool NhapNodeMon(NodeMon* n)
 			cout << c;
 		}
 	} while (true);
-	system("cls");
-	NhapTgMon(n);
-	if ((n->data.bh1.buoi == n->data.bh2.buoi) && (n->data.bh1.thu == n->data.bh2.thu))
+	while (true)
 	{
-		setColor(background_color, red);
-		printA_Sentence("! HAI BUOI HOC TRUNG NHAU... NHAP LAI !", HEIGHT - 4);
-		pause = _getch();
-		return false;
+		NhapTgMon(n);
+		if ((n->data.bh1.buoi == n->data.bh2.buoi) && (n->data.bh1.thu == n->data.bh2.thu))
+		{
+			setColor(background_color, red);
+			printA_Sentence("! HAI BUOI HOC TRUNG NHAU... NHAP LAI !", HEIGHT - 4);
+			pause = _getch();
+			continue;
+		}
+		break;
 	}
 	return true;
 }
@@ -1097,6 +1101,8 @@ void TaoMon(ListNamHoc& l, int nam)
 	setColor(background_color, title_color1);
 	printA_Sentence("            - DANH SACH MON VUA DUOC NHAP -              ", 3);
 	printA_Sentence("                                                      ", 2);
+	setColor(background_color, title_color1);
+	printA_Sentence("Nhan phim bat ki de tiep tuc -->", HEIGHT - 5);
 	pause = _getch();
 	system("cls");
 	setColor(background_color, title_color);
@@ -1331,54 +1337,54 @@ bool XlCapNhat2(ListNamHoc& l, int chon)
 	return false;//ngoai tru quay ve va thoat
 	}
 }
-bool XlCapNhat3(ListNamHoc& l, int chon)
-{
-	switch (chon)
-	{
-	case 1:
-	{
-		system("cls");
-		NodeNamHoc* nodeNam = NodeNamHienTai(l);
-		int stt_hk = 0;
-		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
-		XuatFileCsv(nodeNam, hk, stt_hk);
-		system("pause");
-		break;
-	}
-	case 2:
-	{
-		system("cls");
-		NodeNamHoc* nodeNam = NodeNamHienTai(l);
-		int stt_hk = 0;
-		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
-		NhapDiemTuFile(nodeNam, hk, stt_hk);
-		system("pause");
-		break;
-	}
-	case 3:
-	{
-		system("cls");
-		CapNhatDiemSv(l);
-		system("pause");
-		break;
-	}
-	case 4:
-	{
-		return true;
-	}
-	case 5:
-	{
-		system("cls");
-		background_Gv();
-		if (Ask_YN("Ban thuc su muon THOAT?"))
-		{
-			gotoXY(0, HEIGHT - 4);
-			exit(0);
-		}
-	}
-	return false;//ngoai tru quay ve va thoat
-	}
-}
+//bool XlCapNhat3(ListNamHoc& l, int chon)
+//{
+//	switch (chon)
+//	{
+//	case 1:
+//	{
+//		system("cls");
+//		NodeNamHoc* nodeNam = NodeNamHienTai(l);
+//		int stt_hk = 0;
+//		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
+//		XuatFileCsv(nodeNam, hk, stt_hk);
+//		system("pause");
+//		break;
+//	}
+//	case 2:
+//	{
+//		system("cls");
+//		NodeNamHoc* nodeNam = NodeNamHienTai(l);
+//		int stt_hk = 0;
+//		HocKy* hk = HkHienTai(l, nodeNam, stt_hk);
+//		NhapDiemTuFile(nodeNam, hk, stt_hk);
+//		system("pause");
+//		break;
+//	}
+//	case 3:
+//	{
+//		system("cls");
+//		//CapNhatDiemSv(l);
+//		system("pause");
+//		break;
+//	}
+//	case 4:
+//	{
+//		return true;
+//	}
+//	case 5:
+//	{
+//		system("cls");
+//		background_Gv();
+//		if (Ask_YN("Ban thuc su muon THOAT?"))
+//		{
+//			gotoXY(0, HEIGHT - 4);
+//			exit(0);
+//		}
+//	}
+//	return false;//ngoai tru quay ve va thoat
+//	}
+//}
 bool XlCapNhat(int chon, ListNamHoc& l)
 {
 	switch (chon)
@@ -1402,12 +1408,12 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	case 3:
 	{
 		//cap nhat diem sinh vien 
-		bool Thoat = false;
+		/*bool Thoat = false;
 		do
 		{
 			Thoat = XlCapNhat3(l, InMenuCapNhat3());
 		} while (!Thoat);
-		break;
+		break;*/
 	}
 	case 4:
 	{
@@ -1425,58 +1431,6 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 	}
 	}
 	return false;//ngoai tru lenh quay ve va thoat + chon y/Y
-}
-
-NodeNamHoc* ChonNamHoc(ListNamHoc l, int nam_hoc)
-{
-	NodeNamHoc* nam = l.pHead;
-	while (nam != NULL)
-	{
-		if (nam->data.tg.ngay_bd.y == nam_hoc)
-		{
-			return nam;
-		}
-		nam = nam->pNext;
-	}
-	return NULL;
-}
-NodeNamHoc* NhapNamHoc(ListNamHoc l)
-{
-	int nam_hoc;
-	NodeNamHoc* nam;
-
-	while (true)
-	{
-		cout << "Nhap nam bat dau cua nam hoc: ";
-		cin >> nam_hoc;
-		cin.ignore();
-		nam = ChonNamHoc(l, nam_hoc);
-		if (nam != NULL)
-		{
-			return nam;
-		}
-		else
-		{
-			cout << "Nhap sai nam bat dau cua nam hoc!\n";
-		}
-	}
-}
-HocKy* NhapHocKy(NodeNamHoc* node_nam)
-{
-	int so_hoc_ky = -1;
-	HocKy* hoc_ky;
-
-	while (so_hoc_ky < 1 || so_hoc_ky > 3)
-	{
-		cout << "Nhap hoc ky (1 <= HK <= 3): ";
-		cin >> so_hoc_ky;
-		cin.ignore();
-	}
-	return &node_nam->data.hk[so_hoc_ky - 1];
-}
-HocKy* TimHocKy(ListNamHoc l)
-{
-	return NhapHocKy(NhapNamHoc(l));
 }
 
 //them sv 
@@ -1581,8 +1535,11 @@ void NhapThongtinSv(NodeSv_Lop* n, int i)
 	}
 	cin.ignore();
 	cout << "CMND/CCCD: \n";
-	cin >> n->sv.cmnd;
-
+	char* temp = new char[13];  //toi da 12 ki tu + '\0'
+	cin.getline(temp, 13);
+	int size = strlen(temp) + 1;
+	n->sv.cmnd = new char[size];
+	strcpy_s(n->sv.cmnd, size, temp);
 }
 void GhiThongtinSv(NodeLop* nodeLop, NodeSv_Lop* n)//sau khi dien thong tin sv => check trung => ghi vao file
 {
@@ -2046,7 +2003,6 @@ void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk)
 		temp = temp->pNext;
 	}
 }
-
 string NextLine(string& data)
 {
 	size_t pos = data.find('\n');
@@ -2055,263 +2011,213 @@ string NextLine(string& data)
 	return line;
 }
 
-//sua diem
-float NhapDiem(float diem)
-{
-	while (diem < 0 || diem > 10)
-	{
-		cout << "0 <= diem <= 10. Nhap diem: ";
-		cin >> diem;
-		cin.ignore();
-	}
-	return diem;
-}
-void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon)
-{
-	fstream file(filename, ios::in);
-	string data = "", line;
-	while (!file.eof())
-	{
-		getline(file, line);
-		if (line.empty())
-			break;
-		data += line + '\n';
-	}
-	data = data.substr(0, data.length() - 1);
-	file.close();
-
-	file.open(filename, ios::out);
-	bool success = false, wrote = false;
-
-	while (!data.empty())
-	{
-		if (wrote)
-			file << '\n';
-		line = NextLine(data);
-
-		if (line.find(to_string(node_sv_mon->mssv) + "," + node_sv_mon->lop + ",") == 0)
-		{
-			file << node_sv_mon->mssv << ',' << node_sv_mon->lop << ',' << "R" << ','
-				<< node_sv_mon->diem.gk << ','
-				<< node_sv_mon->diem.ck << ','
-				<< node_sv_mon->diem.gk << ','
-				<< node_sv_mon->diem.tongket << ',';
-			success = true;
-		}
-		else
-		{
-			file << line;
-		}
-	}
-	if (!success)
-		file << node_sv_mon->mssv << ',' << node_sv_mon->lop << ',' << "R" << ','
-		<< node_sv_mon->diem.gk << ','
-		<< node_sv_mon->diem.ck << ','
-		<< node_sv_mon->diem.gk << ','
-		<< node_sv_mon->diem.tongket << ',';
-	file.close();
-	cout << "Luu diem thanh cong!!!\n";
-}
-void HienThiDSLop(NodeLop* head_lop)
-{
-	cout << "\nDanh sach lop:\n";
-	for (NodeLop* node_lop = head_lop; node_lop != NULL; node_lop = node_lop->pNext)
-	{
-		cout << "Lop: " << node_lop->lop.ten << '\n';
-	}
-}
-void HienThiDSSv(NodeSv_Lop* head_sv_lop)
-{
-	cout << "\nDanh sach SV:\n";
-	for (NodeSv_Lop* node_sv_lop = head_sv_lop; node_sv_lop != NULL; node_sv_lop = node_sv_lop->pNext)
-	{
-		cout << "MSSV: " << node_sv_lop->sv.id << ", Ten: " << node_sv_lop->sv.ten << ", CMND: " << node_sv_lop->sv.cmnd << '\n';
-	}
-}
-void CapNhatDiemSv(ListNamHoc& l)
-{
-	cout << "--------------------CAP NHAT DIEM SINH VIEN--------------------\n";
-	NodeNamHoc* node_nam = NhapNamHoc(l);
-	int nam_hoc = node_nam->data.tg.ngay_bd.y;
-	int nam_sv = -1;
-	while (nam_sv < 1 || nam_sv > 4)
-	{
-		cout << "\nNhap nam (sv nam 1, nam 2, ...): ";
-		cin >> nam_sv;
-		if (cin.fail())
-		{
-			cin.clear();
-		}
-		cin.ignore();
-	}
-
-	NodeLop* head_lop = node_nam->data.headLop[nam_sv - 1];
-	NodeLop* node_lop;
-	string ten_lop;
-	while (true)
-	{
-		HienThiDSLop(head_lop);
-		cout << "Ten lop: ";
-		getline(cin, ten_lop);
-
-		for (node_lop = head_lop; node_lop != NULL; node_lop = node_lop->pNext)
-		{
-			if (node_lop->lop.ten == ten_lop)
-			{
-				break;
-			}
-		}
-		// Thu lai
-		if (node_lop == NULL)
-			continue;
-		break;
-	}
-
-	NodeSv_Lop* node_sv_lop;
-	int mssv;
-	while (true)
-	{
-		HienThiDSSv(node_lop->lop.headSvLop);
-		cout << "Nhap MSSV: ";
-		cin >> mssv;
-		cin.ignore();
-
-		for (node_sv_lop = node_lop->lop.headSvLop; node_sv_lop != NULL; node_sv_lop = node_sv_lop->pNext)
-		{
-			if (node_sv_lop->sv.id == mssv)
-				break;
-		}
-		if (node_sv_lop != NULL)
-			break;
-	}
-
-	int hoc_ky = -1;
-	while (hoc_ky < 1 || hoc_ky > 3)
-	{
-		cout << "Nhap hoc ky (1 <= HK <= 3): ";
-		cin >> hoc_ky;
-		cin.ignore();
-	}
-
-	NodeMon_Sv*& head_mon_sv = node_sv_lop->headMon[hoc_ky - 1];
-	NodeMon_Sv* node_mon_sv;
-	string id_mon;
-	while (true)
-	{
-		HienThiDSMon(head_mon_sv->mon);
-		cout << "Nhap ID mon: ";
-		getline(cin, id_mon);
-		for (node_mon_sv = head_mon_sv; node_mon_sv != NULL; node_mon_sv = node_mon_sv->pNext)
-		{
-			if (node_mon_sv->mon->data.id == id_mon)
-				break;
-		}
-		if (node_mon_sv != NULL)
-			break;
-	}
-
-	NodeSv_Mon* node_sv_mon;
-	for (node_sv_mon = node_mon_sv->mon->headSvMon; node_sv_mon != NULL; node_sv_mon = node_sv_mon->pNext)
-	{
-		if (node_sv_mon->mssv == mssv && node_sv_mon->lop == ten_lop)
-			break;
-	}
-	if (node_sv_mon == NULL)
-	{
-		// Tao NodeSv_Mon moi neu can
-		node_sv_mon = new NodeSv_Mon;
-		node_sv_mon->mssv = mssv;
-		node_sv_mon->lop = ten_lop;
-		node_sv_mon->pNext = node_mon_sv->mon->headSvMon;
-		node_mon_sv->mon->headSvMon = node_sv_mon;
-		ThemNodeMon_Sv(node_mon_sv, node_mon_sv->mon, node_sv_mon);
-	}
-
-	Diem& diem = node_sv_mon->diem;
-	string input = "-1";
-
-	cout << "Diem giua ky (" << diem.gk << "): ";
-	getline(cin, input);
-	try
-	{
-		diem.gk = NhapDiem(stof(input));
-	}
-	catch (invalid_argument) {}
-
-	cout << "Diem cuoi ky (" << diem.ck << "): ";
-	getline(cin, input);
-	try
-	{
-		diem.ck = NhapDiem(stof(input));
-	}
-	catch (invalid_argument) {}
-
-	cout << "Diem cong (" << diem.cong << "): ";
-	getline(cin, input);
-	try
-	{
-		diem.cong = NhapDiem(stof(input));
-	}
-	catch (invalid_argument) {}
-
-	diem.tongket = min((diem.gk + diem.ck * 2.0) / 3 + diem.cong / 10, 10.0);
-
-	string filename = to_string(nam_hoc) + "hk" + to_string(hoc_ky) + id_mon + ".txt";
-	LuuDiemSv(filename, node_sv_mon);
-}
+////sua diem
+//float NhapDiem(float diem)
+//{
+//	while (diem < 0 || diem > 10)
+//	{
+//		cout << "0 <= diem <= 10. Nhap diem: ";
+//		cin >> diem;
+//		cin.ignore();
+//	}
+//	return diem;
+//}
+//void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon)
+//{
+//	fstream file(filename, ios::in);
+//	string data = "", line;
+//	while (!file.eof())
+//	{
+//		getline(file, line);
+//		if (line.empty())
+//			break;
+//		data += line + '\n';
+//	}
+//	data = data.substr(0, data.length() - 1);
+//	file.close();
+//
+//	file.open(filename, ios::out);
+//	bool success = false, wrote = false;
+//
+//	while (!data.empty())
+//	{
+//		if (wrote)
+//			file << '\n';
+//		line = NextLine(data);
+//
+//		if (line.find(to_string(node_sv_mon->mssv) + "," + node_sv_mon->lop + ",") == 0)
+//		{
+//			file << node_sv_mon->mssv << ',' << node_sv_mon->lop << ',' << "R" << ','
+//				<< node_sv_mon->diem.gk << ','
+//				<< node_sv_mon->diem.ck << ','
+//				<< node_sv_mon->diem.gk << ','
+//				<< node_sv_mon->diem.tongket << ',';
+//			success = true;
+//		}
+//		else
+//		{
+//			file << line;
+//		}
+//	}
+//	if (!success)
+//		file << node_sv_mon->mssv << ',' << node_sv_mon->lop << ',' << "R" << ','
+//		<< node_sv_mon->diem.gk << ','
+//		<< node_sv_mon->diem.ck << ','
+//		<< node_sv_mon->diem.gk << ','
+//		<< node_sv_mon->diem.tongket << ',';
+//	file.close();
+//	cout << "Luu diem thanh cong!!!\n";
+//}
+//void HienThiDSLop(NodeLop* head_lop)
+//{
+//	cout << "\nDanh sach lop:\n";
+//	for (NodeLop* node_lop = head_lop; node_lop != NULL; node_lop = node_lop->pNext)
+//	{
+//		cout << "Lop: " << node_lop->lop.ten << '\n';
+//	}
+//}
+//void HienThiDSSv(NodeSv_Lop* head_sv_lop)
+//{
+//	cout << "\nDanh sach SV:\n";
+//	for (NodeSv_Lop* node_sv_lop = head_sv_lop; node_sv_lop != NULL; node_sv_lop = node_sv_lop->pNext)
+//	{
+//		cout << "MSSV: " << node_sv_lop->sv.id << ", Ten: " << node_sv_lop->sv.ten << ", CMND: " << node_sv_lop->sv.cmnd << '\n';
+//	}
+//}
+//void CapNhatDiemSv(ListNamHoc& l)
+//{
+//	cout << "--------------------CAP NHAT DIEM SINH VIEN--------------------\n";
+//	NodeNamHoc* node_nam = NhapNamHoc(l);
+//	int nam_hoc = node_nam->data.tg.ngay_bd.y;
+//	int nam_sv = -1;
+//	while (nam_sv < 1 || nam_sv > 4)
+//	{
+//		cout << "\nNhap nam (sv nam 1, nam 2, ...): ";
+//		cin >> nam_sv;
+//		if (cin.fail())
+//		{
+//			cin.clear();
+//		}
+//		cin.ignore();
+//	}
+//
+//	NodeLop* head_lop = node_nam->data.headLop[nam_sv - 1];
+//	NodeLop* node_lop;
+//	string ten_lop;
+//	while (true)
+//	{
+//		HienThiDSLop(head_lop);
+//		cout << "Ten lop: ";
+//		getline(cin, ten_lop);
+//
+//		for (node_lop = head_lop; node_lop != NULL; node_lop = node_lop->pNext)
+//		{
+//			if (node_lop->lop.ten == ten_lop)
+//			{
+//				break;
+//			}
+//		}
+//		// Thu lai
+//		if (node_lop == NULL)
+//			continue;
+//		break;
+//	}
+//
+//	NodeSv_Lop* node_sv_lop;
+//	int mssv;
+//	while (true)
+//	{
+//		HienThiDSSv(node_lop->lop.headSvLop);
+//		cout << "Nhap MSSV: ";
+//		cin >> mssv;
+//		cin.ignore();
+//
+//		for (node_sv_lop = node_lop->lop.headSvLop; node_sv_lop != NULL; node_sv_lop = node_sv_lop->pNext)
+//		{
+//			if (node_sv_lop->sv.id == mssv)
+//				break;
+//		}
+//		if (node_sv_lop != NULL)
+//			break;
+//	}
+//
+//	int hoc_ky = -1;
+//	while (hoc_ky < 1 || hoc_ky > 3)
+//	{
+//		cout << "Nhap hoc ky (1 <= HK <= 3): ";
+//		cin >> hoc_ky;
+//		cin.ignore();
+//	}
+//
+//	NodeMon_Sv*& head_mon_sv = node_sv_lop->headMon[hoc_ky - 1];
+//	NodeMon_Sv* node_mon_sv;
+//	string id_mon;
+//	while (true)
+//	{
+//		HienThiDSMon(head_mon_sv->mon);
+//		cout << "Nhap ID mon: ";
+//		getline(cin, id_mon);
+//		for (node_mon_sv = head_mon_sv; node_mon_sv != NULL; node_mon_sv = node_mon_sv->pNext)
+//		{
+//			if (node_mon_sv->mon->data.id == id_mon)
+//				break;
+//		}
+//		if (node_mon_sv != NULL)
+//			break;
+//	}
+//
+//	NodeSv_Mon* node_sv_mon;
+//	for (node_sv_mon = node_mon_sv->mon->headSvMon; node_sv_mon != NULL; node_sv_mon = node_sv_mon->pNext)
+//	{
+//		if (node_sv_mon->mssv == mssv && node_sv_mon->lop == ten_lop)
+//			break;
+//	}
+//	if (node_sv_mon == NULL)
+//	{
+//		// Tao NodeSv_Mon moi neu can
+//		node_sv_mon = new NodeSv_Mon;
+//		node_sv_mon->mssv = mssv;
+//		node_sv_mon->lop = ten_lop;
+//		node_sv_mon->pNext = node_mon_sv->mon->headSvMon;
+//		node_mon_sv->mon->headSvMon = node_sv_mon;
+//		ThemNodeMon_Sv(node_mon_sv, node_mon_sv->mon, node_sv_mon);
+//	}
+//
+//	Diem& diem = node_sv_mon->diem;
+//	string input = "-1";
+//
+//	cout << "Diem giua ky (" << diem.gk << "): ";
+//	getline(cin, input);
+//	try
+//	{
+//		diem.gk = NhapDiem(stof(input));
+//	}
+//	catch (invalid_argument) {}
+//
+//	cout << "Diem cuoi ky (" << diem.ck << "): ";
+//	getline(cin, input);
+//	try
+//	{
+//		diem.ck = NhapDiem(stof(input));
+//	}
+//	catch (invalid_argument) {}
+//
+//	cout << "Diem cong (" << diem.cong << "): ";
+//	getline(cin, input);
+//	try
+//	{
+//		diem.cong = NhapDiem(stof(input));
+//	}
+//	catch (invalid_argument) {}
+//
+//	diem.tongket = min((diem.gk + diem.ck * 2.0) / 3 + diem.cong / 10, 10.0);
+//
+//	string filename = to_string(nam_hoc) + "hk" + to_string(hoc_ky) + id_mon + ".txt";
+//	LuuDiemSv(filename, node_sv_mon);
+//}
 
 //sua, xoa mon
-NodeMon* ChonMonHoc(HocKy* hk, string id_mon_hoc)
-{
-	NodeMon* mon_hoc = hk->headMon;
-	while (mon_hoc != NULL)
-	{
-		if (mon_hoc->data.id == id_mon_hoc)
-		{
-			return mon_hoc;
-		}
-		mon_hoc = mon_hoc->pNext;
-	}
-	return NULL;
-}
-void HienThiDSMon(NodeMon*& head_mon)
-{
-	cout << "\nDanh sach mon hoc:\n";
-	for (NodeMon* node_mon = head_mon; node_mon != NULL; node_mon = node_mon->pNext)
-	{
-		cout << "ID: " << node_mon->data.id << ", Ten: " << node_mon->data.tenMon << ", Ten GV: " << node_mon->data.tenGv << '\n';
-	}
-}
-NodeMon* NhapMonHoc(HocKy* hoc_ky)
-{
-	string id_mon_hoc;
-	NodeMon* mon = NULL;
-
-	while (true)
-	{
-		if (hoc_ky->headMon == NULL)
-			return NULL;
-		HienThiDSMon(hoc_ky->headMon);
-		cout << "Nhap ID mon hoc: ";
-		getline(cin, id_mon_hoc);
-		mon = ChonMonHoc(hoc_ky, id_mon_hoc);
-		if (mon != NULL)
-		{
-			return mon;
-		}
-		else
-		{
-			cout << "Nhap sai ID mon hoc.\n";
-			return NULL;
-		}
-	}
-}
-NodeMon* NhapMonHoc(ListNamHoc l)
-{
-	return NhapMonHoc(TimHocKy(l));
-}
-// Luu mon hoc vao file tuong ung
-void GhiFileMon(string filename, NodeMon* mon, bool remove)
+void GhiFileMon(string filename, NodeMon* mon, bool remove)//remove: xoa, !remove: sua info
 {
 	fstream file(filename, ios::in);
 	string data, line;
@@ -2334,7 +2240,6 @@ void GhiFileMon(string filename, NodeMon* mon, bool remove)
 		{
 			if (remove)
 			{
-				cout << "Xoa mon hoc thanh cong!!!\n";
 				success = true;
 			}
 			else
@@ -2343,7 +2248,8 @@ void GhiFileMon(string filename, NodeMon* mon, bool remove)
 					<< mon->data.bh1.thu << ',' << mon->data.bh1.buoi << ','
 					<< mon->data.bh2.thu << ',' << mon->data.bh2.buoi << ','
 					<< mon->data.MaxSv << ',';
-				cout << "Luu mon hoc thanh cong!!!\n";
+				setColor(background_color, title_color1);
+				printA_Sentence("~ CAP NHAT MON HOC THANH CONG ~", HEIGHT - 10);
 				success = true;
 			}
 		}
@@ -2353,42 +2259,34 @@ void GhiFileMon(string filename, NodeMon* mon, bool remove)
 		}
 	}
 	if (!success)
-		cout << "Khong the tim thay mon hoc " << mon->data.id << " - " << mon->data.tenMon << "!!!\n";
-	file.close();
-}
-// Tim va luu vao file tuong ung
-void LuuMonHoc(ListNamHoc& l, NodeMon* node_mon, bool remove)
-{
-	for (NodeNamHoc* nam = l.pHead; nam != NULL; nam = nam->pNext)
 	{
-		for (int stt_hoc_ky = 0; stt_hoc_ky <= 2; stt_hoc_ky++)
-		{
-			HocKy hoc_ky = nam->data.hk[stt_hoc_ky];
-			for (NodeMon* mon = hoc_ky.headMon; mon != NULL; mon = mon->pNext)
-			{
-				if (mon == node_mon)
-				{
-					GhiFileMon(to_string(nam->data.tg.ngay_bd.y) + "hk" + to_string(stt_hoc_ky + 1) + ".txt", node_mon, remove);
-				}
-			}
-		}
+		setColor(background_color, red);
+		gotoXY(WIDTH / 3 + 15, 65);
+		cout << "Khong the tim thay mon hoc " << mon->data.id << " - " << mon->data.tenMon << "!!!\n";
+		setColor(background_color, title_color1);
+		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
+		_getch();
 	}
+	file.close();
 }
 void CapNhatMonHoc(ListNamHoc& l)
 {
 	system("cls");
 	setColor(background_color, title_color);
 	printA_Sentence("~ CAP NHAT MON HOC ~", 5);
-	NodeMon* node_mon = timNodeMon_CapNhat(l);
-	//NodeMon* node_mon = NhapMonHoc(l);
+	int nam, stt_hk;
+	NodeMon* node_mon = NULL;
+	node_mon = timNodeMon_CapNhat(l, nam, stt_hk, node_mon);//cap nhat ko can dung node HeadmonHk, chi gan vao cho du tham so
 	if (node_mon == NULL)
 	{
-		//cout that bai
-		system("pause");
+		char 	pause = _getch();
 		return;
 	}
 	MonHoc& mon = node_mon->data;
 	string input;
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ CAP NHAT MON HOC ~", 5);
 	setColor(background_color, title_color1);
 	printA_Sentence("Nhap thong tin moi. De trong va nhan enter de giu nguyen", 8);
 	setColor(background_color, text_color);
@@ -2428,57 +2326,8 @@ void CapNhatMonHoc(ListNamHoc& l)
 	catch (invalid_argument) {}
 	do
 	{
+		system("cls");
 		NhapTgMon(node_mon);
-		//for (int i = 1; i < 3; i++)
-		//{
-		//	string lc;
-		//	HienLuaChonThu(i);
-		//	do
-		//	{
-		//		if(i==1)
-		//			cout << "Nhap lua chon [1-6] ("<<mon.bh1.thu<<"): ";
-		//		else
-		//			cout << "Nhap lua chon [1-6] (" << mon.bh2.thu << "): ";
-		//		getline(cin, lc);
-		//		if (lc == "")
-		//			break;//ko doi buoi hoc!
-		//		else if(stoi(lc) > 0 && stoi(lc) < 7)
-		//		{
-		//			if (i == 1)
-		//				XulyThu(stoi(lc), mon.bh1);
-		//			else
-		//				XulyThu(stoi(lc), mon.bh2);
-		//			break;
-		//		}
-		//	} while (true);
-		//	lc = "";
-		//	HienLuaChonGio();
-		//	do
-		//	{
-		//		if (i == 1)
-		//			cout << "Nhap lua chon [1-4] (" << mon.bh1.buoi << "): ";
-		//		else
-		//			cout << "Nhap lua chon [1-4] (" << mon.bh2.buoi << "): ";
-		//		getline(cin, lc);
-		//		if (lc == "")
-		//			break;//ko nhap thi tiep tuc
-		//		else if(stoi(lc) > 0 && stoi(lc) < 5)
-		//		{
-		//			if (i == 1)
-		//			{
-		//				mon.bh1.buoi = "S";
-		//				mon.bh1.buoi += lc;
-		//			}
-		//			else
-		//			{
-		//				mon.bh2.buoi = "S";
-		//				mon.bh2.buoi += lc;
-		//			}
-		//			break;
-		//		}
-		//	} while (true);
-
-		//}
 		if ((mon.bh1.buoi == mon.bh2.buoi) && (mon.bh1.thu == mon.bh2.thu))
 		{
 			setColor(background_color, red);
@@ -2487,7 +2336,8 @@ void CapNhatMonHoc(ListNamHoc& l)
 		}
 		else
 		{
-			LuuMonHoc(l, node_mon);
+			bool remove = false;//sua mon hoc 
+			GhiFileMon(to_string(nam) + "hk" + to_string(stt_hk) + ".txt", node_mon, remove);
 			break;
 		}
 	} while (true);
@@ -2495,33 +2345,66 @@ void CapNhatMonHoc(ListNamHoc& l)
 void XoaMonHoc(ListNamHoc& l)
 {
 	system("cls");
-	cout << "--------------------XOA MON HOC-------------------------\n";
-	NodeNamHoc* node_nam = NhapNamHoc(l);
-	int so_hoc_ky = -1;
-	HocKy* hoc_ky;
-
-	while (so_hoc_ky < 1 || so_hoc_ky > 3)
+	setColor(background_color, title_color);
+	printA_Sentence("~ XOA MON HOC ~", 5);
+	bool xoa = true;//xoa mon hoc
+	int nam, stt_hk;
+	NodeMon* headmonHK = NULL;
+	NodeMon* node_mon = timNodeMon_CapNhat(l, nam, stt_hk, headmonHK);
+	if (node_mon == NULL)
 	{
-		cout << "Nhap hoc ky (1 <= HK <= 3): ";
-		cin >> so_hoc_ky;
-		cin.ignore();
+		char 	pause = _getch();
+		return;
 	}
-	hoc_ky = &node_nam->data.hk[so_hoc_ky - 1];
-
-	NodeMon* node_mon = NhapMonHoc(hoc_ky);
-	LuuMonHoc(l, node_mon, true);
-	string filename = to_string(node_nam->data.tg.ngay_bd.y) + "hk" + to_string(so_hoc_ky) + node_mon->data.id + ".txt";
-	remove(filename.c_str());
-
+	system("cls");
+	if (!Ask_YN("Ban co chac chan muon xoa mon " + node_mon->data.id + "?"))
+	{
+		setColor(background_color, title_color1);
+		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
+		_getch();
+		return;
+	}
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ XOA MON HOC ~", 5);
+	//xoa mon ra khoi ds mon cua sv
+	if (node_mon->headSvMon != NULL && !XoaMon_sv(l, headmonHK, node_mon, nam, stt_hk))
+	{
+		setColor(background_color, red);
+		printA_Sentence("XOA MON " + node_mon->data.id + " THAT BAI!!!", HEIGHT - 10);
+		setColor(background_color, title_color1);
+		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
+		_getch();
+		return;
+	}
+	//sua thong tin mon hoc trong file truoc
+	GhiFileMon(to_string(nam) + "hk" + to_string(stt_hk) + ".txt", node_mon, xoa);
+	//xoa file dssv
+	string filename = to_string(nam) + "hk" + to_string(stt_hk) + node_mon->data.id + ".txt";
+	ifstream f(filename);
+	if (f.is_open())
+	{
+		f.close();
+		remove(filename.c_str());
+	}
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ XOA MON HOC ~", 5);
+	//xoa mon ra khoi ds mon cua hk
 	NodeMon* next = node_mon->pNext;
 	NodeMon** p;
-	for (p = &hoc_ky->headMon; *p != node_mon; p = &(*p)->pNext);
+	for (p = &headmonHK; *p != node_mon; p = &(*p)->pNext);
 	(*p)->pNext = NULL;
 	delete* p;
 	*p = next;
+	viewDsMonHk(headmonHK, stt_hk);
+	setColor(background_color, title_color1);
+	printA_Sentence("~ XOA MON HOC THANH CONG ~", HEIGHT - 10);
+	setColor(background_color, title_color1);
+	printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
+	_getch();
 }
-
-NodeMon* timNodeMon_CapNhat(ListNamHoc l)
+NodeMon* timNodeMon_CapNhat(ListNamHoc& l,int& nam, int& ki, NodeMon*& headmonHK)
 {
 	int lc = LuaChon_HienThi(whereY(), viewDsNam(l));
 	if (lc == -1 || lc == 0)
@@ -2529,12 +2412,13 @@ NodeMon* timNodeMon_CapNhat(ListNamHoc l)
 		//quay lai man hinh chinh
 		return NULL;
 	}
-	NodeNamHoc* temp = l.pHead;
+	NodeNamHoc* nodeNam = l.pHead;
 	for (int i = 1; i < lc; i++)
-		temp = temp->pNext;
+		nodeNam = nodeNam->pNext;
+	nam = nodeNam->data.tg.ngay_bd.y;
 	system("cls");
-	int ki = chonKi("Chon hoc ki:");
-	int c = viewDsMonHk(temp->data.hk[ki - 1].headMon, lc);
+	ki = chonKi("Chon hoc ki:");
+	int c = viewDsMonHk(nodeNam->data.hk[ki - 1].headMon, lc);
 	if (c == 0)
 	{
 		end(lc);
@@ -2544,14 +2428,65 @@ NodeMon* timNodeMon_CapNhat(ListNamHoc l)
 	if (lc == 0)
 		return NULL;
 	else if (lc == -1)
-		return timNodeMon_CapNhat(l);
-	NodeMon* temp1 = temp->data.hk[ki - 1].headMon;
+		return timNodeMon_CapNhat(l, nam, ki, headmonHK);  // headmonHK la node tra ve
+	headmonHK = nodeNam->data.hk[ki - 1].headMon;
+	NodeMon* temp1 = headmonHK;
 	for (int i = 1; i < lc; i++)
 		temp1 = temp1->pNext;
 	return temp1;
 }
-
-
+bool XoaMon_sv(ListNamHoc& l, NodeMon*& headmonHK, NodeMon* mon, int nam, int ki)
+{
+	NodeNamHoc* nodeNam = NodeNamHienTai(l);
+	if (mon->headSvMon)
+	{
+		system("cls");
+		setColor(background_color, title_color1);
+		gotoXY(0, 10);
+		if (Ask_YN("Mon nay da duoc mo cho sinh vien dang ky! Ban that su muon xoa?"))
+		{
+			//duyet dssv cua mon hoc
+			NodeSv_Mon* temp = mon->headSvMon;
+			while (temp)
+			{
+				//tim node lop cua sv
+				int year = nam % 2000 - stoi(temp->lop.substr(0, 2)) + 1;//sv nam 1 2 3 4
+				NodeLop* nodeLop = timNodeLop(nodeNam, year, temp->lop);
+				//tim node sv lop 
+				NodeSv_Lop* nodeSv = timNodeSv_Lop(nodeLop->lop.headSvLop, temp->mssv);
+				NodeMon_Sv* monSv = nodeSv->headMon[ki - 1];
+				//duyet tim de xoa mon ra khoi ds mon cua sv 
+				if (nodeSv->headMon[ki - 1]->svMon == temp)
+				{
+					nodeSv->headMon[ki - 1] = monSv->pNext;
+					delete monSv;
+				}
+				else
+				{
+					while (monSv->pNext)
+					{
+						if (monSv->pNext->svMon == temp)
+						{
+							NodeMon_Sv* del = monSv->pNext;
+							monSv->pNext = del->pNext;
+							delete del;
+							break; 
+						}
+						else
+							monSv = monSv->pNext;
+					}
+				}
+				//giai phong vung nho dssv mon 
+				NodeSv_Mon* del = temp;
+				temp = temp->pNext;
+				delete del;
+			}
+			return true;			
+		}
+		return false;
+	}
+	return true;
+}
 //HIEN THI
 void hienthiNam(ListNamHoc l, int& lc)
 {

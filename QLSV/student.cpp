@@ -95,13 +95,11 @@ bool XlMenuSv(int chon, ListNamHoc& l, NodeSv_Lop* A)
 	case 2:
 	{
 		DKKH_Sv(NodeNamHienTai(l),A, 0);
-		system("pause");
 		break;
 	}
 	case 3:
 	{
 		DKKH_Sv(NodeNamHienTai(l), A, 1);
-		system("pause");
 		break;
 	}
 	case 4:

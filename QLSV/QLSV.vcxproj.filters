@@ -85,5 +85,8 @@
     <Text Include="2020hk1.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="DKKH.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

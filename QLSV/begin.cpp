@@ -145,6 +145,7 @@ NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 			int size = s.length() + 1;
 			T.cmnd = new char[size];
 			strcpy_s(T.cmnd, size, s.c_str());
+			getline(f, s);
 			NodeSv_Lop* temp = TaoNodeSv(T);
 			ThemNodeSvLop(headSvLop, temp);
 			temp->headMon[0] = temp->headMon[1] = temp->headMon[2] = NULL;

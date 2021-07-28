@@ -13,9 +13,14 @@ void readFileDKKH(ThoiGian& tg, Time& tmBD, Time& tmKT, int& ki)
 	fin.open("DKKH.txt", ios::in | ios::app);
 	string s;
 	//ngaybd
-	getline(fin, s);
-	if (s == "")//file trong
-		throw - 1;
+	if (!fin.eof())
+	{
+		getline(fin, s);
+		if (s == "")//file trong
+		{
+			throw - 1;
+		}
+	}
 	fin.seekg(0);
 	getline(fin, s, ',');
 	tg.ngay_bd.d = stoi(s);
@@ -441,8 +446,8 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 			printA_Sentence("Hien khong co buoi DKKH nao...", HEIGHT / 2 - 2);
 		}
 	}
-	setColor(background_color, title_color1);
-	printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
+	setColor(background_color, title_color);
+	printA_Sentence("Ket qua dang ky cua ban da duoc luu lai!", HEIGHT - 5);
 	char pause = _getch();
 }
 
@@ -537,7 +542,14 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	Time tmBD, tmKT;
 	tmBD.giay = tmKT.giay = 0;
 	int File_Ki;
-	readFileDKKH(tg, tmBD, tmKT, File_Ki);
+	try
+	{
+		readFileDKKH(tg, tmBD, tmKT, File_Ki);
+	}
+	catch (int)
+	{
+		//ok (ko xoa dong nay nha)
+	}
 	if (File_Ki == ki)
 	{
 		setColor(background_color, red);
