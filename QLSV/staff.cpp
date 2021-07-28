@@ -247,7 +247,7 @@ NodeNamHoc* TaoNodeNam()
 					return NULL;
 			}
 			break;
-		}
+    }
 		else if (c >= 48 && c <= 57)
 		{
 			temp += c;
@@ -2477,7 +2477,6 @@ void CapNhatMonHoc(ListNamHoc& l)
 		//			break;
 		//		}
 		//	} while (true);
-
 		//}
 		if ((mon.bh1.buoi == mon.bh2.buoi) && (mon.bh1.thu == mon.bh2.thu))
 		{
