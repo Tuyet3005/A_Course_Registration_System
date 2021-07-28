@@ -48,7 +48,7 @@ void drawTable(int Row, int Col, int posCol[], int posRow)//posRow la hang bat d
 			for (int t = 0; t < posCol[j + 1] - posCol[j] - 1; t++) cout << char(196);
 			cout << char(b);
 		}
-		for (int t = 0; t < posCol[Col] - posCol[Col-1] - 1; t++) cout << char(196);
+		for (int t = 0; t < posCol[Col] - posCol[Col - 1] - 1; t++) cout << char(196);
 		cout << char(c);
 		//ve hang de dien thong tin
 		for (int j = 0; j < Col + 1; j++)
@@ -64,20 +64,20 @@ int viewDsSvLop(NodeLop* A)
 {
 	system("cls");
 	setColor(background_color, title_color);
-	printA_Sentence("~ DANH SACH LOP ~",2);
+	printA_Sentence("~ DANH SACH LOP ~", 2);
 	setColor(background_color, title_color1);
 	printA_Sentence(A->lop.ten, 3);
 	gotoXY(10, 6);
 	if (A->lop.headSvLop == NULL)
 	{
 		setColor(background_color, text_color);
-		printA_Sentence("Hien chua cap nhat du lieu...",whereY());
+		printA_Sentence("Hien chua cap nhat du lieu...", whereY());
 		return 0;
 	}
 	int posRow = whereY();
 	string title[] = { "STT","MSSV","HO","TEN","GIOI TINH","NGAY SINH","CMND" };
 	int posCol[8] = { 0,6,17,43,55,67,81,96 };
-	int space = WIDTH / 2 - posCol[7]/2;
+	int space = WIDTH / 2 - posCol[7] / 2;
 	for (int j = 0; j < 7; j++)
 	{
 		posCol[j] += space;
@@ -137,7 +137,7 @@ int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 	setColor(background_color, title_color);
 	printA_Sentence("~ DANH SACH MON ~", 2);
 	setColor(background_color, title_color1);
-	printA_Sentence("Ki "+to_string(ki)+"    Nam hoc : "+to_string(nam)+" - "+to_string(nam+1), 3);
+	printA_Sentence("Ki " + to_string(ki) + "    Nam hoc : " + to_string(nam) + " - " + to_string(nam + 1), 3);
 	gotoXY(10, 6);
 	if (head == NULL)
 	{
@@ -370,7 +370,7 @@ int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 	setColor(background_color, title_color1);
 	printA_Sentence("Hoc ki : " + to_string(ki), 3);
 	gotoXY(10, 6);
-	if (sv->headMon[ki-1] == NULL)
+	if (sv->headMon[ki - 1] == NULL)
 	{
 		setColor(background_color, text_color);
 		printA_Sentence("Ban chua dang ki mon hoc nao...", whereY());
@@ -383,7 +383,7 @@ int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 	int space = WIDTH / 2 - posCol[7] / 2;
 	for (int j = 0; j < 7; j++)
 	{
-		posCol[j]+=space;
+		posCol[j] += space;
 		gotoXY(posCol[j] + 2, posRow + 1);
 		cout << title[j];
 	}
@@ -464,13 +464,13 @@ void viewInfoSv(Sv A)
 	system("pause");
 }
 
-int viewMondaDk(NodeMon_Sv* A, int ki,int line)//show thong tin mon hoc cua 1 sv
+int viewMondaDk(NodeMon_Sv* A, int ki, int line)//show thong tin mon hoc cua 1 sv
 {
 	setColor(background_color, title_color);
 	printA_Sentence("~ KET QUA DANG KI HOC PHAN ~", line);
 	setColor(background_color, title_color1);
 	printA_Sentence("Hoc ki : " + to_string(ki), line + 1);
-	gotoXY(10, line +2);
+	gotoXY(10, line + 2);
 	if (A == NULL)
 	{
 		setColor(background_color, text_color);
@@ -741,7 +741,7 @@ void background_Login()
 	cout << endl << endl;
 }
 
-void veHCN(int bd_x,int bd_y,int kt_x,int kt_y)
+void veHCN(int bd_x, int bd_y, int kt_x, int kt_y)
 {
 	setColor(background_color, title_color1);
 	gotoXY(bd_x, bd_y);
@@ -758,15 +758,15 @@ void veHCN(int bd_x,int bd_y,int kt_x,int kt_y)
 	}
 	gotoXY(bd_x, kt_y);
 	cout << (char)192;
-	for(int i = 1; i < kt_x - bd_x; i++)
+	for (int i = 1; i < kt_x - bd_x; i++)
 		cout << (char)196;
 	cout << (char)217;
 	setColor(background_color, text_color);
 }
-               
-int LuaChon_Menu(int title_number, string title[],int cell_height,int line)
+
+int LuaChon_Menu(int title_number, string title[], int cell_height, int line)
 {
-	int* pos_x=new int[title_number];
+	int* pos_x = new int[title_number];
 	for (int i = 0; i < title_number; i++)
 		pos_x[i] = WIDTH / 2 - title[i].length() / 2;
 	int bd_x, bd_y, kt_x, kt_y;
@@ -777,7 +777,7 @@ int LuaChon_Menu(int title_number, string title[],int cell_height,int line)
 	for (int i = 0; i < title_number; i++)
 	{
 		veHCN(bd_x, bd_y + i * (cell_height + 2), kt_x, kt_y + i * (cell_height + 2));
-		gotoXY(pos_x[i], bd_y + i * (cell_height + 2) + cell_height/2);
+		gotoXY(pos_x[i], bd_y + i * (cell_height + 2) + cell_height / 2);
 		cout << title[i];
 	}
 	//chon
@@ -797,7 +797,7 @@ int LuaChon_Menu(int title_number, string title[],int cell_height,int line)
 				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
 				cout << title[lc];
 				if (lc == 0)
-					lc = title_number-1;
+					lc = title_number - 1;
 				else
 					lc--;
 				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
@@ -810,7 +810,7 @@ int LuaChon_Menu(int title_number, string title[],int cell_height,int line)
 			{
 				gotoXY(pos_x[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
 				cout << title[lc];
-				if (lc == title_number-1)
+				if (lc == title_number - 1)
 					lc = 0;
 				else
 					lc++;
@@ -821,9 +821,9 @@ int LuaChon_Menu(int title_number, string title[],int cell_height,int line)
 			}
 		}
 	}
-	return lc +1;
+	return lc + 1;
 }
-                      
+
 int LuaChon_HienThi(int line, int max)
 {
 	line++;
@@ -831,7 +831,7 @@ int LuaChon_HienThi(int line, int max)
 	int Cell_width = 22;
 	int cell_height = 2;
 	bd_x = WIDTH / 2 - Cell_width / 2;
-	bd_y = line + 4 ;
+	bd_y = line + 4;
 	kt_x = bd_x + Cell_width;
 	kt_y = bd_y + cell_height;
 	string title[2] = { "QUAY VE","THOAT" };
@@ -879,7 +879,7 @@ int LuaChon_HienThi(int line, int max)
 						}
 					}
 				}
-				return lc-1;//0 la thoat, -1 la quay ve
+				return lc - 1;//0 la thoat, -1 la quay ve
 			}
 			else if (temp == 72)//len
 			{
@@ -950,7 +950,7 @@ int LuaChon_HienThi(int line, int max)
 				if (s.length() == 0)
 					continue;
 				s.pop_back();
-				printA_Sentence("  "+s+"  ", line + 2);
+				printA_Sentence("  " + s + "  ", line + 2);
 				setColor(background_color, text_color);
 			}
 			else
@@ -987,7 +987,7 @@ Ngay nhapNgay_nhap(int line)
 	line++;
 	gotoXY(55, line);
 	setColor(background_color, title_color1);
-	cout << "Ngay/Thang/Nam";
+	cout << "Ngay / Thang / Nam";
 	char pre = 0;
 	char temp = 0;
 	char state = 0;
@@ -1085,7 +1085,7 @@ Ngay nhapNgay_nhap(int line)
 				cout << temp;
 				if (state == 0)//nhap ngay
 				{
-					if ((pre < 48 || pre>57)&&pre!=8)
+					if ((pre < 48 || pre>57) && pre != 8)
 					{
 						gotoXY(80 + state * 10 + 2, line);
 						cout << temp << "    ";
@@ -1108,7 +1108,7 @@ Ngay nhapNgay_nhap(int line)
 				}
 				else if (state == 1)//nhap thang
 				{
-					if ((pre < 48 || pre>57)&&pre!=8)
+					if ((pre < 48 || pre>57) && pre != 8)
 					{
 						gotoXY(80 + state * 10 + 2, line);
 						cout << temp << "    ";
@@ -1131,11 +1131,11 @@ Ngay nhapNgay_nhap(int line)
 				}
 				else
 				{
-					if ((pre < 48 || pre>57)&&pre!=8)
+					if ((pre < 48 || pre>57) && pre != 8)
 					{
 						gotoXY(80 + state * 10 + 2, line);
 						cout << temp << "    ";
-						gotoXY(80 + state * 10 + 2+1, line);
+						gotoXY(80 + state * 10 + 2 + 1, line);
 						year = "";
 					}
 					year += temp;
@@ -1160,7 +1160,7 @@ Ngay nhapNgay_nhap(int line)
 		}
 	}
 	gotoXY(55, line);
-	cout << "Ngay/Thang/Nam";
+	cout << "Ngay / Thang / Nam";
 	return t;
 }
 
@@ -1173,7 +1173,7 @@ void nhapGio_ve(int line)
 	veHCN(80, line - 1, 80 + 20, line + 1);
 	gotoXY(80 + 10, line);
 	cout << ':';
-}   
+}
 
 Time nhapGio_nhap(int line)
 {
@@ -1196,7 +1196,7 @@ Time nhapGio_nhap(int line)
 			//enter
 			if (temp == 13)
 			{
-				if (hour == "" || mins == "" )
+				if (hour == "" || mins == "")
 				{
 					setColor(background_color, red);
 					gotoXY(82, line + 2);
@@ -1254,10 +1254,10 @@ Time nhapGio_nhap(int line)
 				cout << temp;
 				if (state == 0)//nhap gio
 				{
-					if ((pre < 48 || pre>57)&&pre!=8)
+					if ((pre < 48 || pre>57) && pre != 8)
 					{
 						gotoXY(80 + state * 10 + 2, line);
-						cout <<temp<< "    ";
+						cout << temp << "    ";
 						hour = "";
 						gotoXY(80 + state * 10 + 2 + 1, line);
 					}
@@ -1277,7 +1277,7 @@ Time nhapGio_nhap(int line)
 				}
 				else//nhap phut
 				{
-					if ((pre < 48 || pre>57)&&pre!=8)
+					if ((pre < 48 || pre>57) && pre != 8)
 					{
 						gotoXY(80 + state * 10 + 2, line);
 						cout << temp << "    ";

@@ -83,7 +83,7 @@ struct Sv
 {
 	int stt = NULL;//dem tu 1
 	int id = NULL;
-	int cmnd = NULL;
+	char* cmnd = NULL;
 	string ten, ho, gioi;
 	Ngay ngayS;//ngaySinh
 };

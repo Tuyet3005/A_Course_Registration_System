@@ -7,7 +7,7 @@ int InMenuGv()
 	system("cls");
 	background_Gv();
 	string title[5] = { "TAO MOI","CAP NHAT","HIEN THI","QUAY VE","THOAT" };
-	return LuaChon_Menu(5,title,2,HEIGHT/2);//lua chon lon nhat la 5
+	return LuaChon_Menu(5, title, 2, HEIGHT / 2);//lua chon lon nhat la 5
 }
 bool XlMenuGv(int chon, ListNamHoc& l)
 {
@@ -68,28 +68,50 @@ void GiaoVu(ListNamHoc& l)
 
 void ThongbaoCautrucFile(bool chon)//import file dssv lop || file thong tin mon
 {
-	cout << endl << endl;
+	for (int i = 0; i < 7; i++)
+	{
+		cout << endl;
+	}
 	//file dssv lop
+	int x = WIDTH / 7 + 5;
+	int y = whereY();
 	if (chon == 0)
 	{
-		cout << "File chua danh sach sinh vien lop hoc la file text (.txt).\n\n";
+		gotoXY(x, y);
+		cout << "File chua danh sach sinh vien lop hoc la file text (.txt).";
 		Sleep(100);
-		cout << "Thong tin moi sinh vien can nam rieng tren mot dong va theo cau truc nhu sau:\n";
-		cout << "<mssv,stt,ten,ho,gioi tinh,ngay sinh,cccd/cmnd,> (vd:  <19120789,04,Tram,Nguyen Ai,Nu,07052001,111111111,> ).\n\n";
+		y += 2;
+		gotoXY(x, y);
+		cout << "Thong tin moi sinh vien can nam rieng tren mot dong va theo cau truc nhu sau:";
+		y++;
+		gotoXY(x, y);
+		cout << "<mssv,stt,ten,ho,gioi tinh,ngay sinh,cccd/cmnd,> (vd:  <19120789,04,Tram,Nguyen Ai,Nu,07052001,111111111,> ).";
 		Sleep(200);
-		cout << "HAY CHAC CHAN FILE DA DUOC TAO theo dung cau truc de tien hanh ghi thong tin tu file len he thong!\n";
+		y += 2;
+		gotoXY(x, y);
+		cout << "HAY CHAC CHAN FILE DA DUOC TAO theo dung cau truc de tien hanh ghi thong tin tu file len he thong!";
 	}
 	// file thong tin mon
 	else
 	{
-		cout << "File chua thong tin cac mon hoc la file text (.txt) va thong tin moi mon duoc ghi rieng tren mot dong theo cau truc nhu sau:\n";
-		cout << "id mon,ten mon,ten giao vien,so tin chi,ngay hoc 1,buoi hoc 1,ngay hoc 2,buoi hoc 2,si so toi da,\n\n";
+		gotoXY(x, y);
+		cout << "File chua thong tin cac mon hoc la file text (.txt) va thong tin moi mon duoc ghi rieng tren mot dong theo cau truc nhu sau:";
+		gotoXY(x, ++y);
+		cout << "id mon,ten mon,ten giao vien,so tin chi,ngay hoc 1,buoi hoc 1,ngay hoc 2,buoi hoc 2,si so toi da,";
 		Sleep(100);
-		cout << "Chu y khong nen co khoang cach sau cac dau phay!!!\n";
-		cout << "Vi du: KTLT,Ky thuat lap trinh,Nguyen Le Hoang Dung,4,Thu Sau,S3,Thu Sau,S4,50,\n\n";
+		gotoXY(x, ++y);
+		cout << "Chu y khong nen co khoang cach sau cac dau phay!!!";
+		gotoXY(x, ++y);
+		cout << "Vi du: KTLT,Ky thuat lap trinh,Nguyen Le Hoang Dung,4,Thu Sau,S3,Thu Sau,S4,50,";
 		Sleep(200);
-		cout << "HAY CHAC CHAN FILE DA DUOC TAO theo dung cau truc de tien hanh ghi thong tin tu file len he thong!\n";
+		y += 2;
+		gotoXY(x, y);
+		cout << "HAY CHAC CHAN FILE DA DUOC TAO theo dung cau truc de tien hanh ghi thong tin tu file len he thong!";
 	}
+	setColor(background_color, title_color1);
+	printA_Sentence("Nhan phim bat ki de tiep tuc -->", HEIGHT - 5);
+	char pause = _getch();
+	system("cls");
 }
 bool importFilehayNhapTay(bool chon)
 {
@@ -124,8 +146,8 @@ int InMenuTaoMoi()
 	system("cls");
 	printA_Sentence("-- TAO MOI --", 1);
 	background_Gv();
-	string title[7] = { "NAM HOC","LOP HOC","HOC KI","MON HOC","BUOI DANG KI KHOA HOC","QUAY VE","THOAT"};
-	return LuaChon_Menu(7, title,2, HEIGHT / 2);
+	string title[7] = { "NAM HOC","LOP HOC","HOC KI","MON HOC","BUOI DANG KI KHOA HOC","QUAY VE","THOAT" };
+	return LuaChon_Menu(7, title, 2, HEIGHT / 2);
 }
 bool XlTaoMoi(int chon, ListNamHoc& l)
 {
@@ -193,7 +215,7 @@ NodeNamHoc* TaoNodeNam()
 	f.open("listnam.txt", ios::in | ios::app);
 	setColor(background_color, title_color1);
 	cout << "Nhap nam bat dau nam hoc: ";
-	int x = whereX()+5;
+	int x = whereX() + 5;
 	int y = whereY();
 	gotoXY(x, y);
 	setColor(background_color, text_color);
@@ -225,7 +247,7 @@ NodeNamHoc* TaoNodeNam()
 					return NULL;
 			}
 			break;
-		}
+    }
 		else if (c >= 48 && c <= 57)
 		{
 			temp += c;
@@ -293,17 +315,17 @@ int HienNamHoc(ListNamHoc l)
 	return i;
 }
 void TaoNam(ListNamHoc& l)
-  {
+{
 	setColor(background_color, title_color);
 	printA_Sentence("~ TAO MOI MOT NAM HOC ~", 5);
-	gotoXY(WIDTH/3 +5, 12);
+	gotoXY(WIDTH / 3 + 5, 12);
 	NodeNamHoc* n = TaoNodeNam();
 	ThemNodeNamHoc(l, n);
-	if (n) 
+	if (n)
 	{
 		int nam = n->data.tg.ngay_bd.y;
 		setColor(background_color, title_color);
-		printA_Sentence("~ TAO NAM HOC "+to_string(nam)+" - "+to_string(nam+1)+ " THANH CONG ~", HEIGHT-5);
+		printA_Sentence("~ TAO NAM HOC " + to_string(nam) + " - " + to_string(nam + 1) + " THANH CONG ~", HEIGHT - 5);
 	}
 	char pause = _getch();
 }
@@ -349,7 +371,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 	int sl = 0;
 	//nhap ten lop moi len file, tao node len he thong
 	setColor(background_color, title_color);
-	printA_Sentence("~ TAO MOI LOP HOC NAM NHAT ~",5);
+	printA_Sentence("~ TAO MOI LOP HOC NAM NHAT ~", 5);
 	gotoXY(WIDTH / 3, 10);
 	setColor(background_color, title_color1);
 	cout << "Nhap so luong lop nam nhat muon tao: ";
@@ -418,7 +440,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		trungTen = false;
 		gotoXY(x, y);
 		string ten;
-		cout << "Nhap ten lop : ";
+		cout << "Nhap ten lop " << i << ": ";
 		while (true)
 		{
 			gotoXY(x + 19, y);
@@ -428,7 +450,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 				cin.ignore();
 				continue;
 			}
-			if ((int)ten[0]*10+(int)ten[1]-480-48==nam)
+			if ((int)ten[0] * 10 + (int)ten[1] - 480 - 48 == nam)
 			{
 				setColor(background_color, red);
 				printA_Sentence("! TEN LOP KHONG HOP LE !", y + 3);
@@ -490,8 +512,8 @@ void TaoLopNamNhat(NodeNamHoc* node)
 	setColor(background_color, title_color);
 	printA_Sentence("~ TAO MOI LOP HOC NAM NHAT THANH CONG ~", HEIGHT / 2 - 2);
 	setColor(background_color, title_color1);
-	printA_Sentence("Ban da co the cap nhat dssv cho (cac) lop hoc vua tao", HEIGHT / 2 );
-	printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT -5);
+	printA_Sentence("Ban da co the cap nhat dssv cho (cac) lop hoc vua tao", HEIGHT / 2);
+	printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
 	pause = _getch();
 }
 
@@ -565,7 +587,7 @@ void TaoHocKy(ListNamHoc& l)
 	int nam_bd;//nam bat dau cua nam hoc tuong ung ngay kt do user nhap vao
 	system("cls");
 	setColor(background_color, title_color);
-	printA_Sentence("~ TAO MOI HOC KI ~",5);
+	printA_Sentence("~ TAO MOI HOC KI ~", 5);
 	hk = chonKi("Ban muon tao ki may ?");
 	char pause;
 	//lay tg hien tai
@@ -589,12 +611,10 @@ void TaoHocKy(ListNamHoc& l)
 			printA_Sentence("- NGAY BAT DAU -", 11);
 			nhapNgay_ve(13);
 			ngBD = nhapNgay_nhap(13);
-			//nhapNgayGio(tg.ngay_bd, tmBD);
-			//ss tg hien tai vs tgbd
 			if (!sosanhNgay(Dnow, ngBD))//so sanh voi tg hien tai
 			{
 				setColor(background_color, red);
-				printA_Sentence("! HOC KI PHAI DUOC BAT DAU SAU THOI GIAN HIEN TAI !", HEIGHT - 8);
+				printA_Sentence("! NGAY BAT DAU PHAI SAU NGAY HIEN TAI !", HEIGHT - 8);
 				pause = _getch();
 				continue;
 			}
@@ -677,6 +697,7 @@ void TaoHocKy(ListNamHoc& l)
 		hockyP->headMon = NULL;
 		hockyP->tg.ngay_bd = ngBD;
 		hockyP->tg.ngay_kt = ngKT;
+		f.close();
 		f.open(filePath, ios::out);
 		//ghi du lieu thoi gian vao file theo cau truc "ddmmyyyy,ddmmyyyy,\n"
 		//ghi ngay BD
@@ -709,7 +730,7 @@ void TaoHocKy(ListNamHoc& l)
 		f << ngKT.y << ",";
 		f.close();
 		setColor(background_color, title_color);
-		printA_Sentence("~ TAO MOI HOC KI THANH CONG ~", HEIGHT /2 - 1);
+		printA_Sentence("~ TAO MOI HOC KI THANH CONG ~", HEIGHT / 2 - 1);
 		pause = _getch();
 		return;
 	}
@@ -719,7 +740,7 @@ void TaoHocKy(ListNamHoc& l)
 		setColor(background_color, red);
 		printA_Sentence("! TAO MOI HOC KI KHONG THANH CONG !", HEIGHT / 2 - 2);
 		setColor(background_color, text_color);
-		printA_Sentence("Ban chua tao nam hoc nen khong the tao hoc ki", HEIGHT / 2 );
+		printA_Sentence("Ban chua tao nam hoc tuong ung nen khong the tao hoc ki", HEIGHT / 2);
 		pause = _getch();
 	}
 }
@@ -745,7 +766,7 @@ HocKy* HkHienTai(ListNamHoc& l, NodeNamHoc* n, int& i)//i la thu tu hk
 {
 	if (!n)
 		return NULL;
-	HocKy* hk = checkHocKy(n, i);     
+	HocKy* hk = checkHocKy(n, i);
 	if (!hk)//Chua tao hk nao 
 	{
 		//tao hk1 ghi tg vo file truoc -> tao mon
@@ -844,9 +865,13 @@ bool checkTrungMon(NodeMon* head, NodeMon* n)
 		if (t->data.id == n->data.id && t->data.tenGv == n->data.tenGv)
 		{
 			//trung tiep buoi hoc 
-			if(t->data.bh1.thu == n->data.bh1.thu && t->data.bh1.buoi == n->data.bh1.buoi)
-				return true;
 			if (t->data.bh1.thu == n->data.bh1.thu && t->data.bh1.buoi == n->data.bh1.buoi)
+				return true;
+			if (t->data.bh2.thu == n->data.bh2.thu && t->data.bh2.buoi == n->data.bh2.buoi)
+				return true;
+			if (t->data.bh1.thu == n->data.bh2.thu && t->data.bh1.buoi == n->data.bh2.buoi)
+				return true;
+			if (t->data.bh2.thu == n->data.bh1.thu && t->data.bh2.buoi == n->data.bh1.buoi)
 				return true;
 		}
 		t = t->pNext;
@@ -868,8 +893,8 @@ bool NhapNodeMon(NodeMon* n)
 	char pause;
 	while (true)
 	{
-		gotoXY(x + 30,y);
-		cin.ignore();
+		gotoXY(x + 30, y);
+		//cin.ignore();
 		getline(cin, s);
 		if (sizeof(s) == 0)
 		{
@@ -884,7 +909,7 @@ bool NhapNodeMon(NodeMon* n)
 	while (true)
 	{
 		gotoXY(x + 30, y);
-		cin.ignore();
+		//cin.ignore();
 		getline(cin, s);
 		if (sizeof(s) == 0)
 		{
@@ -899,7 +924,7 @@ bool NhapNodeMon(NodeMon* n)
 	while (true)
 	{
 		gotoXY(x + 30, y);
-		cin.ignore();
+		//cin.ignore();
 		getline(cin, s);
 		if (sizeof(s) == 0)
 		{
@@ -910,8 +935,9 @@ bool NhapNodeMon(NodeMon* n)
 	}
 	y += 2;
 	x += 30;
-	gotoXY(x-30, y);
+	gotoXY(x - 30, y);
 	cout << "So tin chi: ";
+	gotoXY(x, y);
 	char c;
 	s = "";
 	do
@@ -950,8 +976,9 @@ bool NhapNodeMon(NodeMon* n)
 		}
 	} while (true);
 	y += 2;
-	gotoXY(x-30, y);
+	gotoXY(x - 30, y);
 	cout << "So luong sinh vien toi da: ";
+	gotoXY(x, y);
 	s = "";
 	do
 	{
@@ -972,7 +999,7 @@ bool NhapNodeMon(NodeMon* n)
 		{
 			if (s == "")
 				continue;
-			if (stoi(s) == 0||stoi(s)>50)
+			if (stoi(s) == 0)
 			{
 				gotoXY(x, y);
 				cout << "   ";
@@ -1015,19 +1042,20 @@ void TaoMon(ListNamHoc& l, int nam)
 	NodeMon* re = NULL;
 	setColor(background_color, title_color1);
 	printA_Sentence("Chon phuong thuc lay du lieu:", 10);
-	if (LuaChon_Menu(2,title,2,12)-1)
+	if (LuaChon_Menu(2, title, 2, 12) - 1)
 	{
-		system("cls");
-		setColor(background_color, title_color);
-		printA_Sentence("~ TAO MOI MON HOC ~", 5);
+		ThongbaoCautrucFile(1);
 		ifstream f;
-		gotoXY(x, y);
-		setColor(background_color, text_color);
-		cout << "Nhap duong dan: " << endl;
 		while (true)
 		{
+			system("cls");
+			setColor(background_color, title_color);
+			printA_Sentence("~ TAO MOI MON HOC ~", 5);
+			gotoXY(x, y);
+			setColor(background_color, text_color);
+			cout << "Nhap duong dan: " << endl;
 			gotoXY(x + 19, y);
-			getline(cin, file,'\n');
+			getline(cin, file, '\n');
 			if (sizeof(file) == 0)
 			{
 				cin.ignore();
@@ -1046,16 +1074,16 @@ void TaoMon(ListNamHoc& l, int nam)
 			if (!Ask_YN("Ban co muon nhap duong dan file khac ?"))
 			{
 				setColor(background_color, red);
-				printA_Sentence("! TAO MON KHONG THANH CONG !", HEIGHT /2 -1);
+				printA_Sentence("! TAO MON KHONG THANH CONG !", HEIGHT / 2 - 1);
 				pause = _getch();
 				return;
 			}
 		}
-		re=mondangmo_docfile(file, nam, i);
+		re = mondangmo_docfile(file, nam, i);
 	}
 	else
 	{
-		re=mondangmo_nhaptay(nam, i);
+		re = mondangmo_nhaptay(nam, i);
 	}
 	if (re == NULL)
 	{
@@ -1087,7 +1115,7 @@ void TaoMon(ListNamHoc& l, int nam)
 	NodeMon* n = re;
 	while (n != NULL)
 	{
-		if (checkTrungMon(hk->headMon, n))
+		if (checkTrungMon(hk->headMon, n))//trung thi bo qua tiep mon khac...
 		{
 			n = n->pNext;
 			continue;
@@ -1166,7 +1194,7 @@ NodeMon* mondangmo_docfile(string file, int nam, int stt_hk)//file nay chi co ds
 			setColor(background_color, red);
 			printA_Sentence("! TAO MOI MON HOC THAT BAI !", HEIGHT / 2 - 2);
 			setColor(background_color, text_color);
-			printA_Sentence("Khong lay duoc du lieu tu file", HEIGHT / 2 );
+			printA_Sentence("Khong lay duoc du lieu tu file", HEIGHT / 2);
 			pause = _getch();
 			return NULL;
 		}
@@ -1184,7 +1212,7 @@ NodeMon* mondangmo_nhaptay(int nam, int stt_hk)
 	gotoXY(WIDTH / 3 + 5, 10);
 	cout << "Nhap so mon hoc muon tao: ";
 	setColor(background_color, title_color1);
-	int x = whereX() +5;
+	int x = whereX() + 5;
 	int y = whereY();
 	char c;
 	string temp;
@@ -1224,7 +1252,6 @@ NodeMon* mondangmo_nhaptay(int nam, int stt_hk)
 	{
 		NodeMon* n = new NodeMon;
 		//cout << endl << "Mon hoc " << i + 1 << endl;
-		cin.ignore();
 		if (!NhapNodeMon(n))
 		{
 			i--;
@@ -1233,7 +1260,7 @@ NodeMon* mondangmo_nhaptay(int nam, int stt_hk)
 		if (checkTrungMon(head, n))
 		{
 			setColor(background_color, red);
-			printA_Sentence("         ! MON HOC DA DUOC TAO !         ", HEIGHT-3);			
+			printA_Sentence("         ! MON HOC DA DUOC TAO !         ", HEIGHT - 3);
 			pause = _getch();
 			continue;
 		}
@@ -1251,7 +1278,7 @@ int InMenuCapNhat()
 	printA_Sentence("-- CAP NHAT --", 2);
 	background_Gv();
 	string title[5] = { "THEM SINH VIEN NAM NHAT","CAP NHAT MON HOC","DIEM SINH VIEN","QUAY VE","THOAT" };
-	return LuaChon_Menu(5,title,2, HEIGHT / 2);
+	return LuaChon_Menu(5, title, 2, HEIGHT / 2);
 }
 int InMenuCapNhat2()
 {
@@ -1259,7 +1286,7 @@ int InMenuCapNhat2()
 	printA_Sentence("-- CAP NHAT MON HOC --", 2);
 	background_Gv();
 	string title[4] = { "SUA THONG TIN MON HOC","XOA MON HOC","QUAY VE","THOAT" };
-	return LuaChon_Menu(4, title,2, HEIGHT / 2);
+	return LuaChon_Menu(4, title, 2, HEIGHT / 2);
 }
 int InMenuCapNhat3()
 {
@@ -1267,7 +1294,7 @@ int InMenuCapNhat3()
 	printA_Sentence("-- CAP NHAT DIEM SINH VIEN--", 2);
 	background_Gv();
 	string title[5] = { "XUAT FILE DE GV NHAP DIEM","NHAP DIEM TU FILE","CHINH SUA DIEM","QUAY VE","THOAT" };
-	return LuaChon_Menu(5, title,2, HEIGHT / 2);
+	return LuaChon_Menu(5, title, 2, HEIGHT / 2);
 }
 bool XlCapNhat2(ListNamHoc& l, int chon)
 {
@@ -1368,7 +1395,7 @@ bool XlCapNhat(int chon, ListNamHoc& l)
 		bool Thoat = false;
 		do
 		{
-			Thoat = XlCapNhat2(l,InMenuCapNhat2());
+			Thoat = XlCapNhat2(l, InMenuCapNhat2());
 		} while (!Thoat);
 		break;
 	}
@@ -1455,7 +1482,7 @@ HocKy* TimHocKy(ListNamHoc l)
 //them sv 
 bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head)
 {
-	while (head&&n)
+	while (head && n)
 	{
 		if (head->sv.stt == n->sv.stt || n->sv.id == head->sv.id)
 		{
@@ -1529,7 +1556,7 @@ void NhapThongtinSv(NodeSv_Lop* n, int i)
 	}
 	cout << "Nhap ten: (vd: Lan)\n";
 	cin >> n->sv.ten;
-	cin.ignore(100,'\n');
+	cin.ignore(100, '\n');
 	cout << "Nhap ho: (Nguyen Thi)\n";
 	getline(cin, n->sv.ho);
 	while (true)
@@ -1697,7 +1724,9 @@ void ThemSvLop_file(NodeLop* nodeLop)
 				T.ngayS.d = T.ngayS.d / 1000000;
 				f.clear();
 				getline(f, s, ',');
-				T.cmnd = atoi(s.c_str());
+				int size = s.length() + 1;
+				T.cmnd = new char[size];
+				strcpy_s(T.cmnd, size, s.c_str());
 				if (!f.good())
 				{
 					throw - 1;
@@ -1777,7 +1806,7 @@ void ThemSvLopNam1(ListNamHoc& l)
 		cin >> lenh;
 		if (lenh != 'y' && lenh != 'Y')
 			break;
-	} 	while (true);
+	} while (true);
 }
 
 //nhap diem 
@@ -2320,7 +2349,7 @@ void GhiFileMon(string filename, NodeMon* mon, bool remove)
 		}
 		else
 		{
-			file << '\n' <<  line;
+			file << '\n' << line;
 		}
 	}
 	if (!success)
@@ -2448,7 +2477,6 @@ void CapNhatMonHoc(ListNamHoc& l)
 		//			break;
 		//		}
 		//	} while (true);
-			
 		//}
 		if ((mon.bh1.buoi == mon.bh2.buoi) && (mon.bh1.thu == mon.bh2.thu))
 		{
@@ -2461,7 +2489,7 @@ void CapNhatMonHoc(ListNamHoc& l)
 			LuuMonHoc(l, node_mon);
 			break;
 		}
-	} 	while (true);	
+	} while (true);
 }
 void XoaMonHoc(ListNamHoc& l)
 {
@@ -2505,7 +2533,7 @@ NodeMon* timNodeMon_CapNhat(ListNamHoc l)
 		temp = temp->pNext;
 	system("cls");
 	int ki = chonKi("Chon hoc ki:");
-	int c = viewDsMonHk(temp->data.hk[ki-1].headMon, lc);
+	int c = viewDsMonHk(temp->data.hk[ki - 1].headMon, lc);
 	if (c == 0)
 	{
 		end(lc);
@@ -2526,7 +2554,7 @@ NodeMon* timNodeMon_CapNhat(ListNamHoc l)
 //HIEN THI
 void hienthiNam(ListNamHoc l, int& lc)
 {
-	lc = LuaChon_HienThi(whereY(),viewDsNam(l));
+	lc = LuaChon_HienThi(whereY(), viewDsNam(l));
 	if (lc == -1 || lc == 0)
 	{
 		//quay lai man hinh chinh
@@ -2540,7 +2568,7 @@ void hienthiNam(ListNamHoc l, int& lc)
 	else		//view lop
 	{
 		///////
-		hienthiDsLop(temp->data.headLop[chonSt_Year()-1], lc);
+		hienthiDsLop(temp->data.headLop[chonSt_Year() - 1], lc);
 	}
 	if (lc == -1)
 		hienthiNam(l, lc);
@@ -2550,8 +2578,8 @@ int chonSt_Year()
 	system("cls");
 	setColor(background_color, title_color1);
 	printA_Sentence("Ban muon chon lop cua hoc sinh nam may?", HEIGHT / 2 - 10);
-	string title[] = { "NAM 1","NAM 2","NAM 3","NAM 4"};
-	return LuaChon_Menu(4, title, 2, HEIGHT / 2-7);
+	string title[] = { "NAM 1","NAM 2","NAM 3","NAM 4" };
+	return LuaChon_Menu(4, title, 2, HEIGHT / 2 - 7);
 }
 //ki
 void hienthiKi(NodeNamHoc* A, int& lc)
@@ -2562,7 +2590,7 @@ void hienthiKi(NodeNamHoc* A, int& lc)
 		end(lc);
 		return;
 	}
-	lc = LuaChon_HienThi(whereY(),c);
+	lc = LuaChon_HienThi(whereY(), c);
 	if (lc == 0 || lc == -1)//thoat
 		return;
 	hienthiDsMon(A->data.hk[lc - 1].headMon, lc);
@@ -2578,7 +2606,7 @@ void hienthiDsMon(NodeMon* head, int& lc)
 		end(lc);
 		return;
 	}
-	lc = LuaChon_HienThi(whereY(),c);
+	lc = LuaChon_HienThi(whereY(), c);
 	if (lc == 0 || lc == -1)
 		return;
 	NodeMon* temp = head;
@@ -2596,16 +2624,16 @@ void hienthiDsSv_Mon(NodeMon* A, int& lc)/////////
 void end(int& lc)
 {
 	string title[] = { "QUAY LAI","THOAT" };
-	lc = LuaChon_Menu(2, title, 2, whereY()+1) - 2;
+	lc = LuaChon_Menu(2, title, 2, whereY() + 1) - 2;
 }
 //lop 
 bool ChonTThayDiem_Lop()//true la TT, false la diem
 {
 	system("cls");
 	setColor(background_color, title_color1);
-	printA_Sentence("Ban muon xem gi ?",HEIGHT/2-5);
+	printA_Sentence("Ban muon xem gi ?", HEIGHT / 2 - 5);
 	string title[] = { "THONG TIN SINH VIEN","DIEM - GPA" };
-	return LuaChon_Menu(2, title, 2, HEIGHT / 2 -2)-2;
+	return LuaChon_Menu(2, title, 2, HEIGHT / 2 - 2) - 2;
 }
 void hienthiDsLop(NodeLop* head, int& lc)
 {
@@ -2616,7 +2644,7 @@ void hienthiDsLop(NodeLop* head, int& lc)
 		return;
 	}
 	lc = LuaChon_HienThi(whereY(), c);
-	if (lc == 0 || lc == -1) 
+	if (lc == 0 || lc == -1)
 		return;
 	NodeLop* temp = head;
 	for (int i = 1; i < lc; i++)
@@ -2644,5 +2672,5 @@ bool ChonKihayLop()
 	setColor(background_color, title_color1);
 	printA_Sentence("Ban muon xem gi ?", HEIGHT / 2 - 5);
 	string title[] = { "KI HOC - MON HOC","LOP HOC - SINH VIEN" };
-	return LuaChon_Menu(2, title, 2, HEIGHT / 2 -2) - 2;
+	return LuaChon_Menu(2, title, 2, HEIGHT / 2 - 2) - 2;
 }

@@ -142,7 +142,9 @@ NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 			T.ngayS.d = T.ngayS.d / 1000000;
 			f.clear();
 			getline(f, s, ',');
-			T.cmnd = atoi(s.c_str());
+			int size = s.length() + 1;
+			T.cmnd = new char[size];
+			strcpy_s(T.cmnd, size, s.c_str());
 			NodeSv_Lop* temp = TaoNodeSv(T);
 			ThemNodeSvLop(headSvLop, temp);
 			temp->headMon[0] = temp->headMon[1] = temp->headMon[2] = NULL;
@@ -337,7 +339,9 @@ Sv findInfo(int id)//co mssv -> mo file sv.txt, doc ten lop cua sv->mo file lop.
 			T.ngayS.d = T.ngayS.d / 1000000;
 			f.clear();
 			getline(f, s, ',');
-			T.cmnd = atoi(s.c_str());
+			int size = s.length() + 1;
+			T.cmnd = new char[size];
+			strcpy_s(T.cmnd, size, s.c_str());
 			break;
 		}
 		f.clear();
@@ -466,7 +470,9 @@ Sv taiTT_GV(string id)
 			gv.ngayS.d = gv.ngayS.d / 1000000;
 			f.clear();
 			getline(f, s, ',');
-			gv.cmnd = stoi(s);
+			int size = s.length() + 1;
+			gv.cmnd = new char[size];
+			strcpy_s(gv.cmnd, size, s.c_str());
 			break;
 		}
 		f.clear();
