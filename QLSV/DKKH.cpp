@@ -578,10 +578,10 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 				continue;
 			}
 			//ss ngay bd voi ngay bd hk
-			if(!sosanhNgay(tg.ngay_bd,tHK.ngay_bd))
+			if(sosanhNgay(tg.ngay_bd,tHK.ngay_bd))
 			{
 				setColor(background_color, red);
-				printA_Sentence("! BUOI DANG KI PHAI DUOC BAT DAU TRUOC KHI HOC KI BAT DAU !", HEIGHT - 8);
+				printA_Sentence("! BUOI DANG KI PHAI DUOC BAT DAU SAU KHI HOC KI BAT DAU !", HEIGHT - 8);
 				pause = _getch();
 				continue;
 			}
@@ -605,11 +605,14 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 		//nhapNgayGio(tg.ngay_kt, tmKT);
 		if (sosanhNgayGio(tg.ngay_bd, tmBD, tg.ngay_kt, tmKT))//ss tg bd vs tg kt
 		{
-			if (sosanhNgay(tg.ngay_kt, tHK.ngay_bd))
+			if (sosanhNgay(tHK.ngay_kt, tg.ngay_kt))
+			{
+				setColor(background_color, red);
+				printA_Sentence("! BUOI DANG KI PHAI KET THUC TRUOC NGAY KET THUC HOC KI !", HEIGHT - 8);
+				pause = _getch();
+			}
+			else
 				break;
-			setColor(background_color, red);
-			printA_Sentence("! BUOI DANG KI PHAI KET THUC TRUOC NGAY BAT DAU HOC KI !", HEIGHT - 8);
-			pause = _getch();
 		}
 		else
 		{

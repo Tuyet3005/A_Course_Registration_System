@@ -47,8 +47,8 @@ void NhapThongtinSv(NodeSv_Lop* n, int i);
 bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head);
 void GhiThongtinSv(NodeLop* nodeLop, NodeSv_Lop* n);
 void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv);
-void ThemSvLop_tay(NodeLop* nodeLop);
-void ThemSvLop_file(NodeLop* nodeLop);
+NodeSv_Lop* ThemSvLop_tay(NodeLop* nodeLop);
+NodeSv_Lop* ThemSvLop_file(NodeLop* nodeLop);
 void ThemSvLopNam1(ListNamHoc& l);
 //sua info mon
 void GhiFileMon(string filename, NodeMon* mon, bool remove);
