@@ -70,8 +70,8 @@ struct NodeSv_Mon
 struct NodeMon
 {
 	MonHoc data;
-	NodeSv_Mon* headSvMon;
-	NodeMon* pNext;
+	NodeSv_Mon* headSvMon = NULL;
+	NodeMon* pNext = NULL;
 };
 struct HocKy
 {

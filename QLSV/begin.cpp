@@ -7,7 +7,7 @@ int InMenuBatDau(int ma_tk)//0 gv 1 sv lay tu login tra vector
 	background();
 	cout << endl << endl;
 	string title[5] = { "HE THONG CHINH","THONG TIN CA NHAN","DOI MAT KHAU","DANG XUAT","THOAT" };
-	return LuaChon_Menu(5, title,2,HEIGHT/2);
+	return LuaChon_Menu(5, title, 2, HEIGHT / 2);
 }
 
 bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false la giao vu, true la sv
@@ -26,7 +26,7 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 	{
 		if (role)//tra ve sinh vien
 			viewInfoSv(findInfo(stoi(tk)));
-		else 
+		else
 			viewInfoGV(taiTT_GV(tk));
 		setColor(background_color, title_color1);
 		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
@@ -69,10 +69,10 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 bool Ask_YN(string cauhoi)//hang in ra cau hoi
 {
 	setColor(background_color, red);
-	printA_Sentence(cauhoi,HEIGHT/2-2);
+	printA_Sentence(cauhoi, HEIGHT / 2 - 2);
 	setColor(background_color, text_color);
-	string title[2] = { "Dung vay","No no, Khong he"};
-	return LuaChon_Menu(2, title,4, HEIGHT / 2)-2;
+	string title[2] = { "Dung vay","No no, Khong he" };
+	return LuaChon_Menu(2, title, 4, HEIGHT / 2) - 2;
 }
 
 //NAM HOC 
@@ -145,6 +145,7 @@ NodeSv_Lop* TaiData_SvLop(NodeLop* nodeLop)
 			int size = s.length() + 1;
 			T.cmnd = new char[size];
 			strcpy_s(T.cmnd, size, s.c_str());
+			getline(f, s);
 			NodeSv_Lop* temp = TaoNodeSv(T);
 			ThemNodeSvLop(headSvLop, temp);
 			temp->headMon[0] = temp->headMon[1] = temp->headMon[2] = NULL;
@@ -161,8 +162,8 @@ void TaiData_Lop(NodeNamHoc* n)
 	for (int i = 1; i <= 4; i++)
 	{
 		//mo file ds lop
-		f.open(to_string(n->data.tg.ngay_bd.y) + 'n'+to_string(i)+".txt", ios::in | ios::app);
-		if(i!=1)
+		f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt", ios::in | ios::app);
+		if (i != 1)
 		{
 			//neu file nam nay chua dc tao -> sao chep data file nam ngoai sang 
 			//vd: 2020n2.txt chua tao -> sao chep 2019n1.txt sang 
@@ -172,7 +173,7 @@ void TaiData_Lop(NodeNamHoc* n)
 				f.close();
 				f.open(to_string(n->data.tg.ngay_bd.y) + 'n' + to_string(i) + ".txt", ios::app);
 				fstream f1;
-				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + 'n'+to_string(i-1)+".txt");
+				f1.open(to_string(n->data.tg.ngay_bd.y - 1) + 'n' + to_string(i - 1) + ".txt");
 				if (!f1.is_open())
 					continue;
 				while (!f1.eof())
@@ -230,11 +231,11 @@ void TaiData_Mon(NodeNamHoc* n)
 	for (int i = 0; i < 3; i++)//xem tung hk 
 	{
 		//mo file thong tin cac hoc ky
-		f.open(to_string(n->data.tg.ngay_bd.y) + "hk"+to_string(i+1)+".txt", ios::in | ios::app);
+		f.open(to_string(n->data.tg.ngay_bd.y) + "hk" + to_string(i + 1) + ".txt", ios::in | ios::app);
 		A = &(n->data.hk[i]);
 		//lay tg hoc ky
 		getline(f, s, ',');
-		if (s != "" && s!="\n")
+		if (s != "" && s != "\n")
 		{
 			A->tg.ngay_bd.d = atoi(s.c_str());
 			A->tg.ngay_bd.y = A->tg.ngay_bd.d % 10000;
@@ -277,7 +278,7 @@ void TaiData_Mon(NodeNamHoc* n)
 			t->pNext = NULL;
 			t->headSvMon = NULL;
 			//tai dssv cua mon trong file mon len 
-			TaiData_SvMon(t, n, i+1);
+			TaiData_SvMon(t, n, i + 1);
 			ThemNodeMon(A->headMon, t);//them vao list mon cua hoc ky
 		}
 		f.close();
@@ -289,7 +290,7 @@ NodeLop* timNodeLop(NodeNamHoc* namhoc, int styear, string lop)
 	NodeLop* n = namhoc->data.headLop[styear - 1];
 	while (n != NULL)
 	{
-		if (n->lop.ten == lop) 
+		if (n->lop.ten == lop)
 			return n;
 		n = n->pNext;
 	}
@@ -410,7 +411,7 @@ void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki)
 			study_year = nam % 2000 - K + 1;//chi dung doi voi cac nam hoc 2000~
 			NodeLop* nodeLop = timNodeLop(nodeNam, study_year, t->lop);
 			NodeSv_Lop* A = timNodeSv_Lop(nodeLop->lop.headSvLop, t->mssv);
-			ThemNodeMon_Sv(A->headMon[ki-1], mon, mon->headSvMon);
+			ThemNodeMon_Sv(A->headMon[ki - 1], mon, mon->headSvMon);
 		}
 	}
 	f.close();
@@ -420,7 +421,7 @@ string timLop(int id)//tra ve ten lop cua sv co id tuong ung
 {
 	ifstream f;
 	f.open("SinhVien.txt");
-	string s ="";
+	string s = "";
 	while (!f.eof())
 	{
 		f.clear();
