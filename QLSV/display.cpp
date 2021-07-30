@@ -598,7 +598,7 @@ bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 	int tin;
 	//lop
 	int dem = 0;
-	int sumlop = 0;
+	float sumlop = 0;
 	bool flag = true;
 	while (pSv != NULL)
 	{
