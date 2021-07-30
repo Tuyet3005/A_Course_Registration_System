@@ -27,9 +27,9 @@ void veHCN(int bd_x, int bd_y, int kt_x, int kt_y);
 
 int LuaChon_Menu(int title_number, string title[] ,int cell_height,int line);
 
-int LuaChon_HienThi(int line, int max);
+int LuaChon_HienThi(int line, int max, int title_number, string title[]);
 
-int LuaChon_DKKH(int line, int max);
+//int LuaChon_DKKH(int line, int max);
 
 void printA_Sentence(string a, int line);
 

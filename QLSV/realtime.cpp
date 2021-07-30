@@ -35,11 +35,9 @@ NodeNamHoc* NodeNamHienTai(ListNamHoc& l)//ktra NH ht co dc tao chua, chua thi c
 	}
 	//CAN TAO NODE NAM HOC HT
 	char lenh;
-	cout << "Nam hoc hien tai chua duoc tao!!!\n";
-	cout << "Ban co muon tao nam hoc hien tai ngay? Y/N?\n";
-	cin.ignore();
-	cin >> lenh;
-	if (lenh == 'y' || lenh == 'Y')
+	system("cls");
+	printA_Sentence("! NAM HOC HIEN TAI CHUA DUOC TAO !", HEIGHT / 2 - 4);
+	if (Ask_YN("Ban co muon tao nam hoc hien tai ngay?"))
 	{
 		NodeNamHoc* node = new NodeNamHoc;
 		node->data.tg.ngay_bd.y = nam_bd;
