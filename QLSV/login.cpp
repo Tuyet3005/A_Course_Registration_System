@@ -266,6 +266,7 @@ bool changePass(bool role, string tk, string& mk)
 	f.close();
 	remove((role) ? "SinhVien.txt" : "GiaoVu.txt");
 	rename("trunggian.txt", (role) ? "SinhVien.txt" : "GiaoVu.txt");
+	system("cls");
 	setColor(background_color, title_color);
 	printA_Sentence("~ DOI MAT KHAU THANH CONG ~", HEIGHT / 2);
 	setColor(background_color, title_color1);

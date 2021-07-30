@@ -135,10 +135,11 @@ int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 	int nam = NHhientai_nambd();
 	system("cls");
 	setColor(background_color, title_color);
-	printA_Sentence("~ DANH SACH MON ~", 2);
+	printA_Sentence("~ DANH SACH MON ~", 3);
 	setColor(background_color, title_color1);
-	printA_Sentence("Ki " + to_string(ki) + "    Nam hoc : " + to_string(nam) + " - " + to_string(nam + 1), 3);
-	gotoXY(10, 6);
+	printA_Sentence("Ki : " + to_string(ki) ,4);
+	printA_Sentence("Nam hoc : " + to_string(nam) + " - " + to_string(nam + 1), 5);
+	gotoXY(10, 7);
 	if (head == NULL)
 	{
 		setColor(background_color, text_color);
@@ -147,7 +148,7 @@ int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 	}
 	string title[] = { "STT", "ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC" };
 	int posRow = whereY();
-	int posCol[8] = { 0,6,15,45,75,90,105,140 };
+	int posCol[8] = { 0,6,15,45,75,90,105,150 };
 	int space = WIDTH / 2 - posCol[7] / 2;
 	for (int j = 0; j < 7; j++)
 	{
@@ -187,10 +188,10 @@ int viewDsSvMon(NodeMon* A)
 {
 	system("cls");
 	setColor(background_color, title_color);
-	printA_Sentence("~ DANH SACH SINH VIEN MON ~", 2);
+	printA_Sentence("~ DANH SACH SINH VIEN MON ~", 3);
 	setColor(background_color, title_color1);
-	printA_Sentence(A->data.tenMon, 3);
-	gotoXY(10, 6);
+	printA_Sentence(A->data.tenMon, 4);
+	gotoXY(10, 7);
 	if (A->headSvMon == NULL)
 	{
 		setColor(background_color, text_color);
@@ -216,7 +217,7 @@ int viewDsSvMon(NodeMon* A)
 	{
 		Sv s = findInfo(p->lop, p->mssv);
 		gotoXY(posCol[0] + 2, posRow + 1 + 2 * i);
-		cout << s.stt;
+		cout << i;
 		gotoXY(posCol[1] + 2, posRow + 1 + 2 * i);
 		cout << s.id;
 		gotoXY(posCol[2] + 2, posRow + 1 + 2 * i);
@@ -391,10 +392,11 @@ int viewSvScore(NodeSv_Lop* sv, int ki)//xem diem theo tung hoc ki
 	posCol[7] += space;
 	cout.clear();
 	int i = 1;
+	NodeSv_Mon* temp;
 	for (; p != NULL; i++)
 	{
 		//tim node svmon
-		NodeSv_Mon* temp = p->mon->headSvMon;
+		temp= p->mon->headSvMon;
 		while (temp != NULL)
 		{
 			if (temp->mssv == sv->sv.id)
@@ -461,7 +463,6 @@ void viewInfoSv(Sv A)
 	cout << A.cmnd;
 	gotoXY(0, posRow);
 	drawTable(2, 7, posCol, posRow);
-	system("pause");
 }
 
 int viewMondaDk(NodeMon_Sv* A, int ki, int line)//show thong tin mon hoc cua 1 sv
@@ -670,7 +671,6 @@ void viewInfoGV(Sv A)
 	cout << A.cmnd;
 	gotoXY(0, posRow);
 	drawTable(2, 5, posCol, posRow);
-	system("pause");
 }
 
 //HIEN THI
@@ -824,7 +824,7 @@ int LuaChon_Menu(int title_number, string title[], int cell_height, int line)
 	return lc + 1;
 }
 
-int LuaChon_HienThi(int line, int max)
+int LuaChon_HienThi(int line, int max, int title_number,string title[])
 {
 	line++;
 	int bd_x, bd_y, kt_x, kt_y;
@@ -834,8 +834,8 @@ int LuaChon_HienThi(int line, int max)
 	bd_y = line + 4;
 	kt_x = bd_x + Cell_width;
 	kt_y = bd_y + cell_height;
-	string title[2] = { "QUAY VE","THOAT" };
-	for (int i = 0; i < 2; i++)
+	//string title[2] = { "QUAY VE","THOAT" };
+	for (int i = 0; i < title_number; i++)
 	{
 		veHCN(bd_x, bd_y + i * (cell_height + 2), kt_x, kt_y + i * (cell_height + 2));
 		printA_Sentence(title[i], bd_y + i * (cell_height + 2) + cell_height / 2);
@@ -887,7 +887,7 @@ int LuaChon_HienThi(int line, int max)
 				if (lc == -1)
 				{
 					printA_Sentence("Nhap lua chon (STT)", line);
-					lc = 1;
+					lc = title_number - 1;
 				}
 				else
 				{
@@ -913,7 +913,7 @@ int LuaChon_HienThi(int line, int max)
 					printA_Sentence("Nhap lua chon (STT)", line);
 				else
 					printA_Sentence(title[lc], bd_y + lc * (cell_height + 2) + cell_height / 2);
-				if (lc == 1)
+				if (lc == title_number - 1)
 				{
 					lc = -1;
 					setColor(background_color, title_color1);
@@ -959,142 +959,6 @@ int LuaChon_HienThi(int line, int max)
 			}
 		}
 	}
-	return lc + 1;
-}
-
-int LuaChon_DKKH(int line, int max)
-{
-	line++;
-	int bd_x, bd_y, kt_x, kt_y;
-	int Cell_width = 22;
-	int cell_height = 2;
-	bd_x = WIDTH / 2 - Cell_width / 2;
-	bd_y = line + 4 ;
-	kt_x = bd_x + Cell_width;
-	kt_y = bd_y + cell_height;
-	string title = "QUAY VE";
-	veHCN(bd_x, bd_y , kt_x, kt_y );
-	printA_Sentence(title, bd_y + cell_height / 2);
-	setColor(background_color, title_color1);
-	printA_Sentence("Nhap lua chon (STT)", line);
-	setColor(background_color, text_color);
-	printA_Sentence("_________________________", line + 1);
-	gotoXY(WIDTH / 2, line + 2);
-	char temp;
-	char lc = -1;
-	string s = "";
-	setColor(background_color, text_color);
-	char key;
-	while (true)//ko enter
-	{
-		if (_kbhit())
-		{
-			temp = _getch();
-			//neu enter
-			if (temp == 13)
-			{
-				if (lc == -1)
-				{
-					if (s.length() == 0)
-						continue;
-					else
-					{
-						key = stoi(s);
-						if (key > 0 && key < max + 1)
-							return key;
-						else
-						{
-							setColor(background_color, red);
-							printA_Sentence("Khong hop le !", line + 2);
-							temp = _getch();
-							printA_Sentence("                 ", line + 2);
-							setColor(background_color, text_color);
-							s = "";
-							continue;
-						}
-					}
-				}
-				return lc;//0 la quay ve
-			}
-			else if (temp == 72)//len
-			{
-
-				if (lc == -1)
-				{
-					printA_Sentence("Nhap lua chon (STT)", line);
-					lc = 0;
-				}
-				else
-				{
-					printA_Sentence(title, bd_y + cell_height / 2);
-					lc--;
-					if (lc == -1)
-					{
-						setColor(background_color, title_color1);
-						printA_Sentence("Nhap lua chon (STT)", line);
-						gotoXY(WIDTH / 2, line + 2);
-						setColor(background_color, text_color);
-						continue;
-					}
-				}
-				setColor(background_color, title_color1);
-				printA_Sentence(title, bd_y + cell_height / 2);
-				setColor(background_color, text_color);
-				//mau
-			}
-			else if (temp == 80)//xuong
-			{
-				if (lc == -1)
-					printA_Sentence("Nhap lua chon (STT)", line);
-				else
-					printA_Sentence(title, bd_y + cell_height / 2);
-				if (lc == 0)
-				{
-					lc = -1;
-					setColor(background_color, title_color1);
-					printA_Sentence("Nhap lua chon (STT)", line);
-					gotoXY(WIDTH / 2, line + 2);
-				}
-				else
-				{
-					lc++;
-					setColor(background_color, title_color1);
-					printA_Sentence(title, bd_y + cell_height / 2);
-				}
-				setColor(background_color, text_color);
-			}
-			else if (temp >= 48 && temp <= 57 && lc == -1)
-			{
-				setColor(background_color, title_color1);
-				s += temp;
-				printA_Sentence(s, line + 2);
-				if (s.length() >= 10)
-				{
-					setColor(background_color, red);
-					printA_Sentence("Khong hop le !", line + 2);
-					temp = _getch();
-					printA_Sentence("                 ", line + 2);
-					gotoXY(WIDTH / 2, line + 2);
-					s = "";
-				}
-				setColor(background_color, text_color);
-			}
-			else if (temp == 8 && lc == -1)//xoa
-			{
-				setColor(background_color, title_color1);
-				if (s.length() == 0)
-					continue;
-				s.pop_back();
-				printA_Sentence("  " + s + "  ", line + 2);
-				setColor(background_color, text_color);
-			}
-			else
-			{
-
-			}
-		}
-	}
-	return lc + 1;
 }
 
 void printA_Sentence(string a, int line)
