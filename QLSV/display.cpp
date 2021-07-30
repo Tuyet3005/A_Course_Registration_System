@@ -578,9 +578,9 @@ int viewDiem_Lop(NodeLop* A, int ki)
 	}
 	gotoXY(posCol[10], posRow + i * 2 + 2);
 	cout << "Trung binh GPA: ";
-	gotoXY(posCol[14] + 1, posRow + i * 2 + 2);
+	gotoXY(posCol[14] + 3, posRow + i * 2 + 2);
 	if (flag)
-		cout << A->lop.GPA;
+		cout << A->lop.GPA[ki-1];
 	else
 		cout << 0;
 	gotoXY(0, posRow);
@@ -599,6 +599,7 @@ bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 	//lop
 	int dem = 0;
 	int sumlop = 0;
+	bool flag = true;
 	while (pSv != NULL)
 	{
 		if (pSv->headMon[ki - 1] == NULL)
@@ -627,11 +628,11 @@ bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 			dem++;
 		}
 		else {
-			return false;//chua cap nhat du gpa
+			flag=false;//chua cap nhat du gpa
 		}
 		pSv = pSv->pNext;
 	}
-	if (dem == 0)//chua co hs nao dk mon hoc
+	if (dem = 0||flag==false)//chua co hs nao dk mon hoc
 		return false;
 	t->lop.GPA[ki - 1] = sumlop / dem;
 	return true;
@@ -919,6 +920,7 @@ int LuaChon_HienThi(int line, int max, int title_number,string title[])
 					setColor(background_color, title_color1);
 					printA_Sentence("Nhap lua chon (STT)", line);
 					gotoXY(WIDTH / 2, line + 2);
+					setColor(background_color, text_color);
 				}
 				else
 				{
