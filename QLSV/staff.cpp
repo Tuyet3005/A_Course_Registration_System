@@ -2905,8 +2905,10 @@ void hienthiDsMon(NodeMon* head, int& lc)
 		for (int i = 1; i < lc2; i++)
 			temp = temp->pNext;
 		hienthiDsSv_Mon(temp, lc2);
-		if (lc == -1)
+		if (lc2 == -1)
 			continue;
+		if (lc2 == 0)//cung chua thoat dc may oi!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+			return;//Nho xem lai hien GPA lop nha (khi chua co diem thi GPA = 0 dung roi, nhung khi co diem cai no hien SAI)
 	}
 }
 void hienthiDsSv_Mon(NodeMon* A, int& lc)/////////
@@ -2931,10 +2933,10 @@ bool ChonTThayDiem_Lop()//true la TT, false la diem
 void hienthiDsLop(NodeLop* head, int& lc)
 {
 	string title[] = { "QUAY LAI","THOAT" };
-	int c
+	int c;
 	while (true)
 	{
-		c= = viewDsLop(head);
+		c = viewDsLop(head);
 		if (c == 0)
 		{
 			end(lc);
@@ -2952,6 +2954,8 @@ void hienthiDsLop(NodeLop* head, int& lc)
 			hienthiDiem_Lop(temp, lc);
 		if (lc == -1)
 			continue;
+		if (lc == 0)
+			return;
 	}
 	
 }
@@ -2962,7 +2966,8 @@ void hienthiTTSv_Lop(NodeLop* A, int& lc)
 }
 void hienthiDiem_Lop(NodeLop* A, int& lc)
 {
-	viewDiem_Lop(A, 1);
+	system("cls");
+	viewDiem_Lop(A, chonKi("Ban muon xem ket qua hoc tap o hoc ky may?"));
 	end(lc);
 }
 bool ChonKihayLop()
