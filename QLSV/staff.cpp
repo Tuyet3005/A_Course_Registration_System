@@ -2883,6 +2883,8 @@ void hienthiKi(NodeNamHoc* A, int& lc)
 		hienthiDsMon(A->data.hk[lc - 1].headMon, lc);
 		if (lc == -1)
 			continue;
+		if (lc == 0)
+			return;
 	}
 }
 void hienthiDsMon(NodeMon* head, int& lc)
@@ -2907,8 +2909,11 @@ void hienthiDsMon(NodeMon* head, int& lc)
 		hienthiDsSv_Mon(temp, lc2);
 		if (lc2 == -1)
 			continue;
-		if (lc2 == 0)//cung chua thoat dc may oi!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+		if (lc2 == 0)
+		{
+			lc = 0;
 			return;//Nho xem lai hien GPA lop nha (khi chua co diem thi GPA = 0 dung roi, nhung khi co diem cai no hien SAI)
+		}
 	}
 }
 void hienthiDsSv_Mon(NodeMon* A, int& lc)/////////
