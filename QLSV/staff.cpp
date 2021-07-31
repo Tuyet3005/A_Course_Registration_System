@@ -1025,7 +1025,7 @@ void TaoMon(ListNamHoc& l, int nam)
 	int x = WIDTH / 3 + 5, y = 10;
 	string file;
 	string s;
-	NodeMon* re;
+	NodeMon* re = NULL;
 	if (importFilehayNhapTay(1))
 	{
 		ifstream f;
@@ -1059,6 +1059,7 @@ void TaoMon(ListNamHoc& l, int nam)
 			{
 				setColor(background_color, red);
 				printA_Sentence("! KHONG THE MO FILE !", HEIGHT - 5);
+				file = "";
 				_getch();
 			}
 			system("cls");
@@ -1067,8 +1068,10 @@ void TaoMon(ListNamHoc& l, int nam)
 				system("cls");
 				setColor(background_color, red);
 				printA_Sentence("! TAO MON KHONG THANH CONG !", HEIGHT / 2 - 1);
+				setColor(background_color, title_color1);
+				printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 4);
 				_getch();
-				continue;
+				return;
 			}
 		}
 		re = mondangmo_docfile(file, nam, i);

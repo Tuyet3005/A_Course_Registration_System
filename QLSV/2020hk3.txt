@@ -2,3 +2,5 @@
 VTP,Vi Tich Phan,Le Van Hien,2,Thu Sau,S1,Thu Bay,S2,50,
 DSTT,Dai So Tuyen Tinh,Le Thi Nhi,2,Thu Hai,S1,Thu Tu,S4,100,
 TD,The Duc,Dang Duc Dung,2,Thu Tu,S3,Thu Tu,S4,48,
+TRI,Triet hoc,Nguyen Van Lam,3,Thu Ba,S3,Thu Tu,S3,55,
+PLDC,Phap luat dai cuong,Nguyen Tuyet An,2,Thu Hai,S3,Thu Tu,S1,95,
