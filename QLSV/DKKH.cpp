@@ -477,7 +477,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 			f.open(to_string(nam) + "hk" + to_string(ki) + pMon_Sv->mon->data.id + ".txt", ios::app);
 			if (pMon_Sv->mon->headSvMon->pNext)
 				f << endl;
-			f << A->sv.id << ',' << lop << ",C,";
+			f << A->sv.id << ',' << lop << ",0,0,0,0,";//mac dinh diem gk, ck, cong, tk = 0
 			f.close();
 		}
 		pMon_Sv = pMon_Sv->pNext;

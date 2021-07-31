@@ -79,5 +79,8 @@
     <Text Include="SinhVien.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="2020hk3TD.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -66,11 +66,8 @@ void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
 void CapNhatDiemSv(ListNamHoc& l);
 float NhapDiem(float diem);
 void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon);
-void HienThiDSLop(NodeLop* head_lop);
-void HienThiDSSv(NodeSv_Lop* head_sv_lop);
 
 //HIENTHI
-//neu chua co du lieu
 void hienthiNam(ListNamHoc l, int& lc);
 //ki
 void hienthiKi(NodeNamHoc* A, int& lc);
