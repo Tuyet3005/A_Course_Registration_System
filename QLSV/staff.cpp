@@ -1085,6 +1085,7 @@ void TaoMon(ListNamHoc& l, int nam)
 		system("cls");
 		setColor(background_color, red);
 		printA_Sentence("! TAO MOI MON HOC THAT BAI !", HEIGHT / 2 - 1);
+		setColor(background_color, title_color1);
 		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 4);
 		_getch();
 		return;
