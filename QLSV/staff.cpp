@@ -95,8 +95,8 @@ void ThongbaoCautrucFile(bool chon)//import file dssv lop || file thong tin mon
 		cout << "File chua thong tin cac mon hoc la file text (.txt) va thong tin moi mon duoc ghi rieng tren mot dong theo cau truc nhu sau:";
 		gotoXY(x, ++y);
 		cout << "id mon,ten mon,ten giao vien,so tin chi,ngay hoc 1,buoi hoc 1,ngay hoc 2,buoi hoc 2,si so toi da,";
-		Sleep(100);
-		gotoXY(x, ++y);
+		y += 2;
+		gotoXY(x, y);
 		cout << "Chu y khong nen co khoang cach sau cac dau phay!!!";
 		gotoXY(x, ++y);
 		cout << "Vi du: KTLT,Ky thuat lap trinh,Nguyen Le Hoang Dung,4,Thu Sau,S3,Thu Sau,S4,50,";
@@ -426,7 +426,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 		{
 			gotoXY(x + 19, y);
 			getline(cin, ten);
-			if (sizeof(ten) == 0)
+			if (ten.length() == 0)
 			{
 				cin.ignore();
 				continue;
@@ -552,16 +552,19 @@ bool sosanhNgay(Ngay ngay_truoc, Ngay ngay_sau)//truoc hoac bang thi true, sai t
 }
 bool XungdotTg(HocKy* hktruoc, Ngay ngBD_hksau, int hkTr, int hkS)
 {
+	system("cls");
 	//chua tao hk truoc 
 	if (hktruoc->tg.ngay_bd.d == 0)
 	{
-		cout << "LOI!!! Ban chua tao hoc ky " << hkTr << "!\n";
+		setColor(background_color, red);
+		printA_Sentence("LOI!!! Ban chua tao hoc ky " + to_string(hkTr) + "!", HEIGHT / 2);
 		return true;
 	}
 	//hk sau co thoi gian xung dot voi thoi gian hoc ky truoc 
 	else if (sosanhNgay(hktruoc->tg.ngay_kt, ngBD_hksau) == false)
 	{
-		cout << "LOI!!! Hoc ky " << hkS << " co thoi gian xung dot voi thoi gian cua hoc ky " << hkTr << "!!!\n";
+		setColor(background_color, red);
+		printA_Sentence("LOI!!! Hoc ky " + to_string(hkS) + " co thoi gian xung dot voi thoi gian cua hoc ky " + to_string(hkTr) + "!", HEIGHT / 2);
 		return true;
 	}
 	return false;
@@ -1871,7 +1874,17 @@ void ThemSvLopNam1(ListNamHoc& l)
 {
 	do
 	{
-		NodeLop* head = NodeNamHienTai(l)->data.headLop[0];
+		NodeLop* head = NULL;
+		try
+		{
+			head = NodeNamHienTai(l)->data.headLop[0];
+			if (head == NULL)
+				throw - 1;
+		}
+		catch(int)
+		{
+			return;//neu ko tao nh hien tai thi ko cho tao lop 
+		 }
 		int max = viewDsLop(head);
 		int line = whereY() + 3;
 		cout << endl;

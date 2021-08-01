@@ -42,6 +42,7 @@ NodeNamHoc* NodeNamHienTai(ListNamHoc& l)//ktra NH ht co dc tao chua, chua thi c
 		NodeNamHoc* node = new NodeNamHoc;
 		node->data.tg.ngay_bd.y = nam_bd;
 		node->data.tg.ngay_kt.y = nam_bd + 1;
+		node->data.headLop[0] = node->data.headLop[1] = node->data.headLop[2] = node->data.headLop[3] = NULL;
 		node->pNext = NULL;
 		ThemNodeNamHoc(l, node);
 		fstream f;
