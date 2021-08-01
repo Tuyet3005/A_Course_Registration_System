@@ -13,11 +13,10 @@ void readFileDKKH(ThoiGian& tg, Time& tmBD, Time& tmKT, int& ki)
 	fin.open("DKKH.txt", ios::in | ios::app);
 	string s;
 	//ngaybd
-	getline(fin, s);
+	getline(fin, s, ',');
 	if (s == "")//file trong
 		throw - 1;
-	fin.seekg(0);
-	getline(fin, s, ',');
+	//file da co data:
 	tg.ngay_bd.d = stoi(s);
 	getline(fin, s, ',');
 	tg.ngay_bd.m = stoi(s);
@@ -477,7 +476,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 			f.open(to_string(nam) + "hk" + to_string(ki) + pMon_Sv->mon->data.id + ".txt", ios::app);
 			if (pMon_Sv->mon->headSvMon->pNext)
 				f << endl;
-			f << A->sv.id << ',' << lop << ",C,";
+			f << A->sv.id << ',' << lop << ",0,0,0,0,";//mac dinh diem gk, ck, cong, tk = 0
 			f.close();
 		}
 		pMon_Sv = pMon_Sv->pNext;
@@ -518,7 +517,14 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 	ThoiGian tg;
 	Time tmBD, tmKT;
 	int ki;
-	readFileDKKH(tg, tmBD, tmKT, ki);
+	try
+	{
+		readFileDKKH(tg, tmBD, tmKT, ki);
+	}
+	catch (int)//catch throw -1 !
+	{
+		//okkkkk
+	}
 	NodeMon* head = HT->data.hk[ki - 1].headMon;
 	if (lc == 1)//view
 	{
@@ -543,9 +549,21 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 
 
 //GV
-void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 1 buoi cho 1 hoc ki duy nhat
+void taoDKKH_Gv(NodeNamHoc* H)
 {
 	system("cls");
+	try
+	{
+		if (H == NULL)
+			throw - 1;//ko tao nh hien tai thi ko cho tao dkkh
+	}
+	catch(int)
+	{
+		setColor(background_color, red);
+		printA_Sentence("! TAO BUOI DANG KI KHOA HOC THAT BAI !", HEIGHT / 2);
+		_getch();
+		return;
+	}
 	//lay tg hien tai
 	tm now = ThoiGianHeThong();
 	Ngay Dnow;
@@ -555,17 +573,6 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	Time Tnow;
 	Tnow.gio = now.tm_hour;
 	Tnow.phut = now.tm_min;
-	//neu 3 hoc ki da bat dau thi thoi
-	//setColor(background_color, title_color);
-	//if (H->data.hk[2].tg.ngay_bd.d != NULL && sosanhNgay(H->data.hk[2].tg.ngay_bd, Dnow))
-	//{
-	//	printA_Sentence("-- TAT CA CAC KI DA BAT DAU --", HEIGHT / 2 - 2);
-	//	setColor(background_color, text_color);
-	//	printA_Sentence("Ban khong can tao buoi DKKH nao nua...", HEIGHT / 2);
-	//	gotoXY(0, HEIGHT - 3);
-	//	system("pause");
-	//	return;
-	//}
 	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 5);
 	setColor(background_color, title_color1);
 	printA_Sentence("~ HUONG DAN ~", 9);
@@ -573,11 +580,11 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	gotoXY(WIDTH / 4 + 3, 11);
 	cout << "--Ban chi co the tao buoi dang ki khoa hoc cho hoc ki CHUA BAT DAU cua nam hoc nay";
 	gotoXY(WIDTH / 4 + 3, 12);
-	cout << "--Ban chi co the tao MOT buoi dang ki khoa hoc cho MOT ki hoc";
+	cout << "--Ban chi co the tao MOT buoi dang ki khoa hoc cho MOT ki hoc.";
 	gotoXY(WIDTH / 4 + 3, 13);
-	cout << "--Buoi DKKH chi duoc to chuc trong khoang thoi gian 30 NGAY truoc khi hoc ki bat dau";
+	cout << "--Buoi DKKH chi duoc to chuc trong khoang thoi gian hoc ky hien tai dien ra.";
 	gotoXY(WIDTH / 4 + 3, 14);
-	cout << "--Ban can TAO MOI hoc ki va CAP NHAT danh sach mon hoc truoc khi tao buoi dang ki khoa hoc";
+	cout << "--Ban can TAO MOI hoc ki va CAP NHAT danh sach mon hoc truoc khi tao buoi dang ki khoa hoc.";
 	gotoXY(0, 16);
 	if (!Ask_YN("Ban co that su muon tao buoi dang ki khoa hoc ?"))
 		return;
@@ -588,13 +595,6 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 
 	//KT KI HOC HOP LE
 	system("cls");
-	//chua toi tg de mo dk kh cho ki nay//trong vong 30 ngay
-	//if (sosanhNgay(_30ngaysau(Dnow), H->data.hk[ki - 1].tg.ngay_bd))
-	//{
-	//	setColor(background_color, red);
-	//	printA_Sentence("! CHUA TOI THOI GIAN CAN DE TAO BUOI DKKH !", HEIGHT / 2 - 1);
-	//	return;
-	//}
 	if (H->data.hk[ki - 1].tg.ngay_bd.d == NULL)//hk chua tao
 	{
 		setColor(background_color, red);
@@ -608,7 +608,7 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	{
 		setColor(background_color, red);
 		printA_Sentence("! HOC KI NAY DA KET THUC !", HEIGHT / 2 - 1);
-		//setColor(background_color, text_color);
+
 		return;
 	}
 	if (sosanhNgay(H->data.hk[ki - 1].tg.ngay_bd, Dnow))
@@ -624,6 +624,7 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 		printA_Sentence("! CHUA TAO MON HOC CHO HOC KY NAY !", HEIGHT / 2 - 2);
 		setColor(background_color, text_color);
 		printA_Sentence("Hay vao muc CAP NHAT de them mon hoc cho ki nay", HEIGHT / 2);
+
 		return;
 	}
 	
@@ -632,7 +633,14 @@ void taoDKKH_Gv(NodeNamHoc* H)//tao cho nam hien tai cho ca 4 nam///////chi tao 
 	Time tmBD, tmKT;
 	tmBD.giay = tmKT.giay = 0;
 	int File_Ki;
-	readFileDKKH(tg, tmBD, tmKT, File_Ki);
+	try
+	{
+		readFileDKKH(tg, tmBD, tmKT, File_Ki);
+	}
+	catch (int)
+	{
+		//phai xu ly throw -1, ko catch se bi loi !
+	}
 	if (File_Ki == ki)
 	{
 		setColor(background_color, red);

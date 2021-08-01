@@ -76,7 +76,7 @@
     <Text Include="GiaoVu.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="SinhVien.txt">
+    <Text Include="listnam.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

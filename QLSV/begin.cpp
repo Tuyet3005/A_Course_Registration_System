@@ -388,17 +388,13 @@ void TaiData_SvMon(NodeMon*& mon, NodeNamHoc* nodeNam, int ki)
 			t->mssv = stoi(s);
 			getline(f, t->lop, ',');
 			getline(f, s, ',');
-			if (s == "R")//neu da co diem 
-			{
-				getline(f, s, ',');
-				t->diem.gk = stof(s);
-				getline(f, s, ',');
-				t->diem.ck = stof(s);
-				getline(f, s, ',');
-				t->diem.cong = stof(s);
-				getline(f, s, ',');
-				t->diem.tongket = stof(s);
-			}
+			t->diem.gk = stof(s);
+			getline(f, s, ',');
+			t->diem.ck = stof(s);
+			getline(f, s, ',');
+			t->diem.cong = stof(s);
+			getline(f, s, ',');
+			t->diem.tongket = stof(s);
 			getline(f, s);//bo "\n" o dong cu 
 
 			//them <node sv_mon> vua tao vao dau <list sv_mon>
