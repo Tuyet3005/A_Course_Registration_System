@@ -1311,3 +1311,18 @@ Time nhapGio_nhap(int line)
 	cout << "Ngay : Gio";
 	return t;
 }
+
+void nhapNgay_Gio_xoa(int line, int func)
+{
+	line++;
+	int pl;
+	if (func)
+		pl = 2;
+	else
+		pl = 3;
+	for (int i = 0; i < pl; i++)
+	{
+		gotoXY(80 + i * 10 + 2, line);
+		cout << "      ";
+	}
+}

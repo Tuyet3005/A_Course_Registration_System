@@ -96,8 +96,11 @@ bool xoaLC(int dem, int mon, int ki, NodeSv_Lop* A, NodeMon* head)
 	}
 	int lc;
 	setColor(background_color, title_color1);
-	printA_Sentence("Nhap STT mon muon xoa (theo danh sach mon ban da dang ki) ", y - 2);
+	printA_Sentence("Nhap STT mon muon xoa  ", y - 2);
 	setColor(background_color, text_color);
+	printA_Sentence("(theo danh sach mon ban da dang ki)", y - 1);
+	printA_Sentence("______________________________________", y);
+	y++;
 	char c;
 	string s = "";
 	gotoXY(x, y);
@@ -228,7 +231,7 @@ int viewDKKH_Sv(NodeMon_Sv* A, int ki, NodeMon* head)
 	printA_Sentence("-- Moi nhap (STT) --", line += 2);
 	setColor(background_color, text_color);
 	printA_Sentence("__________________________", line += 1);
-	gotoXY(0, line+=2);
+	gotoXY(0, line+=1);
 	return mon;
 }
 
@@ -543,8 +546,8 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 		}
 	}
 	setColor(background_color, title_color1);
-	printA_Sentence("<-- Nhan phim bat ki de quay lai", whereY()+3);
-	char pause = _getch();
+	printA_Sentence("<-- Nhan phim bat ki de quay lai", whereY() + 4);
+	_getch();
 }
 
 
@@ -560,7 +563,11 @@ void taoDKKH_Gv(NodeNamHoc* H)
 	catch(int)
 	{
 		setColor(background_color, red);
-		printA_Sentence("! TAO BUOI DANG KI KHOA HOC THAT BAI !", HEIGHT / 2);
+		printA_Sentence("! NAM HOC NAY CHUA DUOC TAO !", HEIGHT / 2 - 1);
+		setColor(background_color, text_color);
+		printA_Sentence("Vao muc TAO MOI de tao nam hoc",HEIGHT / 2 + 1);
+		setColor(background_color, title_color1);
+		printA_Sentence("<-- Nhan nut bat ki de quay lai", HEIGHT - 4);
 		_getch();
 		return;
 	}
@@ -573,7 +580,8 @@ void taoDKKH_Gv(NodeNamHoc* H)
 	Time Tnow;
 	Tnow.gio = now.tm_hour;
 	Tnow.phut = now.tm_min;
-	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 5);
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 3);
 	setColor(background_color, title_color1);
 	printA_Sentence("~ HUONG DAN ~", 9);
 	setColor(background_color, text_color);
@@ -582,7 +590,7 @@ void taoDKKH_Gv(NodeNamHoc* H)
 	gotoXY(WIDTH / 4 + 3, 12);
 	cout << "--Ban chi co the tao MOT buoi dang ki khoa hoc cho MOT ki hoc.";
 	gotoXY(WIDTH / 4 + 3, 13);
-	cout << "--Buoi DKKH chi duoc to chuc trong khoang thoi gian hoc ky hien tai dien ra.";
+	cout << "--Buoi DKKH chi duoc to chuc trong khoang thoi gian hoc ki hien tai dien ra.";
 	gotoXY(WIDTH / 4 + 3, 14);
 	cout << "--Ban can TAO MOI hoc ki va CAP NHAT danh sach mon hoc truoc khi tao buoi dang ki khoa hoc.";
 	gotoXY(0, 16);
@@ -590,7 +598,7 @@ void taoDKKH_Gv(NodeNamHoc* H)
 		return;
 	system("cls");
 	setColor(background_color, title_color);
-	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 5);
+	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 3);
 	int ki= chonKi("Ban muon tao buoi DKKH cho ki nao?");
 
 	//KT KI HOC HOP LE
@@ -601,21 +609,28 @@ void taoDKKH_Gv(NodeNamHoc* H)
 		printA_Sentence("! HOC KI NAY CHUA DUOC TAO !", HEIGHT / 2 - 2);
 		setColor(background_color, text_color);
 		printA_Sentence("Hay vao muc TAO MOI de tao hoc ki va them mon hoc", HEIGHT / 2 );
+		setColor(background_color, title_color1);
+		printA_Sentence("<-- Nhan nut bat ki de quay lai", HEIGHT - 4);
+		_getch();
 		return;
 	}
-	//hk da ket thuc hoac da bd
+	//hk da ket thuc hoac chua bd
 	if (sosanhNgay(H->data.hk[ki - 1].tg.ngay_kt, Dnow))
 	{
 		setColor(background_color, red);
 		printA_Sentence("! HOC KI NAY DA KET THUC !", HEIGHT / 2 - 1);
-
+		setColor(background_color, title_color1);
+		printA_Sentence("<-- Nhan nut bat ki de quay lai", HEIGHT - 4);
+		_getch();
 		return;
 	}
-	if (sosanhNgay(H->data.hk[ki - 1].tg.ngay_bd, Dnow))
+	if (!sosanhNgay(H->data.hk[ki - 1].tg.ngay_bd, Dnow))
 	{
 		setColor(background_color, red);
-		printA_Sentence("! HOC KI NAY DA BAT DAU !", HEIGHT / 2 - 1);
-		//setColor(background_color, text_color);
+		printA_Sentence("! HOC KI NAY CHUA BAT DAU !", HEIGHT / 2 - 1);
+		setColor(background_color, title_color1);
+		printA_Sentence("<-- Nhan nut bat ki de quay lai", HEIGHT - 4);
+		_getch();
 		return;
 	}
 	if (H->data.hk[ki - 1].headMon == NULL)//chua co mon nao
@@ -624,7 +639,9 @@ void taoDKKH_Gv(NodeNamHoc* H)
 		printA_Sentence("! CHUA TAO MON HOC CHO HOC KY NAY !", HEIGHT / 2 - 2);
 		setColor(background_color, text_color);
 		printA_Sentence("Hay vao muc CAP NHAT de them mon hoc cho ki nay", HEIGHT / 2);
-
+		setColor(background_color, title_color1);
+		printA_Sentence("<-- Nhan nut bat ki de quay lai", HEIGHT - 4);
+		_getch();
 		return;
 	}
 	
@@ -651,132 +668,208 @@ void taoDKKH_Gv(NodeNamHoc* H)
   
 	//SAU KHI NHAP KI THANH CONG
 
-	char pause;
 	ThoiGian tHK = H->data.hk[ki - 1].tg;//tg hocki
-	bool flagbd = true;//chua nhap ngay bd
-	do {
-		system("cls");
-		setColor(background_color, title_color);
-		printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 5);
-		//in ra tg hk va tg nam hoc
-		setColor(background_color, text_color);
-		printA_Sentence("Thoi gian HOC KI " + to_string(ki) + ": " + to_string(tHK.ngay_bd.d) + '/' + to_string(tHK.ngay_bd.m) + '/' + to_string(tHK.ngay_bd.y) + " - " + to_string(tHK.ngay_kt.d) + '/' + to_string(tHK.ngay_kt.m) + '/' + to_string(tHK.ngay_kt.y), 9);
-		//in ra cho nhap ngay bd
-		
-		if (flagbd)
-		{
-			setColor(background_color, title_color1);
-			printA_Sentence("- NGAY BAT DAU -", 11);
-			nhapNgay_ve(13);
-			nhapGio_ve(18);
-			tg.ngay_bd=nhapNgay_nhap(13);
-			tmBD = nhapGio_nhap(18);
-			//nhapNgayGio(tg.ngay_bd, tmBD);
-			//ss tg hien tai vs tgbd
-			if (!sosanhNgayGio(Dnow, Tnow, tg.ngay_bd, tmBD))//so sanh voi tg hien tai
-			{
-				setColor(background_color, red);
-				printA_Sentence("! BUOI DANG KI PHAI DUOC BAT DAU SAU THOI GIAN HIEN TAI !", HEIGHT - 8);
-				pause = _getch();
-				continue;
-			}
-			//ss ngay bd voi ngay bd hk
-			if(sosanhNgay(tg.ngay_bd,tHK.ngay_bd))
-			{
-				setColor(background_color, red);
-				printA_Sentence("! BUOI DANG KI PHAI DUOC BAT DAU SAU KHI HOC KI BAT DAU !", HEIGHT - 8);
-				pause = _getch();
-				continue;
-			}
-			setColor(background_color, title_color1);
-			printA_Sentence("An phim bat ki de tiep tuc -->", HEIGHT - 8);
-			pause = _getch();
-			flagbd = false;
-			continue;
-		}
-		else
-		{
-			setColor(background_color, title_color1);
-			printA_Sentence("- NGAY BAT DAU " + to_string(tmBD.gio) + 'h' + to_string(tmBD.phut) + "ph  ngay " + to_string(tg.ngay_bd.d) + "/" + to_string(tg.ngay_bd.m) + "/" + to_string(tg.ngay_bd.y), 11);
-		}
-		setColor(background_color, title_color1);
-		printA_Sentence("- NGAY KET THUC -", 13);
-		nhapNgay_ve(15);
-		nhapGio_ve(21);
-		tg.ngay_kt = nhapNgay_nhap(15);
-		tmKT = nhapGio_nhap(21);
-		//nhapNgayGio(tg.ngay_kt, tmKT);
-		if (sosanhNgayGio(tg.ngay_bd, tmBD, tg.ngay_kt, tmKT))//ss tg bd vs tg kt
-		{
-			if (sosanhNgay(tHK.ngay_kt, tg.ngay_kt))
-			{
-				setColor(background_color, red);
-				printA_Sentence("! BUOI DANG KI PHAI KET THUC TRUOC NGAY KET THUC HOC KI !", HEIGHT - 8);
-				pause = _getch();
-			}
-			else
-				break;
-		}
-		else
+	//bool flagbd = true;//chua nhap ngay bd
+	//do {
+	//	system("cls");
+	//	setColor(background_color, title_color);
+	//	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 5);
+	//	//in ra tg hk va tg nam hoc
+	//	setColor(background_color, text_color);
+	//	printA_Sentence("Thoi gian HOC KI " + to_string(ki) + ": " + to_string(tHK.ngay_bd.d) + '/' + to_string(tHK.ngay_bd.m) + '/' + to_string(tHK.ngay_bd.y) + " - " + to_string(tHK.ngay_kt.d) + '/' + to_string(tHK.ngay_kt.m) + '/' + to_string(tHK.ngay_kt.y), 9);
+	//	//in ra cho nhap ngay bd
+	//	
+	//	if (flagbd)
+	//	{
+	//		setColor(background_color, title_color1);
+	//		printA_Sentence("- NGAY BAT DAU -", 11);
+	//		nhapNgay_ve(13);
+	//		nhapGio_ve(18);
+	//		tg.ngay_bd=nhapNgay_nhap(13);
+	//		tmBD = nhapGio_nhap(18);
+	//		//nhapNgayGio(tg.ngay_bd, tmBD);
+	//		//ss tg hien tai vs tgbd
+	//		if (!sosanhNgayGio(Dnow, Tnow, tg.ngay_bd, tmBD))//so sanh voi tg hien tai
+	//		{
+	//			setColor(background_color, red);
+	//			printA_Sentence("! BUOI DANG KI PHAI DUOC BAT DAU SAU THOI GIAN HIEN TAI !", HEIGHT - 8);
+	//			_getch();
+	//			continue;
+	//		}
+	//		//ss ngay bd voi ngay bd hk
+	//		if(sosanhNgay(tg.ngay_bd,tHK.ngay_bd))
+	//		{
+	//			setColor(background_color, red);
+	//			printA_Sentence("! BUOI DANG KI PHAI DUOC BAT DAU SAU KHI HOC KI BAT DAU !", HEIGHT - 8);
+	//			_getch();
+	//			continue;
+	//		}
+	//		setColor(background_color, title_color1);
+	//		printA_Sentence("An phim bat ki de tiep tuc -->", HEIGHT - 8);
+	//		_getch();
+	//		flagbd = false;
+	//		continue;
+	//	}
+	//	else
+	//	{
+	//		setColor(background_color, title_color1);
+	//		printA_Sentence("- NGAY BAT DAU " + to_string(tmBD.gio) + 'h' + to_string(tmBD.phut) + "ph  ngay " + to_string(tg.ngay_bd.d) + "/" + to_string(tg.ngay_bd.m) + "/" + to_string(tg.ngay_bd.y), 11);
+	//	}
+	//	setColor(background_color, title_color1);
+	//	printA_Sentence("- NGAY KET THUC -", 13);
+	//	nhapNgay_ve(15);
+	//	nhapGio_ve(21);
+	//	tg.ngay_kt = nhapNgay_nhap(15);
+	//	tmKT = nhapGio_nhap(21);
+	//	//nhapNgayGio(tg.ngay_kt, tmKT);
+	//	if (sosanhNgayGio(tg.ngay_bd, tmBD, tg.ngay_kt, tmKT))//ss tg bd vs tg kt
+	//	{
+	//		if (sosanhNgay(tHK.ngay_kt, tg.ngay_kt))
+	//		{
+	//			setColor(background_color, red);
+	//			printA_Sentence("! BUOI DANG KI PHAI KET THUC TRUOC NGAY KET THUC HOC KI !", HEIGHT - 8);
+	//			_getch();
+	//		}
+	//		else
+	//			break;
+	//	}
+	//	else
+	//	{
+	//		setColor(background_color, red);
+	//		printA_Sentence("! NGAY KET THUC PHAI SAU NGAY BAT DAU !", HEIGHT - 8);
+	//		_getch();
+	//	}
+	//} while (true);
+	system("cls");
+	setColor(background_color, title_color);
+	printA_Sentence("~ TAO BUOI DANG KI KHOA HOC ~", 3);
+	//in ra tg hk va tg nam hoc
+	setColor(background_color, text_color);
+	printA_Sentence("Thoi gian HOC KI " + to_string(ki) + ": " + to_string(tHK.ngay_bd.d) + '/' + to_string(tHK.ngay_bd.m) + '/' + to_string(tHK.ngay_bd.y) + " - " + to_string(tHK.ngay_kt.d) + '/' + to_string(tHK.ngay_kt.m) + '/' + to_string(tHK.ngay_kt.y), 7);
+	//in ra cho nhap ngay bd
+	setColor(background_color, title_color1);
+	printA_Sentence("- NGAY BAT DAU -", 10);
+	nhapNgay_ve(12);
+	nhapGio_ve(18);
+	setColor(background_color, text_color);
+	printA_Sentence("- NGAY KET THUC -", 24);
+	nhapNgay_ve(26);
+	nhapGio_ve(32);
+	while (true)//nhap ngay_bd
+	{
+		tg.ngay_bd = nhapNgay_nhap(12);
+		if (sosanhNgay(tg.ngay_bd, tHK.ngay_bd))
 		{
 			setColor(background_color, red);
-			printA_Sentence("! NGAY KET THUC PHAI SAU NGAY BAT DAU !", HEIGHT - 8);
-			pause = _getch();
+			printA_Sentence("! BUOI DANG KI PHAI DUOC BAT DAU SAU KHI HOC KI BAT DAU !", HEIGHT - 4);
+			_getch();
+			printA_Sentence("                                                              ", HEIGHT - 4);
+			nhapNgay_Gio_xoa(12, 0);
+			continue;
 		}
-	} while (true);
+		break;
+	}
+	while (true)//nhap gio_bd
+	{
+		tmBD = nhapGio_nhap(18);
+		if (!sosanhNgayGio(Dnow, Tnow, tg.ngay_bd, tmBD))//so sanh voi tg hien tai
+		{
+			setColor(background_color, red);
+			printA_Sentence("! BUOI DANG KI PHAI DUOC BAT DAU SAU THOI GIAN HIEN TAI !", HEIGHT - 4);
+			_getch();
+			printA_Sentence("                                                              ", HEIGHT - 4);
+			nhapNgay_Gio_xoa(19, 1);
+			continue;
+		}
+		break;
+	}
+
+	setColor(background_color, text_color);
+	printA_Sentence("- NGAY BAT DAU -", 10);
 	setColor(background_color, title_color1);
-	printA_Sentence("An phim bat ki de tiep tuc -->", HEIGHT - 8);
-	pause = _getch();
+	printA_Sentence("- NGAY KET THUC -", 24);
+	while (true)//nhap ngay_gio_kt
+	{
+		tg.ngay_kt = nhapNgay_nhap(26);
+		if (sosanhNgay(tHK.ngay_kt, tg.ngay_kt))
+		{
+			setColor(background_color, red);
+			printA_Sentence("! BUOI DANG KI PHAI KET THUC TRUOC NGAY KET THUC HOC KI !", HEIGHT - 4);
+			_getch();
+			printA_Sentence("                                                            ", HEIGHT - 4);
+			nhapNgay_Gio_xoa(26, 0);
+			continue;
+		}
+		tmKT = nhapGio_nhap(32);
+		if (!sosanhNgayGio(tg.ngay_bd, tmBD, tg.ngay_kt, tmKT))//ss tg bd vs tg kt
+		{
+			setColor(background_color, red);
+			printA_Sentence("! NGAY KET THUC PHAI SAU NGAY BAT DAU !", HEIGHT - 4);
+			_getch();
+			printA_Sentence("                                            ", HEIGHT - 4);
+			nhapNgay_Gio_xoa(26, 0);
+			nhapNgay_Gio_xoa(32, 1);
+			continue;
+		}
+		break;
+	}
+	setColor(background_color, title_color1);
+	printA_Sentence("An phim bat ki de tiep tuc -->", HEIGHT - 4);
+	_getch();
 	if (askforsure(tg, tmBD, tmKT, ki))
 		if (xuatFile_DKKH(tg, tmBD, tmKT, ki))
 		{
 			system("cls");
 			setColor(background_color, title_color);
 			printA_Sentence("~ TAO THANH CONG BUOI DANG KI KHOA HOC ~", HEIGHT / 2);
-			pause = _getch();
+			setColor(background_color, title_color1);
+			printA_Sentence("<-- Nhan nut bat ki de quay lai", HEIGHT - 4);
+			_getch();
 			return;
 		}
 	system("cls");
 	setColor(background_color, red);
 	printA_Sentence("! TAO BUOI DANG KI KHOA HOC THAT BAI !", HEIGHT / 2);
-	pause = _getch();
+	setColor(background_color, title_color1);
+	printA_Sentence("<-- Nhan nut bat ki de quay lai", HEIGHT - 4);
+	_getch();
 }
 
-void nhapNgayGio(Ngay& ngay, Time& t)
-{
-	cout << "-Nhap lan luot ngay, thang, nam : " << endl;
-	do
-	{
-		cout << "Hay nhap: " << endl;
-		cin >> ngay.d >> ngay.m >> ngay.y;//be careful
-		if (cin.fail())
-		{
-			cin.clear();
-			cin.ignore(100, '\n');
-			continue;
-		}
-		else if (NgayHopLe(ngay.d, ngay.m, ngay.y))
-		{
-			break;
-		}
-	} while (true);
-	cout << "-Nhap lan luot gio, phut :" << endl;
-	do
-	{
-		cout << "Hay nhap: " << endl;
-		cin >> t.gio >> t.phut;
-		if (cin.fail())
-		{
-			cin.clear();
-			cin.ignore(100, '\n');
-			continue;
-		}
-		else if (GioHopLe(t))
-		{
-			break;
-		}
-	} while (true);
-}
+//void nhapNgayGio(Ngay& ngay, Time& t)
+//{
+//	cout << "-Nhap lan luot ngay, thang, nam : " << endl;
+//	do
+//	{
+//		cout << "Hay nhap: " << endl;
+//		cin >> ngay.d >> ngay.m >> ngay.y;//be careful
+//		if (cin.fail())
+//		{
+//			cin.clear();
+//			cin.ignore(100, '\n');
+//			continue;
+//		}
+//		else if (NgayHopLe(ngay.d, ngay.m, ngay.y))
+//		{
+//			break;
+//		}
+//	} while (true);
+//	cout << "-Nhap lan luot gio, phut :" << endl;
+//	do
+//	{
+//		cout << "Hay nhap: " << endl;
+//		cin >> t.gio >> t.phut;
+//		if (cin.fail())
+//		{
+//			cin.clear();
+//			cin.ignore(100, '\n');
+//			continue;
+//		}
+//		else if (GioHopLe(t))
+//		{
+//			break;
+//		}
+//	} while (true);
+//}
 
 bool askforsure(ThoiGian& tg, Time& tmBD, Time& tmKT, int ki)
 {
@@ -787,13 +880,17 @@ bool askforsure(ThoiGian& tg, Time& tmBD, Time& tmKT, int ki)
 	printA_Sentence("Ban da tao buoi dang ki khoa hoc ki " + to_string(ki), 10);
 	setColor(background_color, text_color);
 	gotoXY(WIDTH / 3, 13);
-	cout << "--BAT DAU vao luc  :  " << tmBD.gio << "h" << tmBD.phut << "ph";
+	cout << "-- BAT DAU vao luc :  ";
+	gotoXY(WIDTH / 3 + 25, 13);
+	cout<< tmBD.gio << "h" << tmBD.phut << "ph";
 	gotoXY(WIDTH*4 / 7, 13);
-	cout << "Ngay " << tg.ngay_bd.d << '/' << tg.ngay_bd.m << '/' << tg.ngay_bd.y;
+	cout << "ngay " << tg.ngay_bd.d << '/' << tg.ngay_bd.m << '/' << tg.ngay_bd.y;
 	gotoXY(WIDTH / 3, 15);
-	cout << "--KET THUC vao luc  :  " << tmKT.gio << "h" << tmKT.phut << "ph";
+	cout << "-- KET THUC vao luc :  ";
+	gotoXY(WIDTH / 3 + 25, 15);
+	cout << tmKT.gio << "h" << tmKT.phut << "ph";
 	gotoXY(WIDTH*4 / 7, 15);
-	cout << "Ngay " << tg.ngay_kt.d << '/' << tg.ngay_kt.m << '/' << tg.ngay_kt.y;
+	cout << "ngay " << tg.ngay_kt.d << '/' << tg.ngay_kt.m << '/' << tg.ngay_kt.y;
 	return Ask_YN("Ban chac chan muon tao buoi DKKH nay ?");
 }
 
