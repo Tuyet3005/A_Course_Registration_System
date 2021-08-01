@@ -18,4 +18,4 @@ void taoDKKH_Gv(NodeNamHoc* H);
 bool askforsure(ThoiGian& tg, Time& tmBD, Time& tmKT, int ki);
 bool xuatFile_DKKH(ThoiGian tg, Time tmBD, Time tmKT,int ki);
 bool askY_N();
-void nhapNgayGio(Ngay& ngay, Time& t);
+//void nhapNgayGio(Ngay& ngay, Time& t);

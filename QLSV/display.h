@@ -41,3 +41,6 @@ Ngay nhapNgay_nhap(int line);
 void nhapGio_ve(int line);
 
 Time nhapGio_nhap(int line);
+
+//nhap Ngay: func=0 else nhap Gio
+void nhapNgay_Gio_xoa(int line, int func);
