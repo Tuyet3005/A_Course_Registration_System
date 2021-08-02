@@ -64,7 +64,7 @@ bool DocDiemTuFile(string file, NodeMon* mon, int siso);
 void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
 
 void CapNhatDiemSv(ListNamHoc& l);
-float NhapDiem(float diem);
+void NhapDiem(float& diem, int x, int y);//x, y: toa do 
 void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon);
 
 //HIENTHI

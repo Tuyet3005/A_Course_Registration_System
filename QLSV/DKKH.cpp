@@ -623,7 +623,7 @@ void taoDKKH_Gv(NodeNamHoc* H)
 		_getch();
 		return;
 	}
-	if (!sosanhNgay(H->data.hk[ki - 1].tg.ngay_bd, Dnow))
+	if (sosanhNgay(Dnow, H->data.hk[ki - 1].tg.ngay_bd))
 	{
 		setColor(background_color, red);
 		printA_Sentence("! HOC KI NAY CHUA BAT DAU !", HEIGHT / 2 - 1);
@@ -833,42 +833,6 @@ void taoDKKH_Gv(NodeNamHoc* H)
 	printA_Sentence("<-- Nhan nut bat ki de quay lai", HEIGHT - 4);
 	_getch();
 }
-
-//void nhapNgayGio(Ngay& ngay, Time& t)
-//{
-//	cout << "-Nhap lan luot ngay, thang, nam : " << endl;
-//	do
-//	{
-//		cout << "Hay nhap: " << endl;
-//		cin >> ngay.d >> ngay.m >> ngay.y;//be careful
-//		if (cin.fail())
-//		{
-//			cin.clear();
-//			cin.ignore(100, '\n');
-//			continue;
-//		}
-//		else if (NgayHopLe(ngay.d, ngay.m, ngay.y))
-//		{
-//			break;
-//		}
-//	} while (true);
-//	cout << "-Nhap lan luot gio, phut :" << endl;
-//	do
-//	{
-//		cout << "Hay nhap: " << endl;
-//		cin >> t.gio >> t.phut;
-//		if (cin.fail())
-//		{
-//			cin.clear();
-//			cin.ignore(100, '\n');
-//			continue;
-//		}
-//		else if (GioHopLe(t))
-//		{
-//			break;
-//		}
-//	} while (true);
-//}
 
 bool askforsure(ThoiGian& tg, Time& tmBD, Time& tmKT, int ki)
 {

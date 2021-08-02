@@ -690,7 +690,7 @@ void background()
 	cout << "                                               XXXX                       XXXX                XXX              XXX              XXXX       " << endl;
 	setColor(background_color, text_color);
 	cout << endl;
-	cout << "                                                                     Course & Student Management System";
+	cout << "                                                               The Courses & Students Management System";
 
 }
 

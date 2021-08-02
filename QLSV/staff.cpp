@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include"staff.h"
-#include<iostream>
-using namespace std;
+
 //GIAO VU
 int InMenuGv()
 {
@@ -2025,8 +2024,9 @@ void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai
 			if (!ofs.is_open())
 			{
 				ofs.close();
-				setColor(background_color, text_color);
+				setColor(background_color, red);
 				printA_Sentence("Khong the tao file dssv mon " + temp->data.id + " theo duong dan ban vua nhap", HEIGHT / 2 - 3);
+				_getch();
 				f.close();
 				system("cls");
 				if (!Ask_YN("Ban co muon tiep tuc xuat cac mon khac ?"))
@@ -2084,7 +2084,7 @@ void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk) //nam, hk <hien tai
 	}
 	setColor(background_color, title_color);
 	system("cls");
-	printA_Sentence("~ XUAT FILE DSSV CAC MON THANH CONG ~", HEIGHT / 2 - 1);
+	printA_Sentence("~ XUAT FILE THANH CONG ~", HEIGHT / 2 - 1);
 }
 bool DocDiemTuFile(string file, NodeMon* mon, int siso)// doc tu file tai len he thong
 {
@@ -2275,7 +2275,8 @@ void NhapDiemTuFile(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk)
 		printA_Sentence("~ NHAP DIEM TU FILE THANH CONG ~", HEIGHT / 2 - 1);
 	}
 }
-string NextLine(string& data)
+//line <tra ve>: dong hien tai, data: dong tiep theo
+string NextLine(string& data) 
 {
 	size_t pos = data.find('\n');
 	string line = data.substr(0, pos);
@@ -2284,50 +2285,83 @@ string NextLine(string& data)
 }
 
 //sua diem
-float NhapDiem(float diem)
+
+//float NhapDiem(float diem)
+//{
+//	int x = whereX();
+//	int y = whereY();
+//	char c;
+//	string s = "";
+//	gotoXY(x, y);
+//	do
+//	{
+//		c = _getch();
+//		if (c == '\b')//nhan phim backspace 
+//		{
+//			if (s == "")
+//			{
+//				gotoXY(x, y);
+//				continue;
+//			}
+//			gotoXY(whereX() - 1, y);
+//			cout << " ";
+//			gotoXY(whereX() - 1, y);//quay lai vi tri " "
+//			s.pop_back();
+//		}
+//		else if (c == '\r' || c == '\n')
+//		{
+//			if (s == "")
+//				continue;
+//			if (diem < 0 || diem>10)
+//			{
+//				setColor(background_color, red);
+//				printA_Sentence("Diem khong hop le!", y + 1);
+//				_getch();
+//				printA_Sentence("                           ", y + 1);
+//				gotoXY(x, y);
+//				cout << "                       ";
+//				gotoXY(x, y);
+//				continue;
+//			}
+//			diem = stof(s);
+//			return diem;
+//		}
+//		else if (c >= 48 && c <= 57)
+//		{
+//			s += c;
+//			cout << c;
+//		}
+//	} while (true);
+//}
+void NhapDiem(float& diem, int x, int y)//x, y: toa do 
 {
-	int x = whereX();
-	int y = whereY();
-	char c;
-	string s = "";
-	gotoXY(x, y);
 	do
 	{
-		c = _getch();
-		if (c == '\b')//nhan phim backspace 
+		string nhap;
+		gotoXY(x + 25, y);
+		getline(cin, nhap);
+		if (nhap == "")
 		{
-			if (s == "")
-			{
-				gotoXY(x, y);
-				continue;
-			}
-			gotoXY(whereX() - 1, y);
-			cout << " ";
-			gotoXY(whereX() - 1, y);//quay lai vi tri " "
-			s.pop_back();
+			return;
 		}
-		else if (c == '\r' || c == '\n')
+		else
 		{
-			if (s == "")
-				continue;
+			try
+			{
+				diem = stof(nhap);
+			}
+			catch (invalid_argument)
+			{
+				diem = -1;
+			}
 			if (diem < 0 || diem>10)
 			{
-				setColor(background_color, red);
-				printA_Sentence("Diem khong hop le!", y + 1);
-				_getch();
-				printA_Sentence("                           ", y + 1);
-				gotoXY(x, y);
-				cout << "                       ";
-				gotoXY(x, y);
-				continue;
+				cin.clear();
+				gotoXY(x + 25, y);
+				cout << "                                    ";
 			}
-			diem = stof(s);
-			return diem;
-		}
-		else if (c >= 48 && c <= 57)
-		{
-			s += c;
-			cout << c;
+			else
+				break;
 		}
 	} while (true);
 }
@@ -2352,14 +2386,15 @@ void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon)
 	{
 		if (wrote)
 			file << '\n';
-		line = NextLine(data);
 
+		line = NextLine(data);
+		//check co sua thong tin?
 		if (line.find(to_string(node_sv_mon->mssv) + "," + node_sv_mon->lop + ",") == 0)
 		{
-			file << node_sv_mon->mssv << ',' << node_sv_mon->lop << ',' << "R" << ','
+			file << node_sv_mon->mssv << ',' << node_sv_mon->lop << ','
 				<< node_sv_mon->diem.gk << ','
 				<< node_sv_mon->diem.ck << ','
-				<< node_sv_mon->diem.gk << ','
+				<< node_sv_mon->diem.cong << ','
 				<< node_sv_mon->diem.tongket << ',';
 			success = true;
 		}
@@ -2367,13 +2402,14 @@ void LuuDiemSv(string filename, NodeSv_Mon* node_sv_mon)
 		{
 			file << line;
 		}
+		wrote = true;
 	}
-	if (!success)
-		file << node_sv_mon->mssv << ',' << node_sv_mon->lop << ',' << "R" << ','
+	/*if (!success)
+		file << node_sv_mon->mssv << ',' << node_sv_mon->lop << ','
 		<< node_sv_mon->diem.gk << ','
 		<< node_sv_mon->diem.ck << ','
-		<< node_sv_mon->diem.gk << ','
-		<< node_sv_mon->diem.tongket << ',';
+		<< node_sv_mon->diem.cong << ','
+		<< node_sv_mon->diem.tongket << ',';*/
 	file.close();
 }
 void CapNhatDiemSv(ListNamHoc& l)
@@ -2411,41 +2447,34 @@ void CapNhatDiemSv(ListNamHoc& l)
 		setColor(background_color, title_color1);
 		printA_Sentence("Nhap thong tin moi. De trong va nhan enter de giu nguyen", 9);
 		setColor(background_color, text_color);
-		int x = WIDTH / 3 + 5, y = 11;
+		int x = WIDTH / 3 + 5, y = 12;
 		Diem& diem = node_sv_mon->diem;
-		string input = "-1";
+
 		gotoXY(x, y);
 		cout << "Diem giua ky (" << diem.gk << "): ";
-		gotoXY(x + 25, y);
-		getline(cin, input);
-		try
-		{
-			diem.gk = NhapDiem(stof(input));
-		}
-		catch (invalid_argument) {}
+		NhapDiem(diem.gk, x, y);
 		y += 2;
+
 		gotoXY(x, y);
 		cout << "Diem cuoi ky (" << diem.ck << "): ";
-		gotoXY(x + 25, y);
-		getline(cin, input);
-		try
-		{
-			diem.ck = NhapDiem(stof(input));
-		}
-		catch (invalid_argument) {}
+		NhapDiem(diem.gk, x, y);
 		y += 2;
+
 		gotoXY(x, y);
 		cout << "Diem cong (" << diem.cong << "): ";
-		gotoXY(x + 25, y);
-		getline(cin, input);
-		try
-		{
-			diem.cong = NhapDiem(stof(input));
-		}
-		catch (invalid_argument) {}
+		NhapDiem(diem.gk, x, y);
+		y += 2;
 
+		gotoXY(x, y);
 		diem.tongket = min((diem.gk + diem.ck * 2.0) / 3 + diem.cong / 10, 10.0);
-		string filename = to_string(nam->data.tg.ngay_bd.y) + "hk" + to_string(ki) + pMon->data.tenMon + ".txt";
+		cout << "Diem tong ket:";
+		gotoXY(x + 25, y); 
+		cout << diem.tongket;
+		
+		y += 2;
+		gotoXY(x, y);
+		cout << "TK = (GK + CK * 2)/3 + CONG/10).   (( TK > 10 --> TK = 10 ))";
+		string filename = to_string(nam->data.tg.ngay_bd.y) + "hk" + to_string(ki) + pMon->data.id + ".txt";
 		LuuDiemSv(filename, node_sv_mon);
 		setColor(background_color, title_color);
 		printA_Sentence("~ CAP NHAT DIEM THANH CONG ~", HEIGHT - 4);
