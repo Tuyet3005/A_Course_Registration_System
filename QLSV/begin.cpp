@@ -46,7 +46,6 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 		if (Ask_YN("Ban se DANG XUAT ra khoi tai khoan nay?"))
 		{
 			gotoXY(0, HEIGHT - 4);
-			//cin.ignore(100, '\n');
 			return true;
 		}
 		break;
@@ -75,7 +74,7 @@ bool Ask_YN(string cauhoi)//hang in ra cau hoi
 	return LuaChon_Menu(2, title, 4, HEIGHT / 2) - 2;
 }
 
-//NAM HOC nb
+//NAM HOC 
 void TaiData_Nam(ListNamHoc& l)
 {
 	fstream f;

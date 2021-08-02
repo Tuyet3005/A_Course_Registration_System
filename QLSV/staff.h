@@ -43,7 +43,7 @@ int InMenuCapNhat();
 int InMenuCapNhat2(); //muc 2 cua menu cap nhat chinh
 int InMenuCapNhat3(); //muc 3 cua menu cap nhat chinh
 //them sv
-void NhapThongtinSv(NodeSv_Lop* n, int i);
+void NhapThongtinSv(NodeSv_Lop* n, int i, int k);//i: stt them sv ; k: k19, k20...
 bool checkTrungSv(NodeSv_Lop* n, NodeSv_Lop* head);
 void GhiThongtinSv(NodeLop* nodeLop, NodeSv_Lop* n);
 void ThemNodeSvLop(NodeSv_Lop*& headSvLop, NodeSv_Lop* nodeSv);
@@ -53,11 +53,11 @@ void ThemSvLopNam1(ListNamHoc& l);
 //sua info mon
 void GhiFileMon(string filename, NodeMon* mon, bool remove);
 void CapNhatMonHoc(ListNamHoc& l);
-NodeMon* timNodeMon_CapNhat(ListNamHoc& l, int& nam, int& ki, NodeMon*& headmonHK);
+NodeMon* timNodeMon_CapNhat(ListNamHoc& l, NodeNamHoc*& NodeNam, int& ki, NodeMon*& headmonHK);
 //xoa mon
 void XoaMonHoc(ListNamHoc& l);
 //xoa mon ra khoi ds mon cua sv (neu co sv dang ky)
-bool XoaMon_sv(ListNamHoc& l, NodeMon*& headmonHK, NodeMon* mon, int nam, int ki);
+bool XoaMon_Sv(ListNamHoc& l, NodeNamHoc* nodeNam, int ki, NodeMon*& headmonHK, NodeMon* mon);
 //diem 
 void XuatFileCsv(NodeNamHoc* nodeNam, HocKy* hk, int stt_hk);
 bool DocDiemTuFile(string file, NodeMon* mon, int siso);

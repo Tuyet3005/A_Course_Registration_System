@@ -126,7 +126,7 @@ void LogIn(string& tk, string& mk, bool& lc)
 	}
 	cout << endl;
 	setColor(background_color, text_color);
-	system("pause");
+	_getch();
 }
 
 bool changePass(bool role, string tk, string& mk)

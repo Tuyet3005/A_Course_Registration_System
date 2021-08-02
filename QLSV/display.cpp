@@ -126,7 +126,7 @@ void BackGround()
 	cout << "        XXX        XXX            XXX         XXX           XXX              XXX          XXX        XXX     " << endl;
 	cout << "             XXXX                      XXXX                 XXX              XXX              XXXX         " << endl;
 	cout << endl;
-	cout << "                                     Course & Student Management System";
+	cout << "                                  The Courses & Students Management System";
 	gotoXY(0, 15);
 }
 
