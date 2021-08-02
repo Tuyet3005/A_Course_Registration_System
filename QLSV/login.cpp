@@ -51,6 +51,53 @@ string typePass()
 	return pass;
 }
 
+string typeAccount()
+{
+	int x = whereX();
+	int y = whereY();
+	string acc = "";
+	int x_now = x, y_now = y;
+	do
+	{
+		char c = _getch();
+		if (c == '\b')//nhan phim backspace 
+		{
+			if (acc.length() == 0)
+			{
+				gotoXY(x, y);
+				continue;
+			}
+			gotoXY(whereX() - 1, y);
+			cout << " ";
+			gotoXY(whereX() - 1, y);//quay lai vi tri " "
+			acc.pop_back();
+		}
+		else if (c == '\r' || c == '\n')
+		{
+			return acc;
+		}
+		else
+		{
+			if (acc.length() >= 25)//ko dc enter khi mk it hon 5 ki tu 
+			{
+				x_now = whereX();
+				y_now = whereY();
+				setColor(background_color, red);
+				printA_Sentence("! TAI KHOAN KHONG HOP LE !", HEIGHT - 6);
+				setColor(background_color, text_color);
+				_getch();
+				printA_Sentence("                                             ", HEIGHT - 6);
+				gotoXY(x_now, y_now);
+			}
+			else
+			{
+				acc += c;
+				cout << c;
+			}
+		}
+	} while (true);
+}
+
 bool checkAccount(string tk, string mk, bool lc)
 {
 	ifstream f;
@@ -80,18 +127,18 @@ void LogIn(string& tk, string& mk, bool& lc)
 	system("cls");
 	background_Login();
 	setColor(background_color, title_color1);
+	veHCN(78, HEIGHT / 2 + 2, 78 + 32, HEIGHT / 2 + 4);
+	veHCN(78, HEIGHT / 2 + 6, 78 + 32, HEIGHT / 2 + 8);
 	gotoXY(65, HEIGHT / 2 + 3);
 	cout << "Tai khoan: ";
 	gotoXY(65, HEIGHT / 2 + 7);
 	cout << "Mat khau: ";//check mk bnh ki tu
 	setColor(background_color, text_color);
 	char dem = 0;
-	char pause;
 	while (dem < 5)
 	{
 		gotoXY(80, HEIGHT / 2 + 3);
-		cin >> tk;
-		cin.ignore();//xoa \n
+		tk = typeAccount();
 		gotoXY(80, HEIGHT / 2 + 7);
 		cin.clear();
 		mk = typePass();
@@ -101,7 +148,7 @@ void LogIn(string& tk, string& mk, bool& lc)
 			setColor(background_color, red);
 			printA_Sentence("! MAT KHAU HOAC TAI KHOAN KHONG DUNG !", HEIGHT - 6);
 			setColor(background_color, text_color);
-			pause = _getch();
+			_getch();
 			printA_Sentence("                                          ", HEIGHT - 6);
 			gotoXY(80, HEIGHT / 2 + 3);
 			cout << "                                          ";
@@ -126,7 +173,7 @@ void LogIn(string& tk, string& mk, bool& lc)
 	}
 	cout << endl;
 	setColor(background_color, text_color);
-	system("pause");
+	_getch();
 }
 
 bool changePass(bool role, string tk, string& mk)

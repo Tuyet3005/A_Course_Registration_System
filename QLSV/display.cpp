@@ -678,34 +678,35 @@ void viewInfoGV(Sv A)
 void background()
 {
 	cout << "Chao mung ban den voi he thong quan li sinh vien...";
-	gotoXY(0, 6);
+	gotoXY(0, 4);
 	setColor(background_color, title_color);
-	cout << "                                              XXXX                       XXXX                 XXXX            XXXX            XXXX         " << endl;
-	cout << "                                         XXX         XX              XXX        XX            XXX  XXX    XXX  XXX        XXX        XX    " << endl;
-	cout << "                                      XXX                            XXX                      XXX      XXX     XXX        XXX              " << endl;
-	cout << "                                    XXX                                   XXX                 XXX       X      XXX              XXX        " << endl;
-	cout << "                                    XXX                                          XXX          XXX              XXX                    XXX  " << endl;
-	cout << "                                      XXX                XX        XX              XXX        XXX              XXX        XX            XXX" << endl;
-	cout << "                                          XXX        XXX            XXX          XXX          XXX              XXX          XXX        XXX " << endl;
-	cout << "                                               XXXX                       XXXX                XXX              XXX              XXXX       " << endl;
+	cout<<"                                                               ___           ___           ___           ___     "<<endl;
+	cout<<"                                                              /  /\\         /  /\\         /__/\\         /  /\\    "<<endl;
+	cout<<"                                                             /  /:/        /  /:/_       |  |::\\       /  /:/_   "<<endl;
+	cout<<"                                                            /  /:/        /  /:/ /\\      |  |:|:\\     /  /:/ /\\  "<<endl;
+	cout<<"                                                           /  /:/  ___   /  /:/ /::\\   __|__|:|\\:\\   /  /:/ /::\\ "<<endl;
+	cout<<"                                                          /__/:/  /  /\\ /__/:/ /:/\\:\\ /__/::::| \\:\\ /__/:/ /:/\\:\\"<<endl;
+	cout<<"                                                          \\  \\:\\ /  /:/ \\  \\:\\/:/~/:/ \\  \\:\\~~\\__\\/ \\  \\:\\/:/~/:/"<<endl;
+	cout<<"                                                           \\  \\:\\  /:/   \\  \\::/ /:/   \\  \\:\\        \\  \\::/ /:/ "<<endl;
+	cout<<"                                                            \\  \\:\\/:/     \\__\\/ /:/     \\  \\:\\        \\__\\/ /:/  "<<endl;
+	cout<<"                                                             \\  \\::/        /__/:/       \\  \\:\\         /__/:/   "<<endl;
+	cout<<"                                                              \\__\\/         \\__\\/         \\__\\/         \\__\\/    "<<endl;
 	setColor(background_color, text_color);
-	cout << endl;
-	cout << "                                                                     Course & Student Management System";
-
+	cout << endl << endl;
+	cout << "                                                                     Courses & Students Management System";
 }
 
 void background_Sv()
 {
 	setColor(background_color, title_color);
-	gotoXY(0, 6);
-	cout << "                                      xxxxx     xx  xxxxx       xx   xxx       xx         xxx             xx   xx   xxxxxxxxxx  xxxxx       xx" << endl;
-	cout << "                                   xxx     xx   xx  xxx xx      xx   xxx       xx          xxx           xx    xx   xxx         xxx xx      xx" << endl;
-	cout << "                                  xxx           xx  xxx  xx     xx   xxx       xx           xxx         xx     xx   xxx         xxx  xx     xx" << endl;
-	cout << "                                     xxxx       xx  xxx   xx    xx   xxx       xx            xxx       xx      xx   xxxxxx      xxx   xx    xx" << endl;
-	cout << "                                         xxxx   xx  xxx    xx   xx   xxxxxxxxxxxx             xxx     xx       xx   xxxxxx      xxx    xx   xx" << endl;
-	cout << "                                 xx         xxx xx  xxx     xx  xx   xxxxxxxxxxxx              xxx   xx        xx   xxx         xxx     xx  xx" << endl;
-	cout << "                                  xxx      xxx  xx  xxx      xx xx   xxx       xx               xxx xx         xx   xxx         xxx      xx xx" << endl;
-	cout << "                                      xxxx      xx  xxx       xxxx   xxx       xx                xxxx          xx   xxxxxxxxxxx xxx       xxxx" << endl;
+	gotoXY(0, 7);       
+	cout<<"                                    _                 _______  ___   __    _  __   __    __   __  ___   _______  __    _                _    "<<endl;
+	cout<<"                                  _| |_              |       ||   | |  |  | ||  | |  |  |  | |  ||   | |       ||  |  | |             _| |_  "<<endl;
+	cout<<"                                 |_   _|             |  _____||   | |   |_| ||  |_|  |  |  |_|  ||   | |    ___||   |_| |            |_   _| "<<endl;
+	cout<<"                                   |_|               | |_____ |   | |       ||       |  |       ||   | |   |___ |       |              |_|   "<<endl;
+	cout<<"                                                     |_____  ||   | |  _    ||       |  |       ||   | |    ___||  _    |                    "<<endl;
+	cout<<"                                                      _____| ||   | | | |   ||   _   |   |     | |   | |   |___ | | |   |                    "<<endl;
+	cout<<"                                                     |_______||___| |_|  |__||__| |__|    |___|  |___| |_______||_|  |__|                    "<<endl;
 	cout << endl << endl;
 	setColor(background_color, text_color);
 }
@@ -713,15 +714,14 @@ void background_Sv()
 void background_Gv()
 {
 	setColor(background_color, title_color);
-	gotoXY(0, 6);
-	cout << "                                           xxxxx       xx         xxxx               xxxxx              xxx             xx  xxx          xx" << endl;
-	cout << "                                        xxx      xx    xx        xxx xx          xxx        xx           xxx           xx   xxx          xx" << endl;
-	cout << "                                      xxx              xx       xxx   xx       xxx            xx          xxx         xx    xxx          xx" << endl;
-	cout << "                                     xxx               xx      xxx     xx     xxx              xx          xxx       xx     xxx          xx" << endl;
-	cout << "                                     xxx         xxxxx xx     xxxxxxxxxxxx    xxx              xx           xxx     xx      xxx          xx" << endl;
-	cout << "                                      xxx         xxx  xx    xxxxxxxxxxxxxx    xxx            xx             xxx   xx       xxx          xx" << endl;
-	cout << "                                        xxx    xxxxxx  xx   xxx           xx      xxx      xx                 xxx xx         xxxx       xx " << endl;
-	cout << "                                           xxxxx  xxx  xx  xxx             xx         xxxxx                    xxxx            xxxxxxxxx   " << endl;
+	gotoXY(0, 6);                    
+	cout<<"                                               _             _______  ___   _______  _______    __   __  __   __            _    "<<endl;
+	cout<<"                                             _| |_          |       ||   | |   _   ||       |  |  | |  ||  | |  |         _| |_  "<<endl;
+	cout<<"                                            |_   _|         |    ___||   | |  |_|  ||   _   |  |  |_|  ||  | |  |        |_   _| "<<endl;
+	cout<<"                                              |_|           |   | __ |   | |       ||  | |  |  |       ||  |_|  |          |_|   "<<endl;
+	cout<<"                                                            |   ||  ||   | |       ||  |_|  |  |       ||       |                "<<endl;
+	cout<<"                                                            |   |_| ||   | |   _   ||       |   |     | |       |                "<<endl;
+	cout<<"                                                            |_______||___| |__| |__||_______|    |___|  |_______|                "<<endl;
 	setColor(background_color, text_color);
 	cout << endl << endl;
 }
@@ -729,15 +729,14 @@ void background_Gv()
 void background_Login()
 {
 	setColor(background_color, title_color);
-	gotoXY(0, 7);
-	cout << "                       xxxxxxxx             xxxx         xxxxx       xx         xxx            xxxx        xx  xxx        xx        xxxx         xxxxxxxx    " << endl;
-	cout << "                       xxx     xxx         xxx xx        xxx xx      xx     xxx    xx          xxx xx      xx  xxx        xx       xxx xx        xxx    xxx  " << endl;
-	cout << "                       xxx       xx       xxx   xx       xxx  xx     xx   xxx                  xxx  xx     xx  xxx        xx      xxx   xx       xxx      xx " << endl;
-	cout << "                       xxx        xx     xxxxxxxxxx      xxx   xx    xx  xxx                   xxx   xx    xx  xxxxxxxxxxxxx     xxxxxxxxxx      xxx    xxx  " << endl;
-	cout << "                       xxx        xx    xxxxxxxxxxxx     xxx    xx   xx  xxx     xxxxxx        xxx    xx   xx  xxxxxxxxxxxxx    xxxxxxxxxxxx     xxxxxxx     " << endl;
-	cout << "                       xxx       xx    xxx         xx    xxx     xx  xx   xxx       xxx        xxx     xx  xx  xxx        xx   xxx         xx    xxx         " << endl;
-	cout << "                       xxx     xxx    xxx           xx   xxx      xx xx     xxx    xxxx        xxx      xx xx  xxx        xx  xxx           xx   xxx         " << endl;
-	cout << "                       xxxxxxxx      xxx             xx  xxx       xxxx       xxxxx xxx        xxx        xxx  xxx        xx xxx             xx  xxx         " << endl;
+	gotoXY(0, 8);                              
+	cout<<"                                                    ______   _______  __    _  _______    __    _  __   __  _______  _______                "<<endl;
+	cout<<"                                                   |      | |   _   ||  |  | ||       |  |  |  | ||  | |  ||   _   ||       |               "<<endl;
+	cout<<"                                     ____          |  _    ||  |_|  ||   |_| ||    ___|  |   |_| ||  |_|  ||  |_|  ||    _  |         ____  "<<endl;
+	cout<<"                                    |____|         | | |   ||       ||       ||   | __   |       ||       ||       ||   |_| |        |____| "<<endl;
+	cout<<"                                                   | |_|   ||       ||  _    ||   ||  |  |  _    ||       ||       ||    ___|               "<<endl;
+	cout<<"                                                   |       ||   _   || | |   ||   |_| |  | | |   ||   _   ||   _   ||   |                   "<<endl;
+	cout<<"                                                   |______| |__| |__||_|  |__||_______|  |_|  |__||__| |__||__| |__||___|                   "<<endl;
 	setColor(background_color, text_color);
 	cout << endl << endl;
 }
