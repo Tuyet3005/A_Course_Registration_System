@@ -53,13 +53,16 @@ string typePass()
 
 string typeAccount()
 {
+	string acc = "";
+	//luu toa do ban dau 
 	int x = whereX();
 	int y = whereY();
-	string acc = "";
-	int x_now = x, y_now = y;
+	int x_now = x;
+	int y_now = y;
+	char c;
 	do
 	{
-		char c = _getch();
+		c = _getch();
 		if (c == '\b')//nhan phim backspace 
 		{
 			if (acc.length() == 0)
@@ -80,14 +83,12 @@ string typeAccount()
 		{
 			if (acc.length() >= 25)//ko dc enter khi mk it hon 5 ki tu 
 			{
-				x_now = whereX();
-				y_now = whereY();
 				setColor(background_color, red);
 				printA_Sentence("! TAI KHOAN KHONG HOP LE !", HEIGHT - 6);
 				setColor(background_color, text_color);
 				_getch();
 				printA_Sentence("                                             ", HEIGHT - 6);
-				gotoXY(x_now, y_now);
+				gotoXY(x+25, y);
 			}
 			else
 			{
@@ -135,10 +136,13 @@ void LogIn(string& tk, string& mk, bool& lc)
 	cout << "Mat khau: ";//check mk bnh ki tu
 	setColor(background_color, text_color);
 	char dem = 0;
+	char pause;
 	while (dem < 5)
 	{
 		gotoXY(80, HEIGHT / 2 + 3);
 		tk = typeAccount();
+		//cin >> tk;
+		//cin.ignore();//xoa \n
 		gotoXY(80, HEIGHT / 2 + 7);
 		cin.clear();
 		mk = typePass();
@@ -148,7 +152,7 @@ void LogIn(string& tk, string& mk, bool& lc)
 			setColor(background_color, red);
 			printA_Sentence("! MAT KHAU HOAC TAI KHOAN KHONG DUNG !", HEIGHT - 6);
 			setColor(background_color, text_color);
-			_getch();
+			pause = _getch();
 			printA_Sentence("                                          ", HEIGHT - 6);
 			gotoXY(80, HEIGHT / 2 + 3);
 			cout << "                                          ";

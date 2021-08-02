@@ -30,7 +30,7 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 			viewInfoGV(taiTT_GV(tk));
 		setColor(background_color, title_color1);
 		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
-		char pause = _getch();
+		_getch();
 		break;
 	}
 	case 3:
