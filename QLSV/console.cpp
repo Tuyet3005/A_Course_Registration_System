@@ -69,7 +69,7 @@ void SetConsole()
 {
 	resizeConsole(1980, 1080);
 	DisableResizeWindow();
-	SetConsoleTitle(L"The Courses & Students Management System");
+	SetConsoleTitle(L"- The Courses & Students Management System - @gaITeam");
 	ShowScrollbar(0);
 }
 void SetFontSize(int size)

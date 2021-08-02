@@ -63,6 +63,8 @@ Sv findInfo(string tenlop, int tk)//tim Info sv trong file Lop
 void SinhVien(ListNamHoc& l, int tk)
 {
 	NodeNamHoc* t = NodeNamHienTai(l);
+	if (t == NULL)
+		return;
 	int namhientai = t->data.tg.ngay_bd.y;
 	string tenlop = timLop(tk);
 	NodeLop* plop = NULL;

@@ -543,7 +543,6 @@ void DKKH_Sv(NodeNamHoc* HT, NodeSv_Lop*& A, int lc)
 		}
 	}
 	setColor(background_color, title_color1);
-	printA_Sentence("<-- Nhan phim bat ki de quay lai", whereY()+3);
 	char pause = _getch();
 }
 

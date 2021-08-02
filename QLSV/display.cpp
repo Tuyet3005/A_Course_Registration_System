@@ -130,7 +130,7 @@ void BackGround()
 	gotoXY(0, 15);
 }
 
-int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
+int viewDsMonHk(NodeMon* head, int ki)//head la headMonHK
 {
 	int nam = NHhientai_nambd();
 	system("cls");
@@ -143,7 +143,7 @@ int viewDsMonHk(NodeMon* head, int ki)//đưa dô head moon của struct hk
 	if (head == NULL)
 	{
 		setColor(background_color, text_color);
-		printA_Sentence("Hien chua cap nhat du lieu...", whereY());
+		printA_Sentence("Hien chua co du lieu...", whereY());
 		return 0;
 	}
 	string title[] = { "STT", "ID","TEN MON HOC","TEN GIANG VIEN","SO TIN CHI","SO SV TOI DA","LICH HOC" };
@@ -690,7 +690,7 @@ void background()
 	cout << "                                               XXXX                       XXXX                XXX              XXX              XXXX       " << endl;
 	setColor(background_color, text_color);
 	cout << endl;
-	cout << "                                                                     Course & Student Management System";
+	cout << "                                                                  The Courses & Students Management System";
 
 }
 

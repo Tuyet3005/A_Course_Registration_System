@@ -46,7 +46,6 @@ bool XlMenuBD(int chon, bool role, string tk, string& mk, ListNamHoc& l)//false 
 		if (Ask_YN("Ban se DANG XUAT ra khoi tai khoan nay?"))
 		{
 			gotoXY(0, HEIGHT - 4);
-			cin.ignore(100, '\n');
 			return true;
 		}
 		break;
