@@ -51,6 +51,59 @@ string typePass()
 	return pass;
 }
 
+string typeAccount()
+{
+	string acc = "";
+	//luu toa do ban dau 
+	int x = whereX();
+	int y = whereY();
+	int x_now = x;
+	int y_now = y;
+	char c;
+	do
+	{
+		c = _getch();
+		if (c == '\b')//nhan phim backspace 
+		{
+			if (acc.length() == 0)
+			{
+				gotoXY(x, y);
+				continue;
+			}
+			gotoXY(whereX() - 1, y);
+			cout << " ";
+			gotoXY(whereX() - 1, y);//quay lai vi tri " "
+			acc.pop_back();
+		}
+		else if (c == '\r' || c == '\n')
+		{
+			if (acc.length() == 0)
+			{
+				gotoXY(x, y);
+				continue;
+			}
+			return acc;
+		}
+		else
+		{
+			if (acc.length() >= 25)//ko dc enter khi mk it hon 5 ki tu 
+			{
+				setColor(background_color, red);
+				printA_Sentence("! TAI KHOAN KHONG HOP LE !", HEIGHT - 6);
+				setColor(background_color, text_color);
+				_getch();
+				printA_Sentence("                                             ", HEIGHT - 6);
+				gotoXY(x + 25, y);
+			}
+			else
+			{
+				acc += c;
+				cout << c;
+			}
+		} 
+	} while (true);
+}
+
 bool checkAccount(string tk, string mk, bool lc)
 {
 	ifstream f;
@@ -80,20 +133,22 @@ void LogIn(string& tk, string& mk, bool& lc)
 	system("cls");
 	background_Login();
 	setColor(background_color, title_color1);
+	veHCN(78, HEIGHT / 2 + 2, 78 + 32, HEIGHT / 2 + 4);
+	veHCN(78, HEIGHT / 2 + 6, 78 + 32, HEIGHT / 2 + 8);
 	gotoXY(65, HEIGHT / 2 + 3);
 	cout << "Tai khoan: ";
 	gotoXY(65, HEIGHT / 2 + 7);
 	cout << "Mat khau: ";//check mk bnh ki tu
 	setColor(background_color, text_color);
 	char dem = 0;
-	char pause;
 	while (dem < 5)
 	{
 		gotoXY(80, HEIGHT / 2 + 3);
-		cin >> tk;
-		cin.ignore();//xoa \n
+		//cin >> tk;
+		//cin.ignore();//xoa \n
+		tk = typeAccount();
 		gotoXY(80, HEIGHT / 2 + 7);
-		cin.clear();
+		//cin.clear();
 		mk = typePass();
 		if (checkAccount(tk, mk, lc)) break;
 		else
@@ -101,12 +156,12 @@ void LogIn(string& tk, string& mk, bool& lc)
 			setColor(background_color, red);
 			printA_Sentence("! MAT KHAU HOAC TAI KHOAN KHONG DUNG !", HEIGHT - 6);
 			setColor(background_color, text_color);
-			pause = _getch();
+			_getch();
 			printA_Sentence("                                          ", HEIGHT - 6);
 			gotoXY(80, HEIGHT / 2 + 3);
-			cout << "                                          ";
+			cout << "                          ";
 			gotoXY(80, HEIGHT / 2 + 7);
-			cout << "                                          ";
+			cout << "                          ";
 		}
 		dem++;
 	}
@@ -116,7 +171,7 @@ void LogIn(string& tk, string& mk, bool& lc)
 		printA_Sentence("! DANG NHAP THAT BAI !", HEIGHT - 7);
 		printA_Sentence("Nhap sai 5 lan... Ban bi buoc thoat", HEIGHT - 5);
 		cout << endl;
-		system("pause");
+		_getch();
 		exit(0);
 	}
 	else
@@ -135,7 +190,6 @@ bool changePass(bool role, string tk, string& mk)
 	system("cls");
 	setColor(background_color, title_color);
 	printA_Sentence("~ DOI MAT KHAU ~", 5);
-	char pause;
 	gotoXY(50, 12);
 	setColor(background_color, title_color1);
 	cout << "Nhap mat khau cu: ";
@@ -152,7 +206,7 @@ bool changePass(bool role, string tk, string& mk)
 			setColor(background_color, red);
 			printA_Sentence("! MAT KHAU KHONG DUNG !", HEIGHT - 6);
 			setColor(background_color, text_color);
-			pause = _getch();
+			_getch();
 			printA_Sentence("                                          ", HEIGHT - 6);
 			gotoXY(80, 12);
 			cout << "                                                     ";
@@ -176,7 +230,7 @@ bool changePass(bool role, string tk, string& mk)
 			setColor(background_color, red);
 			printA_Sentence("! MAT KHAU MOI PHAI KHAC VOI MAT KHAU CU !", HEIGHT - 6);
 			setColor(background_color, text_color);
-			pause = _getch();
+			_getch();
 			printA_Sentence("                                          ", HEIGHT - 6);
 			gotoXY(80, 15);
 			cout << "                                                     ";
@@ -193,7 +247,7 @@ bool changePass(bool role, string tk, string& mk)
 		setColor(background_color, red);
 		printA_Sentence("! MAT KHAU VUA NHAP KHONG KHOP !", HEIGHT - 6);
 		setColor(background_color, text_color);
-		pause = _getch();
+		_getch();
 		printA_Sentence("                                          ", HEIGHT - 6);
 		gotoXY(80, 18);
 		cout << "                                                     ";
@@ -207,7 +261,7 @@ bool changePass(bool role, string tk, string& mk)
 		printA_Sentence("! DOI MAT KHAU THAT BAI !", HEIGHT /2);
 		setColor(background_color, title_color1);
 		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT -4);
-		pause = _getch();
+		_getch();
 		return false;
 	}
 	ifstream f;
@@ -271,6 +325,6 @@ bool changePass(bool role, string tk, string& mk)
 	printA_Sentence("~ DOI MAT KHAU THANH CONG ~", HEIGHT / 2);
 	setColor(background_color, title_color1);
 	printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 4);
-	pause = _getch();
+	_getch();
 	return true;
 }
