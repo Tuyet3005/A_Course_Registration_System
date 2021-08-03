@@ -12,7 +12,7 @@ int viewDsLop(NodeLop* head);
 void viewInfoSv(Sv A);
 int viewMondaDk(NodeMon_Sv* A, int ki,int line);
 int viewSvScore(NodeSv_Lop* sv, int ki);
-bool tinhGPA_SvvaLop(NodeLop* t, int ki);
+void tinhGPA_SvvaLop(NodeLop* t, int ki);
 int viewDiem_Lop(NodeLop* A, int ki);
 void viewInfoGV(Sv A);
 

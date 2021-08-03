@@ -193,7 +193,7 @@ bool XlTaoMoi(int chon, ListNamHoc& l)
 }
 
 //nam hoc
-NodeNamHoc* TaoNodeNam()
+NodeNamHoc* TaoNodeNam(ListNamHoc& l)
 {
 	NodeNamHoc* n = new NodeNamHoc;
 	int nam_bd;
@@ -264,6 +264,8 @@ NodeNamHoc* TaoNodeNam()
 	f.clear();
 	f << nam_bd << ',';
 	f.close();
+	//tai data lop n234
+	TaiNam234(l.pTail, n);
 	n->pNext = NULL;
 	return n;
 }
@@ -302,12 +304,35 @@ int HienNamHoc(ListNamHoc l)
 		cout << "CHUA CO NAM HOC NAO!\n";
 	return i;
 }
+void TaiNam234(NodeNamHoc*& namT, NodeNamHoc*& namS)
+{
+	ifstream f;
+	fstream g;
+	string s;
+	int nam = namS->data.tg.ngay_bd.y;
+	if (namT == NULL)
+		return;
+	//namT != NULL
+	for (int i = 1; i < 4; i++)
+	{
+		namS->data.headLop[i] = namT->data.headLop[i - 1];
+		f.open(to_string(nam - 1) + 'n' + to_string(i) + ".txt", ios::in);
+		g.open(to_string(nam) + 'n' + to_string(i + 1) + ".txt", ios::app);
+		while (!f.eof())
+		{
+			f.clear();
+			getline(f, s);
+			if (s != "")
+				g << s;
+		}
+	}
+}
 void TaoNam(ListNamHoc& l)
 {
 	setColor(background_color, title_color);
 	printA_Sentence("~ TAO MOI MOT NAM HOC ~", 5);
 	gotoXY(WIDTH / 3 + 5, 12);
-	NodeNamHoc* n = TaoNodeNam();
+	NodeNamHoc* n = TaoNodeNam(l);
 	ThemNodeNamHoc(l, n);
 	if (n)
 	{
@@ -502,7 +527,6 @@ void TaoLopNamNhat(NodeNamHoc* node)
 	printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 5);
 	_getch();
 }
-
 //hoc ky 
 NodeNamHoc* TimNodeNamHoc(ListNamHoc& l, int nam_bd)//tim nam hoc de them hk vao
 {
@@ -1359,7 +1383,6 @@ bool XlCapNhat3(ListNamHoc& l, int chon)
 	{
 		system("cls");
 		CapNhatDiemSv(l);
-		_getch();
 		break;
 	}
 	case 4:
@@ -2285,54 +2308,6 @@ string NextLine(string& data)
 }
 
 //sua diem
-
-//float NhapDiem(float diem)
-//{
-//	int x = whereX();
-//	int y = whereY();
-//	char c;
-//	string s = "";
-//	gotoXY(x, y);
-//	do
-//	{
-//		c = _getch();
-//		if (c == '\b')//nhan phim backspace 
-//		{
-//			if (s == "")
-//			{
-//				gotoXY(x, y);
-//				continue;
-//			}
-//			gotoXY(whereX() - 1, y);
-//			cout << " ";
-//			gotoXY(whereX() - 1, y);//quay lai vi tri " "
-//			s.pop_back();
-//		}
-//		else if (c == '\r' || c == '\n')
-//		{
-//			if (s == "")
-//				continue;
-//			if (diem < 0 || diem>10)
-//			{
-//				setColor(background_color, red);
-//				printA_Sentence("Diem khong hop le!", y + 1);
-//				_getch();
-//				printA_Sentence("                           ", y + 1);
-//				gotoXY(x, y);
-//				cout << "                       ";
-//				gotoXY(x, y);
-//				continue;
-//			}
-//			diem = stof(s);
-//			return diem;
-//		}
-//		else if (c >= 48 && c <= 57)
-//		{
-//			s += c;
-//			cout << c;
-//		}
-//	} while (true);
-//}
 void NhapDiem(float& diem, int x, int y)//x, y: toa do 
 {
 	do
@@ -2422,6 +2397,7 @@ void CapNhatDiemSv(ListNamHoc& l)
 	int si_so = viewDsSvMon(pMon);
 	if (si_so == 0)
 	{
+		setColor(background_color, title_color1);
 		printA_Sentence("<-- Nhan phim bat ki de quay lai", HEIGHT - 4);
 		_getch();
 		return;
@@ -2434,7 +2410,6 @@ void CapNhatDiemSv(ListNamHoc& l)
 	string title = "QUAY VE";
 	while (true)
 	{
-
 		stt_sv = LuaChon_HienThi(line, si_so, 1, &title);
 		if (stt_sv == -1)//thoat
 			return;
@@ -2561,34 +2536,65 @@ void CapNhatMonHoc(ListNamHoc& l)
 
 	gotoXY(x, y);
 	cout << "Ten mon (" << mon.tenMon << "): ";
+	gotoXY(x + 25, y);
 	getline(cin, input);
 	if (!input.empty()) mon.tenMon = input;
 
 	y += 2;
 	gotoXY(x, y);
 	cout << "Ten giao vien (" << mon.tenGv << "): ";
+	gotoXY(x + 25, y);
 	getline(cin, input);
 	if (!input.empty()) mon.tenGv = input;
 
 	y += 2;
 	gotoXY(x, y);
 	cout << "So tin chi (" << mon.so_tc << "): ";
-	getline(cin, input);
-	try
+	while (true)
 	{
+		gotoXY(x + 25, y);
+		getline(cin, input);
+		if (input.empty())
+			break;
+		try
+		{
+			stoi(input);
+		}
+		catch (invalid_argument)
+		{
+			cin.clear();
+			gotoXY(x + 25, y);
+			cout << "                                                ";
+			continue;
+		}
 		mon.so_tc = stoi(input);
+		break;
 	}
-	catch (invalid_argument) {}
-
+	
 	y += 2;
 	gotoXY(x, y);
 	cout << "So sinh vien toi da (" << mon.MaxSv << "): ";
-	getline(cin, input);
-	try
+	while (true)
 	{
+		gotoXY(x + 25, y);
+		getline(cin, input);
+		if (input.empty())
+			break;
+		try
+		{
+			stoi(input);
+		}
+		catch (invalid_argument)
+		{
+			cin.clear();
+			gotoXY(x + 25, y);
+			cout << "                                                ";
+			continue;
+		}
 		mon.MaxSv = stoi(input);
+		break;
 	}
-	catch (invalid_argument) {}
+	
 	do
 	{
 		system("cls");

@@ -86,7 +86,7 @@ string typeAccount()
 		}
 		else
 		{
-			if (acc.length() >= 25)//ko dc enter khi mk it hon 5 ki tu 
+			if (acc.length() >= 25)
 			{
 				setColor(background_color, red);
 				printA_Sentence("! TAI KHOAN KHONG HOP LE !", HEIGHT - 6);

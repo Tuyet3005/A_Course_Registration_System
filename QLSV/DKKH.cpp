@@ -296,6 +296,7 @@ bool themMon(NodeSv_Lop* A, int ki, int stt, NodeMon* head)//them dau
 	nw2->mssv = A->sv.id;
 	nw2->lop = timLop(A->sv.id);
 	nw2->pNext = temp->headSvMon;
+	nw->svMon = nw2;
 	temp->headSvMon = nw2;
 	return true;
 }

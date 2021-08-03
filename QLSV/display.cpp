@@ -519,7 +519,7 @@ int viewMondaDk(NodeMon_Sv* A, int ki, int line)//show thong tin mon hoc cua 1 s
 int viewDiem_Lop(NodeLop* A, int ki)
 {
 	//TINH GPA
-	bool flag = tinhGPA_SvvaLop(A, ki);
+	tinhGPA_SvvaLop(A, ki);
 	//
 	system("cls");
 	setColor(background_color, title_color);
@@ -564,33 +564,30 @@ int viewDiem_Lop(NodeLop* A, int ki)
 		gotoXY(posCol[3] + 1, posRow + 1 + 2 * i);
 		cout << pSv->sv.ten;
 		j = 4;
-		for (; j <= 4 + 10 && pMon != NULL; j += 2)
+		for (; pMon != NULL; j += 2)
 		{
 			gotoXY(posCol[j] + 1, posRow + 1 + 2 * i);
 			cout << pMon->mon->data.id;
 			gotoXY(posCol[j + 1] + 1, posRow + 1 + 2 * i);
-			cout << pMon->svMon->diem.tongket;
+			cout << setprecision(2) << pMon->svMon->diem.tongket;
 			pMon = pMon->pNext;
 		}
-		gotoXY(posCol[j] + 1, posRow + 1 + 2 * i);
-		cout << pSv->GPA[ki - 1];
+		gotoXY(posCol[14] + 1, posRow + 1 + 2 * i);
+		cout << setprecision(4) << pSv->GPA[ki - 1];
 		pSv = pSv->pNext;
 	}
 	gotoXY(posCol[10], posRow + i * 2 + 2);
 	cout << "Trung binh GPA: ";
 	gotoXY(posCol[14] + 3, posRow + i * 2 + 2);
-	if (flag)
-		cout << A->lop.GPA[ki-1];
-	else
-		cout << 0;
+	cout << A->lop.GPA[ki-1];
 	gotoXY(0, posRow);
 	drawTable(i, 15, posCol, posRow);
 	gotoXY(0, posRow + i * 2 + 4);
 	return i - 1;
 }
 
-//TINH GPA //co bug nhung chua fix
-bool tinhGPA_SvvaLop(NodeLop* t, int ki)
+//TINH GPA
+void tinhGPA_SvvaLop(NodeLop* t, int ki)
 {
 	NodeSv_Lop* pSv = t->lop.headSvLop;
 	NodeMon_Sv* pMon;
@@ -599,43 +596,27 @@ bool tinhGPA_SvvaLop(NodeLop* t, int ki)
 	//lop
 	int dem = 0;
 	float sumlop = 0;
-	bool flag = true;
 	while (pSv != NULL)
 	{
-		if (pSv->headMon[ki - 1] == NULL)
-		{
-			pSv = pSv->pNext;
-			continue;
-		}
 		pMon = pSv->headMon[ki - 1];
 		sum = 0;
 		tin = 0;
 		while (pMon != NULL)
 		{
-			if (!pMon->svMon->diem.tongket)
-				break;
-			else
-			{
-				tin += pMon->mon->data.so_tc;
-				sum += pMon->svMon->diem.tongket;
-			}
+			tin += pMon->mon->data.so_tc;
+			sum += (pMon->svMon->diem.tongket) * (pMon->mon->data.so_tc); //TK * so_tc
 			pMon = pMon->pNext;
 		}
-		if (pMon == NULL)//co diem tk
+		if (tin != 0)//chua dk mon nao
 		{
 			pSv->GPA[ki - 1] = sum / tin;
 			sumlop += pSv->GPA[ki - 1];
-			dem++;
 		}
-		else {
-			flag=false;//chua cap nhat du gpa
-		}
+		dem++;
 		pSv = pSv->pNext;
 	}
-	if (dem = 0||flag==false)//chua co hs nao dk mon hoc
-		return false;
-	t->lop.GPA[ki - 1] = sumlop / dem;
-	return true;
+	if(dem!=0)
+		t->lop.GPA[ki - 1] = sumlop / dem;
 }
 
 //TTGV
@@ -694,7 +675,7 @@ void background()
 
 	setColor(background_color, text_color);
 	cout << endl << endl;
-	cout << "                                                               The Courses & Students Management System";
+	cout << "                                                                  The Courses & Students Management System";
 
 }
 

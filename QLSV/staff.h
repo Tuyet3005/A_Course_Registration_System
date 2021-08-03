@@ -12,8 +12,9 @@ bool importFilehayNhapTay(bool chon);
 int InMenuTaoMoi();
 bool XlTaoMoi(int chon, ListNamHoc& l);
 //nam hoc
-NodeNamHoc* TaoNodeNam();
+NodeNamHoc* TaoNodeNam(ListNamHoc& l);
 void ThemNodeNamHoc(ListNamHoc& l, NodeNamHoc* n);
+void TaiNam234(NodeNamHoc*& namT, NodeNamHoc*& namS);
 void TaoNam(ListNamHoc& l);
 //lop hoc
 NodeLop* TaoNodeLop(string ten);
