@@ -76,5 +76,11 @@
     <Text Include="GiaoVu.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="SinhVien.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2019hk1KHTD.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

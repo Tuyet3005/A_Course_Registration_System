@@ -1,8 +1,5 @@
 #pragma once
-#include"variable.h"
-#include"display.h"
-#include<conio.h>
-#include<string>
+#include"begin.h"
 //SV
 void readFileDKKH(ThoiGian& tg, Time& tmBD, Time& tmKT, int& ki);
 bool sosanhNgayGio(Ngay tg1, Time t1, Ngay tg2, Time t2);

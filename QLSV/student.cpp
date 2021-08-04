@@ -62,9 +62,16 @@ Sv findInfo(string tenlop, int tk)//tim Info sv trong file Lop
 }
 void SinhVien(ListNamHoc& l, int tk)
 {
-	NodeNamHoc* t = NodeNamHienTai(l);
-	if (t == NULL)
+	NodeNamHoc* t = NULL;
+	if (!daTaoNamHT(l, t, NHhientai_nambd()))
+	{
+		system("cls");
+		setColor(background_color, red);
+		printA_Sentence("! BAN CHUA THE TRUY CAP VAO HE THONG LUC NAY !", HEIGHT / 2 - 1);
+		char pause = _getch();
 		return;
+	}
+	t = NodeNamHienTai(l);
 	int namhientai = t->data.tg.ngay_bd.y;
 	string tenlop = timLop(tk);
 	NodeLop* plop = NULL;

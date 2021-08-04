@@ -1,10 +1,4 @@
 ﻿#include"DKKH.h"
-#include"begin.h"
-#include<string>
-#include<fstream>
-//nho khoi tao nodemon_sv vs doc node mon
-using namespace std;
-
 
 //SV
 void readFileDKKH(ThoiGian& tg, Time& tmBD, Time& tmKT, int& ki)
@@ -362,7 +356,6 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 							setColor(background_color, red);
 							printA_Sentence("Da dang ki du 5 mon.. ban khong the dang ki them !", y + 2);
 							_getch();
-							//cin.clear();
 							printA_Sentence("                                                    ", y + 2);
 							gotoXY(x_now, y);
 							setColor(background_color, text_color);
@@ -470,7 +463,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 		{
 			if (pMon_Sv->mon == keep[i])//vi cac mon duoc them se nam o DAU
 			{
-				flagkeep[i] = true;
+				flagkeep[i] = true;//danh dau mon hoc dc GIU LAI tu ds mon cu
 				flag = true;
 				break;
 			}
@@ -488,6 +481,7 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 	//xoa sv khoi mon
 	ifstream fin;
 	int pos;
+	bool flag2 = false;
 	string ss;
 	string file;
 	for (int i = 0; i < nkeep; i++)
@@ -498,15 +492,41 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 			pos = -1;
 			file = to_string(nam) + "hk" + to_string(ki) + keep[i]->data.id + ".txt";
 			fin.open(file);
-			while (!fin.eof())
+
+			getline(fin, ss);
+			pos = ss.find(to_string(A->sv.id));
+			if (pos == -1) //ko tim thay 
+				f << ss;
+			else
 			{
+				flag2 = true;
 				getline(fin, ss);
-				pos = ss.find(to_string(A->sv.id));
-				if (pos != string::npos)
-					continue;
-				if (ss == "")
-					break;
-				f << ss << endl;
+				if (ss != "")
+					f << ss;
+			}
+			if (ss != "")
+			{
+				while (!fin.eof())
+				{
+					getline(fin, ss);
+					if (flag2)//tim thay roi
+					{
+						if (ss == "")
+							break;
+						f << endl << ss;
+						continue;
+					}
+					pos = ss.find(to_string(A->sv.id));
+					if (pos == 0)//tim thay
+					{
+						flag2 = true;
+						continue;
+					}
+					else
+					{
+						f << endl << ss;
+					}
+				}
 			}
 			f.close();
 			fin.close();
@@ -586,13 +606,11 @@ void taoDKKH_Gv(NodeNamHoc* H)
 	printA_Sentence("~ HUONG DAN ~", 9);
 	setColor(background_color, text_color);
 	gotoXY(WIDTH / 4 + 3, 11);
-	cout << "--Ban chi co the tao buoi dang ki khoa hoc cho hoc ki CHUA BAT DAU cua nam hoc nay";
-	gotoXY(WIDTH / 4 + 3, 12);
 	cout << "--Ban chi co the tao MOT buoi dang ki khoa hoc cho MOT ki hoc.";
+	gotoXY(WIDTH / 4 + 3, 12);
+	cout << "--Buoi DKKH chi duoc to chuc TRONG khoang thoi gian HOC KY HIEN TAI dien ra.";
 	gotoXY(WIDTH / 4 + 3, 13);
-	cout << "--Buoi DKKH chi duoc to chuc trong khoang thoi gian hoc ki hien tai dien ra.";
-	gotoXY(WIDTH / 4 + 3, 14);
-	cout << "--Ban can TAO MOI hoc ki va CAP NHAT danh sach mon hoc truoc khi tao buoi dang ki khoa hoc.";
+	cout << "--Ban can TAO HOC KI va danh sach MON HOC truoc khi tao buoi dang ki khoa hoc.";
 	gotoXY(0, 16);
 	if (!Ask_YN("Ban co that su muon tao buoi dang ki khoa hoc ?"))
 		return;
@@ -638,7 +656,7 @@ void taoDKKH_Gv(NodeNamHoc* H)
 		setColor(background_color, red);
 		printA_Sentence("! CHUA TAO MON HOC CHO HOC KY NAY !", HEIGHT / 2 - 2);
 		setColor(background_color, text_color);
-		printA_Sentence("Hay vao muc CAP NHAT de them mon hoc cho ki nay", HEIGHT / 2);
+		printA_Sentence("Hay vao muc TAO MOI de them mon hoc cho ki nay", HEIGHT / 2);
 		setColor(background_color, title_color1);
 		printA_Sentence("<-- Nhan nut bat ki de quay lai", HEIGHT - 4);
 		_getch();

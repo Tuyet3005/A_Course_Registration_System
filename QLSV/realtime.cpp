@@ -19,19 +19,28 @@ int NHhientai_nambd()
 		nam_bd = tmTime.tm_year;
 	return 1900 + nam_bd;//struct tm tinh nam tu nam 1900
 }
-
-NodeNamHoc* NodeNamHienTai(ListNamHoc& l)//ktra NH ht co dc tao chua, chua thi co the tao nam hoc hoac tra ve NULL, co roi thi tra ve node NH ht 
+bool daTaoNamHT(ListNamHoc& l, NodeNamHoc*& node, int nam_bd)
 {
-	int nam_bd = NHhientai_nambd();
 	NodeNamHoc* temp = l.pHead;
 	while (temp != NULL)
 	{
 		if (temp->data.tg.ngay_bd.y == nam_bd)
 		{
-			return temp;//luc nay, temp tro den node cua nam hoc hien tai
+			node = temp;
+			return true;
 		}
 		else
 			temp = temp->pNext;
+	}
+	return false;
+}
+NodeNamHoc* NodeNamHienTai(ListNamHoc& l)//ktra NH ht co dc tao chua, chua thi co the tao nam hoc hoac tra ve NULL, co roi thi tra ve node NH ht 
+{
+	int nam_bd = NHhientai_nambd();
+	NodeNamHoc* node = NULL;
+	if (daTaoNamHT(l, node, nam_bd))
+	{
+		return node;
 	}
 	//CAN TAO NODE NAM HOC HT
 	char lenh;
