@@ -530,7 +530,7 @@ void TaoLopNamNhat(NodeNamHoc* node)
 //hoc ky 
 NodeNamHoc* TimNodeNamHoc(ListNamHoc& l, int nam_bd)//tim nam hoc de them hk vao
 {
-	int line = whereY() + 2;
+	int line = whereY() + 5;
 	NodeNamHoc* temp = l.pHead;
 	while (temp != NULL)
 	{
@@ -545,7 +545,7 @@ NodeNamHoc* TimNodeNamHoc(ListNamHoc& l, int nam_bd)//tim nam hoc de them hk vao
 	setColor(background_color, red);
 	printA_Sentence("Nam hoc tuong ung chua duoc tao !", line);
 	setColor(background_color, title_color1);
-	printA_Sentence("Ban co muon tao nam hoc do ngay?", line + 1);
+	printA_Sentence("Ban co muon tao nam hoc do ngay?", line + 2);
 	string title[2] = { "Ok, Lam lien","No no, khong he" };
 	if (LuaChon_Menu(2, title, 2, line + 2) == 1)
 	{
@@ -686,6 +686,7 @@ bool TaoHocKy(ListNamHoc& l)
 		}
 		if (flag)
 		{
+			system("cls");
 			setColor(background_color, red);
 			printA_Sentence("! TAO MOI HOC KI KHONG THANH CONG !", HEIGHT / 2 - 2);
 			setColor(background_color, title_color1);
@@ -886,6 +887,7 @@ bool NhapNodeMon(NodeMon* n)
 	gotoXY(x, y);
 	cout << "Ten mon: ";
 	string s;
+	setColor(background_color, text_color);
 	while (true)
 	{
 		gotoXY(x + 30, y);
@@ -900,7 +902,9 @@ bool NhapNodeMon(NodeMon* n)
 	}
 	y += 2;
 	gotoXY(x, y);
+	setColor(background_color, title_color1);
 	cout << "Ma mon hoc: ";
+	setColor(background_color, text_color);
 	while (true)
 	{
 		gotoXY(x + 30, y);
@@ -915,7 +919,9 @@ bool NhapNodeMon(NodeMon* n)
 	}
 	y += 2;
 	gotoXY(x, y);
+	setColor(background_color, title_color1);
 	cout << "Ten giao vien giang day: ";
+	setColor(background_color, text_color);
 	while (true)
 	{
 		gotoXY(x + 30, y);
@@ -930,7 +936,9 @@ bool NhapNodeMon(NodeMon* n)
 	y += 2;
 	x += 30;
 	gotoXY(x - 30, y);
+	setColor(background_color, title_color1);
 	cout << "So tin chi: ";
+	setColor(background_color, text_color);
 	gotoXY(x, y);
 	char c;
 	s = "";
@@ -971,7 +979,9 @@ bool NhapNodeMon(NodeMon* n)
 	} while (true);
 	y += 2;
 	gotoXY(x - 30, y);
+	setColor(background_color, title_color1);
 	cout << "So luong sinh vien toi da: ";
+	setColor(background_color, text_color);
 	gotoXY(x, y);
 	s = "";
 	do
