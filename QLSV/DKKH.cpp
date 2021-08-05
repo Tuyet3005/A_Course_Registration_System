@@ -481,7 +481,6 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 	//xoa sv khoi mon
 	ifstream fin;
 	int pos;
-	bool flag2 = false;
 	string ss;
 	string file;
 	for (int i = 0; i < nkeep; i++)
@@ -489,44 +488,28 @@ void runDKKH_Sv(NodeSv_Lop* A, int ki, NodeMon*& head)
 		if (!flagkeep[i])//xoa tt khoi ds
 		{
 			f.open("trunggian.txt");
-			pos = -1;
+			int line = 0; //stt dong trong file (dem tu 0)
 			file = to_string(nam) + "hk" + to_string(ki) + keep[i]->data.id + ".txt";
 			fin.open(file);
-
-			getline(fin, ss);
-			pos = ss.find(to_string(A->sv.id));
-			if (pos == -1) //ko tim thay 
-				f << ss;
-			else
+			bool done = false;//danh dau da tim thay sv can xoa chua
+			while (!fin.eof())
 			{
-				flag2 = true;
+				fin.clear();
 				getline(fin, ss);
-				if (ss != "")
-					f << ss;
-			}
-			if (ss != "")
-			{
-				while (!fin.eof())
+				if (!done && ss.substr(0, 8) == to_string(A->sv.id))
 				{
-					getline(fin, ss);
-					if (flag2)//tim thay roi
-					{
-						if (ss == "")
-							break;
-						f << endl << ss;
-						continue;
-					}
-					pos = ss.find(to_string(A->sv.id));
-					if (pos == 0)//tim thay
-					{
-						flag2 = true;
-						continue;
-					}
-					else
-					{
-						f << endl << ss;
-					}
+					done = true;
+					continue; //doc dong tiep theo
 				}
+				else if (ss != "" && line != 0) // line != 0: tru di tr.hop xoa o dong dau tien
+				{
+					f << '\n' << ss;
+				}
+				else
+				{
+					f << ss;
+				}
+				line++;
 			}
 			f.close();
 			fin.close();

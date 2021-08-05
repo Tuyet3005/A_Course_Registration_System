@@ -641,6 +641,7 @@ bool TaoHocKy(ListNamHoc& l)
 			setColor(background_color, red);
 			printA_Sentence("! NGAY KET THUC PHAI SAU NGAY BAT DAU !", HEIGHT - 8);
 			_getch();
+			printA_Sentence("                                                                                     ", HEIGHT - 8);
 			continue;
 		}
 		break;
@@ -2448,12 +2449,12 @@ void CapNhatDiemSv(ListNamHoc& l)
 
 		gotoXY(x, y);
 		cout << "Diem cuoi ky (" << diem.ck << "): ";
-		NhapDiem(diem.gk, x, y);
+		NhapDiem(diem.ck, x, y);
 		y += 2;
 
 		gotoXY(x, y);
 		cout << "Diem cong (" << diem.cong << "): ";
-		NhapDiem(diem.gk, x, y);
+		NhapDiem(diem.cong, x, y);
 		y += 2;
 
 		gotoXY(x, y);
