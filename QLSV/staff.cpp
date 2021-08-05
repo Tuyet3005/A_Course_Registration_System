@@ -458,7 +458,15 @@ void TaoLopNamNhat(NodeNamHoc* node)
 				continue;
 			}
 			//kiem tra chi dung doi voi cac nh 2000~ 
-			if (stoi(ten.substr(0, 2)) != nam % 2000)
+			int k = -1;
+			try
+			{
+				stoi(ten.substr(0, 2));
+				k = stoi(ten.substr(0, 2));
+			}
+			catch (invalid_argument)	{}
+			
+			if ( k != nam % 2000)
 			{
 				setColor(background_color, red);
 				printA_Sentence("! TEN LOP KHONG HOP LE !", y + 3);
@@ -908,7 +916,6 @@ bool NhapNodeMon(NodeMon* n)
 	while (true)
 	{
 		gotoXY(x + 30, y);
-		//cin.ignore();
 		getline(cin, s);
 		if (s.length() == 0)
 		{
@@ -1258,17 +1265,17 @@ NodeMon* mondangmo_nhaptay(int nam, int stt_hk)
 		{
 			if (temp == "")
 				continue;
-			//if (stoi(temp) == 0)
-			//{
-			//	setColor(background_color, red);
-			//	printA_Sentence("! SO MON IT NHAT BANG 1 !",HEIGHT-4);
-			//	_getch();
-			//	setColor(background_color, text_color);
-			//	printA_Sentence("                            ", HEIGHT - 4);
-			//	gotoXY(x, y);
-			//	cout << "                       ";
-			//	gotoXY(x, y);
-			//}
+			/*if (stoi(temp) < 0)
+			{
+				setColor(background_color, red);
+				printA_Sentence("! SO MON IT NHAT BANG 0 !",HEIGHT-4);
+				_getch();
+				setColor(background_color, text_color);
+				printA_Sentence("                            ", HEIGHT - 4);
+				gotoXY(x, y);
+				cout << "                       ";
+				gotoXY(x, y);
+			}*/
 			break;
 		}
 		else if (c >= 48 && c <= 57)
@@ -1284,7 +1291,6 @@ NodeMon* mondangmo_nhaptay(int nam, int stt_hk)
 	for (int i = 0; i < somon; i++)
 	{
 		NodeMon* n = new NodeMon;
-		//cout << endl << "Mon hoc " << i + 1 << endl;
 		if (!NhapNodeMon(n))
 		{
 			i--;
